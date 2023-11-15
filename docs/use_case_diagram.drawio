@@ -1,1 +1,150 @@
-<mxfile host="app.diagrams.net" modified="2023-11-10T22:20:25.260Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="UffVw4onSd_EgEXCX8TV" version="14.2.4" type="device"><diagram id="zjK6OgsOYJaDhMb_vuTh" name="Page-1">7Ztdc+I2FIZ/jS/bsS1/wGVCdtOZtrPZSXe6e7WjYK0RGMkjBIH8+kqWDLYECRgcm05yE+tYFujVc46lI+GA0Xx9z2A++ZsmKHN8N1k74M7xfc8FA/FPWjbKEvrakDKc6Eo7wyN+QeWT2rrECVrUKnJKM47zunFMCUFjXrNBxuhzvdovmtU/NYcpsgyPY5jZ1n9xwifKOvDjnf0PhNNJ+cleNFR35rCsrHuymMCEPldM4JMDRoxSrq7m6xHKpHilLuq5zwfubr8YQ4Qf88B9vvmao5/zr1M//EZS5n17yX+LVCsrmC11h2/yDM/gGE+hsD/yZbJ5zCeIId0JvimVmfB5Jq48B9zCDKdEXI/FV0FMGFaIcSxEvNE3OM2F9RclXI+wF4qy3QPdKfk4WldMukf3iM4RZxtRpbwbanU1XpEuPu/GKi4HYFIZpyHQRqj5SLdN7yQUF1rFokifppIw383gE8rUY39ShhcEz1RjolQUilvK9Kr61b7p0aoILIDJ5eVynt2MOa3q+pf8Bg90gTmmUt8nyjmdHxS+MlTVMQgqQ8eUNhcZE7c+JmFgDwrYMybR6UMiinpUTmA+tpifMYQZJFMBueuMQufGy3Em+Z/BQk6LffEpIgCJwu3zBHP0mMOxvPMsYuBhuS+EvB/GNXm3Wlbk9YI9+san63ucoANbUOEWSkhnFDiDO3Sl2oadazu0tF2u6Ms1ahmAsGMtyzlFRUz8cqVqgs7J9DxLzZyhNENJoRrkeMHFTELqSQvvzxnkqCiqdyZdiQKB4qEEznotdnS02F5bYvtvxdhYx1iCxBR8SmgqRcggQazfIMfdgwyO1fafL3df5PxPkt1rUQd+56IGx4o6E2stkkCJqQtnHK8I7bu8Q69zecM9r7I5IvAa3mVhYMxg96za3llOex1MxWJ2ild6VTATd4RMXEpKk5SuaMFroXcCC3OOuajcb6WDQedK26uvutJXRy/onF7fntfaipHkRqbDRIlQgl5XCa0x/67vyesf4tr9HRh/+uad1MUtC5tK4QExLHooM0LKRkRvv1cLquGwLO6aKkplWwcHbUGXbIxeo03V45CliL9ST48oSmrJQBuByhCHe0a4tDGUienvqp5C3Dfs+hMeKCbcOZhACQKDHNVv/ZRfSfmZDRnZMTA0GlLCWA0VFG67fQaY9hLhTDAbEtQS0O2DOegXmKDOU+w2BXNQbygK3xlMezn1AeZJYA77BaYRMbc5/3MjZmS+tNsG016LdgPmQYLeJKNcG/UFDSNmheY2Q1M0rODXNhr2iro/McvrYYgqE5R9AdEz+Bk0BTEyGjL3MtsG0c49XF2M8vuFhhGjosbzKnOC9t5o2HmUjxj1KoigXyD+b2KUnWa6uhgV9AuNi8Wo2EDDnJC1jYa9pe74EZzLzGGmjsBUS2jNBSiLrTGtVUl3Z2b2k0VzRAooyrNt4tUDbhO4mKBEo3YMdV6z8OdWwp9+6mAAPCPYxUci3SCbsQ0kZ+IbGFnb0FzYHYtv5L7RUMv4lm74ge/F8A2PxLdBlvhi+MbGpkPTBAcwGvLMN3zb+NqZt+rpuylKiNoUlhs/9qHTLjd+AsPzvc53gcFp2aKnjI5ndW+OVPEzlh9c+NFRc6CdB/+oOXAf3LkkrM/uDIbGvmxTdw7NQ3ZmQ227856kVHHic7ndOVfeXZxHqu7t9sixQ2NGus30defYp6VYznbsBg564N3edDn0tlsHV+jW3qXc2myoZbcOPiaZXU0yG2ysXQpfkzrghs3wNWdKfhy+L777zh0cxheTcbZMUMf4vl9iKeoOscD8bVDTZXjgGYgNLoWYKO5+lKeq737aCD79Bw==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2023-11-15T18:34:11.745Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="553nX67IxKyDhHMM3QMp" version="22.1.2" type="device">
+  <diagram id="zjK6OgsOYJaDhMb_vuTh" name="Page-1">
+    <mxGraphModel dx="1050" dy="530" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-6" value="Aplikacija StudySphere" style="html=1;align=center;verticalAlign=top;fontSize=15;" parent="1" vertex="1">
+          <mxGeometry x="150" y="60" width="720" height="1040" as="geometry" />
+        </mxCell>
+        <object label="Korisnik" Korsnik="" id="GpyQpe_mQj25Ungr1Uzp-1">
+          <mxCell style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=14;align=right;" parent="1" vertex="1">
+            <mxGeometry x="100" y="540" width="30" height="60" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-7" value="kreiranje špila kartica" style="ellipse;whiteSpace=wrap;html=1;fontSize=15;" parent="1" vertex="1">
+          <mxGeometry x="257" y="230" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-8" value="koriščenje špila kartica" style="ellipse;whiteSpace=wrap;html=1;fontSize=15;" parent="1" vertex="1">
+          <mxGeometry x="257" y="530" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-9" value="uvoz špila kartica" style="ellipse;whiteSpace=wrap;html=1;fontSize=15;" parent="1" vertex="1">
+          <mxGeometry x="257" y="435" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-10" value="izvoz špila kartica" style="ellipse;whiteSpace=wrap;html=1;fontSize=15;" parent="1" vertex="1">
+          <mxGeometry x="257" y="330" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-11" value="pregled statistika koje prate korisnikov napredak" style="ellipse;whiteSpace=wrap;html=1;fontSize=15;" parent="1" vertex="1">
+          <mxGeometry x="257" y="720" width="140" height="71" as="geometry" />
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-12" value="korišćenje nedeljnog planera" style="ellipse;whiteSpace=wrap;html=1;fontSize=15;" parent="1" vertex="1">
+          <mxGeometry x="257" y="820" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-13" value="korišćenje TODO listi" style="ellipse;whiteSpace=wrap;html=1;fontSize=15;" parent="1" vertex="1">
+          <mxGeometry x="257" y="910" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-14" value="korišćenje kalendara aktivnosti" style="ellipse;whiteSpace=wrap;html=1;fontSize=15;" parent="1" vertex="1">
+          <mxGeometry x="257" y="1000" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-15" value="izmena špila kartica" style="ellipse;whiteSpace=wrap;html=1;fontSize=15;" parent="1" vertex="1">
+          <mxGeometry x="547" y="260" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-16" value="ocenjivanje kvaliteta odgovora na data pitanja" style="ellipse;whiteSpace=wrap;html=1;fontSize=15;" parent="1" vertex="1">
+          <mxGeometry x="547" y="480" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-17" value="ocenjivanje špila kartica" style="ellipse;whiteSpace=wrap;html=1;fontSize=15;" parent="1" vertex="1">
+          <mxGeometry x="547" y="360" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-20" value="" style="endArrow=none;html=1;fontSize=15;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="GpyQpe_mQj25Ungr1Uzp-1" target="GpyQpe_mQj25Ungr1Uzp-7" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="440" as="sourcePoint" />
+            <mxPoint x="150" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-21" value="" style="endArrow=none;html=1;fontSize=15;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="GpyQpe_mQj25Ungr1Uzp-1" target="GpyQpe_mQj25Ungr1Uzp-8" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="130" y="700" as="sourcePoint" />
+            <mxPoint x="180" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-22" value="" style="endArrow=none;html=1;fontSize=15;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="GpyQpe_mQj25Ungr1Uzp-1" target="GpyQpe_mQj25Ungr1Uzp-9" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="720" as="sourcePoint" />
+            <mxPoint x="150" y="670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-23" value="" style="endArrow=none;html=1;fontSize=15;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="GpyQpe_mQj25Ungr1Uzp-10" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="130" y="560" as="sourcePoint" />
+            <mxPoint x="150" y="700" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-24" value="" style="endArrow=none;html=1;fontSize=15;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="GpyQpe_mQj25Ungr1Uzp-1" target="GpyQpe_mQj25Ungr1Uzp-11" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="110" y="780" as="sourcePoint" />
+            <mxPoint x="160" y="730" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-25" value="" style="endArrow=none;html=1;fontSize=15;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="GpyQpe_mQj25Ungr1Uzp-12" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="130" y="600" as="sourcePoint" />
+            <mxPoint x="130" y="730" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-26" value="" style="endArrow=none;html=1;fontSize=15;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="GpyQpe_mQj25Ungr1Uzp-1" target="GpyQpe_mQj25Ungr1Uzp-13" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="110" y="780" as="sourcePoint" />
+            <mxPoint x="160" y="730" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-27" value="" style="endArrow=none;html=1;fontSize=15;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="GpyQpe_mQj25Ungr1Uzp-14" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="130" y="600" as="sourcePoint" />
+            <mxPoint x="170" y="760" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-29" value="&amp;lt;&amp;lt;extends&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;fontSize=15;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="GpyQpe_mQj25Ungr1Uzp-17" target="GpyQpe_mQj25Ungr1Uzp-8" edge="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="447" y="570" as="sourcePoint" />
+            <mxPoint x="607" y="570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-30" value="&amp;lt;&amp;lt;extends&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;fontSize=15;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="GpyQpe_mQj25Ungr1Uzp-15" target="GpyQpe_mQj25Ungr1Uzp-7" edge="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="477" y="320" as="sourcePoint" />
+            <mxPoint x="377" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-32" value="kreiranje jedne kartice" style="ellipse;whiteSpace=wrap;html=1;fontSize=15;" parent="1" vertex="1">
+          <mxGeometry x="407" y="110" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-33" value="" style="endArrow=block;endSize=16;endFill=0;html=1;fontSize=15;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="GpyQpe_mQj25Ungr1Uzp-32" target="GpyQpe_mQj25Ungr1Uzp-7" edge="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="397" y="420" as="sourcePoint" />
+            <mxPoint x="557" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-34" value="čuvanje kreiranog špila" style="ellipse;whiteSpace=wrap;html=1;fontSize=15;" parent="1" vertex="1">
+          <mxGeometry x="570" y="150" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-35" value="" style="endArrow=block;endSize=16;endFill=0;html=1;fontSize=15;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" parent="1" source="GpyQpe_mQj25Ungr1Uzp-34" target="GpyQpe_mQj25Ungr1Uzp-7" edge="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="397" y="410" as="sourcePoint" />
+            <mxPoint x="557" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-40" value="&amp;lt;&amp;lt;extends&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;fontSize=15;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="GpyQpe_mQj25Ungr1Uzp-15" target="GpyQpe_mQj25Ungr1Uzp-9" edge="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="557" y="305" as="sourcePoint" />
+            <mxPoint x="407" y="275" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GpyQpe_mQj25Ungr1Uzp-41" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="endArrow=open;endSize=12;dashed=1;html=1;fontSize=15;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="GpyQpe_mQj25Ungr1Uzp-16" edge="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="400" y="570" as="sourcePoint" />
+            <mxPoint x="417" y="285" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5DbdMqT_OgdcS5fOnxSo-1" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;podešavanje aplikacije&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="257" y="620" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="5DbdMqT_OgdcS5fOnxSo-2" value="" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="GpyQpe_mQj25Ungr1Uzp-1" target="5DbdMqT_OgdcS5fOnxSo-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="620" as="sourcePoint" />
+            <mxPoint x="450" y="570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
