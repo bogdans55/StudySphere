@@ -13,7 +13,7 @@ Opis slučaja upotrebe "Izvoz špila kartica":
         Kreirani je fajl sa podacima o špilu.
 
     Osnovni tok:
-        1. Korisnik bira špilove iz biblioteke sa početnog ekrana i pritiska dumge "Izvezi".
+        1. Korisnik bira špilove iz biblioteke sa početnog ekrana i pritiska dugme "Izvezi".
         2. Aplikacija prikazuje ekran za izvoz špilova.
         3. Korisnik bira format i lokaciju na kojoj želi da izveze špilove.
         4. Aplikacija kreira fajlove sa podacima o špilovima u željenom formatu i čuva ih na željenoj lokaciji.
