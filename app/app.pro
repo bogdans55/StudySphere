@@ -10,11 +10,13 @@ CONFIG += c++17
 
 SOURCES += \
     src/cardcontent.cpp \
+    src/cardstats.cpp \
     src/main.cpp \
     src/mainwindow.cpp
 
 HEADERS += \
     lib/cardcontent.h \
+    lib/cardstats.h \
     lib/mainwindow.h
 
 FORMS += \
