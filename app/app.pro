@@ -10,10 +10,12 @@ CONFIG += c++17
 
 SOURCES += \
     src/main.cpp \
+    src/user.cpp \
     src/settings.cpp \
     src/mainwindow.cpp
 
 HEADERS += \
+    lib/user.h \
     lib/settings.h \
     lib/mainwindow.h
 
