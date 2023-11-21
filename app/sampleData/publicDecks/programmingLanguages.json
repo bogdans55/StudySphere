@@ -5,7 +5,7 @@
     "DeckRating": 4.2,
     "Privacy": "Public",
     "NumberOfCardsPerIteration": 15,
-    "Thumbnail": "systemDefault.jpg",
+    "Thumbnail": "systemDefault.png",
     "Flashcards": [
         {
             "question": "What is the difference between interpreted and compiled languages?",

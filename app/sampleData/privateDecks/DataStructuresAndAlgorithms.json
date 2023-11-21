@@ -5,7 +5,7 @@
     "DeckRating" : 4.5,
     "Privacy" : "Private",
     "NumberOfCardsPerIteration" : 20,
-    "Thumbnail" : "systemDefault.jpg",
+    "Thumbnail" : "systemDefault.png",
     "Flashcards": [
         {
             "question": "What is a computable set of steps to achive a desired result?",
