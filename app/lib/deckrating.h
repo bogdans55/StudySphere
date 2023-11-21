@@ -11,6 +11,7 @@ private:
     double m_rating;
 public:
     DeckRating();
+    ~DeckRating() {}
 
     inline QVector<unsigned> getUserRatings() const {return m_userRatings;}
     inline unsigned getTimesRated() const {return m_timesRated;}
