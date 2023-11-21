@@ -12,6 +12,9 @@ SOURCES += \
     src/card.cpp \
     src/cardcontent.cpp \
     src/cardstats.cpp \
+    src/deck.cpp \
+    src/deckstats.cpp \
+    src/deckrating.cpp \
     src/main.cpp \
     src/user.cpp \
     src/settings.cpp \
@@ -21,6 +24,9 @@ HEADERS += \
     lib/card.h \
     lib/cardcontent.h \
     lib/cardstats.h \
+    lib/deck.h \
+    lib/deckstats.h \
+    lib/deckrating.h \
     lib/user.h \
     lib/settings.h \
     lib/mainwindow.h
