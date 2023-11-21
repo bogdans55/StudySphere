@@ -1,0 +1,40 @@
+{
+    "Subject": "Data Structures and Algorithms",
+    "UserID" : "marko1684",
+    "DeckID" : "000001",
+    "DeckRating" : 4.5,
+    "Privacy" : "Private",
+    "NumberOfCardsPerIteration" : 20,
+    "Thumbnail" : "systemDefault.png",
+    "Flashcards": [
+        {
+            "question": "What is a computable set of steps to achive a desired result?",
+            "answer" : "Algorithm",
+            "questionDifficulty" : "EASY"
+        },
+        {
+            "question" : "Array",
+            "answer" : "In programming, a list of data values, all of the same type, any element of which can be referenced by an expression consisting of the array name followed by an indexing expresion. Arrays are part of the fundamentals of data structures, which, in turn, are a major fundamental of computer programming",
+            "questionDifficulty" : "EASY"
+        },
+        {
+            "question": "FIFO",
+            "answer" : "First in first out is a policy that items are processed in order of arrival. A queue implements this.",
+            "questionDifficulty" : "EASY"
+        },
+        {
+            "question": "Insertion sort",
+            "answer" : "Sort by repeatedly taking the next item and inserting it into the final data structure in its proper order with resprect to items already inserted",
+            "questionDifficulty" : "EASY"
+        },
+        {
+            "question": "What is a computable set of steps to achive a desired result?",
+            "answer" : "Algorithm",
+            "questionDifficulty" : "EASY"
+        },
+        {  
+            "question": "Linked list",
+            "answer" : "A data structure in which a list of nodes or elements of a data structure connected by pointers. A singly linked list has one pointer in each node pointing to the next node in the list. A doubly linked list has two pointers in each node pointing to the next and previous nodes. In a circular list, the first and last nodes of the list are linked together.",
+            "questionDifficulty" : "MEDIUM"
+        }
+]}
