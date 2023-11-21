@@ -13,12 +13,16 @@ SOURCES += \
     src/cardcontent.cpp \
     src/cardstats.cpp \
     src/main.cpp \
+    src/user.cpp \
+    src/settings.cpp \
     src/mainwindow.cpp
 
 HEADERS += \
     lib/card.h \
     lib/cardcontent.h \
     lib/cardstats.h \
+    lib/user.h \
+    lib/settings.h \
     lib/mainwindow.h
 
 FORMS += \
