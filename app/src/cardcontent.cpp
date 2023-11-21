@@ -2,7 +2,7 @@
 
 #include <QImage>
 
-CardContent::CardContent(std::string &text)
+CardContent::CardContent(QString &text)
     :m_text(text)
 {}
 
