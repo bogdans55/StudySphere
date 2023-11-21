@@ -4,7 +4,7 @@
 #include <QString>
 #include <QVector>
 #include "card.h"
-#include "lib/deckstats.h"
+#include "deckstats.h"
 #include <QImage>
 #include "deckrating.h"
 
@@ -27,7 +27,8 @@ private:
     unsigned m_numOfCardsPerTest;
 
 public:
-    Deck(const QString &name, const QVector<Card> &cards, Privacy privacy, const DeckStats &deckStats, const QImage &thumbnail, const DeckRating &rating, unsigned int numOfCardsPerTest);
+    Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest, const QImage &thumbnail);
+    Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest);
     ~Deck() {}
 
     inline unsigned int getDeckId() const {return m_deckId;}
