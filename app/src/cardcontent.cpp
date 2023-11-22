@@ -16,3 +16,7 @@ void show() {
 void CardContent::setImage(const QImage &image) {
     m_image = image;
 }
+
+void CardContent::setText(const QString& text){
+    m_text = text;
+}

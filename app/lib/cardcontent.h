@@ -17,6 +17,7 @@ public:
 
     // Setter
     void setImage(const QImage &image);
+    void setText(const QString& text);
 
 private:
     QString m_text;
