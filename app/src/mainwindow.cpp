@@ -23,6 +23,9 @@ void MainWindow::on_createDeckButton_clicked()
         CreateDeckWindow *createDeck = new CreateDeckWindow();
         createDeck->setAttribute(Qt::WA_DeleteOnClose);
         createDeck->show();
+        QString name = popUp.getDeckName();
+        int privacy = popUp.getDeckPrivacy(); // should be changed to Privacy
+//        qDebug() << name << ' ' << privacy;
     }
 }
 
