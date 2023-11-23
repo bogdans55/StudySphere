@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/createdeckdialog.cpp \
     src/card.cpp \
     src/cardcontent.cpp \
     src/cardstats.cpp \
@@ -21,6 +22,7 @@ SOURCES += \
     src/mainwindow.cpp
 
 HEADERS += \
+    lib/createdeckdialog.h \
     lib/card.h \
     lib/cardcontent.h \
     lib/cardstats.h \
@@ -32,6 +34,7 @@ HEADERS += \
     lib/mainwindow.h
 
 FORMS += \
+    forms/createdeckdialog.ui \
     forms/mainwindow.ui
 
 # Default rules for deployment.
