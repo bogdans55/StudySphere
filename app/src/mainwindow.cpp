@@ -1,5 +1,6 @@
 #include "lib/mainwindow.h"
 #include "lib/createdeckdialog.h"
+#include "lib/createdeckwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -17,8 +18,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_createDeckButton_clicked()
 {
-    CreateDeckDialog popUp;
-//    this->close();
-    popUp.exec();
+    CreateDeckDialog popUp(this);
+    if (popUp.exec() == QDialog::Accepted) {
+        CreateDeckWindow *createDeck = new CreateDeckWindow();
+        createDeck->setAttribute(Qt::WA_DeleteOnClose);
+        createDeck->show();
+    }
 }
 
