@@ -16,6 +16,7 @@ SOURCES += \
     src/deckstats.cpp \
     src/deckrating.cpp \
     src/main.cpp \
+    src/studysession.cpp \
     src/user.cpp \
     src/settings.cpp \
     src/mainwindow.cpp
@@ -27,6 +28,7 @@ HEADERS += \
     lib/deck.h \
     lib/deckstats.h \
     lib/deckrating.h \
+    lib/studysession.h \
     lib/user.h \
     lib/settings.h \
     lib/mainwindow.h
