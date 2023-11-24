@@ -12,7 +12,7 @@ public:
     static Library& getInstance();
 
     void addDeck(const Deck& deck);
-    void removeDeck(const QVector<Deck>& decks);
+    void removeDeck(QVector<Deck>& decks);
     void importDeck(const QString& filePath);
     void exportDeck(const QVector<Deck>& decks, const QString& filePath);
 private:
@@ -21,6 +21,8 @@ private:
     Library();
     Library(const Library&) = delete;
     void operator=(const Library&) = delete;
+
+    void loadDecksFromFolder(const QString folderPath);
 };
 
 #endif // LIBRARY_H

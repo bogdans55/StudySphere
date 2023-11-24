@@ -2,11 +2,14 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QFile>
+#include <QDebug>
+#include <QDir>
 #include <QJsonArray>
 
 
 Library::Library(){
-    //Initialize the library instance, load decks from json...
+    //TODO delete hardcoded path, and make so that user can define path where the decks will be stored
+    loadDecksFromFolder("../sampleData/privateDecks");
 }
 
 Library& Library::getInstance(){
@@ -19,11 +22,35 @@ void Library::addDeck(const Deck& deck)
     m_decks.push_back(deck);
 }
 
-void Library::removeDeck(const QVector<Deck>& decks){
-    for(const Deck& deck : decks){
-        m_decks.removeAll(deck);
+void Library::loadDecksFromFolder(const QString folderPath){
+    QDir deckFolder(folderPath);
+
+    QStringList nameFilters;
+    nameFilters << "*.json";
+    deckFolder.setNameFilters(nameFilters);
+
+    QStringList deckFiles = deckFolder.entryList();
+
+    for(const QString& deckFile : deckFiles){
+        QString filePath = deckFolder.filePath(deckFile);
+        importDeck(filePath);
     }
-    //TODO update library document, so the decks that were removed are removed from the document also
+}
+
+void Library::removeDeck(QVector<Deck>& decks){
+    for(Deck& deck : decks){
+        m_decks.removeAll(deck);
+        QString filePath = deck.getFilePath();
+
+        QFile file(filePath);
+        if(file.remove()){
+            qDebug() << "File removed: " << filePath;
+        }
+        else{
+            qDebug() << "Failed to remove file: " << filePath;
+            //TODO error handling if needed...
+        }
+    }
 }
 
 void Library::importDeck(const QString& filePath){

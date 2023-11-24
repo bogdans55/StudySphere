@@ -1,9 +1,11 @@
 #include "lib/deck.h"
 #include <QJsonArray>
 #include <QRandomGenerator>
+#include <string>
 
 Deck::Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest, const QImage &thumbnail)
     : m_deckId(QRandomGenerator::global()->generate()),
+    //TODO Smart Id choosing
     m_name(name),
     m_privacy(privacy),
     m_deckStats(),
@@ -56,21 +58,24 @@ void Deck::fromJson(const QJsonObject& json){
 
 QJsonObject Deck::toJson() const{
     QJsonObject json;
-    json["DeckID"] = static_cast<int>(m_deckId);
-    json["Subject"] = m_name;
-    json["Privacy"] = (m_privacy == Privacy::PRIVATE) ? "Private" : "Public";
+    json["DeckID"] = static_cast<int>(getDeckId());
+    json["Subject"] = getName();
+    json["Privacy"] = (getPrivacy() == Privacy::PRIVATE) ? "Private" : "Public";
     json["Thumbnail"] = "systemDefault.png";
     //TODO Thumbnail image saving, and naming
-    json["NumberOfCardsPerIteration"] = static_cast<int>(m_numOfCardsPerTest);
+    json["NumberOfCardsPerIteration"] = static_cast<int>(getNumOfCardsPerTest());
 
     QJsonArray cardsArray;
-    for(const Card& card : m_cards){
+    for(const Card& card : getCards()){
         cardsArray.append(card.toJson());
     }
     json["Flashcards"] = cardsArray;
     return json;
 }
 
+const QString Deck::getFilePath(){
+    return  QString::number(getDeckId()).append(".json");
+}
 
 
 

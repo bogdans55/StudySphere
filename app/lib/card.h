@@ -18,7 +18,7 @@ class Card
 public:
     Card();
     Card(CardContent m_question, CardContent m_answer, Difficulty m_questionDifficulty);
-
+    ~Card();
     void flipCard();
     void evaluateAnswer(unsigned evaluation);
 
