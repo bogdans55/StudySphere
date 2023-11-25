@@ -11,13 +11,16 @@ CONFIG += c++17
 SOURCES += \
     src/createdeckwindow.cpp \
     src/createdeckdialog.cpp \
+    src/browser.cpp \
     src/card.cpp \
     src/cardcontent.cpp \
     src/cardstats.cpp \
     src/deck.cpp \
     src/deckstats.cpp \
     src/deckrating.cpp \
+    src/library.cpp \
     src/main.cpp \
+    src/studysession.cpp \
     src/user.cpp \
     src/settings.cpp \
     src/mainwindow.cpp
@@ -25,12 +28,15 @@ SOURCES += \
 HEADERS += \
     lib/createdeckwindow.h \
     lib/createdeckdialog.h \
+    lib/browser.h \
     lib/card.h \
     lib/cardcontent.h \
     lib/cardstats.h \
     lib/deck.h \
     lib/deckstats.h \
     lib/deckrating.h \
+    lib/studysession.h \
+    lib/library.h \
     lib/user.h \
     lib/settings.h \
     lib/mainwindow.h

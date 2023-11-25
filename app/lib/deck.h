@@ -27,9 +27,9 @@ private:
     unsigned m_numOfCardsPerTest;
 
 public:
+    Deck();
     Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest, const QImage &thumbnail);
     Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest);
-    ~Deck() {}
 
     inline unsigned int getDeckId() const {return m_deckId;}
     inline QString getName() const {return m_name;}
@@ -42,6 +42,10 @@ public:
 
     void addCard(Card card);
     void updateRating(unsigned grade);
+
+    void fromJson(const QJsonObject& json);
+    QJsonObject toJson() const;
+    QString getFilePath();
 };
 
 #endif // DECK_H

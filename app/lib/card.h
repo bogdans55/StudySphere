@@ -3,6 +3,7 @@
 
 #include "lib/cardcontent.h"
 #include "lib/cardstats.h"
+#include <QJsonObject>
 
 // in .h .cpp ?
 enum class Difficulty
@@ -15,9 +16,9 @@ enum class Difficulty
 class Card
 {
 public:
+    Card();
     Card(CardContent m_question, CardContent m_answer, Difficulty m_questionDifficulty);
     ~Card();
-
     void flipCard();
     void evaluateAnswer(unsigned evaluation);
 
@@ -31,6 +32,8 @@ public:
     // Setters
     void setAnswerShowed(bool answerShowed);     // public?
 
+    void fromJson(const QJsonObject& json);
+    QJsonObject toJson() const;
 
 private:
     CardContent m_question;
