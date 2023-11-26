@@ -2,6 +2,10 @@
 
 #include <QImage>
 
+CardContent::CardContent()
+    :m_text()
+{}
+
 CardContent::CardContent(QString &text)
     :m_text(text)
 {}

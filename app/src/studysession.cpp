@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <random>
 #include <numeric>
+#include <QDebug>
 
 StudySession::StudySession(const User &user, const Deck &deck)
     : m_user(user),
@@ -30,7 +31,7 @@ QVector<unsigned> StudySession::chooseCardSequence(Deck &deck, unsigned num_card
 void StudySession::nextCard()
 {
     m_currentCardIndex++;
-    if(m_currentCardIndex > m_cardSequence.length()) std::cerr << "Nema vise kartica u spilu";   //Sta raditi sa ovakvim error-ima?
+    if(m_currentCardIndex > m_cardSequence.length()) qDebug() << "Used nextCard() without anymore cards in the card sequence";
 }
 Card StudySession::getCurrentCard()
 {

@@ -46,6 +46,9 @@ public:
     void fromJson(const QJsonObject& json);
     QJsonObject toJson() const;
     QString getFilePath();
+
+    bool operator==(const Deck& deck);
+
 };
 
 #endif // DECK_H
