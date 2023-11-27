@@ -15,6 +15,17 @@ public:
     explicit StudySessionGUI(QWidget *parent = nullptr);
     ~StudySessionGUI();
 
+private slots:
+    void on_flipPushButton_clicked();
+
+    void on_skipPushButton_clicked();
+
+    void on_badPushButton_clicked();
+
+    void on_midPushButton_clicked();
+
+    void on_goodPushButton_clicked();
+
 private:
     Ui::StudySessionGUI *ui;
 };
