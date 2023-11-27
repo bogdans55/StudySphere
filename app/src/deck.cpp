@@ -3,6 +3,15 @@
 #include <QRandomGenerator>
 #include <string>
 
+Deck::Deck()
+    : m_deckId(-1),
+    m_privacy(),
+    m_deckStats(),
+    m_thumbnail(),
+    m_rating(),
+    m_numOfCardsPerTest()
+{}
+
 Deck::Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest, const QImage &thumbnail)
     : m_deckId(QRandomGenerator::global()->generate()),
     //TODO Smart Id choosing
@@ -73,11 +82,11 @@ QJsonObject Deck::toJson() const{
     return json;
 }
 
-const QString Deck::getFilePath(){
+QString Deck::getFilePath(){
     return  QString::number(getDeckId()).append(".json");
 }
 
-
+bool Deck::operator==(const Deck& deck){return this->getDeckId() == deck.getDeckId();}
 
 
 

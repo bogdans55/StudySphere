@@ -9,6 +9,8 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/createdeckwindow.cpp \
+    src/createdeckdialog.cpp \
     src/browser.cpp \
     src/card.cpp \
     src/cardcontent.cpp \
@@ -21,9 +23,12 @@ SOURCES += \
     src/studysession.cpp \
     src/user.cpp \
     src/settings.cpp \
-    src/mainwindow.cpp
+    src/mainwindow.cpp \
+    src/studysessiongui.cpp
 
 HEADERS += \
+    lib/createdeckwindow.h \
+    lib/createdeckdialog.h \
     lib/browser.h \
     lib/card.h \
     lib/cardcontent.h \
@@ -35,10 +40,14 @@ HEADERS += \
     lib/library.h \
     lib/user.h \
     lib/settings.h \
-    lib/mainwindow.h
+    lib/mainwindow.h \
+    lib/studysessiongui.h
 
 FORMS += \
-    forms/mainwindow.ui
+    forms/createdeckwindow.ui \
+    forms/createdeckdialog.ui \
+    forms/mainwindow.ui \
+    forms/studysessiongui.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

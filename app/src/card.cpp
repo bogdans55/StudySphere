@@ -2,6 +2,14 @@
 #include "lib/cardcontent.h"
 #include "lib/cardstats.h"
 
+Card::Card()
+    :m_question()
+    ,m_answer()
+    ,m_questionDifficulty()
+    ,m_answerShowed()
+    ,m_stats()
+{}
+
 Card::Card(CardContent question, CardContent answer, Difficulty questionDifficulty)
     :m_question(question)
     ,m_answer(answer)

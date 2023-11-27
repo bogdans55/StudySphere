@@ -6,6 +6,7 @@
 class CardContent
 {
 public:
+    CardContent();
     CardContent(QString &text);
     ~CardContent();
 

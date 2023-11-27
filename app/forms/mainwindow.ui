@@ -13,6 +13,144 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="libraryButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Biblioteka</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="todoButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>TODO lista</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="planerButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Nedeljni planer</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="calendarButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Kalendar aktivnosti</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="statsButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Statistike</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Minimum</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>140</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="settingsButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Podešavanja</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="helpButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Pomoć</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QTableWidget" name="tableWidget"/>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPushButton" name="createDeckButton">
+         <property name="text">
+          <string>Kreiraj novi špil</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="startStudySessionButton">
+         <property name="text">
+          <string>Započni učenje</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
