@@ -1,6 +1,7 @@
 #include "lib/mainwindow.h"
 #include "lib/createdeckdialog.h"
 #include "lib/createdeckwindow.h"
+#include "lib/studysessiongui.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -27,5 +28,13 @@ void MainWindow::on_createDeckButton_clicked()
         int privacy = popUp.getDeckPrivacy(); // should be changed to Privacy
 //        qDebug() << name << ' ' << privacy;
     }
+}
+
+
+void MainWindow::on_startStudySessionButton_clicked()
+{
+    StudySessionGUI *useDeck = new StudySessionGUI();
+    useDeck->setAttribute(Qt::WA_DeleteOnClose);
+    useDeck->show();
 }
 

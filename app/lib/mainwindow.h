@@ -18,6 +18,8 @@ public:
 private slots:
     void on_createDeckButton_clicked();
 
+    void on_startStudySessionButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
