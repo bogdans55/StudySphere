@@ -35,7 +35,7 @@ void StudySession::nextCard()
 }
 Card StudySession::getCurrentCard()
 {
-    return m_deck.getCards()[m_cardSequence[m_currentCardIndex]];
+    return m_deck.cards()[m_cardSequence[m_currentCardIndex]];
 }
 void StudySession::saveStatus()
 {

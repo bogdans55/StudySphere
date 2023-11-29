@@ -53,8 +53,8 @@ void Card::fromJson(const QJsonObject& json){
 
 QJsonObject Card::toJson() const{
     QJsonObject json;
-    json["question"] = m_question.getText();
-    json["answer"] = m_answer.getText();
+    json["question"] = m_question.text();
+    json["answer"] = m_answer.text();
 
     QString difficultyStr;
     switch (m_questionDifficulty) {

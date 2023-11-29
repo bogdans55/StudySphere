@@ -13,8 +13,8 @@ public:
     void show();
 
     // Getters
-    inline QString getText() const {return m_text;}
-    inline QImage getImage() const {return m_image;}
+    inline QString text() const {return m_text;}
+    inline QImage image() const {return m_image;}
 
     // Setter
     void setImage(const QImage &image);

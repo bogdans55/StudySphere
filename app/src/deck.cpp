@@ -67,15 +67,15 @@ void Deck::fromJson(const QJsonObject& json){
 
 QJsonObject Deck::toJson() const{
     QJsonObject json;
-    json["DeckID"] = static_cast<int>(getDeckId());
-    json["Subject"] = getName();
-    json["Privacy"] = (getPrivacy() == Privacy::PRIVATE) ? "Private" : "Public";
+    json["DeckID"] = static_cast<int>(deckId());
+    json["Subject"] = name();
+    json["Privacy"] = (privacy() == Privacy::PRIVATE) ? "Private" : "Public";
     json["Thumbnail"] = "systemDefault.png";
     //TODO Thumbnail image saving, and naming
-    json["NumberOfCardsPerIteration"] = static_cast<int>(getNumOfCardsPerTest());
+    json["NumberOfCardsPerIteration"] = static_cast<int>(numOfCardsPerTest());
 
     QJsonArray cardsArray;
-    for(const Card& card : getCards()){
+    for(const Card& card : cards()){
         cardsArray.append(card.toJson());
     }
     json["Flashcards"] = cardsArray;
@@ -83,10 +83,10 @@ QJsonObject Deck::toJson() const{
 }
 
 QString Deck::getFilePath(){
-    return  QString::number(getDeckId()).append(".json");
+    return  QString::number(deckId()).append(".json");
 }
 
-bool Deck::operator==(const Deck& deck){return this->getDeckId() == deck.getDeckId();}
+bool Deck::operator==(const Deck& deck){return this->deckId() == deck.deckId();}
 
 
 
