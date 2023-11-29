@@ -1,18 +1,17 @@
 #include "lib/card.h"
-#include "lib/cardcontent.h"
 #include "lib/cardstats.h"
 
 Card::Card()
-    :m_question()
-    ,m_answer()
+    :m_questionText()
+    ,m_answerText()
     ,m_questionDifficulty()
     ,m_answerShowed()
     ,m_stats()
 {}
 
-Card::Card(CardContent question, CardContent answer, Difficulty questionDifficulty)
-    :m_question(question)
-    ,m_answer(answer)
+Card::Card(QString questionText, QString answerText, Difficulty questionDifficulty)
+    :m_questionText(questionText)
+    ,m_answerText(answerText)
     ,m_questionDifficulty(questionDifficulty)
     ,m_answerShowed(false)
     ,m_stats()
@@ -35,8 +34,8 @@ void Card::setAnswerShowed(bool answerShowed) {
 }
 
 void Card::fromJson(const QJsonObject& json){
-    m_question.setText(json["question"].toString());
-    m_answer.setText(json["answer"].toString());
+    m_questionText.operator =(json["question"].toString());
+    m_answerText.operator =(json["answer"].toString());
 
     QString difficultyStr = json["questionDifficulty"].toString();
     if(difficultyStr == "EASY"){
@@ -53,8 +52,8 @@ void Card::fromJson(const QJsonObject& json){
 
 QJsonObject Card::toJson() const{
     QJsonObject json;
-    json["question"] = m_question.text();
-    json["answer"] = m_answer.text();
+    json["question"] = m_questionText;
+    json["answer"] = m_answerText;
 
     QString difficultyStr;
     switch (m_questionDifficulty) {
