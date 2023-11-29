@@ -12,7 +12,7 @@ Library::Library(){
     loadDecksFromFolder("../sampleData/privateDecks");
 }
 
-Library& Library::getInstance(){
+Library& Library::instance(){
     static Library instance;
     return instance;
 }

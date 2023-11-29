@@ -1,19 +1,19 @@
-#ifndef STUDYSESSIONGUI_H
-#define STUDYSESSIONGUI_H
+#ifndef STUDYSESSIONWINDOW_H
+#define STUDYSESSIONWINDOW_H
 
 #include <QWidget>
 
 namespace Ui {
-class StudySessionGUI;
+class StudySessionWindow;
 }
 
-class StudySessionGUI : public QWidget
+class StudySessionWindow : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit StudySessionGUI(QWidget *parent = nullptr);
-    ~StudySessionGUI();
+    explicit StudySessionWindow(QWidget *parent = nullptr);
+    ~StudySessionWindow();
 
 private slots:
     void on_flipPushButton_clicked();
@@ -27,7 +27,7 @@ private slots:
     void on_goodPushButton_clicked();
 
 private:
-    Ui::StudySessionGUI *ui;
+    Ui::StudySessionWindow *ui;
 };
 
-#endif // STUDYSESSIONGUI_H
+#endif // STUDYSESSIONWINDOW_H

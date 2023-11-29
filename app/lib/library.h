@@ -9,7 +9,7 @@
 class Library{
 
 public:
-    static Library& getInstance();
+    static Library& instance();
 
     void addDeck(const Deck& deck);
     void removeDeck(QVector<Deck>& decks);

@@ -23,11 +23,11 @@ public:
     void evaluateAnswer(unsigned evaluation);
 
     // Getters
-    inline CardContent getQuestion() const {return m_question;}
-    inline CardContent getAnswer() const {return m_answer;}
-    inline bool isAnswerShowed() const {return m_answerShowed;}
-    inline Difficulty getQuestionDifficulty() const {return m_questionDifficulty;}
-    inline CardStats getStats() const {return m_stats;}
+    inline CardContent question() const {return m_question;}
+    inline CardContent answer() const {return m_answer;}
+    inline bool answerShowed() const {return m_answerShowed;}
+    inline Difficulty questionDifficulty() const {return m_questionDifficulty;}
+    inline CardStats stats() const {return m_stats;}
 
     // Setters
     void setAnswerShowed(bool answerShowed);     // public?

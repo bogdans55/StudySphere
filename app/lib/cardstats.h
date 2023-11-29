@@ -12,9 +12,9 @@ public:
     void addNewGrade(unsigned grade);
 
     // Getters
-    inline QVector<unsigned> getGrades() const { return m_grades; }
-    inline unsigned getTimesAnswered() const { return m_timesAnswered; }
-    inline double getAverage() const { return m_average; }
+    inline QVector<unsigned> grades() const { return m_grades; }
+    inline unsigned timesAnswered() const { return m_timesAnswered; }
+    inline double average() const { return m_average; }
 
 private:
     QVector<unsigned> m_grades;

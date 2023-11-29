@@ -16,8 +16,8 @@ public:
 
 
 
-    inline QString getUsername() const {return m_username;}
-    inline QString getName() const {return m_name;}
+    inline QString username() const {return m_username;}
+    inline QString name() const {return m_name;}
     void setUsername(const QString &newUsername);
     void setName(const QString &newName);
 };

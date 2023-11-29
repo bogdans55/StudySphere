@@ -1,7 +1,7 @@
 #include "lib/mainwindow.h"
 #include "lib/createdeckdialog.h"
 #include "lib/createdeckwindow.h"
-#include "lib/studysessiongui.h"
+#include "lib/studysessionwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -33,7 +33,7 @@ void MainWindow::on_createDeckButton_clicked()
 
 void MainWindow::on_startStudySessionButton_clicked()
 {
-    StudySessionGUI *useDeck = new StudySessionGUI();
+    StudySessionWindow *useDeck = new StudySessionWindow();
     useDeck->setAttribute(Qt::WA_DeleteOnClose);
     useDeck->show();
 }

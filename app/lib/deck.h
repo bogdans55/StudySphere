@@ -31,14 +31,14 @@ public:
     Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest, const QImage &thumbnail);
     Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest);
 
-    inline unsigned int getDeckId() const {return m_deckId;}
-    inline QString getName() const {return m_name;}
-    inline QVector<Card> getCards() const {return m_cards;}
-    inline Privacy getPrivacy() const {return m_privacy;}
-    inline DeckStats getDeckStats() const {return m_deckStats;}
-    inline QImage getThumbnail() const {return m_thumbnail;}
-    inline DeckRating getRating() const {return m_rating;}
-    inline unsigned int getNumOfCardsPerTest() const {return m_numOfCardsPerTest;}
+    inline unsigned int deckId() const {return m_deckId;}
+    inline QString name() const {return m_name;}
+    inline QVector<Card> cards() const {return m_cards;}
+    inline Privacy privacy() const {return m_privacy;}
+    inline DeckStats deckStats() const {return m_deckStats;}
+    inline QImage thumbnail() const {return m_thumbnail;}
+    inline DeckRating rating() const {return m_rating;}
+    inline unsigned int numOfCardsPerTest() const {return m_numOfCardsPerTest;}
 
     void addCard(Card card);
     void updateRating(unsigned grade);
