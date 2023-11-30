@@ -1,6 +1,7 @@
 #include "lib/mainwindow.h"
 #include "lib/createdeckdialog.h"
 #include "lib/createdeckwindow.h"
+#include "lib/statswindow.h"
 #include "lib/studysessionwindow.h"
 #include "ui_mainwindow.h"
 
@@ -65,7 +66,10 @@ void MainWindow::on_calendarButton_clicked()
 
 void MainWindow::on_statsButton_clicked()
 {
-    // TODO create and load stats form
+    StatsWindow *stats = new StatsWindow();
+    stats->setAttribute(Qt::WA_DeleteOnClose);
+    stats->show();
+    this->close(); // should be reworked to open in the same window
 }
 
 

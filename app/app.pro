@@ -26,7 +26,8 @@ SOURCES += \
     src/studysessionwindow.cpp \
     src/user.cpp \
     src/settings.cpp \
-    src/mainwindow.cpp
+    src/mainwindow.cpp \
+    src/statswindow.cpp
 
 HEADERS += \
     lib/createdeckwindow.h \
@@ -45,13 +46,15 @@ HEADERS += \
     lib/studysessionwindow.h \
     lib/user.h \
     lib/settings.h \
-    lib/mainwindow.h
+    lib/mainwindow.h \
+    lib/statswindow.h
 
 FORMS += \
     forms/createdeckwindow.ui \
     forms/createdeckdialog.ui \
     forms/mainwindow.ui \
-    forms/studysessionwindow.ui
+    forms/studysessionwindow.ui \
+    forms/statswindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
