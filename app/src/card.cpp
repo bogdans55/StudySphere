@@ -1,19 +1,18 @@
 #include "lib/card.h"
-#include "lib/cardstats.h"
 
 Card::Card()
     :m_questionText()
     ,m_answerText()
-    ,m_questionDifficulty()
     ,m_answerShowed()
+    ,m_questionDifficulty()
     ,m_stats()
 {}
 
 Card::Card(QString questionText, QString answerText, Difficulty questionDifficulty)
     :m_questionText(questionText)
     ,m_answerText(answerText)
-    ,m_questionDifficulty(questionDifficulty)
     ,m_answerShowed(false)
+    ,m_questionDifficulty(questionDifficulty)
     ,m_stats()
 {}
 

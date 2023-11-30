@@ -41,7 +41,7 @@ void Deck::addCard(Card card)
 
 void Deck::updateRating(unsigned int grade)
 {
-    m_rating.addNewRating(grade);
+    m_rating.addNewGrade(grade);
 }
 
 void Deck::fromJson(const QJsonObject& json){

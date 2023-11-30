@@ -23,7 +23,7 @@ private:
     Privacy m_privacy;
     DeckStats m_deckStats;
     QImage m_thumbnail;
-    DeckRating m_rating;
+    Grading m_rating;
     unsigned m_numOfCardsPerTest;
 
 public:
@@ -37,7 +37,7 @@ public:
     inline Privacy privacy() const {return m_privacy;}
     inline DeckStats deckStats() const {return m_deckStats;}
     inline QImage thumbnail() const {return m_thumbnail;}
-    inline DeckRating rating() const {return m_rating;}
+    inline Grading rating() const {return m_rating;}
     inline unsigned int numOfCardsPerTest() const {return m_numOfCardsPerTest;}
 
     void addCard(Card card);

@@ -9,8 +9,6 @@ public:
     CardStats();
     ~CardStats();
 
-    // override
-//    void addNewGrade(unsigned grade) override;
 };
 
 #endif // CARDSTATS_H
