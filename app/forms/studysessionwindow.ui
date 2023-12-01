@@ -42,7 +42,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="cardTextEdit"/>
+        <widget class="QTextEdit" name="cardTextEdit">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QPushButton" name="flipPushButton">
