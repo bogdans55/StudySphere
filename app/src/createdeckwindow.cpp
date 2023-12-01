@@ -8,9 +8,28 @@ CreateDeckWindow::CreateDeckWindow(QWidget *parent) :
     ui->setupUi(this);
 }
 
+CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::CreateDeckWindow),
+    m_deck(name, privacy)
+{
+    ui->setupUi(this);
+
+}
+
 CreateDeckWindow::~CreateDeckWindow()
 {
     delete ui;
+}
+
+QString CreateDeckWindow::getQuestionText() const
+{
+    return ui->questionTextEdit->toPlainText();
+}
+
+QString CreateDeckWindow::getAnswerText() const
+{
+    return ui->answerTextEdit->toPlainText();
 }
 
 void CreateDeckWindow::on_finishedButton_clicked()

@@ -33,6 +33,15 @@ Deck::Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest)
     m_numOfCardsPerTest(numOfCardsPerTest)
 {}
 
+Deck::Deck(const QString &name, Privacy privacy)
+    : m_deckId(QRandomGenerator::global()->generate()),
+    m_name(name),
+    m_privacy(privacy),
+    m_deckStats(),
+    m_thumbnail(),
+    m_rating(),
+    m_numOfCardsPerTest(20)
+{}
 
 void Deck::addCard(Card card)
 {

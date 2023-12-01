@@ -2,6 +2,8 @@
 #define CREATEDECKWINDOW_H
 
 #include <QWidget>
+#include<QString>
+#include"deck.h"
 
 namespace Ui {
 class CreateDeckWindow;
@@ -13,7 +15,16 @@ class CreateDeckWindow : public QWidget
 
 public:
     explicit CreateDeckWindow(QWidget *parent = nullptr);
+
+    CreateDeckWindow( QString name, Privacy privacy, QWidget *parent = nullptr);
+
     ~CreateDeckWindow();
+
+    QString getQuestionText() const;
+    QString getAnswerText() const;
+
+
+
 
 private slots:
     void on_finishedButton_clicked();
@@ -22,6 +33,8 @@ private slots:
 
 private:
     Ui::CreateDeckWindow *ui;
+    Deck m_deck;
+
 };
 
 #endif // CREATEDECKWINDOW_H
