@@ -1,15 +1,23 @@
 #include "lib/mainwindow.h"
 #include "lib/createdeckdialog.h"
 #include "lib/createdeckwindow.h"
-#include "lib/statswindow.h"
 #include "lib/studysessionwindow.h"
 #include "ui_mainwindow.h"
+
+#define LIBRARY  0
+#define TODO     1
+#define PLANER   2
+#define CALENDAR 3
+#define STATS    4
+#define SETTINGS 5
+#define HELP     6
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->stackedWidget->setCurrentIndex(LIBRARY);
 }
 
 MainWindow::~MainWindow()
@@ -42,45 +50,43 @@ void MainWindow::on_startStudySessionButton_clicked()
 
 void MainWindow::on_libraryButton_clicked()
 {
-    // TODO clear form?
+    ui->stackedWidget->setCurrentIndex(LIBRARY);
 }
 
 
 void MainWindow::on_todoButton_clicked()
 {
-    // TODO create and load TODO list form
+    ui->stackedWidget->setCurrentIndex(TODO);
 }
 
 
 void MainWindow::on_planerButton_clicked()
 {
-    // TODO create and load weekly planer form
+    ui->stackedWidget->setCurrentIndex(PLANER);
 }
 
 
 void MainWindow::on_calendarButton_clicked()
 {
-    // TODO create and load activity calendar form
+    ui->stackedWidget->setCurrentIndex(CALENDAR);
 }
 
 
 void MainWindow::on_statsButton_clicked()
 {
-    StatsWindow *stats = new StatsWindow();
-    stats->setAttribute(Qt::WA_DeleteOnClose);
-    stats->show();
-    this->close(); // should be reworked to open in the same window
+    ui->stackedWidget->setCurrentIndex(STATS);
+
 }
 
 
 void MainWindow::on_settingsButton_clicked()
 {
-    // TODO create and load settings form
+    ui->stackedWidget->setCurrentIndex(SETTINGS);
 }
 
 
 void MainWindow::on_helpButton_clicked()
 {
-    // TODO create and load help form
+    ui->stackedWidget->setCurrentIndex(HELP);
 }
 
