@@ -28,7 +28,7 @@ public:
     inline unsigned currentCardIndex() const {return m_currentCardIndex;}
     inline time_t timeStarted() const {return m_timeStarted;}
     inline time_t timeEnded() const {return m_timeEnded;}
-    inline QVector<unsigned> csardSequence(){return m_cardSequence;}
+    inline QVector<unsigned> cardSequence(){return m_cardSequence;}
 
     void startSession();
     void endSession();
