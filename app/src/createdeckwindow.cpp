@@ -14,7 +14,6 @@ CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, QWidget *paren
     m_deck(name, privacy)
 {
     ui->setupUi(this);
-
 }
 
 CreateDeckWindow::~CreateDeckWindow()
@@ -42,7 +41,13 @@ void CreateDeckWindow::on_finishedButton_clicked()
 void CreateDeckWindow::on_addNewButton_clicked()
 {
     // TODO add card to deck
+    m_questionDifficulty = new QButtonGroup(this);
+    m_questionDifficulty->addButton(ui->easyRadioButton, 1);
+    m_questionDifficulty->addButton(ui->mediumRadioButton, 2);
+    m_questionDifficulty->addButton(ui->hardRadioButton, 3);
+
     ui->questionTextEdit->clear();
     ui->answerTextEdit->clear();
+    // TODO clear radio buttons
 }
 

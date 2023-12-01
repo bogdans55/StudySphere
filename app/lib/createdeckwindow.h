@@ -2,8 +2,9 @@
 #define CREATEDECKWINDOW_H
 
 #include <QWidget>
-#include<QString>
-#include"deck.h"
+#include <QString>
+#include <QButtonGroup>
+#include "deck.h"
 
 namespace Ui {
 class CreateDeckWindow;
@@ -34,7 +35,7 @@ private slots:
 private:
     Ui::CreateDeckWindow *ui;
     Deck m_deck;
-
+    QButtonGroup *m_questionDifficulty;
 };
 
 #endif // CREATEDECKWINDOW_H
