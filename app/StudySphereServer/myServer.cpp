@@ -23,3 +23,8 @@ void MyServer::startServer(){
     }
 }
 
+void MyServer::newConnection(){
+    QTcpSocket* socket = server->nextPendingConnection();
+    connect(socket, &QTcpSocket::readyRead, this, &MyServer::readData);
+
+}
