@@ -71,3 +71,17 @@ void MyServer::searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery
 
     socket->close();
 }
+
+void MyServer::saveDeck(const QString& deckName, const QByteArray& deckData){
+    QString filePath = publicDecksFolder + "/" + deckName;
+    QFile file(filePath);
+
+    if(file.open(QIODevice::WriteOnly)){
+        file.write(deckData);
+        file.close();
+        qDebug() << "Deck saved: " << filePath;
+    }
+    else{
+        qDebug() << "Error saving deck: " << file.errorString();
+    }
+}
