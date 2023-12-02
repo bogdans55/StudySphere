@@ -2,6 +2,7 @@
 #define STUDYSESSIONWINDOW_H
 
 #include <QWidget>
+
 #include "lib/studysession.h"
 
 namespace Ui {

@@ -5,9 +5,17 @@
 #include <numeric>
 #include <QDebug>
 
+StudySession::StudySession()
+    : m_user(),
+    m_deck()
+{}
+
 StudySession::StudySession(const User &user, const Deck &deck)
     : m_user(user),
     m_deck(deck)
+{}
+
+StudySession::~StudySession()
 {}
 
 void StudySession::startSession()

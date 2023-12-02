@@ -44,6 +44,7 @@ void MainWindow::on_startStudySessionButton_clicked()
 {
     StudySessionWindow *useDeck = new StudySessionWindow();
     useDeck->setAttribute(Qt::WA_DeleteOnClose);
+    useDeck->setSession(StudySession());
     useDeck->show();
 }
 

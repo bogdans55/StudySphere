@@ -1,5 +1,9 @@
 #include "lib/user.h"
 
+User::User()
+    :m_username(), m_name()
+{}
+
 User::User(const QString &newUsername, const QString &newName)
     :m_username(newUsername), m_name(newName)
 {}

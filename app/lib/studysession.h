@@ -20,6 +20,7 @@ private:
     time_t m_timeEnded;
     QVector<unsigned> m_cardSequence;
 public:
+    StudySession();
     StudySession(const User &user, const Deck &deck);
     ~StudySession();
 

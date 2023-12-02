@@ -11,6 +11,7 @@ private:
     QString m_name;
 
 public:
+    User();
     User(const QString &m_username, const QString &m_name);
     ~User();
 

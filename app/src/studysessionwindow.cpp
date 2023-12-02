@@ -3,7 +3,7 @@
 
 StudySessionWindow::StudySessionWindow(QWidget *parent) :
     QWidget(parent),
-    m_session(new StudySession()),
+    m_session(),
     ui(new Ui::StudySessionWindow)
 {
     ui->setupUi(this);
