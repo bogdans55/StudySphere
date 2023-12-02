@@ -23,6 +23,7 @@ public:
 
     QString getQuestionText() const;
     QString getAnswerText() const;
+    Difficulty getDifficulty() const;
 
 
 
