@@ -15,11 +15,11 @@ class StudySessionWindow : public QWidget
 
 public:
     explicit StudySessionWindow(QWidget *parent = nullptr);
-    explicit StudySessionWindow(QWidget *parent, const StudySession& session);
+    StudySessionWindow(const StudySession& session, QWidget *parent = nullptr);
     ~StudySessionWindow();
 
     inline StudySession session() const {return m_session;}
-    inline void setSession(const StudySession& session) {m_session=session;}
+    void setSession(const StudySession& session);
 
 private slots:
     void on_flipPushButton_clicked();

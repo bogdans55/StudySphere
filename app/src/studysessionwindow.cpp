@@ -3,16 +3,16 @@
 
 StudySessionWindow::StudySessionWindow(QWidget *parent) :
     QWidget(parent),
-    m_session(),
-    ui(new Ui::StudySessionWindow)
+    ui(new Ui::StudySessionWindow),
+    m_session()
 {
     ui->setupUi(this);
 }
 
-StudySessionWindow::StudySessionWindow(QWidget *parent, const StudySession& session) :
+StudySessionWindow::StudySessionWindow(const StudySession& session, QWidget *parent) :
     QWidget(parent),
-    m_session(session),
-    ui(new Ui::StudySessionWindow)
+    ui(new Ui::StudySessionWindow),
+    m_session(session)
 {
     ui->setupUi(this);
 }
@@ -20,6 +20,11 @@ StudySessionWindow::StudySessionWindow(QWidget *parent, const StudySession& sess
 StudySessionWindow::~StudySessionWindow()
 {
     delete ui;
+}
+
+void StudySessionWindow::setSession(const StudySession &session)
+{
+    m_session = session;
 }
 
 void StudySessionWindow::on_flipPushButton_clicked()
