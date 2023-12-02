@@ -17,7 +17,6 @@ public slots:
 
 private slots:
     void newConnection();
-    void readData();
 
 private:
     QTcpServer *server;
