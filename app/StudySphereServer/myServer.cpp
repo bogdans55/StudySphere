@@ -28,3 +28,46 @@ void MyServer::newConnection(){
     connect(socket, &QTcpSocket::readyRead, this, &MyServer::readData);
 
 }
+
+
+void MyServer::searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery){
+    QDir deckFolder(".");
+    QStringList filters;
+
+    filters << "*.json";
+
+    QStringList foundDecks;
+
+    QJsonObject response;
+
+    for(const QString &fileName : deckFolder.entryList(filters)){
+        if(fileName.contains(searchQuery, Qt::CaseInsensitive)){
+            foundDecks.append(fileName);
+        }
+    }
+
+    if(!foundDecks.isEmpty()){
+        response["status"] = "success";
+        //TODO find more elegant solution to pack found decks in response
+        response["decks"] = foundDecks.join(", ");
+
+        for(const QString& deckName : foundDecks){
+            QFile deckFile(deckName);
+            if(deckFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+                QByteArray deckData = deckFile.readAll();
+                QTextStream stream(socket);
+                stream << deckData;
+                socket->flush();
+                deckFile.close();
+            }
+        }
+    }
+    else{
+        response["status"] = "no results";
+    }
+
+    QTextStream stream(socket);
+    stream << QJsonDocument(response).toJson();
+
+    socket->close();
+}
