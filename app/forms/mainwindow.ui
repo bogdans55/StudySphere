@@ -147,7 +147,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>5</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="libraryPage">
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -502,35 +502,6 @@
            </property>
           </widget>
          </item>
-         <item row="5" column="2">
-          <widget class="QLCDNumber" name="skipNumber">
-           <property name="smallDecimalPoint">
-            <bool>true</bool>
-           </property>
-           <property name="digitCount">
-            <number>5</number>
-           </property>
-           <property name="segmentStyle">
-            <enum>QLCDNumber::Flat</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="2">
-          <widget class="QLCDNumber" name="goodNumber">
-           <property name="smallDecimalPoint">
-            <bool>true</bool>
-           </property>
-           <property name="digitCount">
-            <number>5</number>
-           </property>
-           <property name="segmentStyle">
-            <enum>QLCDNumber::Flat</enum>
-           </property>
-           <property name="value" stdset="0">
-            <double>0.000000000000000</double>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
@@ -549,19 +520,6 @@
           <widget class="QLabel" name="label_7">
            <property name="text">
             <string>Ukupan broj pitanja:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="2">
-          <widget class="QLCDNumber" name="badNumber">
-           <property name="smallDecimalPoint">
-            <bool>true</bool>
-           </property>
-           <property name="digitCount">
-            <number>5</number>
-           </property>
-           <property name="segmentStyle">
-            <enum>QLCDNumber::Flat</enum>
            </property>
           </widget>
          </item>
@@ -588,19 +546,6 @@
           <widget class="QLabel" name="label_5">
            <property name="text">
             <string>Procenat pitanja označenih sa &quot;Srednje&quot;:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="2">
-          <widget class="QLCDNumber" name="midNumber">
-           <property name="smallDecimalPoint">
-            <bool>true</bool>
-           </property>
-           <property name="digitCount">
-            <number>5</number>
-           </property>
-           <property name="segmentStyle">
-            <enum>QLCDNumber::Flat</enum>
            </property>
           </widget>
          </item>
@@ -654,6 +599,34 @@
            </property>
           </spacer>
          </item>
+         <item row="5" column="2">
+          <widget class="QProgressBar" name="progressBar">
+           <property name="value">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="2">
+          <widget class="QProgressBar" name="progressBar_2">
+           <property name="value">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="2">
+          <widget class="QProgressBar" name="progressBar_3">
+           <property name="value">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="2">
+          <widget class="QProgressBar" name="progressBar_4">
+           <property name="value">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>
@@ -687,9 +660,6 @@
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
          <widget class="QComboBox" name="comboBox_2">
-          <property name="editable">
-           <bool>true</bool>
-          </property>
           <property name="placeholderText">
            <string>Jezik</string>
           </property>
