@@ -147,7 +147,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="libraryPage">
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -255,17 +255,17 @@
       </widget>
      </widget>
      <widget class="QWidget" name="calendarPage">
-      <widget class="QLabel" name="label_13">
+      <widget class="QCalendarWidget" name="calendarWidget">
        <property name="geometry">
         <rect>
-         <x>270</x>
-         <y>230</y>
-         <width>49</width>
-         <height>16</height>
+         <x>70</x>
+         <y>30</y>
+         <width>541</width>
+         <height>361</height>
         </rect>
        </property>
-       <property name="text">
-        <string>kalendar</string>
+       <property name="locale">
+        <locale language="Serbian" country="Serbia"/>
        </property>
       </widget>
      </widget>
