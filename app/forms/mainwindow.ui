@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="inputMethodHints">
+   <set>Qt::ImhNone</set>
+  </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -464,18 +467,45 @@
       </layout>
      </widget>
      <widget class="QWidget" name="settingsPage">
-      <widget class="QLabel" name="label_10">
+      <widget class="QWidget" name="verticalLayoutWidget">
        <property name="geometry">
         <rect>
-         <x>240</x>
-         <y>230</y>
-         <width>261</width>
-         <height>16</height>
+         <x>260</x>
+         <y>50</y>
+         <width>160</width>
+         <height>261</height>
         </rect>
        </property>
-       <property name="text">
-        <string>podesavanja</string>
-       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QComboBox" name="comboBox_2">
+          <property name="placeholderText">
+           <string>Jezik</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBox">
+          <property name="placeholderText">
+           <string>Tema</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox">
+          <property name="text">
+           <string>Zvuk</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSlider" name="horizontalSlider">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
      <widget class="QWidget" name="helpPage">
