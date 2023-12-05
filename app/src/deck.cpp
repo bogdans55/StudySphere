@@ -33,6 +33,15 @@ Deck::Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest)
     m_numOfCardsPerTest(numOfCardsPerTest)
 {}
 
+Deck::Deck(const QString &name, Privacy privacy)
+    : m_deckId(QRandomGenerator::global()->generate()),
+    m_name(name),
+    m_privacy(privacy),
+    m_deckStats(),
+    m_thumbnail(),
+    m_rating(),
+    m_numOfCardsPerTest(20)
+{}
 
 void Deck::addCard(Card card)
 {
@@ -88,6 +97,46 @@ QString Deck::getFilePath(){
 
 bool Deck::operator==(const Deck& deck){return this->deckId() == deck.deckId();}
 
+QVariant Deck::toVariant() const{
+    QVariantMap map;
+    map.insert("DeckId", static_cast<int>(deckId()));
+    map.insert("Subject", name());
+    map.insert("Privacy", (privacy() == Privacy::PRIVATE) ? "Private" : "Public");
+    map.insert("Thumbnail", "systemDefault.png");     //TODO Thumbnail image saving, and naming
+    map.insert("NumberOfCardsPerIteration", static_cast<int>(numOfCardsPerTest()));
+
+    QVariantList cardsList;
+    for (const Card &card : m_cards){ //cards?
+        cardsList.append(card.toVariant());
+        }
+    map.insert("Flashcards", cardsList);
+
+    return map;
+}
+
+void Deck::fromVariant(const QVariant &variant){
+    QVariantMap map = variant.toMap();
+    m_deckId = map.value("DeckId").toUInt();
+    m_name = map.value("Subject").toString();
+    if(map.value("Privacy").toString() == "Private"){
+        m_privacy = Privacy::PRIVATE;
+    }
+    else{
+        m_privacy = Privacy::PUBLIC;
+    }
+    m_thumbnail = QImage(map.value("Thumbnail").toString());
+    m_numOfCardsPerTest = map.value("NumOfCardsPerIteration").toUInt();
+
+    //qDeleteAll(&m_cards);
+    m_cards.clear();
+
+    const auto cards = map.value("Flashcards").toList();
+    for(const auto &card : cards){
+        Card curr_card;
+        curr_card.fromVariant(card);
+        m_cards.push_back(curr_card);
+    }
+}
 
 
 

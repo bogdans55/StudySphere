@@ -22,8 +22,8 @@ QString CreateDeckDialog::getDeckName() const
     return ui->deckNameLineEdit->text();
 }
 
-int CreateDeckDialog::getDeckPrivacy() const
+Privacy CreateDeckDialog::getDeckPrivacy() const
 {
-//    return deckPrivacy->checkedId() == 1 ? Privacy::PRIVATE : Privacy::PUBLIC;
-    return deckPrivacy->checkedId();
+    return deckPrivacy->checkedId() == 1 ? Privacy::PRIVATE : Privacy::PUBLIC;
+//    return deckPrivacy->checkedId();
 }
