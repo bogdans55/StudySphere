@@ -71,7 +71,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Kalendar aktivnosti</string>
+        <string>Kalendar događaja</string>
        </property>
       </widget>
      </item>
@@ -337,6 +337,9 @@
            </item>
            <item row="2" column="1">
             <widget class="QSpinBox" name="spinBox_duration">
+             <property name="suffix">
+              <string>min</string>
+             </property>
              <property name="maximum">
               <number>1399</number>
              </property>
@@ -465,33 +468,33 @@
      <widget class="QWidget" name="page_calendar">
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
+        <layout class="QHBoxLayout" name="horizontalLayout_event">
          <item>
-          <layout class="QFormLayout" name="formLayout">
+          <layout class="QFormLayout" name="formLayout_event">
            <item row="0" column="0">
-            <widget class="QLabel" name="label">
+            <widget class="QLabel" name="label_event">
              <property name="text">
-              <string>Aktivnost:</string>
+              <string>Događaj:</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEdit"/>
+            <widget class="QLineEdit" name="lineEdit_event"/>
            </item>
            <item row="1" column="0">
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="label_eventTime">
              <property name="text">
               <string>Datum:</string>
              </property>
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QDateTimeEdit" name="dateTimeEdit"/>
+            <widget class="QDateTimeEdit" name="dateTimeEdit_eventTime"/>
            </item>
            <item row="2" column="1">
-            <widget class="QPushButton" name="pushButton">
+            <widget class="QPushButton" name="pushButton_addEvent">
              <property name="text">
-              <string>Dodaj aktivnost</string>
+              <string>Dodaj događaj</string>
              </property>
             </widget>
            </item>
