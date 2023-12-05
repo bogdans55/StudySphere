@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../res/icons.qrc">
+    <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
+  </property>
   <property name="inputMethodHints">
    <set>Qt::ImhNone</set>
   </property>
@@ -147,7 +151,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>4</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="libraryPage">
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -288,8 +292,43 @@
               <bool>false</bool>
              </property>
              <property name="currentText">
-              <string/>
+              <string>Ponedeljak</string>
              </property>
+             <item>
+              <property name="text">
+               <string>Ponedeljak</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Utorak</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Sreda</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Četvrtak</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Petak</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Subota</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Nedelja</string>
+              </property>
+             </item>
             </widget>
            </item>
            <item row="4" column="1">
@@ -663,6 +702,16 @@
           <property name="placeholderText">
            <string>Jezik</string>
           </property>
+          <item>
+           <property name="text">
+            <string>Srpski</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Engleski</string>
+           </property>
+          </item>
          </widget>
         </item>
         <item>
@@ -670,6 +719,16 @@
           <property name="placeholderText">
            <string>Tema</string>
           </property>
+          <item>
+           <property name="text">
+            <string>Svetla</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Tamna</string>
+           </property>
+          </item>
          </widget>
         </item>
         <item>
@@ -708,6 +767,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../res/icons.qrc"/>
+ </resources>
  <connections/>
 </ui>
