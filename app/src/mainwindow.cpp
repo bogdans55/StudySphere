@@ -4,6 +4,9 @@
 #include "lib/studysessionwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QApplication>
+#include <QMessageBox>
+
 #define LIBRARY  0
 #define TODO     1
 #define PLANER   2
@@ -89,5 +92,17 @@ void MainWindow::on_pushButton_settings_clicked()
 void MainWindow::on_pushButton_help_clicked()
 {
     ui->stackedWidget->setCurrentIndex(HELP);
+}
+
+
+void MainWindow::on_calendarWidget_activated(const QDate &date)
+{
+    // work in progress!
+
+//    qDebug() << date;
+    if(date.dayOfWeek() == 7)
+        QMessageBox::information(this, date.toString(), "nema nista");
+    else
+        QMessageBox::information(this, date.toString(), "aktivnosti za taj dan npr");
 }
 
