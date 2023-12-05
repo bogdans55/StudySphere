@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>StudySphere - add card</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../res/icons.qrc">
@@ -19,26 +19,26 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QFormLayout" name="formLayout_2">
+    <layout class="QFormLayout" name="formLayout_card">
      <item row="0" column="0">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="label_question">
        <property name="text">
         <string>Pitanje:</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QTextEdit" name="questionTextEdit"/>
+      <widget class="QTextEdit" name="textEdit_question"/>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="label_answer">
        <property name="text">
         <string>Odgovor:</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QTextEdit" name="answerTextEdit"/>
+      <widget class="QTextEdit" name="textEdit_answer"/>
      </item>
      <item row="4" column="1">
       <spacer name="verticalSpacer_2">
@@ -57,23 +57,23 @@
       </spacer>
      </item>
      <item row="2" column="1">
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayout_difficulty">
        <item>
-        <widget class="QRadioButton" name="easyRadioButton">
+        <widget class="QRadioButton" name="radioButton_easy">
          <property name="text">
           <string>Lako</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="mediumRadioButton">
+        <widget class="QRadioButton" name="radioButton_medium">
          <property name="text">
           <string>Srednje</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QRadioButton" name="hardRadioButton">
+        <widget class="QRadioButton" name="radioButton_hard">
          <property name="text">
           <string>Teško</string>
          </property>
@@ -82,7 +82,7 @@
       </layout>
      </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="label_difficulty">
        <property name="text">
         <string>Težina:</string>
        </property>
@@ -91,7 +91,7 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout_buttons">
      <item>
       <spacer name="horizontalSpacer_2">
        <property name="orientation">
@@ -106,7 +106,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="finishedButton">
+      <widget class="QPushButton" name="pushButton_finish">
        <property name="text">
         <string>Završi dodavanje</string>
        </property>
@@ -129,7 +129,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="addNewButton">
+      <widget class="QPushButton" name="pushButton_add">
        <property name="text">
         <string>Dodaj karticu</string>
        </property>

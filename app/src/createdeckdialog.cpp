@@ -8,8 +8,8 @@ CreateDeckDialog::CreateDeckDialog(QWidget *parent) :
     ui->setupUi(this);
 
     deckPrivacy = new QButtonGroup(this);
-    deckPrivacy->addButton(ui->PrivateRadioButton, 1);
-    deckPrivacy->addButton(ui->PublicRadioButton, 2);
+    deckPrivacy->addButton(ui->radioButton_private, 1);
+    deckPrivacy->addButton(ui->radioButton_public, 2);
 }
 
 CreateDeckDialog::~CreateDeckDialog()
@@ -19,7 +19,7 @@ CreateDeckDialog::~CreateDeckDialog()
 
 QString CreateDeckDialog::getDeckName() const
 {
-    return ui->deckNameLineEdit->text();
+    return ui->lineEdit_deckName->text();
 }
 
 Privacy CreateDeckDialog::getDeckPrivacy() const

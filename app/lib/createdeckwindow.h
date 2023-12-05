@@ -29,9 +29,9 @@ public:
 
 
 private slots:
-    void on_finishedButton_clicked();
+    void on_pushButton_finish_clicked();
 
-    void on_addNewButton_clicked();
+    void on_pushButton_add_clicked();
 
 private:
     Ui::CreateDeckWindow *ui;

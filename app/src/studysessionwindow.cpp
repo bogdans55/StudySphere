@@ -13,31 +13,31 @@ StudySessionWindow::~StudySessionWindow()
     delete ui;
 }
 
-void StudySessionWindow::on_flipPushButton_clicked()
+void StudySessionWindow::on_pushButton_flip_clicked()
 {
     // TODO flip card (show answer/question)
 }
 
 
-void StudySessionWindow::on_skipPushButton_clicked()
+void StudySessionWindow::on_pushButton_skip_clicked()
 {
     // TODO skip question and load next card
 }
 
 
-void StudySessionWindow::on_badPushButton_clicked()
+void StudySessionWindow::on_pushButton_bad_clicked()
 {
     // TODO save users grade and load next card
 }
 
 
-void StudySessionWindow::on_midPushButton_clicked()
+void StudySessionWindow::on_pushButton_mid_clicked()
 {
     // TODO save users grade and load next card
 }
 
 
-void StudySessionWindow::on_goodPushButton_clicked()
+void StudySessionWindow::on_pushButton_good_clicked()
 {
     // TODO save users grade and load next card
 }

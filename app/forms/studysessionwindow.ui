@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>StudySphere - StudySession</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../res/icons.qrc">
@@ -19,7 +19,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="horizontalLayout_card">
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
@@ -34,9 +34,9 @@
       </spacer>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayout_card">
        <item>
-        <widget class="QLabel" name="label_5">
+        <widget class="QLabel" name="label_cardName">
          <property name="text">
           <string>Kartica</string>
          </property>
@@ -46,14 +46,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="cardTextEdit">
+        <widget class="QTextEdit" name="textEdit_card">
          <property name="readOnly">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="flipPushButton">
+        <widget class="QPushButton" name="pushButton_flip">
          <property name="text">
           <string>Okreni karticu</string>
          </property>
@@ -77,30 +77,30 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout_grade">
      <item>
-      <widget class="QPushButton" name="skipPushButton">
+      <widget class="QPushButton" name="pushButton_skip">
        <property name="text">
         <string>Ne znam</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="badPushButton">
+      <widget class="QPushButton" name="pushButton_bad">
        <property name="text">
         <string>Loše</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="midPushButton">
+      <widget class="QPushButton" name="pushButton_mid">
        <property name="text">
         <string>Srednje</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="goodPushButton">
+      <widget class="QPushButton" name="pushButton_good">
        <property name="text">
         <string>Odlično</string>
        </property>

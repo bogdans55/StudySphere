@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>StudySphere</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../res/icons.qrc">
@@ -22,9 +22,9 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="verticalLayout_buttons">
      <item>
-      <widget class="QPushButton" name="libraryButton">
+      <widget class="QPushButton" name="pushButton_library">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -37,7 +37,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="todoButton">
+      <widget class="QPushButton" name="pushButton_todo">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -50,7 +50,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="planerButton">
+      <widget class="QPushButton" name="pushButton_planer">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -63,7 +63,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="calendarButton">
+      <widget class="QPushButton" name="pushButton_calendar">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -76,7 +76,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="statsButton">
+      <widget class="QPushButton" name="pushButton_stats">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -105,7 +105,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="settingsButton">
+      <widget class="QPushButton" name="pushButton_settings">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -118,7 +118,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="helpButton">
+      <widget class="QPushButton" name="pushButton_help">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -151,26 +151,26 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>5</number>
+      <number>0</number>
      </property>
-     <widget class="QWidget" name="libraryPage">
+     <widget class="QWidget" name="page_library">
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <layout class="QVBoxLayout" name="verticalLayout_library">
          <item>
-          <widget class="QTableWidget" name="tableWidget"/>
+          <widget class="QTableWidget" name="tableWidget_library"/>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
+          <layout class="QHBoxLayout" name="horizontalLayout_act">
            <item>
-            <widget class="QPushButton" name="createDeckButton">
+            <widget class="QPushButton" name="pushButton_createDeck">
              <property name="text">
               <string>Kreiraj novi špil</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="startStudySessionButton">
+            <widget class="QPushButton" name="pushButton_startStudySession">
              <property name="text">
               <string>Započni učenje</string>
              </property>
@@ -182,8 +182,8 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="todoPage">
-      <widget class="QPushButton" name="pushButton">
+     <widget class="QWidget" name="page_todo">
+      <widget class="QPushButton" name="pushButton_addTodo">
        <property name="geometry">
         <rect>
          <x>590</x>
@@ -196,7 +196,7 @@
         <string>Dodaj aktivnost</string>
        </property>
       </widget>
-      <widget class="QListWidget" name="listWidget">
+      <widget class="QListWidget" name="listWidget_todos">
        <property name="geometry">
         <rect>
          <x>5</x>
@@ -206,7 +206,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QTextEdit" name="textEdit">
+      <widget class="QTextEdit" name="textEdit_todo">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -216,7 +216,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="pushButton_deleteTodo">
        <property name="geometry">
         <rect>
          <x>460</x>
@@ -229,7 +229,7 @@
         <string>Obriši</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="pushButton_deleteAllTodos">
        <property name="geometry">
         <rect>
          <x>590</x>
@@ -243,51 +243,51 @@
        </property>
       </widget>
      </widget>
-     <widget class="QWidget" name="planerPage">
+     <widget class="QWidget" name="page_planer">
       <layout class="QVBoxLayout" name="verticalLayout_6">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <layout class="QHBoxLayout" name="horizontalLayout_activity">
          <item>
-          <layout class="QFormLayout" name="formLayout">
+          <layout class="QFormLayout" name="formLayout_activity">
            <item row="0" column="0">
-            <widget class="QLabel" name="label_11">
+            <widget class="QLabel" name="label_activityName">
              <property name="text">
               <string>Aktivnost:</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEdit"/>
+            <widget class="QLineEdit" name="lineEdit_activityName"/>
            </item>
            <item row="1" column="0">
-            <widget class="QLabel" name="label_9">
+            <widget class="QLabel" name="label_start">
              <property name="text">
               <string>Početak aktivnosti:</string>
              </property>
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QLineEdit" name="lineEdit_2"/>
+            <widget class="QLineEdit" name="lineEdit_start"/>
            </item>
            <item row="2" column="0">
-            <widget class="QLabel" name="label_10">
+            <widget class="QLabel" name="label_end">
              <property name="text">
               <string>Kraj aktivnosti:</string>
              </property>
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QLineEdit" name="lineEdit_3"/>
+            <widget class="QLineEdit" name="lineEdit_end"/>
            </item>
            <item row="3" column="0">
-            <widget class="QLabel" name="label_13">
+            <widget class="QLabel" name="label_day">
              <property name="text">
               <string>Dan:</string>
              </property>
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QComboBox" name="comboBox_3">
+            <widget class="QComboBox" name="comboBox_day">
              <property name="editable">
               <bool>false</bool>
              </property>
@@ -332,7 +332,7 @@
             </widget>
            </item>
            <item row="4" column="1">
-            <widget class="QPushButton" name="pushButton_4">
+            <widget class="QPushButton" name="pushButton_addActivity">
              <property name="text">
               <string>Dodaj</string>
              </property>
@@ -359,9 +359,9 @@
         </layout>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout_2">
+        <layout class="QGridLayout" name="gridLayout_week">
          <item row="0" column="1">
-          <widget class="QLabel" name="label_15">
+          <widget class="QLabel" name="label_tuesday">
            <property name="text">
             <string>Utorak</string>
            </property>
@@ -371,7 +371,7 @@
           </widget>
          </item>
          <item row="0" column="5">
-          <widget class="QLabel" name="label_19">
+          <widget class="QLabel" name="label_saturday">
            <property name="text">
             <string>Subota</string>
            </property>
@@ -381,7 +381,7 @@
           </widget>
          </item>
          <item row="0" column="0">
-          <widget class="QLabel" name="label_14">
+          <widget class="QLabel" name="label_monday">
            <property name="text">
             <string>Ponedeljak</string>
            </property>
@@ -391,7 +391,7 @@
           </widget>
          </item>
          <item row="0" column="4">
-          <widget class="QLabel" name="label_18">
+          <widget class="QLabel" name="label_friday">
            <property name="text">
             <string>Petak</string>
            </property>
@@ -401,7 +401,7 @@
           </widget>
          </item>
          <item row="0" column="3">
-          <widget class="QLabel" name="label_17">
+          <widget class="QLabel" name="label_thursday">
            <property name="text">
             <string>Četvrtak</string>
            </property>
@@ -411,7 +411,7 @@
           </widget>
          </item>
          <item row="0" column="2">
-          <widget class="QLabel" name="label_16">
+          <widget class="QLabel" name="label_wednesday">
            <property name="text">
             <string>Sreda</string>
            </property>
@@ -421,10 +421,10 @@
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QListWidget" name="listWidget_2"/>
+          <widget class="QListWidget" name="listWidget_monday"/>
          </item>
          <item row="0" column="6">
-          <widget class="QLabel" name="label_20">
+          <widget class="QLabel" name="label_sunday">
            <property name="text">
             <string>Nedelja</string>
            </property>
@@ -434,28 +434,28 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QListWidget" name="listWidget_3"/>
+          <widget class="QListWidget" name="listWidget_tuesday"/>
          </item>
          <item row="1" column="2">
-          <widget class="QListWidget" name="listWidget_4"/>
+          <widget class="QListWidget" name="listWidget_wednesday"/>
          </item>
          <item row="1" column="3">
-          <widget class="QListWidget" name="listWidget_5"/>
+          <widget class="QListWidget" name="listWidget_thursday"/>
          </item>
          <item row="1" column="4">
-          <widget class="QListWidget" name="listWidget_6"/>
+          <widget class="QListWidget" name="listWidget_friday"/>
          </item>
          <item row="1" column="5">
-          <widget class="QListWidget" name="listWidget_7"/>
+          <widget class="QListWidget" name="listWidget_saturday"/>
          </item>
          <item row="1" column="6">
-          <widget class="QListWidget" name="listWidget_8"/>
+          <widget class="QListWidget" name="listWidget_sunday"/>
          </item>
         </layout>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="calendarPage">
+     <widget class="QWidget" name="page_calendar">
       <widget class="QCalendarWidget" name="calendarWidget">
        <property name="geometry">
         <rect>
@@ -470,7 +470,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QWidget" name="statsPage">
+     <widget class="QWidget" name="page_stats">
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <spacer name="verticalSpacer_2">
@@ -486,7 +486,7 @@
         </spacer>
        </item>
        <item>
-        <layout class="QGridLayout" name="gridLayout">
+        <layout class="QGridLayout" name="gridLayout_stats">
          <property name="leftMargin">
           <number>40</number>
          </property>
@@ -494,7 +494,7 @@
           <number>100</number>
          </property>
          <item row="2" column="2">
-          <widget class="QLCDNumber" name="deckSizeNumber">
+          <widget class="QLCDNumber" name="number_deckSize">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -513,7 +513,7 @@
           </widget>
          </item>
          <item row="3" column="2">
-          <widget class="QLCDNumber" name="usesNumber">
+          <widget class="QLCDNumber" name="number_uses">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -532,38 +532,38 @@
           </widget>
          </item>
          <item row="0" column="1" colspan="2">
-          <widget class="QComboBox" name="deckComboBox"/>
+          <widget class="QComboBox" name="comboBox_deck"/>
          </item>
          <item row="2" column="0">
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="label_uses">
            <property name="text">
             <string>Broj korišćenja:</string>
            </property>
           </widget>
          </item>
          <item row="0" column="0">
-          <widget class="QLabel" name="label">
+          <widget class="QLabel" name="label_deck">
            <property name="text">
             <string>Izaberi špil:</string>
            </property>
           </widget>
          </item>
          <item row="6" column="0">
-          <widget class="QLabel" name="label_4">
+          <widget class="QLabel" name="label_bad">
            <property name="text">
             <string>Procenat pitanja označenih sa &quot;Loše&quot;:</string>
            </property>
           </widget>
          </item>
          <item row="3" column="0">
-          <widget class="QLabel" name="label_7">
+          <widget class="QLabel" name="label_deckSize">
            <property name="text">
             <string>Ukupan broj pitanja:</string>
            </property>
           </widget>
          </item>
          <item row="4" column="2">
-          <widget class="QLCDNumber" name="untestedNumber">
+          <widget class="QLCDNumber" name="number_untested">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -582,28 +582,28 @@
           </widget>
          </item>
          <item row="7" column="0">
-          <widget class="QLabel" name="label_5">
+          <widget class="QLabel" name="label_mid">
            <property name="text">
             <string>Procenat pitanja označenih sa &quot;Srednje&quot;:</string>
            </property>
           </widget>
          </item>
          <item row="4" column="0">
-          <widget class="QLabel" name="label_8">
+          <widget class="QLabel" name="label_untested">
            <property name="text">
             <string>Broj nepredjenih pitanja:</string>
            </property>
           </widget>
          </item>
          <item row="8" column="0">
-          <widget class="QLabel" name="label_6">
+          <widget class="QLabel" name="label_good">
            <property name="text">
             <string>Procenat pitanja označenih sa &quot;Odlično&quot;:</string>
            </property>
           </widget>
          </item>
          <item row="5" column="0">
-          <widget class="QLabel" name="label_3">
+          <widget class="QLabel" name="label_skip">
            <property name="text">
             <string>Procenat pitanja označenih sa &quot;Ne znam&quot;:</string>
            </property>
@@ -639,28 +639,28 @@
           </spacer>
          </item>
          <item row="5" column="2">
-          <widget class="QProgressBar" name="progressBar">
+          <widget class="QProgressBar" name="progressBar_skip">
            <property name="value">
             <number>0</number>
            </property>
           </widget>
          </item>
          <item row="6" column="2">
-          <widget class="QProgressBar" name="progressBar_2">
+          <widget class="QProgressBar" name="progressBar_bad">
            <property name="value">
             <number>0</number>
            </property>
           </widget>
          </item>
          <item row="7" column="2">
-          <widget class="QProgressBar" name="progressBar_3">
+          <widget class="QProgressBar" name="progressBar_mid">
            <property name="value">
             <number>0</number>
            </property>
           </widget>
          </item>
          <item row="8" column="2">
-          <widget class="QProgressBar" name="progressBar_4">
+          <widget class="QProgressBar" name="progressBar_good">
            <property name="value">
             <number>0</number>
            </property>
@@ -686,7 +686,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="settingsPage">
+     <widget class="QWidget" name="page_settings">
       <widget class="QWidget" name="verticalLayoutWidget">
        <property name="geometry">
         <rect>
@@ -696,9 +696,9 @@
          <height>261</height>
         </rect>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_5">
+       <layout class="QVBoxLayout" name="verticalLayout_settings">
         <item>
-         <widget class="QComboBox" name="comboBox_2">
+         <widget class="QComboBox" name="comboBox_language">
           <property name="placeholderText">
            <string>Jezik</string>
           </property>
@@ -715,7 +715,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox">
+         <widget class="QComboBox" name="comboBox_theme">
           <property name="placeholderText">
            <string>Tema</string>
           </property>
@@ -732,14 +732,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBox">
+         <widget class="QCheckBox" name="checkBox_sound">
           <property name="text">
            <string>Zvuk</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QSlider" name="horizontalSlider">
+         <widget class="QSlider" name="horizontalSlider_volume">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -748,8 +748,8 @@
        </layout>
       </widget>
      </widget>
-     <widget class="QWidget" name="helpPage">
-      <widget class="QLabel" name="label_12">
+     <widget class="QWidget" name="page_help">
+      <widget class="QLabel" name="label_temp">
        <property name="geometry">
         <rect>
          <x>280</x>

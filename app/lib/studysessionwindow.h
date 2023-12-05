@@ -16,15 +16,15 @@ public:
     ~StudySessionWindow();
 
 private slots:
-    void on_flipPushButton_clicked();
+    void on_pushButton_flip_clicked();
 
-    void on_skipPushButton_clicked();
+    void on_pushButton_skip_clicked();
 
-    void on_badPushButton_clicked();
+    void on_pushButton_bad_clicked();
 
-    void on_midPushButton_clicked();
+    void on_pushButton_mid_clicked();
 
-    void on_goodPushButton_clicked();
+    void on_pushButton_good_clicked();
 
 private:
     Ui::StudySessionWindow *ui;

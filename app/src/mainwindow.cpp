@@ -26,7 +26,7 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_createDeckButton_clicked()
+void MainWindow::on_pushButton_createDeck_clicked()
 {
     CreateDeckDialog popUp(this);
     if (popUp.exec() == QDialog::Accepted) {
@@ -41,7 +41,7 @@ void MainWindow::on_createDeckButton_clicked()
 }
 
 
-void MainWindow::on_startStudySessionButton_clicked()
+void MainWindow::on_pushButton_startStudySession_clicked()
 {
     StudySessionWindow *useDeck = new StudySessionWindow();
     useDeck->setAttribute(Qt::WA_DeleteOnClose);
@@ -49,44 +49,44 @@ void MainWindow::on_startStudySessionButton_clicked()
 }
 
 
-void MainWindow::on_libraryButton_clicked()
+void MainWindow::on_pushButton_library_clicked()
 {
     ui->stackedWidget->setCurrentIndex(LIBRARY);
 }
 
 
-void MainWindow::on_todoButton_clicked()
+void MainWindow::on_pushButton_todo_clicked()
 {
     ui->stackedWidget->setCurrentIndex(TODO);
 }
 
 
-void MainWindow::on_planerButton_clicked()
+void MainWindow::on_pushButton_planer_clicked()
 {
     ui->stackedWidget->setCurrentIndex(PLANER);
 }
 
 
-void MainWindow::on_calendarButton_clicked()
+void MainWindow::on_pushButton_calendar_clicked()
 {
     ui->stackedWidget->setCurrentIndex(CALENDAR);
 }
 
 
-void MainWindow::on_statsButton_clicked()
+void MainWindow::on_pushButton_stats_clicked()
 {
     ui->stackedWidget->setCurrentIndex(STATS);
 
 }
 
 
-void MainWindow::on_settingsButton_clicked()
+void MainWindow::on_pushButton_settings_clicked()
 {
     ui->stackedWidget->setCurrentIndex(SETTINGS);
 }
 
 
-void MainWindow::on_helpButton_clicked()
+void MainWindow::on_pushButton_help_clicked()
 {
     ui->stackedWidget->setCurrentIndex(HELP);
 }

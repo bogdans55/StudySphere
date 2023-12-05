@@ -26,12 +26,12 @@ CreateDeckWindow::~CreateDeckWindow()
 
 QString CreateDeckWindow::getQuestionText() const
 {
-    return ui->questionTextEdit->toPlainText();
+    return ui->textEdit_question->toPlainText();
 }
 
 QString CreateDeckWindow::getAnswerText() const
 {
-    return ui->answerTextEdit->toPlainText();
+    return ui->textEdit_answer->toPlainText();
 }
 
 Difficulty CreateDeckWindow::getDifficulty() const
@@ -43,7 +43,7 @@ Difficulty CreateDeckWindow::getDifficulty() const
     else return Difficulty::HARD;
 } //default difficulty set to HARD, change if needed
 
-void CreateDeckWindow::on_finishedButton_clicked()
+void CreateDeckWindow::on_pushButton_finish_clicked()
 {
 
     // m_deck.toJson();
@@ -53,13 +53,13 @@ void CreateDeckWindow::on_finishedButton_clicked()
 }
 
 
-void CreateDeckWindow::on_addNewButton_clicked()
+void CreateDeckWindow::on_pushButton_add_clicked()
 {
 
     m_questionDifficulty = new QButtonGroup(this);
-    m_questionDifficulty->addButton(ui->easyRadioButton, 1);
-    m_questionDifficulty->addButton(ui->mediumRadioButton, 2);
-    m_questionDifficulty->addButton(ui->hardRadioButton, 3);
+    m_questionDifficulty->addButton(ui->radioButton_easy, 1);
+    m_questionDifficulty->addButton(ui->radioButton_medium, 2);
+    m_questionDifficulty->addButton(ui->radioButton_hard, 3);
 
     QString m_question = getQuestionText();
     QString m_answer = getAnswerText();
@@ -69,8 +69,8 @@ void CreateDeckWindow::on_addNewButton_clicked()
 
     m_deck.addCard(m_card);
 
-    ui->questionTextEdit->clear();
-    ui->answerTextEdit->clear();
+    ui->textEdit_question->clear();
+    ui->textEdit_answer->clear();
     // TODO clear radio buttons
 }
 
