@@ -1,6 +1,8 @@
 #include "lib/createdeckwindow.h"
 #include "ui_createdeckwindow.h"
 #include "lib/card.h"
+#include "lib/serializer.h"
+#include "lib/jsonserializer.h"
 
 CreateDeckWindow::CreateDeckWindow(QWidget *parent) :
     QWidget(parent),
@@ -44,8 +46,9 @@ Difficulty CreateDeckWindow::getDifficulty() const
 void CreateDeckWindow::on_finishedButton_clicked()
 {
 
-    m_deck.toJson();
-
+    // m_deck.toJson();
+    JSONSerializer *serializer = new JSONSerializer();
+    serializer->save(m_deck, "../decks/" + m_deck.name() + ".json");
     close();
 }
 

@@ -14,7 +14,7 @@ enum class Privacy
     PUBLIC
 };
 
-class Deck
+class Deck : public Serializable
 {
 private:
     unsigned m_deckId;
@@ -49,6 +49,9 @@ public:
     QString getFilePath();
 
     bool operator==(const Deck& deck);
+
+    QVariant toVariant() const override;
+    void fromVariant(const QVariant &variant) override;
 
 };
 

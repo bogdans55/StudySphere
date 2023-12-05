@@ -19,6 +19,7 @@ SOURCES += \
     src/deckrating.cpp \
     src/grading.cpp \
     src/imagecard.cpp \
+    src/jsonserializer.cpp \
     src/library.cpp \
     src/main.cpp \
     src/plaincard.cpp \
@@ -39,7 +40,10 @@ HEADERS += \
     lib/deckrating.h \
     lib/grading.h \
     lib/imagecard.h \
+    lib/jsonserializer.h \
     lib/plaincard.h \
+    lib/serializable.h \
+    lib/serializer.h \
     lib/studysession.h \
     lib/library.h \
     lib/studysessionwindow.h \
