@@ -11,34 +11,38 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>StudySphere - new deck</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../res/icons.qrc">
+    <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout_deckName">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="label_deckName">
        <property name="text">
         <string>Unesite naziv špila:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="deckNameLineEdit"/>
+      <widget class="QLineEdit" name="lineEdit_deckName"/>
      </item>
     </layout>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="verticalLayout_privacy">
      <item>
-      <widget class="QRadioButton" name="PrivateRadioButton">
+      <widget class="QRadioButton" name="radioButton_private">
        <property name="text">
         <string>Privatan</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="PublicRadioButton">
+      <widget class="QRadioButton" name="radioButton_public">
        <property name="text">
         <string>Javan</string>
        </property>
@@ -60,7 +64,7 @@
     </spacer>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
+    <widget class="QDialogButtonBox" name="buttonBox_done">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -71,10 +75,12 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../res/icons.qrc"/>
+ </resources>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>buttonBox_done</sender>
    <signal>accepted()</signal>
    <receiver>CreateDeckDialog</receiver>
    <slot>accept()</slot>
@@ -90,7 +96,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>buttonBox_done</sender>
    <signal>rejected()</signal>
    <receiver>CreateDeckDialog</receiver>
    <slot>reject()</slot>

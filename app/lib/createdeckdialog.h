@@ -18,7 +18,7 @@ public:
     ~CreateDeckDialog();
 
     QString getDeckName() const;
-    int getDeckPrivacy() const; // should be changed to return Privacy
+    Privacy getDeckPrivacy() const;
 
 private:
     Ui::CreateDeckDialog *ui;

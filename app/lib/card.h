@@ -3,6 +3,7 @@
 
 #include "lib/grading.h"
 #include <QJsonObject>
+#include"lib/serializable.h"
 
 // in .h .cpp ?
 enum class Difficulty
@@ -12,7 +13,7 @@ enum class Difficulty
     HARD
 };
 
-class Card
+class Card : public Serializable
 {
 public:
     Card();
@@ -33,6 +34,9 @@ public:
 
     void fromJson(const QJsonObject& json);
     QJsonObject toJson() const;
+
+    QVariant toVariant() const override;
+    void fromVariant(const QVariant &variant) override;
 
 protected:
     QString m_questionText;     // was CardContent

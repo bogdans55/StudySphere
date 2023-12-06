@@ -16,23 +16,25 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_createDeckButton_clicked();
+    void on_pushButton_createDeck_clicked();
 
-    void on_startStudySessionButton_clicked();
+    void on_pushButton_startStudySession_clicked();
 
-    void on_libraryButton_clicked();
+    void on_pushButton_library_clicked();
 
-    void on_todoButton_clicked();
+    void on_pushButton_todo_clicked();
 
-    void on_planerButton_clicked();
+    void on_pushButton_planer_clicked();
 
-    void on_calendarButton_clicked();
+    void on_pushButton_calendar_clicked();
 
-    void on_statsButton_clicked();
+    void on_pushButton_stats_clicked();
 
-    void on_settingsButton_clicked();
+    void on_pushButton_settings_clicked();
 
-    void on_helpButton_clicked();
+    void on_pushButton_help_clicked();
+
+    void on_calendarWidget_activated(const QDate &date);
 
 private:
     Ui::MainWindow *ui;
