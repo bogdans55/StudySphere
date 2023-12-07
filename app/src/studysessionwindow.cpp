@@ -27,45 +27,45 @@ void StudySessionWindow::setSession(const StudySession &session)
     m_session = session;
 }
 
-void StudySessionWindow::on_flipPushButton_clicked()
+void StudySessionWindow::on_pushButton_flip_clicked()
 {
     if(!session().getCurrentCard().answerShowed())
-        ui->cardTextEdit->setText(session().getCurrentCard().questionText());
+        ui->textEdit_card->setText(session().getCurrentCard().questionText());
     else
-        ui->cardTextEdit->setText(session().getCurrentCard().questionAnswer());
+        ui->textEdit_card->setText(session().getCurrentCard().questionAnswer());
 
     session().getCurrentCard().flipCard();
 }
 
 
-void StudySessionWindow::on_skipPushButton_clicked()
+void StudySessionWindow::on_pushButton_skip_clicked()
 {
     session().getCurrentCard().evaluateAnswer(0);
     session().nextCard();
-    ui->cardTextEdit->setText(session().getCurrentCard().questionText());
+    ui->textEdit_card->setText(session().getCurrentCard().questionText());
 }
 
 
-void StudySessionWindow::on_badPushButton_clicked()
+void StudySessionWindow::on_pushButton_bad_clicked()
 {
     session().getCurrentCard().evaluateAnswer(1);
     session().nextCard();
-    ui->cardTextEdit->setText(session().getCurrentCard().questionText());
+    ui->textEdit_card->setText(session().getCurrentCard().questionText());
 }
 
 
-void StudySessionWindow::on_midPushButton_clicked()
+void StudySessionWindow::on_pushButton_mid_clicked()
 {
     session().getCurrentCard().evaluateAnswer(2);
     session().nextCard();
-    ui->cardTextEdit->setText(session().getCurrentCard().questionText());
+    ui->textEdit_card->setText(session().getCurrentCard().questionText());
 }
 
 
-void StudySessionWindow::on_goodPushButton_clicked()
+void StudySessionWindow::on_pushButton_good_clicked()
 {
     session().getCurrentCard().evaluateAnswer(3);
     session().nextCard();
-    ui->cardTextEdit->setText(session().getCurrentCard().questionText());
+    ui->textEdit_card->setText(session().getCurrentCard().questionText());
 }
 
