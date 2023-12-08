@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
         QJsonObject request;
         request["action"] = "login";
         request["username"] = "marko1684";
+        request["password"] = "kerkoc123";
 
         socket.write(QJsonDocument(request).toJson());
         socket.waitForBytesWritten();

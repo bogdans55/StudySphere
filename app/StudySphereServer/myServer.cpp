@@ -12,6 +12,9 @@ MyServer::MyServer(QObject* parent) : QObject(parent){
 
     publicDecksFolder = "publicDecks";
     QDir().mkpath(publicDecksFolder);
+
+    usersInfoFolder = "usersInfo";
+    QDir().mkpath(usersInfoFolder);
 }
 
 void MyServer::startServer(){
@@ -37,7 +40,28 @@ void MyServer::readData()
 
     if (action == "login") {
         QString username = jsonObject["username"].toString();
-        searchAndSendDecks(socket, username);
+        QFile userFile(QDir(usersInfoFolder).absoluteFilePath(username + ".txt"));
+        qDebug() << username;
+        try{
+            userFile.open(QIODevice::ReadOnly);
+            QByteArray password = userFile.readLine();
+            if(password != jsonObject["password"].toString()){
+                qDebug() << "Password incorrect: " << username;
+                socket -> write("Password error, try again");
+                socket -> close();
+            }else{
+                socket -> write("Login successful!");
+                searchAndSendDecks(socket, username);
+            }
+
+        }catch(const QFile::FileError& error){
+            qDebug() << "Username incorrect or file error: " << username;
+            socket -> write("Username error, try again");
+            socket -> close();
+        }
+
+
+        // searchAndSendDecks(socket, username);
     }/* else if (action == "upload") {
         // Assuming you will include the username in the upload request
         QString username = jsonObject["username"].toString();

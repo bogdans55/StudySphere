@@ -21,6 +21,8 @@ private slots:
 private:
     QTcpServer *server;
     QString publicDecksFolder;
+    QString usersInfoFolder;
+
 
     void searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery);
     void saveDeck(const QString& deckName, const QByteArray& deckData);
