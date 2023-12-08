@@ -15,6 +15,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void loadDecks();
+
 private slots:
     void on_pushButton_createDeck_clicked();
 

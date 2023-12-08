@@ -6,6 +6,7 @@
 
 #include <QApplication>
 #include <QMessageBox>
+#include <QDirIterator>
 
 #define LIBRARY  0
 #define TODO     1
@@ -21,11 +22,30 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(LIBRARY);
+
+    loadDecks();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::loadDecks()
+{
+    ui->listWidget_library->clear();
+
+    // load all file names from decks folder located in 'decks'
+    QDirIterator it("../decks", QDirIterator::Subdirectories);
+    while (it.hasNext()) {
+        QString fileName = it.next();
+        if (fileName.endsWith(".json")) {
+            // remove "../decks/" and ".json" from file name
+            fileName.remove(0, 9);
+            fileName.remove(fileName.length() - 5, 5);
+            ui->listWidget_library->addItem(fileName);
+        }
+    }
 }
 
 
@@ -40,12 +60,16 @@ void MainWindow::on_pushButton_createDeck_clicked()
         createDeck->setAttribute(Qt::WA_DeleteOnClose);
         createDeck->show();
 
+        loadDecks();
     }
 }
 
 
 void MainWindow::on_pushButton_startStudySession_clicked()
 {
+    QString deckName = ui->listWidget_library->currentItem()->text();
+    qDebug() << deckName;
+
     StudySessionWindow *useDeck = new StudySessionWindow();
     useDeck->setAttribute(Qt::WA_DeleteOnClose);
     useDeck->setSession(StudySession());
@@ -56,6 +80,7 @@ void MainWindow::on_pushButton_startStudySession_clicked()
 void MainWindow::on_pushButton_library_clicked()
 {
     ui->stackedWidget->setCurrentIndex(LIBRARY);
+    loadDecks();
 }
 
 

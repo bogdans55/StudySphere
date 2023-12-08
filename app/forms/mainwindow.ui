@@ -151,14 +151,14 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page_library">
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_library">
          <item>
-          <widget class="QTableWidget" name="tableWidget_library"/>
+          <widget class="QListWidget" name="listWidget_library"/>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_act">
