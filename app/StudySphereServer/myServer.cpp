@@ -67,10 +67,13 @@ void MyServer::searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery
     QJsonObject response;
 
     for(const QString &fileName : deckFolder.entryList(filters)){
-        if(fileName.contains(searchQuery, Qt::CaseInsensitive)){
-            foundDecks.append(fileName);
-            qDebug() << fileName << '\n';
-        }
+        // if(fileName.contains(searchQuery, Qt::CaseInsensitive)){
+        //     foundDecks.append(fileName);
+        //     qDebug() << fileName << '\n';
+        // }
+        //Add search options, separate login from browser search
+        foundDecks.append(fileName);
+        qDebug() << fileName << '\n';
     }
 
     if(!foundDecks.isEmpty()){
@@ -79,7 +82,7 @@ void MyServer::searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery
         response["decks"] = foundDecks.join(", ");
 
         for(const QString& deckName : foundDecks){
-            QFile deckFile(deckName);
+            QFile deckFile(deckFolder.absoluteFilePath(deckName));
             if(deckFile.open(QIODevice::ReadOnly | QIODevice::Text)){
                 QByteArray deckData = deckFile.readAll();
                 QTextStream stream(socket);
