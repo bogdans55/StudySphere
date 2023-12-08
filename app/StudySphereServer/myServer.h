@@ -24,7 +24,7 @@ private:
 
     void searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery);
     void saveDeck(const QString& deckName, const QByteArray& deckData);
-
+    void readData();
 };
 
 #endif // MYSERVER_H

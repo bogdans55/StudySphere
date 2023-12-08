@@ -23,15 +23,41 @@ void MyServer::startServer(){
     }
 }
 
+void MyServer::readData()
+{
+    QTcpSocket *socket = qobject_cast<QTcpSocket*>(sender());
+    if (!socket)
+        return;
+
+    QByteArray data = socket->readAll();
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+    QJsonObject jsonObject = doc.object();
+
+    QString action = jsonObject["action"].toString();
+
+    if (action == "login") {
+        QString username = jsonObject["username"].toString();
+        searchAndSendDecks(socket, username);
+    }/* else if (action == "upload") {
+        // Assuming you will include the username in the upload request
+        QString username = jsonObject["username"].toString();
+        QString deckName = jsonObject["deckName"].toString();
+        QByteArray deckData = socket->readAll();
+        saveDeckForUser(username, deckName, deckData);
+        socket->write("Upload successful");
+        socket->close();
+    }*/
+}
+
 void MyServer::newConnection(){
     QTcpSocket* socket = server->nextPendingConnection();
-    connect(socket, &QTcpSocket::readyRead, this);
+    connect(socket, &QTcpSocket::readyRead, this, &MyServer::readData);
 
 }
 
 
 void MyServer::searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery){
-    QDir deckFolder(".");
+    QDir deckFolder(publicDecksFolder);
     QStringList filters;
 
     filters << "*.json";
@@ -43,6 +69,7 @@ void MyServer::searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery
     for(const QString &fileName : deckFolder.entryList(filters)){
         if(fileName.contains(searchQuery, Qt::CaseInsensitive)){
             foundDecks.append(fileName);
+            qDebug() << fileName << '\n';
         }
     }
 

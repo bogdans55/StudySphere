@@ -1,0 +1,36 @@
+{
+    "Subject": "Programming Languages",
+    "UserID": "codingWizard42",
+    "DeckID": "000002",
+    "DeckRating": 4.2,
+    "Privacy": "Public",
+    "NumberOfCardsPerIteration": 15,
+    "Thumbnail": "systemDefault.png",
+    "Flashcards": [
+        {
+            "question": "What is the difference between interpreted and compiled languages?",
+            "answer": "Interpreted languages are executed line by line, while compiled languages are translated into machine code before execution.",
+            "questionDifficulty": "MEDIUM"
+        },
+        {
+            "question": "Java vs. Python",
+            "answer": "Java is statically typed and requires explicit declaration of variables, while Python is dynamically typed and allows implicit variable declaration.",
+            "questionDifficulty": "MEDIUM"
+        },
+        {
+            "question": "Object-Oriented Programming",
+            "answer": "A programming paradigm based on the concept of 'objects,' which can contain data and code. Encapsulation, inheritance, and polymorphism are key principles.",
+            "questionDifficulty": "EASY"
+        },
+        {
+            "question": "Functional Programming",
+            "answer": "A programming paradigm that treats computation as the evaluation of mathematical functions and avoids changing state and mutable data.",
+            "questionDifficulty": "EASY"
+        },
+        {
+            "question": "What is a lambda function?",
+            "answer": "An anonymous function, often used for short, quick operations. Common in functional programming languages.",
+            "questionDifficulty": "EASY"
+        }
+    ]
+}
