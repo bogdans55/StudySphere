@@ -12,7 +12,7 @@ Library::Library(){
     loadDecksFromFolder("../sampleData/privateDecks");
 }
 
-Library& Library::getInstance(){
+Library& Library::instance(){
     static Library instance;
     return instance;
 }
@@ -39,7 +39,12 @@ void Library::loadDecksFromFolder(const QString folderPath){
 
 void Library::removeDeck(QVector<Deck>& decks){
     for(Deck& deck : decks){
-        m_decks.removeAll(deck);
+
+        for(int i = 0;i < m_decks.length();i++){
+            if(m_decks[i] == deck)
+                m_decks.remove(i);
+        }
+
         QString filePath = deck.getFilePath();
 
         QFile file(filePath);

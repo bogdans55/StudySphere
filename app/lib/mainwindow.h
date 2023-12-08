@@ -15,6 +15,27 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_pushButton_createDeck_clicked();
+
+    void on_pushButton_startStudySession_clicked();
+
+    void on_pushButton_library_clicked();
+
+    void on_pushButton_todo_clicked();
+
+    void on_pushButton_planer_clicked();
+
+    void on_pushButton_calendar_clicked();
+
+    void on_pushButton_stats_clicked();
+
+    void on_pushButton_settings_clicked();
+
+    void on_pushButton_help_clicked();
+
+    void on_calendarWidget_activated(const QDate &date);
+
 private:
     Ui::MainWindow *ui;
 };

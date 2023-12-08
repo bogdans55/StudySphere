@@ -47,7 +47,7 @@ void Browser::importDeck(QString& filePath){
 void Browser::searchDecks(const QString& searchQuery){
     m_foundDecks.erase(m_foundDecks.begin(), m_foundDecks.end());
     for(int i = 0; i < m_publicDeckList.size(); i++){
-        if(searchQuery == QString::number(m_publicDeckList[i].getDeckId())){
+        if(searchQuery == QString::number(m_publicDeckList[i].deckId())){
             m_foundDecks.push_back(m_publicDeckList[i]);
         }
     }

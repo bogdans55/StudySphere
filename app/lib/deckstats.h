@@ -13,9 +13,9 @@ public:
     DeckStats();
     ~DeckStats() {}
 
-    inline double profficiency() const {return m_profficiency;};
-    inline unsigned int timesUsed() const {return m_timesUsed;};
-    inline QDate creationDate() const {return m_creationDate;};
+    inline double profficiency() const {return m_profficiency;}
+    inline unsigned int timesUsed() const {return m_timesUsed;}
+    inline QDate creationDate() const {return m_creationDate;}
 
 //    TODO
 //    void calculate();
