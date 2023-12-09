@@ -4,33 +4,21 @@
 #include <string>
 
 Deck::Deck()
-    : m_deckId(-1),
+    : m_deckId(),
     m_privacy(),
     m_deckStats(),
     m_thumbnail(),
-    m_rating(),
-    m_numOfCardsPerTest()
+    m_rating()
 {}
 
-Deck::Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest, const QImage &thumbnail)
+Deck::Deck(const QString &name, Privacy privacy, const QImage &thumbnail)
     : m_deckId(QRandomGenerator::global()->generate()),
     //TODO Smart Id choosing
     m_name(name),
     m_privacy(privacy),
     m_deckStats(),
     m_thumbnail(thumbnail),
-    m_rating(),
-    m_numOfCardsPerTest(numOfCardsPerTest)
-{}
-
-Deck::Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest)
-    : m_deckId(QRandomGenerator::global()->generate()),
-    m_name(name),
-    m_privacy(privacy),
-    m_deckStats(),
-    m_thumbnail(),
-    m_rating(),
-    m_numOfCardsPerTest(numOfCardsPerTest)
+    m_rating()
 {}
 
 Deck::Deck(const QString &name, Privacy privacy)
@@ -39,8 +27,7 @@ Deck::Deck(const QString &name, Privacy privacy)
     m_privacy(privacy),
     m_deckStats(),
     m_thumbnail(),
-    m_rating(),
-    m_numOfCardsPerTest(20)
+    m_rating()
 {}
 
 void Deck::addCard(Card card)
@@ -63,7 +50,6 @@ void Deck::fromJson(const QJsonObject& json){
         m_privacy = Privacy::PUBLIC;
     }
     m_thumbnail = QImage(json["Thumbnail"].toString());
-    m_numOfCardsPerTest = json["NumOfCardsPerIteration"].toVariant().toUInt();
 
     m_cards.clear();
     QJsonArray cardsArray = json["FlashCards"].toArray();
@@ -81,7 +67,6 @@ QJsonObject Deck::toJson() const{
     json["Privacy"] = (privacy() == Privacy::PRIVATE) ? "Private" : "Public";
     json["Thumbnail"] = "systemDefault.png";
     //TODO Thumbnail image saving, and naming
-    json["NumberOfCardsPerIteration"] = static_cast<int>(numOfCardsPerTest());
 
     QJsonArray cardsArray;
     for(const Card& card : cards()){
@@ -103,7 +88,6 @@ QVariant Deck::toVariant() const{
     map.insert("Subject", name());
     map.insert("Privacy", (privacy() == Privacy::PRIVATE) ? "Private" : "Public");
     map.insert("Thumbnail", "systemDefault.png");     //TODO Thumbnail image saving, and naming
-    map.insert("NumberOfCardsPerIteration", static_cast<int>(numOfCardsPerTest()));
 
     QVariantList cardsList;
     for (const Card &card : m_cards){ //cards?
@@ -125,7 +109,6 @@ void Deck::fromVariant(const QVariant &variant){
         m_privacy = Privacy::PUBLIC;
     }
     m_thumbnail = QImage(map.value("Thumbnail").toString());
-    m_numOfCardsPerTest = map.value("NumOfCardsPerIteration").toUInt();
 
     //qDeleteAll(&m_cards);
     m_cards.clear();

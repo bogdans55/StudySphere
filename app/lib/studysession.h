@@ -33,7 +33,7 @@ public:
 
     void startSession();
     void endSession();
-    QVector<unsigned> chooseCardSequence(Deck &deck, unsigned num_cards);
+    QVector<unsigned> chooseCardSequence(unsigned num_cards);
     void nextCard();
     Card getCurrentCard();
     void saveStatus();

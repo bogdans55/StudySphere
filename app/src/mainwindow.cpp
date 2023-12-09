@@ -2,6 +2,7 @@
 #include "lib/createdeckdialog.h"
 #include "lib/createdeckwindow.h"
 #include "lib/studysessionwindow.h"
+#include "lib/jsonserializer.h"
 #include "ui_mainwindow.h"
 
 #include <QApplication>
@@ -68,9 +69,11 @@ void MainWindow::on_pushButton_createDeck_clicked()
 void MainWindow::on_pushButton_startStudySession_clicked()
 {
     QString deckName = ui->listWidget_library->currentItem()->text();
-    qDebug() << deckName;
-
-    StudySessionWindow *useDeck = new StudySessionWindow();
+    Deck deck;
+    User user;
+    JSONSerializer().load(deck, "../decks/" + deckName + ".json");
+    StudySession session(user, session);
+    StudySessionWindow *useDeck = new StudySessionWindow(session);
     useDeck->setAttribute(Qt::WA_DeleteOnClose);
     useDeck->setSession(StudySession());
     useDeck->show();
