@@ -115,7 +115,6 @@ void MainWindow::on_calendarWidget_activated(const QDate &date)
         QMessageBox::information(this, date.toString(), "aktivnosti za taj dan npr");
 }
 
-
 void MainWindow::on_pushButton_login_clicked()
 {
     if(!m_loggedIn) // use getter instead?
@@ -134,11 +133,15 @@ void MainWindow::on_pushButton_login_clicked()
 
         if(socket.waitForConnected()){
             QJsonObject request;
-            request["action"] = "login";
+            if(login.isRegisterSelected()){
+                request["action"] = "register";
+
+            }
+            else{
+                request["action"] = "login";
+            }
             request["username"] = username;
             request["password"] = password;
-
-            qDebug() << request["password"].toString();
 
             socket.write(QJsonDocument(request).toJson());
             socket.waitForBytesWritten();
@@ -146,6 +149,10 @@ void MainWindow::on_pushButton_login_clicked()
             QByteArray responseData = socket.readAll();
             QTextStream stream(responseData);
 
+            if(stream.readAll() == "Username already exists, try again"){
+                qDebug() << "Username already exists, try again";
+                return;
+            }
             qDebug() << "Recieved Data:";
 
             m_loggedIn = true; // use setter instead?

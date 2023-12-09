@@ -17,6 +17,7 @@ public:
 
     QString getUsername();
     QString getPassword();
+    bool isRegisterSelected();
 
 private:
     Ui::LoginDialog *ui;

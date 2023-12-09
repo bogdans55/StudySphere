@@ -94,6 +94,34 @@ void MyServer::readData()
         QJsonObject response;
         response["status"] = "Upload Successful";
         socket->close();
+    }else if(action == "register"){
+        QString username = jsonObject["username"].toString();
+        QFile userFile(QDir(usersInfoFolder).absoluteFilePath(username + ".txt"));
+
+        QDir users(usersInfoFolder);
+
+        for(const QString &fileName : users.entryList()){
+            if(fileName.contains(username, Qt::CaseInsensitive)){
+                socket->write("Username already exists, try again");
+                socket->close();
+                return;
+            }
+        }
+
+        try{
+            userFile.open(QIODevice::WriteOnly);
+            QByteArray enteredPassword = jsonObject["password"].toString().toUtf8();
+            QByteArray enteredHashedPassword = QCryptographicHash::hash(enteredPassword, QCryptographicHash::Sha256);
+
+            userFile.write(QByteArray(enteredHashedPassword.toHex()));
+            userFile.close();
+            socket -> write("Register successful!");
+            socket -> close();
+        }catch(const QFile::FileError& error){
+            qDebug() << "file error: " << username;
+            socket -> write("Registration not successful, try again");
+            socket -> close();
+        }
     }
 }
 

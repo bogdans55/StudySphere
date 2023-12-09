@@ -22,3 +22,8 @@ QString LoginDialog::getPassword()
 {
     return ui->lineEdit_password->text();
 }
+
+bool LoginDialog::isRegisterSelected()
+{
+    return ui->radioButton_register->isChecked();
+}
