@@ -68,18 +68,33 @@ void MyServer::readData()
             socket -> write("Username error, try again");
             socket -> close();
         }
-
-
-        // searchAndSendDecks(socket, username);
-    }/* else if (action == "upload") {
+    }else if (action == "saveDeck") {
         // Assuming you will include the username in the upload request
         QString username = jsonObject["username"].toString();
-        QString deckName = jsonObject["deckName"].toString();
-        QByteArray deckData = socket->readAll();
-        saveDeckForUser(username, deckName, deckData);
-        socket->write("Upload successful");
+        // QByteArray deckData = socket->readAll();
+        QJsonObject deck = jsonObject["deck"].toObject();
+        QString deckID = QString::number(deck["DeckId"].toDouble());
+
+
+
+        QString filePath = QDir(QDir(userDecksFolder).absoluteFilePath(username)).absoluteFilePath(deckID + ".json");
+
+        QFile file(filePath);
+
+        if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
+            QTextStream stream(&file);
+            stream << QJsonDocument(deck).toJson();
+            file.close();
+            qDebug() << "Deck saved: " << filePath;
+        }else{
+            qDebug() << "Error saving deck:" << file.errorString();
+        }
+
+        // saveDeckForUser(username, deckName, deckData);
+        QJsonObject response;
+        response["status"] = "Upload Successful";
         socket->close();
-    }*/
+    }
 }
 
 void MyServer::newConnection(){

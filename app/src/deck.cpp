@@ -1,7 +1,7 @@
 #include "lib/deck.h"
 #include <QJsonArray>
 #include <QRandomGenerator>
-#include <string>
+#include <QString>
 
 Deck::Deck()
     : m_deckId(-1),
@@ -13,7 +13,7 @@ Deck::Deck()
 {}
 
 Deck::Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest, const QImage &thumbnail)
-    : m_deckId(QRandomGenerator::global()->generate()),
+    : m_deckId(QRandomGenerator::global()->bounded(25600)),
     //TODO Smart Id choosing
     m_name(name),
     m_privacy(privacy),
@@ -24,7 +24,7 @@ Deck::Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest,
 {}
 
 Deck::Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest)
-    : m_deckId(QRandomGenerator::global()->generate()),
+    : m_deckId(QRandomGenerator::global()->bounded(25600)),
     m_name(name),
     m_privacy(privacy),
     m_deckStats(),
@@ -34,7 +34,7 @@ Deck::Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest)
 {}
 
 Deck::Deck(const QString &name, Privacy privacy)
-    : m_deckId(QRandomGenerator::global()->generate()),
+    : m_deckId(QRandomGenerator::global()->bounded(25600)),
     m_name(name),
     m_privacy(privacy),
     m_deckStats(),
