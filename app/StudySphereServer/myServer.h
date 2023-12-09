@@ -22,8 +22,9 @@ private:
     QTcpServer *server;
     QString publicDecksFolder;
     QString usersInfoFolder;
+    QString userDecksFolder;
 
-
+    void sendUserDecks(QTcpSocket* socket, const QString& searchQuery);
     void searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery);
     void saveDeck(const QString& deckName, const QByteArray& deckData);
     void readData();

@@ -16,6 +16,9 @@ MyServer::MyServer(QObject* parent) : QObject(parent){
 
     usersInfoFolder = "usersInfo";
     QDir().mkpath(usersInfoFolder);
+
+    userDecksFolder = "userDecks";
+    QDir().mkpath(userDecksFolder);
 }
 
 void MyServer::startServer(){
@@ -43,7 +46,6 @@ void MyServer::readData()
         QString username = jsonObject["username"].toString();
         QFile userFile(QDir(usersInfoFolder).absoluteFilePath(username + ".txt"));
 
-
         qDebug() << username;
         try{
             userFile.open(QIODevice::ReadOnly);
@@ -58,7 +60,7 @@ void MyServer::readData()
                 socket -> close();
             }else{
                 // socket -> write("Login successful!");
-                searchAndSendDecks(socket, username);
+                sendUserDecks(socket, username);
             }
 
         }catch(const QFile::FileError& error){
@@ -90,7 +92,6 @@ void MyServer::newConnection(){
 void MyServer::searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery){
     QDir deckFolder(publicDecksFolder);
     QStringList filters;
-
     filters << "*.json";
 
     QStringList foundDecks;
@@ -103,6 +104,45 @@ void MyServer::searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery
         //     qDebug() << fileName << '\n';
         // }
         //Add search options, separate login from browser search
+        foundDecks.append(fileName);
+        qDebug() << fileName << '\n';
+    }
+
+    if(!foundDecks.isEmpty()){
+        response["status"] = "success";
+        //TODO find more elegant solution to pack found decks in response
+        response["decks"] = foundDecks.join(", ");
+        for(const QString& deckName : foundDecks){
+            QFile deckFile(deckFolder.absoluteFilePath(deckName));
+            if(deckFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+                QByteArray deckData = deckFile.readAll();
+                response[deckName] = QJsonDocument::fromJson(deckData).object();
+                deckFile.close();
+            }
+        }
+    }
+    else{
+        response["status"] = "no results";
+    }
+
+    QTextStream stream(socket);
+    stream << QJsonDocument(response).toJson();
+
+    socket->close();
+}
+
+
+void MyServer::sendUserDecks(QTcpSocket* socket, const QString& username){
+    QDir deckFolder(QDir(userDecksFolder).absoluteFilePath(username));
+    QStringList filters;
+
+    filters << "*.json";
+
+    QStringList foundDecks;
+
+    QJsonObject response;
+
+    for(const QString &fileName : deckFolder.entryList(filters)){
         foundDecks.append(fileName);
         qDebug() << fileName << '\n';
     }
