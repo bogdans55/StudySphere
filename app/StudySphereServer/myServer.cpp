@@ -50,9 +50,6 @@ void MyServer::readData()
             QByteArray storedHashedPassword = userFile.readLine().trimmed();
             QByteArray enteredPassword = jsonObject["password"].toString().toUtf8();
             QByteArray enteredHashedPassword = QCryptographicHash::hash(enteredPassword, QCryptographicHash::Sha256);
-            qDebug() << enteredPassword;
-            qDebug() << enteredHashedPassword.toStdString();
-            qDebug() << QString(storedHashedPassword);
 
             if(QString(enteredHashedPassword.toHex()) != QString(storedHashedPassword)){
                 qDebug() << "Password incorrect: " << username;
