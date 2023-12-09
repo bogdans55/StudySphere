@@ -36,7 +36,10 @@ private slots:
 
     void on_calendarWidget_activated(const QDate &date);
 
+    void on_pushButton_login_clicked();
+
 private:
     Ui::MainWindow *ui;
+    bool m_loggedIn = false;
 };
 #endif // MAINWINDOW_H

@@ -1,11 +1,20 @@
 #include "lib/mainwindow.h"
 #include "lib/createdeckdialog.h"
 #include "lib/createdeckwindow.h"
+#include "lib/logindialog.h"
 #include "lib/studysessionwindow.h"
 #include "ui_mainwindow.h"
 
 #include <QApplication>
 #include <QMessageBox>
+
+#include <QTcpServer>
+#include <QTcpSocket>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QTextStream>
+#include <QDebug>
+#include <QCryptographicHash>
 
 #define LIBRARY  0
 #define TODO     1
@@ -104,5 +113,61 @@ void MainWindow::on_calendarWidget_activated(const QDate &date)
         QMessageBox::information(this, date.toString(), "nema nista");
     else
         QMessageBox::information(this, date.toString(), "aktivnosti za taj dan npr");
+}
+
+
+void MainWindow::on_pushButton_login_clicked()
+{
+    if(!m_loggedIn) // use getter instead?
+    {
+        QString username;
+        QString password;
+        LoginDialog login(this);
+        if (login.exec() != QDialog::Accepted) {
+            return;
+        }
+        username = login.getUsername();
+        password = login.getPassword();
+
+        QTcpSocket socket;
+        socket.connectToHost("127.0.0.1", 8080);
+
+        if(socket.waitForConnected()){
+            QJsonObject request;
+            request["action"] = "login";
+            request["username"] = username;
+            request["password"] = password;
+
+            qDebug() << request["password"].toString();
+
+            socket.write(QJsonDocument(request).toJson());
+            socket.waitForBytesWritten();
+            socket.waitForReadyRead();
+            QByteArray responseData = socket.readAll();
+            QTextStream stream(responseData);
+
+            qDebug() << "Recieved Data:";
+
+            m_loggedIn = true; // use setter instead?
+
+            ui->label_username->setText(request["username"].toString());
+            ui->pushButton_login->setText("Odjavi se");
+
+            while (!stream.atEnd()) {
+                qDebug() << stream.readLine();
+            }
+
+            socket.disconnectFromHost();
+        }else{
+            qDebug() << "Failed to connect to the server";
+        }
+    }
+    else
+    {
+        m_loggedIn = false; // use setter instead?
+
+        ui->label_username->setText("Nema korisnika");
+        ui->pushButton_login->setText("Prijavi se");
+    }
 }
 
