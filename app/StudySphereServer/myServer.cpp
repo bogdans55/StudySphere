@@ -4,6 +4,7 @@
 #include <QJsonObject>
 #include <QDir>
 #include <QFile>
+#include <QCryptographicHash>
 
 
 MyServer::MyServer(QObject* parent) : QObject(parent){
@@ -41,11 +42,19 @@ void MyServer::readData()
     if (action == "login") {
         QString username = jsonObject["username"].toString();
         QFile userFile(QDir(usersInfoFolder).absoluteFilePath(username + ".txt"));
+
+
         qDebug() << username;
         try{
             userFile.open(QIODevice::ReadOnly);
-            QByteArray password = userFile.readLine();
-            if(password != jsonObject["password"].toString()){
+            QByteArray storedHashedPassword = userFile.readLine().trimmed();
+            QByteArray enteredPassword = jsonObject["password"].toString().toUtf8();
+            QByteArray enteredHashedPassword = QCryptographicHash::hash(enteredPassword, QCryptographicHash::Sha256);
+            qDebug() << enteredPassword;
+            qDebug() << enteredHashedPassword.toStdString();
+            qDebug() << QString(storedHashedPassword);
+
+            if(QString(enteredHashedPassword.toHex()) != QString(storedHashedPassword)){
                 qDebug() << "Password incorrect: " << username;
                 socket -> write("Password error, try again");
                 socket -> close();

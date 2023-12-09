@@ -6,6 +6,7 @@
 #include <QTextStream>
 #include <QDebug>
 #include <QApplication>
+#include <QCryptographicHash>
 
 int main(int argc, char *argv[])
 {
@@ -24,6 +25,8 @@ int main(int argc, char *argv[])
         request["action"] = "login";
         request["username"] = "marko1684";
         request["password"] = "kerkoc123";
+
+        qDebug() << request["password"].toString();
 
         socket.write(QJsonDocument(request).toJson());
         socket.waitForBytesWritten();
