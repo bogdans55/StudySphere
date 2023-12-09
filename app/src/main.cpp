@@ -31,7 +31,6 @@ int main(int argc, char *argv[])
         socket.write(QJsonDocument(request).toJson());
         socket.waitForBytesWritten();
         socket.waitForReadyRead();
-
         QByteArray responseData = socket.readAll();
         QTextStream stream(responseData);
 
@@ -39,6 +38,7 @@ int main(int argc, char *argv[])
         while (!stream.atEnd()) {
             qDebug() << stream.readLine();
         }
+
         socket.disconnectFromHost();
     }else{
         qDebug() << "Failed to connect to the server";

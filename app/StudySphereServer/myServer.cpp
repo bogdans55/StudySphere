@@ -51,12 +51,13 @@ void MyServer::readData()
             QByteArray enteredPassword = jsonObject["password"].toString().toUtf8();
             QByteArray enteredHashedPassword = QCryptographicHash::hash(enteredPassword, QCryptographicHash::Sha256);
 
+
             if(QString(enteredHashedPassword.toHex()) != QString(storedHashedPassword)){
                 qDebug() << "Password incorrect: " << username;
                 socket -> write("Password error, try again");
                 socket -> close();
             }else{
-                socket -> write("Login successful!");
+                // socket -> write("Login successful!");
                 searchAndSendDecks(socket, username);
             }
 
@@ -110,14 +111,11 @@ void MyServer::searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery
         response["status"] = "success";
         //TODO find more elegant solution to pack found decks in response
         response["decks"] = foundDecks.join(", ");
-
         for(const QString& deckName : foundDecks){
             QFile deckFile(deckFolder.absoluteFilePath(deckName));
             if(deckFile.open(QIODevice::ReadOnly | QIODevice::Text)){
                 QByteArray deckData = deckFile.readAll();
-                QTextStream stream(socket);
-                stream << deckData;
-                socket->flush();
+                response[deckName] = QJsonDocument::fromJson(deckData).object();
                 deckFile.close();
             }
         }
