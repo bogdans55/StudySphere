@@ -4,7 +4,7 @@
 #include <string>
 
 Deck::Deck()
-    : m_deckId(-1),
+    : m_deckId(),
     m_privacy(),
     m_deckStats(),
     m_thumbnail(),
@@ -12,25 +12,14 @@ Deck::Deck()
     m_numOfCardsPerTest()
 {}
 
-Deck::Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest, const QImage &thumbnail)
+Deck::Deck(const QString &name, Privacy privacy, const QImage &thumbnail)
     : m_deckId(QRandomGenerator::global()->generate()),
     //TODO Smart Id choosing
     m_name(name),
     m_privacy(privacy),
     m_deckStats(),
     m_thumbnail(thumbnail),
-    m_rating(),
-    m_numOfCardsPerTest(numOfCardsPerTest)
-{}
-
-Deck::Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest)
-    : m_deckId(QRandomGenerator::global()->generate()),
-    m_name(name),
-    m_privacy(privacy),
-    m_deckStats(),
-    m_thumbnail(),
-    m_rating(),
-    m_numOfCardsPerTest(numOfCardsPerTest)
+    m_rating()
 {}
 
 Deck::Deck(const QString &name, Privacy privacy)
@@ -39,8 +28,7 @@ Deck::Deck(const QString &name, Privacy privacy)
     m_privacy(privacy),
     m_deckStats(),
     m_thumbnail(),
-    m_rating(),
-    m_numOfCardsPerTest(20)
+    m_rating()
 {}
 
 void Deck::addCard(Card card)
