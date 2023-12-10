@@ -19,6 +19,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
 private slots:
     void on_pushButton_createDeck_clicked();
 
@@ -52,5 +53,8 @@ private:
     QString path = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/todoFile.txt";
 
 //    QString path = QDir(QCoreApplication::applicationDirPath()).filePath("/info/todoFile.txt");
+
+
+    void updateTodoFile();
 };
 #endif // MAINWINDOW_H

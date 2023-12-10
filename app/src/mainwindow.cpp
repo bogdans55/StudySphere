@@ -155,15 +155,39 @@ void MainWindow::on_pushButton_addTodo_clicked()
 
 void MainWindow::on_pushButton_deleteTodo_clicked()
 {
-    QListWidgetItem* item = ui->listWidget_todos->takeItem(ui->listWidget_todos->currentRow());
-    // TODO: cross it from file too
-    delete item;
+    int currentRow = ui->listWidget_todos->currentRow();
+
+    if (currentRow >= 0) {
+        QListWidgetItem* item = ui->listWidget_todos->takeItem(currentRow);
+        delete item;
+
+        MainWindow::updateTodoFile();
+    }
 }
 
 
 void MainWindow::on_pushButton_deleteAllTodos_clicked()
 {
-    // TODO: cross it from file too
     ui->listWidget_todos->clear();
+
+    MainWindow::updateTodoFile();
+}
+
+void MainWindow::updateTodoFile()
+{
+    QFile file(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/todoFile.txt");
+
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+        QMessageBox::information(0, "Error", file.errorString());
+        return;
+    }
+
+    QTextStream out(&file);
+
+    for (int i = 0; i < ui->listWidget_todos->count(); ++i) {
+        out << ui->listWidget_todos->item(i)->text() << '\n';
+    }
+
+    file.close();
 }
 
