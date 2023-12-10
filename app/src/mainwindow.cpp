@@ -149,11 +149,16 @@ void MainWindow::on_pushButton_login_clicked()
             QByteArray responseData = socket.readAll();
             QTextStream stream(responseData);
 
-            if(request["action"] == "register" && stream.readAll() == "Username already exists, try again"){
-                qDebug() << "Username already exists, try again";
-                return;
-            }
             qDebug() << "Recieved Data:";
+
+            if(request["action"] == "register" ){
+                QString registerResponse = stream.readAll();
+                if(registerResponse == "Username already exists, try again"){
+                    qDebug() << "Username already exists, try again";
+                    return;
+                }
+                qDebug() << registerResponse;
+            }
 
             m_loggedIn = true; // use setter instead?
 

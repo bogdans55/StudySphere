@@ -209,6 +209,10 @@ void MyServer::registerUser(QTcpSocket* socket, QJsonObject& jsonObject){
     QString username = jsonObject["username"].toString();
     QFile userFile(QDir(usersInfoFolder).absoluteFilePath(username + ".txt"));
 
+    QJsonObject response;
+
+
+
     QDir users(usersInfoFolder);
 
     for(const QString &fileName : users.entryList()){
@@ -222,13 +226,14 @@ void MyServer::registerUser(QTcpSocket* socket, QJsonObject& jsonObject){
         userFile.open(QIODevice::WriteOnly);
         QByteArray enteredPassword = jsonObject["password"].toString().toUtf8();
         QByteArray enteredHashedPassword = QCryptographicHash::hash(enteredPassword, QCryptographicHash::Sha256);
-
         userFile.write(QByteArray(enteredHashedPassword.toHex()));
         userFile.close();
-        socket -> write("Register successful!");
-        socket -> close();
+        response["status"] = "Register successful!";
     }catch(const QFile::FileError& error){
         qDebug() << "file error: " << username;
-        socket -> write("Registration not successful, try again");
+        response["status"] = "Registration not successful, try again";
     }
+
+    QTextStream stream(socket);
+    stream << QJsonDocument(response).toJson();
 }
