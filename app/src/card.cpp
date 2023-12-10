@@ -16,6 +16,14 @@ Card::Card(QString questionText, QString answerText, Difficulty questionDifficul
     ,m_stats()
 {}
 
+Card::Card(const Card& card)
+    :m_questionText(card.m_questionText)
+    ,m_answerText(card.m_answerText)
+    ,m_answerShowed(card.m_answerShowed)
+    ,m_questionDifficulty(card.m_questionDifficulty)
+    ,m_stats()
+{}
+
 Card::~Card()
 {}
 

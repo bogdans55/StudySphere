@@ -22,6 +22,7 @@ private:
 public:
     StudySession();
     StudySession(const User &user, const Deck &deck);
+    StudySession(const StudySession& session);
     ~StudySession();
 
     inline User user() const {return m_user;}
@@ -33,7 +34,7 @@ public:
 
     void startSession();
     void endSession();
-    QVector<unsigned> chooseCardSequence(unsigned num_cards);
+    void chooseCardSequence(unsigned num_cards);
     void nextCard();
     Card getCurrentCard();
     void saveStatus();

@@ -7,6 +7,8 @@ StudySessionWindow::StudySessionWindow(QWidget *parent) :
     m_session()
 {
     ui->setupUi(this);
+    m_session.startSession();
+    ui->textEdit_card->setText(m_session.getCurrentCard().questionText());
 }
 
 StudySessionWindow::StudySessionWindow(const StudySession& session, QWidget *parent) :
@@ -15,6 +17,8 @@ StudySessionWindow::StudySessionWindow(const StudySession& session, QWidget *par
     m_session(session)
 {
     ui->setupUi(this);
+    m_session.startSession();
+    ui->textEdit_card->setText(m_session.getCurrentCard().questionText());
 }
 
 StudySessionWindow::~StudySessionWindow()
@@ -29,43 +33,43 @@ void StudySessionWindow::setSession(const StudySession &session)
 
 void StudySessionWindow::on_pushButton_flip_clicked()
 {
-    if(!session().getCurrentCard().answerShowed())
-        ui->textEdit_card->setText(session().getCurrentCard().questionText());
+    if(m_session.getCurrentCard().answerShowed())
+        ui->textEdit_card->setText(m_session.getCurrentCard().questionText());
     else
-        ui->textEdit_card->setText(session().getCurrentCard().questionAnswer());
+        ui->textEdit_card->setText(m_session.getCurrentCard().questionAnswer());
 
-    session().getCurrentCard().flipCard();
+    m_session.getCurrentCard().flipCard();
 }
 
 
 void StudySessionWindow::on_pushButton_skip_clicked()
 {
-    session().getCurrentCard().evaluateAnswer(0);
-    session().nextCard();
-    ui->textEdit_card->setText(session().getCurrentCard().questionText());
+    m_session.getCurrentCard().evaluateAnswer(0);
+    m_session.nextCard();
+    ui->textEdit_card->setText(m_session.getCurrentCard().questionText());
 }
 
 
 void StudySessionWindow::on_pushButton_bad_clicked()
 {
-    session().getCurrentCard().evaluateAnswer(1);
-    session().nextCard();
-    ui->textEdit_card->setText(session().getCurrentCard().questionText());
+    m_session.getCurrentCard().evaluateAnswer(1);
+    m_session.nextCard();
+    ui->textEdit_card->setText(m_session.getCurrentCard().questionText());
 }
 
 
 void StudySessionWindow::on_pushButton_mid_clicked()
 {
-    session().getCurrentCard().evaluateAnswer(2);
-    session().nextCard();
-    ui->textEdit_card->setText(session().getCurrentCard().questionText());
+    m_session.getCurrentCard().evaluateAnswer(2);
+    m_session.nextCard();
+    ui->textEdit_card->setText(m_session.getCurrentCard().questionText());
 }
 
 
 void StudySessionWindow::on_pushButton_good_clicked()
 {
-    session().getCurrentCard().evaluateAnswer(3);
-    session().nextCard();
-    ui->textEdit_card->setText(session().getCurrentCard().questionText());
+    m_session.getCurrentCard().evaluateAnswer(3);
+    m_session.nextCard();
+    ui->textEdit_card->setText(m_session.getCurrentCard().questionText());
 }
 

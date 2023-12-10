@@ -56,7 +56,6 @@ void MainWindow::on_pushButton_createDeck_clicked()
     if (popUp.exec() == QDialog::Accepted) {
         QString name = popUp.getDeckName();
         Privacy privacy = popUp.getDeckPrivacy();
-
         CreateDeckWindow *createDeck = new CreateDeckWindow(name, privacy);
         createDeck->setAttribute(Qt::WA_DeleteOnClose);
         createDeck->show();
@@ -72,10 +71,9 @@ void MainWindow::on_pushButton_startStudySession_clicked()
     Deck deck;
     User user;
     JSONSerializer().load(deck, "../decks/" + deckName + ".json");
-    StudySession session(user, session);
+    StudySession session(user, deck);
     StudySessionWindow *useDeck = new StudySessionWindow(session);
     useDeck->setAttribute(Qt::WA_DeleteOnClose);
-    useDeck->setSession(StudySession());
     useDeck->show();
 }
 

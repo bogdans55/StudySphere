@@ -30,6 +30,16 @@ Deck::Deck(const QString &name, Privacy privacy)
     m_rating()
 {}
 
+Deck::Deck(const Deck& deck)
+    : m_deckId(deck.m_deckId),
+    m_name(deck.m_name),
+    m_cards(deck.m_cards),
+    m_privacy(deck.m_privacy),
+    m_deckStats(deck.m_deckStats),
+    m_thumbnail(deck.m_thumbnail),
+    m_rating(deck.m_rating)
+{}
+
 void Deck::addCard(Card card)
 {
     m_cards.append(card);

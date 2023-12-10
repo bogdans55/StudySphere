@@ -29,6 +29,7 @@ public:
     Deck();
     Deck(const QString &name, Privacy privacy, const QImage &thumbnail);
     Deck(const QString &name, Privacy privacy);
+    Deck(const Deck& deck);
 
     inline unsigned int deckId() const {return m_deckId;}
     inline QString name() const {return m_name;}

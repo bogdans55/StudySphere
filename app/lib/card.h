@@ -18,6 +18,8 @@ class Card : public Serializable
 public:
     Card();
     Card(QString m_questionText, QString m_answerText, Difficulty m_questionDifficulty);
+    Card(const Card& card);
+
     ~Card();
     void flipCard();
     void evaluateAnswer(unsigned evaluation);
