@@ -4,6 +4,7 @@
 #include "lib/logindialog.h"
 #include "lib/studysessionwindow.h"
 #include "ui_mainwindow.h"
+#include "lib/user.h"
 
 #include <QApplication>
 #include <QMessageBox>
@@ -27,6 +28,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWindow)
+    , m_user()
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(LIBRARY);
@@ -45,7 +47,7 @@ void MainWindow::on_pushButton_createDeck_clicked()
         QString name = popUp.getDeckName();
         Privacy privacy = popUp.getDeckPrivacy();
 
-        CreateDeckWindow *createDeck = new CreateDeckWindow(name, privacy);
+        CreateDeckWindow *createDeck = new CreateDeckWindow(name,privacy,m_user);
         createDeck->setAttribute(Qt::WA_DeleteOnClose);
         createDeck->show();
 
@@ -146,8 +148,8 @@ void MainWindow::on_pushButton_login_clicked()
             socket.write(QJsonDocument(request).toJson());
             socket.waitForBytesWritten();
             socket.waitForReadyRead();
-            QByteArray responseData = socket.readAll();
-            QTextStream stream(responseData);
+            QByteArray responseText = socket.readAll();
+            QTextStream stream(responseText);
 
             qDebug() << "Recieved Data:";
 
@@ -163,20 +165,19 @@ void MainWindow::on_pushButton_login_clicked()
             m_loggedIn = true; // use setter instead?
 
 
-            QString responseText = stream.readAll();
-            QJsonDocument jsondoc = QJsonDocument::fromJson(responseText.toUtf8());
+            QString loginResponse = stream.readAll();
+            QJsonDocument jsondoc = QJsonDocument::fromJson(loginResponse.toUtf8());
 
             qDebug() << jsondoc["status"];
             qDebug() << jsondoc;
+
             if(jsondoc["status"] != QJsonValue::Undefined)
             {
                 ui->label_username->setText(request["username"].toString());
                 ui->pushButton_login->setText("Odjavi se");
+                m_user.setUsername(request["username"].toString());
             }
 
-//            while (!stream.atEnd()) {
-//                qDebug() << stream.readLine();
-//            }
 
             socket.disconnectFromHost();
         }else{

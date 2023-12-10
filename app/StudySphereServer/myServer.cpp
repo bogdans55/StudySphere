@@ -33,8 +33,6 @@ void MyServer::startServer(){
 void MyServer::loginUser(QTcpSocket* socket, QJsonObject& jsonObject){
     QString username = jsonObject["username"].toString();
     QFile userFile(QDir(usersInfoFolder).absoluteFilePath(username + ".txt"));
-
-    qDebug() << username;
     try{
         userFile.open(QIODevice::ReadOnly);
         QByteArray storedHashedPassword = userFile.readLine().trimmed();
@@ -44,15 +42,23 @@ void MyServer::loginUser(QTcpSocket* socket, QJsonObject& jsonObject){
 
         if(QString(enteredHashedPassword.toHex()) != QString(storedHashedPassword)){
             qDebug() << "Password incorrect: " << username;
-            socket -> write("Password error, try again");
+            QJsonObject response;
+            response["status"] = "Password incorrect, try again";
+
+            QTextStream stream(socket);
+            stream << QJsonDocument(response).toJson();
         }else{
-            socket -> write("Login successful!");
             sendUserDecks(socket, username);
         }
     }catch(const QFile::FileError& error){
         qDebug() << "Username incorrect or file error: " << username;
-        socket -> write("Username error, try again");
+        QJsonObject response;
+        response["status"] = "Username error, try again";
+
+        QTextStream stream(socket);
+        stream << QJsonDocument(response).toJson();
     }
+    socket -> close();
 }
 
 void MyServer::readData()
@@ -190,6 +196,8 @@ void MyServer::saveDeck(QTcpSocket* socket, QJsonObject& jsonObject){
 
     QString filePath = QDir(QDir(userDecksFolder).absoluteFilePath(username)).absoluteFilePath(deckID + ".json");
 
+    qDebug() << filePath;
+
     QFile file(filePath);
 
     if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
@@ -228,6 +236,9 @@ void MyServer::registerUser(QTcpSocket* socket, QJsonObject& jsonObject){
         QByteArray enteredHashedPassword = QCryptographicHash::hash(enteredPassword, QCryptographicHash::Sha256);
         userFile.write(QByteArray(enteredHashedPassword.toHex()));
         userFile.close();
+
+        QDir().mkdir(QDir(userDecksFolder).absoluteFilePath(username));
+
         response["status"] = "Register successful!";
     }catch(const QFile::FileError& error){
         qDebug() << "file error: " << username;

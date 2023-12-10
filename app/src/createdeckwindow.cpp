@@ -6,17 +6,19 @@
 #include <QTcpSocket>
 #include <QTcpServer>
 
-CreateDeckWindow::CreateDeckWindow(QWidget *parent) :
+CreateDeckWindow::CreateDeckWindow(User& user, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::CreateDeckWindow)
+    ui(new Ui::CreateDeckWindow),
+    m_user(user)
 {
     ui->setupUi(this);
 }
 
-CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, QWidget *parent) :
+CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, User& user, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CreateDeckWindow),
-    m_deck(name, privacy)
+    m_deck(name, privacy),
+    m_user(user)
 {
     ui->setupUi(this);
 }
@@ -47,11 +49,7 @@ Difficulty CreateDeckWindow::getDifficulty() const
 
 void CreateDeckWindow::on_pushButton_finish_clicked()
 {
-
-    // m_deck.toJson();
     JSONSerializer *serializer = new JSONSerializer();
-    // serializer->save(m_deck, "../decks/" + m_deck.name() + ".json");
-
     QJsonDocument doc = serializer ->createJson(m_deck);
 
 
@@ -61,7 +59,7 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
     if(socket.waitForConnected()){
         QJsonObject request;
         request["action"] = "saveDeck";
-        request["username"] = "marko1684";
+        request["username"] = m_user.username();
         request["deck"] = doc.toVariant().toJsonObject();
 
         socket.write(QJsonDocument(request).toJson());

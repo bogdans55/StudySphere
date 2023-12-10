@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "user.h"
+
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -41,5 +43,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     bool m_loggedIn = false;
+    User m_user;
 };
 #endif // MAINWINDOW_H
