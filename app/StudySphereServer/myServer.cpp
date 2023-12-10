@@ -73,6 +73,8 @@ void MyServer::readData()
         saveDeck(socket, jsonObject);
     }else if(action == "register"){
         registerUser(socket, jsonObject);
+    }else if(action == "removeDeck"){
+        removeDeck(socket, jsonObject);
     }
 
     socket ->close();
@@ -84,6 +86,23 @@ void MyServer::newConnection(){
 
 }
 
+void MyServer::removeDeck(QTcpSocket* socket, QJsonObject& jsonObject){
+
+    QString username = jsonObject["username"].toString();
+    QString deckID = QString::number(jsonObject["DeckId"].toDouble());
+    QDir deckFolder(QDir(userDecksFolder).absoluteFilePath(username));
+    QJsonObject response;
+    QString filePath = deckFolder.absoluteFilePath(deckID + ".json");
+
+    if(QFile::remove(filePath)){
+        response["status"] = "Successfuly removed deck" + deckID + ".json";
+    }else{
+        response["status"] = "Failed to remove deck";
+    }
+
+    QTextStream stream(socket);
+    stream << QJsonDocument(response).toJson();
+}
 
 void MyServer::searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery){
     QDir deckFolder(publicDecksFolder);

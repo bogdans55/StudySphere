@@ -31,6 +31,7 @@ private:
     void searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery);
     void saveDeck(QTcpSocket* socket, QJsonObject& jsonObject);
     void saveDeckForUser(const QString& username, const QString& deckName, QByteArray& deckData);
+    void removeDeck(QTcpSocket* socket, QJsonObject& jsonObject);
     void readData();
 };
 

@@ -12,7 +12,7 @@ public:
     static Library& instance();
 
     void addDeck(const Deck& deck);
-    void removeDeck(QVector<Deck>& decks);
+    void removeDeck(Deck& deck, QString& username);
     void importDeck(const QString& filePath);
     void exportDeck(const QVector<Deck>& decks, const QString& filePath);
 private:

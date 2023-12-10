@@ -5,6 +5,8 @@
 #include <QDebug>
 #include <QDir>
 #include <QJsonArray>
+#include <QTcpServer>
+#include <QTcpSocket>
 
 
 Library::Library(){
@@ -37,24 +39,33 @@ void Library::loadDecksFromFolder(const QString folderPath){
     }
 }
 
-void Library::removeDeck(QVector<Deck>& decks){
-    for(Deck& deck : decks){
+void Library::removeDeck(Deck& deck, QString& username){
 
-        for(int i = 0;i < m_decks.length();i++){
-            if(m_decks[i] == deck)
-                m_decks.remove(i);
+    QTcpSocket socket;
+    socket.connectToHost("127.0.0.1", 8080);
+
+    if(socket.waitForConnected()){
+        QJsonObject request;
+        request["action"] = "removeDeck";
+        request["username"] = username;
+        request["DeckId"] = QString::number(deck.deckId());
+
+        socket.write(QJsonDocument(request).toJson());
+        socket.waitForBytesWritten();
+        socket.waitForReadyRead();
+
+        QByteArray responseData = socket.readAll();
+        QTextStream stream(responseData);
+
+        qDebug() << "Recieved Data:";
+
+        while (!stream.atEnd()) {
+            qDebug() << stream.readLine();
         }
 
-        QString filePath = deck.getFilePath();
-
-        QFile file(filePath);
-        if(file.remove()){
-            qDebug() << "File removed: " << filePath;
-        }
-        else{
-            qDebug() << "Failed to remove file: " << filePath;
-            //TODO error handling if needed...
-        }
+        socket.disconnectFromHost();
+    }else{
+        qDebug() << "Failed to connect to the server";
     }
 }
 
