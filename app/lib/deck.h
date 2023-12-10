@@ -37,7 +37,6 @@ public:
     inline DeckStats deckStats() const {return m_deckStats;}
     inline QImage thumbnail() const {return m_thumbnail;}
     inline Grading rating() const {return m_rating;}
-    inline unsigned int numOfCardsPerTest() const {return m_numOfCardsPerTest;}
 
     void addCard(Card card);
     void updateRating(unsigned grade);
