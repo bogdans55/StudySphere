@@ -19,7 +19,7 @@ void StudySession::endSession()
 {
     m_timeEnded = time(NULL);
 }
-QVector<unsigned> StudySession::chooseCardSequence(unsigned num_cards)
+QVector<unsigned> StudySession::chooseCardSequence(Deck &deck, unsigned num_cards)
 {
     QVector<unsigned> selectedCards(num_cards);
     QVector<unsigned> cardIndices(num_cards);

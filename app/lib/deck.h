@@ -24,10 +24,12 @@ private:
     DeckStats m_deckStats;
     QImage m_thumbnail;
     Grading m_rating;
+    unsigned m_numOfCardsPerTest;
 
 public:
     Deck();
-    Deck(const QString &name, Privacy privacy, const QImage &thumbnail);
+    Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest, const QImage &thumbnail);
+    Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest);
     Deck(const QString &name, Privacy privacy);
 
     inline unsigned int deckId() const {return m_deckId;}
