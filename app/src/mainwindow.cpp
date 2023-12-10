@@ -6,6 +6,8 @@
 
 #include <QApplication>
 #include <QMessageBox>
+#include <QStandardPaths>
+#include <QFile>
 
 #define LIBRARY  0
 #define TODO     1
@@ -21,11 +23,46 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(LIBRARY);
+
+    QFile file(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/todoFile.txt");
+    //    QString path = QDir(QCoreApplication::applicationDirPath()).filePath("/info/todoFile.txt");
+    //    QFile file(path);
+
+
+
+    if(!file.open(QIODevice::ReadWrite)) {
+        QMessageBox::information(0, "error", file.errorString());
+    }
+
+    QTextStream in(&file);
+
+    while(!in.atEnd()) {
+        QListWidgetItem* item = new QListWidgetItem(in.readLine(), ui->listWidget_todos);
+        ui->listWidget_todos->addItem(item);
+    }
+
+    file.close();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+
+    QFile file(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/todoFile.txt");
+//    QString path = QDir(QCoreApplication::applicationDirPath()).filePath("/info/todoFile.txt");
+//    QFile file(path);
+
+    if(!file.open(QIODevice::ReadWrite)) {
+        QMessageBox::information(0, "error", file.errorString());
+    }
+
+    QTextStream out(&file);
+
+    for(int i = 0; i < ui->listWidget_todos->count(); ++i) {
+        out << ui->listWidget_todos->item(i)->text() << '\n';
+    }
+
+    file.close();
 }
 
 
@@ -119,12 +156,14 @@ void MainWindow::on_pushButton_addTodo_clicked()
 void MainWindow::on_pushButton_deleteTodo_clicked()
 {
     QListWidgetItem* item = ui->listWidget_todos->takeItem(ui->listWidget_todos->currentRow());
+    // TODO: cross it from file too
     delete item;
 }
 
 
 void MainWindow::on_pushButton_deleteAllTodos_clicked()
 {
+    // TODO: cross it from file too
     ui->listWidget_todos->clear();
 }
 

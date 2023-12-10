@@ -3,6 +3,10 @@
 
 #include <QWidget>
 
+#include <QDir>
+#include <QCoreApplication>
+#include <QStandardPaths>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -44,5 +48,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    QString path = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/todoFile.txt";
+
+//    QString path = QDir(QCoreApplication::applicationDirPath()).filePath("/info/todoFile.txt");
 };
 #endif // MAINWINDOW_H
