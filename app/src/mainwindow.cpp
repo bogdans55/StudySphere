@@ -106,3 +106,25 @@ void MainWindow::on_calendarWidget_activated(const QDate &date)
         QMessageBox::information(this, date.toString(), "aktivnosti za taj dan npr");
 }
 
+
+void MainWindow::on_pushButton_addTodo_clicked()
+{
+    QListWidgetItem* item = new QListWidgetItem(ui->textEdit_todo->toPlainText(), ui->listWidget_todos);
+    ui->listWidget_todos->addItem(item);
+    ui->textEdit_todo->clear();
+    ui->textEdit_todo->setFocus();
+}
+
+
+void MainWindow::on_pushButton_deleteTodo_clicked()
+{
+    QListWidgetItem* item = ui->listWidget_todos->takeItem(ui->listWidget_todos->currentRow());
+    delete item;
+}
+
+
+void MainWindow::on_pushButton_deleteAllTodos_clicked()
+{
+    ui->listWidget_todos->clear();
+}
+

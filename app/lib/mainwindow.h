@@ -36,6 +36,12 @@ private slots:
 
     void on_calendarWidget_activated(const QDate &date);
 
+    void on_pushButton_addTodo_clicked();
+
+    void on_pushButton_deleteTodo_clicked();
+
+    void on_pushButton_deleteAllTodos_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
