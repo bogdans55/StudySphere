@@ -149,7 +149,7 @@ void MainWindow::on_pushButton_login_clicked()
             QByteArray responseData = socket.readAll();
             QTextStream stream(responseData);
 
-            if(stream.readAll() == "Username already exists, try again"){
+            if(request["action"] == "register" && stream.readAll() == "Username already exists, try again"){
                 qDebug() << "Username already exists, try again";
                 return;
             }

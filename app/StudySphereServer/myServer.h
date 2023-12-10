@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTcpServer>
+#include <QJsonObject>
 
 class MyServer : public QObject{
     Q_OBJECT
@@ -24,9 +25,11 @@ private:
     QString usersInfoFolder;
     QString userDecksFolder;
 
+    void registerUser(QTcpSocket* socket, QJsonObject& jsonObject);
+    void loginUser(QTcpSocket* socket, QJsonObject& jsonObject);
     void sendUserDecks(QTcpSocket* socket, const QString& searchQuery);
     void searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery);
-    void saveDeck(const QString& deckName, const QByteArray& deckData);
+    void saveDeck(QTcpSocket* socket, QJsonObject& jsonObject);
     void saveDeckForUser(const QString& username, const QString& deckName, QByteArray& deckData);
     void readData();
 };

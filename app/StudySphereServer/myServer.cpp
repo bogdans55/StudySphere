@@ -30,6 +30,31 @@ void MyServer::startServer(){
     }
 }
 
+void MyServer::loginUser(QTcpSocket* socket, QJsonObject& jsonObject){
+    QString username = jsonObject["username"].toString();
+    QFile userFile(QDir(usersInfoFolder).absoluteFilePath(username + ".txt"));
+
+    qDebug() << username;
+    try{
+        userFile.open(QIODevice::ReadOnly);
+        QByteArray storedHashedPassword = userFile.readLine().trimmed();
+        QByteArray enteredPassword = jsonObject["password"].toString().toUtf8();
+        QByteArray enteredHashedPassword = QCryptographicHash::hash(enteredPassword, QCryptographicHash::Sha256);
+
+
+        if(QString(enteredHashedPassword.toHex()) != QString(storedHashedPassword)){
+            qDebug() << "Password incorrect: " << username;
+            socket -> write("Password error, try again");
+        }else{
+            socket -> write("Login successful!");
+            sendUserDecks(socket, username);
+        }
+    }catch(const QFile::FileError& error){
+        qDebug() << "Username incorrect or file error: " << username;
+        socket -> write("Username error, try again");
+    }
+}
+
 void MyServer::readData()
 {
     QTcpSocket *socket = qobject_cast<QTcpSocket*>(sender());
@@ -43,86 +68,14 @@ void MyServer::readData()
     QString action = jsonObject["action"].toString();
 
     if (action == "login") {
-        QString username = jsonObject["username"].toString();
-        QFile userFile(QDir(usersInfoFolder).absoluteFilePath(username + ".txt"));
-
-        qDebug() << username;
-        try{
-            userFile.open(QIODevice::ReadOnly);
-            QByteArray storedHashedPassword = userFile.readLine().trimmed();
-            QByteArray enteredPassword = jsonObject["password"].toString().toUtf8();
-            QByteArray enteredHashedPassword = QCryptographicHash::hash(enteredPassword, QCryptographicHash::Sha256);
-
-
-            if(QString(enteredHashedPassword.toHex()) != QString(storedHashedPassword)){
-                qDebug() << "Password incorrect: " << username;
-                socket -> write("Password error, try again");
-                socket -> close();
-            }else{
-                // socket -> write("Login successful!");
-                sendUserDecks(socket, username);
-            }
-
-        }catch(const QFile::FileError& error){
-            qDebug() << "Username incorrect or file error: " << username;
-            socket -> write("Username error, try again");
-            socket -> close();
-        }
+        loginUser(socket, jsonObject);
     }else if (action == "saveDeck") {
-        // Assuming you will include the username in the upload request
-        QString username = jsonObject["username"].toString();
-        // QByteArray deckData = socket->readAll();
-        QJsonObject deck = jsonObject["deck"].toObject();
-        QString deckID = QString::number(deck["DeckId"].toDouble());
-
-
-
-        QString filePath = QDir(QDir(userDecksFolder).absoluteFilePath(username)).absoluteFilePath(deckID + ".json");
-
-        QFile file(filePath);
-
-        if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
-            QTextStream stream(&file);
-            stream << QJsonDocument(deck).toJson();
-            file.close();
-            qDebug() << "Deck saved: " << filePath;
-        }else{
-            qDebug() << "Error saving deck:" << file.errorString();
-        }
-
-        // saveDeckForUser(username, deckName, deckData);
-        QJsonObject response;
-        response["status"] = "Upload Successful";
-        socket->close();
+        saveDeck(socket, jsonObject);
     }else if(action == "register"){
-        QString username = jsonObject["username"].toString();
-        QFile userFile(QDir(usersInfoFolder).absoluteFilePath(username + ".txt"));
-
-        QDir users(usersInfoFolder);
-
-        for(const QString &fileName : users.entryList()){
-            if(fileName.contains(username, Qt::CaseInsensitive)){
-                socket->write("Username already exists, try again");
-                socket->close();
-                return;
-            }
-        }
-
-        try{
-            userFile.open(QIODevice::WriteOnly);
-            QByteArray enteredPassword = jsonObject["password"].toString().toUtf8();
-            QByteArray enteredHashedPassword = QCryptographicHash::hash(enteredPassword, QCryptographicHash::Sha256);
-
-            userFile.write(QByteArray(enteredHashedPassword.toHex()));
-            userFile.close();
-            socket -> write("Register successful!");
-            socket -> close();
-        }catch(const QFile::FileError& error){
-            qDebug() << "file error: " << username;
-            socket -> write("Registration not successful, try again");
-            socket -> close();
-        }
+        registerUser(socket, jsonObject);
     }
+
+    socket ->close();
 }
 
 void MyServer::newConnection(){
@@ -171,7 +124,6 @@ void MyServer::searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery
     QTextStream stream(socket);
     stream << QJsonDocument(response).toJson();
 
-    socket->close();
 }
 
 
@@ -209,20 +161,55 @@ void MyServer::sendUserDecks(QTcpSocket* socket, const QString& username){
 
     QTextStream stream(socket);
     stream << QJsonDocument(response).toJson();
-
-    socket->close();
 }
 
-void MyServer::saveDeck(const QString& deckName, const QByteArray& deckData){
-    QString filePath = publicDecksFolder + "/" + deckName;
+void MyServer::saveDeck(QTcpSocket* socket, QJsonObject& jsonObject){
+    QString username = jsonObject["username"].toString();
+
+    QJsonObject deck = jsonObject["deck"].toObject();
+    QString deckID = QString::number(deck["DeckId"].toDouble());
+
+    QString filePath = QDir(QDir(userDecksFolder).absoluteFilePath(username)).absoluteFilePath(deckID + ".json");
+
     QFile file(filePath);
 
-    if(file.open(QIODevice::WriteOnly)){
-        file.write(deckData);
+    if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
+        QTextStream stream(&file);
+        stream << QJsonDocument(deck).toJson();
         file.close();
         qDebug() << "Deck saved: " << filePath;
+    }else{
+        qDebug() << "Error saving deck:" << file.errorString();
     }
-    else{
-        qDebug() << "Error saving deck: " << file.errorString();
+
+    QJsonObject response;
+    response["status"] = "Upload Successful";
+}
+
+void MyServer::registerUser(QTcpSocket* socket, QJsonObject& jsonObject){
+    QString username = jsonObject["username"].toString();
+    QFile userFile(QDir(usersInfoFolder).absoluteFilePath(username + ".txt"));
+
+    QDir users(usersInfoFolder);
+
+    for(const QString &fileName : users.entryList()){
+        if(fileName.contains(username, Qt::CaseInsensitive)){
+            socket->write("Username already exists, try again");
+            return;
+        }
+    }
+
+    try{
+        userFile.open(QIODevice::WriteOnly);
+        QByteArray enteredPassword = jsonObject["password"].toString().toUtf8();
+        QByteArray enteredHashedPassword = QCryptographicHash::hash(enteredPassword, QCryptographicHash::Sha256);
+
+        userFile.write(QByteArray(enteredHashedPassword.toHex()));
+        userFile.close();
+        socket -> write("Register successful!");
+        socket -> close();
+    }catch(const QFile::FileError& error){
+        qDebug() << "file error: " << username;
+        socket -> write("Registration not successful, try again");
     }
 }

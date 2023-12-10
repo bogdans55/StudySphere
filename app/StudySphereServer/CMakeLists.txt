@@ -17,6 +17,7 @@ add_executable(StudySphereServer
   myServer.h
   myServer.cpp
 )
+
 target_link_libraries(StudySphereServer Qt${QT_VERSION_MAJOR}::Core)
 
 find_package(Qt6 REQUIRED COMPONENTS Network)
