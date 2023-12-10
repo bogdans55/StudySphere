@@ -133,7 +133,7 @@ void MainWindow::on_pushButton_login_clicked()
 
         if(socket.waitForConnected()){
             QJsonObject request;
-            if(login.isRegisterSelected()){
+            if(login.isRegister()){
                 request["action"] = "register";
 
             }
@@ -162,12 +162,21 @@ void MainWindow::on_pushButton_login_clicked()
 
             m_loggedIn = true; // use setter instead?
 
-            ui->label_username->setText(request["username"].toString());
-            ui->pushButton_login->setText("Odjavi se");
 
-            while (!stream.atEnd()) {
-                qDebug() << stream.readLine();
+            QString responseText = stream.readAll();
+            QJsonDocument jsondoc = QJsonDocument::fromJson(responseText.toUtf8());
+
+            qDebug() << jsondoc["status"];
+            qDebug() << jsondoc;
+            if(jsondoc["status"] != QJsonValue::Undefined)
+            {
+                ui->label_username->setText(request["username"].toString());
+                ui->pushButton_login->setText("Odjavi se");
             }
+
+//            while (!stream.atEnd()) {
+//                qDebug() << stream.readLine();
+//            }
 
             socket.disconnectFromHost();
         }else{

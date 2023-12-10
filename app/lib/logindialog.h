@@ -15,12 +15,20 @@ public:
     explicit LoginDialog(QWidget *parent = nullptr);
     ~LoginDialog();
 
-    QString getUsername();
-    QString getPassword();
-    bool isRegisterSelected();
+    inline QString getUsername() const { return m_username; }
+    inline QString getPassword() const { return m_password; }
+    inline bool isRegister() const { return m_isRegister; }
+
+private slots:
+    void on_pushButton_login_clicked();
+
+    void on_pushButton_openRegister_clicked();
 
 private:
     Ui::LoginDialog *ui;
+    QString m_username;
+    QString m_password;
+    bool m_isRegister = false;
 };
 
 #endif // LOGINDIALOG_H

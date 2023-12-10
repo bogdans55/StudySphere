@@ -1,11 +1,16 @@
 #include "lib/logindialog.h"
 #include "ui_logindialog.h"
 
+#define LOGIN       (0)
+#define REGISTER    (1)
+
 LoginDialog::LoginDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LoginDialog)
 {
     ui->setupUi(this);
+    ui->tabWidget->setCurrentIndex(LOGIN);
+    ui->label_error->setVisible(false);
 }
 
 LoginDialog::~LoginDialog()
@@ -13,17 +18,30 @@ LoginDialog::~LoginDialog()
     delete ui;
 }
 
-QString LoginDialog::getUsername()
+void LoginDialog::on_pushButton_login_clicked()
 {
-    return ui->lineEdit_username->text();
+    m_username = ui->lineEdit_username->text();
+    m_password = ui->lineEdit_password->text();
+    accept();
 }
 
-QString LoginDialog::getPassword()
+
+void LoginDialog::on_pushButton_openRegister_clicked()
 {
-    return ui->lineEdit_password->text();
+    m_isRegister = true;
+    m_username = ui->lineEdit_username_reg->text();
+    m_password = ui->lineEdit_password_reg->text();
+    QString confirmPassword = ui->lineEdit_confirmPassword->text();
+
+    if (m_password != confirmPassword)
+    {
+        ui->lineEdit_username_reg->clear();
+        ui->lineEdit_password_reg->clear();
+        ui->lineEdit_confirmPassword->clear();
+
+        ui->label_error->setVisible(true);
+    }
+    else
+        accept();
 }
 
-bool LoginDialog::isRegisterSelected()
-{
-    return ui->radioButton_register->isChecked();
-}
