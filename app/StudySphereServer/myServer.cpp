@@ -196,15 +196,13 @@ void MyServer::saveDeck(QTcpSocket* socket, QJsonObject& jsonObject){
 
     QString filePath = QDir(QDir(userDecksFolder).absoluteFilePath(username)).absoluteFilePath(deckID + ".json");
 
-    qDebug() << filePath;
-
     QFile file(filePath);
 
     if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
         QTextStream stream(&file);
         stream << QJsonDocument(deck).toJson();
         file.close();
-        qDebug() << "Deck saved: " << filePath;
+        qDebug() << "Deck saved on path: " << filePath;
     }else{
         qDebug() << "Error saving deck:" << file.errorString();
     }

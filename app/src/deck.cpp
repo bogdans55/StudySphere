@@ -82,6 +82,10 @@ QJsonObject Deck::toJson() const{
     json["Thumbnail"] = "systemDefault.png";
     //TODO Thumbnail image saving, and naming
     json["NumberOfCardsPerIteration"] = static_cast<int>(numOfCardsPerTest());
+    //TODO add real user
+    json["Username"] = "defaultUser";
+    //TODO add real rating
+    json["DeckRating"] = 0.0;
 
     QJsonArray cardsArray;
     for(const Card& card : cards()){
@@ -104,7 +108,10 @@ QVariant Deck::toVariant() const{
     map.insert("Privacy", (privacy() == Privacy::PRIVATE) ? "Private" : "Public");
     map.insert("Thumbnail", "systemDefault.png");     //TODO Thumbnail image saving, and naming
     map.insert("NumberOfCardsPerIteration", static_cast<int>(numOfCardsPerTest()));
-
+    //TODO add real User
+    map.insert("Username", "defaultUser");
+    //TODO add real deck rating
+    map.insert("DeckRating", 0.0);
     QVariantList cardsList;
     for (const Card &card : m_cards){ //cards?
         cardsList.append(card.toVariant());
