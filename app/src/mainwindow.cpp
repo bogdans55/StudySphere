@@ -1,6 +1,7 @@
 #include "lib/mainwindow.h"
 #include "lib/createdeckdialog.h"
 #include "lib/createdeckwindow.h"
+#include "lib/libraryalt.h"
 #include "lib/logindialog.h"
 #include "lib/studysessionwindow.h"
 #include "ui_mainwindow.h"
@@ -29,9 +30,21 @@ MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWindow)
     , m_user()
+    , m_library(new LibraryAlt(this))
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(LIBRARY);
+    ui->graphicsView_library->setScene(m_library);
+
+    for (int i = 0; i < 10; ++i) {
+        Deck *deck = new Deck("testing deck", Privacy::PRIVATE);
+        DeckItem *deckItem = new DeckItem(deck);
+        m_library->addItem(deckItem);
+        m_library->addDeck(deckItem);
+        m_library->m_decks.push_back(deck);
+
+        delete deck;
+    }
 }
 
 MainWindow::~MainWindow()

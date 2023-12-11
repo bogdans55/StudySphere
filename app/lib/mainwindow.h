@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "user.h"
+#include "libraryalt.h"
 
 #include <QWidget>
 
@@ -44,5 +45,6 @@ private:
     Ui::MainWindow *ui;
     bool m_loggedIn = false;
     User m_user;
+    LibraryAlt *m_library;
 };
 #endif // MAINWINDOW_H
