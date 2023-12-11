@@ -1,14 +1,14 @@
-#include "lib/libraryalt.h"
+#include "lib/libraryscene.h"
 #include "lib/deck.h"
 #include "lib/deckitem.h"
 
-LibraryAlt::LibraryAlt(QObject *parent)
+LibraryScene::LibraryScene(QObject *parent)
     : QGraphicsScene(parent)
 {
 
 }
 
-void LibraryAlt::addDeck(DeckItem *deckItem)
+void LibraryScene::addDeck(DeckItem *deckItem)
 {
     const auto sirinaTable = static_cast<int>(this->width());
     const auto visinaTable = static_cast<int>(this->height());

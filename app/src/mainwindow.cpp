@@ -1,7 +1,7 @@
 #include "lib/mainwindow.h"
 #include "lib/createdeckdialog.h"
 #include "lib/createdeckwindow.h"
-#include "lib/libraryalt.h"
+#include "lib/libraryscene.h"
 #include "lib/logindialog.h"
 #include "lib/studysessionwindow.h"
 #include "ui_mainwindow.h"
@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWindow)
     , m_user()
-    , m_library(new LibraryAlt(this))
+    , m_library(new LibraryScene(this))
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(LIBRARY);

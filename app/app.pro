@@ -9,8 +9,8 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    src/libraryalt.cpp \
     src/deckitem.cpp \
+    src/libraryscene.cpp \
     src/logindialog.cpp \
     src/cardstats.cpp \
     src/createdeckwindow.cpp \
@@ -45,6 +45,7 @@ HEADERS += \
     lib/grading.h \
     lib/imagecard.h \
     lib/jsonserializer.h \
+    lib/libraryscene.h \
     lib/plaincard.h \
     lib/serializable.h \
     lib/serializer.h \
@@ -54,8 +55,7 @@ HEADERS += \
     lib/user.h \
     lib/settings.h \
     lib/mainwindow.h \
-    lib/logindialog.h \
-    lib/libraryalt.h
+    lib/logindialog.h
 
 FORMS += \
     forms/createdeckwindow.ui \

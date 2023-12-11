@@ -1,5 +1,5 @@
-#ifndef LIBRARYALT_H
-#define LIBRARYALT_H
+#ifndef LIBRARYSCENE_H
+#define LIBRARYSCENE_H
 
 #include "lib/deckitem.h"
 
@@ -8,10 +8,10 @@ class DectItem;
 
 #include <QGraphicsScene>
 
-class LibraryAlt : public QGraphicsScene
+class LibraryScene : public QGraphicsScene
 {
 public:
-    explicit LibraryAlt(QObject *parent = nullptr);
+    explicit LibraryScene(QObject *parent = nullptr);
 
     QVector<Deck *> m_decks;
     void addDeck(DeckItem *deckItem);
@@ -19,4 +19,4 @@ private:
 
 };
 
-#endif // LIBRARYALT_H
+#endif // LIBRARYSCENE_H
