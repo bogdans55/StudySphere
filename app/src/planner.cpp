@@ -24,4 +24,14 @@ void Planner::fromJson(const QJsonObject &json){
     m_day.operator = (json["day"].toString());
 }
 
+QVariant Planner::toVariant() const
+{
+
+}
+
+void Planner::fromVariant(const QVariant &variant)
+{
+
+}
+
 

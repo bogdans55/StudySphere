@@ -9,6 +9,8 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/activityitem.cpp \
+    src/plannerscene.cpp \
     src/cardstats.cpp \
     src/createdeckwindow.cpp \
     src/createdeckdialog.cpp \
@@ -31,6 +33,7 @@ SOURCES += \
     src/mainwindow.cpp
 
 HEADERS += \
+    lib/activityitem.h \
     lib/createdeckwindow.h \
     lib/createdeckdialog.h \
     lib/browser.h \
@@ -51,7 +54,8 @@ HEADERS += \
     lib/studysessionwindow.h \
     lib/user.h \
     lib/settings.h \
-    lib/mainwindow.h
+    lib/mainwindow.h \
+    lib/plannerscene.h
 
 FORMS += \
     forms/createdeckwindow.ui \

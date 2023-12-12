@@ -21,6 +21,14 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(LIBRARY);
+
+    ui->graphicsView_monday->setScene(&m_plannerMondayScene);
+    ui->graphicsView_tuesday->setScene(&m_plannerTuesdayScene);
+    ui->graphicsView_wednesday->setScene(&m_plannerWednesdayScene);
+    ui->graphicsView_thursday->setScene(&m_plannerThursdayScene);
+    ui->graphicsView_friday->setScene(&m_plannerFridayScene);
+    ui->graphicsView_saturday->setScene(&m_plannerSaturdayScene);
+    ui->graphicsView_sunday->setScene(&m_plannerSundayScene);
 }
 
 MainWindow::~MainWindow()

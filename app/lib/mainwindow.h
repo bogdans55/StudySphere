@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "lib/plannerscene.h"
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -38,5 +39,12 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    PlannerScene m_plannerMondayScene;
+    PlannerScene m_plannerTuesdayScene;
+    PlannerScene m_plannerWednesdayScene;
+    PlannerScene m_plannerThursdayScene;
+    PlannerScene m_plannerFridayScene;
+    PlannerScene m_plannerSaturdayScene;
+    PlannerScene m_plannerSundayScene;
 };
 #endif // MAINWINDOW_H
