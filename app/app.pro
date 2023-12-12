@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/activity.cpp \
     src/activityitem.cpp \
     src/plannerscene.cpp \
     src/cardstats.cpp \
@@ -25,7 +26,6 @@ SOURCES += \
     src/library.cpp \
     src/main.cpp \
     src/plaincard.cpp \
-    src/planner.cpp \
     src/studysession.cpp \
     src/studysessionwindow.cpp \
     src/user.cpp \
@@ -33,6 +33,7 @@ SOURCES += \
     src/mainwindow.cpp
 
 HEADERS += \
+    lib/activity.h \
     lib/activityitem.h \
     lib/createdeckwindow.h \
     lib/createdeckdialog.h \
@@ -46,7 +47,6 @@ HEADERS += \
     lib/imagecard.h \
     lib/jsonserializer.h \
     lib/plaincard.h \
-    lib/planner.h \
     lib/serializable.h \
     lib/serializer.h \
     lib/studysession.h \
