@@ -23,6 +23,7 @@ SOURCES += \
     src/library.cpp \
     src/main.cpp \
     src/plaincard.cpp \
+    src/planner.cpp \
     src/studysession.cpp \
     src/studysessionwindow.cpp \
     src/user.cpp \
@@ -42,6 +43,7 @@ HEADERS += \
     lib/imagecard.h \
     lib/jsonserializer.h \
     lib/plaincard.h \
+    lib/plnner.h \
     lib/serializable.h \
     lib/serializer.h \
     lib/studysession.h \
