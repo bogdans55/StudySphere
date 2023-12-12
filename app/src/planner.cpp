@@ -1,4 +1,4 @@
-#include "lib/plnner.h"
+#include "lib/planner.h"
 
 Planner::Planner()
     :m_activityText(),

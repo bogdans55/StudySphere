@@ -43,7 +43,7 @@ HEADERS += \
     lib/imagecard.h \
     lib/jsonserializer.h \
     lib/plaincard.h \
-    lib/plnner.h \
+    lib/planner.h \
     lib/serializable.h \
     lib/serializer.h \
     lib/studysession.h \

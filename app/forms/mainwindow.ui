@@ -151,7 +151,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>3</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="page_library">
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -430,9 +430,6 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QListWidget" name="listWidget_monday"/>
-         </item>
          <item row="0" column="6">
           <widget class="QLabel" name="label_sunday">
            <property name="text">
@@ -443,23 +440,26 @@
            </property>
           </widget>
          </item>
+         <item row="1" column="0">
+          <widget class="QGraphicsView" name="graphicsView_monday"/>
+         </item>
          <item row="1" column="1">
-          <widget class="QListWidget" name="listWidget_tuesday"/>
+          <widget class="QGraphicsView" name="graphicsView_tuesday"/>
          </item>
          <item row="1" column="2">
-          <widget class="QListWidget" name="listWidget_wednesday"/>
+          <widget class="QGraphicsView" name="graphicsView_wednesday"/>
          </item>
          <item row="1" column="3">
-          <widget class="QListWidget" name="listWidget_thursday"/>
+          <widget class="QGraphicsView" name="graphicsView_thursday"/>
          </item>
          <item row="1" column="4">
-          <widget class="QListWidget" name="listWidget_friday"/>
+          <widget class="QGraphicsView" name="graphicsView_friday"/>
          </item>
          <item row="1" column="5">
-          <widget class="QListWidget" name="listWidget_saturday"/>
+          <widget class="QGraphicsView" name="graphicsView_saturday"/>
          </item>
          <item row="1" column="6">
-          <widget class="QListWidget" name="listWidget_sunday"/>
+          <widget class="QGraphicsView" name="graphicsView"/>
          </item>
         </layout>
        </item>

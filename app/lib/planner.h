@@ -1,5 +1,5 @@
-#ifndef PLNNER_H
-#define PLNNER_H
+#ifndef PLANNER_H
+#define PLANNER_H
 
 #include <QJsonObject>
 #include "lib/serializable.h"
@@ -33,4 +33,4 @@ protected:
 
 
 
-#endif // PLNNER_H
+#endif // PLANNER_H
