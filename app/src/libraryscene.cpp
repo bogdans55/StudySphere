@@ -10,18 +10,17 @@ LibraryScene::LibraryScene(QObject *parent)
 
 void LibraryScene::addDeck(DeckItem *deckItem)
 {
-    const auto sirinaTable = static_cast<int>(this->width());
-    const auto visinaTable = static_cast<int>(this->height());
-    auto xPozPomeraj = 0.0;
-    auto indeksNovogCvora = m_decks.size();
+    const auto tableWidth = static_cast<int>(this->width());
+    const auto tableHeight = static_cast<int>(this->height());
+    auto currentIndex = m_decks.size();
 
 //    adding under
-//    const auto xPoz = (120 * indeksNovogCvora) % sirinaTable;
-//    const auto yPoz = 200 * ((120 * indeksNovogCvora) / sirinaTable);
-//    deckItem->setPos(xPoz + xPozPomeraj, yPoz);
+//    const auto xPoz = (120 * currentIndex) % tableWidth;
+//    const auto yPoz = 200 * ((120 * currentIndex) / tableWidth);
+//    deckItem->setPos(xPoz + offset, yPoz);
 
 //    adding to the right
-    const auto yPoz = (200 * indeksNovogCvora) % visinaTable;
-    const auto xPoz = 120 * ((200 * indeksNovogCvora) / visinaTable);
-    deckItem->setPos(xPoz + xPozPomeraj, yPoz);
+    const auto yPos = (500 * currentIndex) % tableHeight;
+    const auto xPos = 200 * ((500 * currentIndex) / tableHeight);
+    deckItem->setPos(xPos, yPos);
 }

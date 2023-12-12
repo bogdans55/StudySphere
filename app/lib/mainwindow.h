@@ -45,6 +45,6 @@ private:
     Ui::MainWindow *ui;
     bool m_loggedIn = false;
     User m_user;
-    LibraryScene *m_library;
+    LibraryScene m_library;
 };
 #endif // MAINWINDOW_H
