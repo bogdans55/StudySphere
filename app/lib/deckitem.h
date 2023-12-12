@@ -14,6 +14,9 @@ public:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
+    inline int width() const { return 200; }
+    inline int height() const { return 500; }
+
     inline Deck deck() const { return m_deck; }
 
 private:

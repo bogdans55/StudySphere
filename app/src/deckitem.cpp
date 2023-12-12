@@ -10,7 +10,7 @@ DeckItem::DeckItem(Deck *deck)
 
 QRectF DeckItem::boundingRect() const
 {
-    return QRectF(0, 0, 200, 500); // hardcoded values for test purposess
+    return QRectF(0, 0, width(), height()); // hardcoded values for test purposess
 }
 
 void DeckItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

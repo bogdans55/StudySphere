@@ -1,7 +1,6 @@
 #include "lib/mainwindow.h"
 #include "lib/createdeckdialog.h"
 #include "lib/createdeckwindow.h"
-#include "lib/jsonserializer.h"
 #include "lib/libraryscene.h"
 #include "lib/logindialog.h"
 #include "lib/studysessionwindow.h"
@@ -127,7 +126,7 @@ void MainWindow::on_pushButton_login_clicked()
     for (auto item : m_library.items())
         delete item;
     m_library.clear();
-    m_library.m_decks.clear();
+    m_library.clearDeck();
 
     if(!m_loggedIn) // use getter instead?
     {
@@ -190,7 +189,6 @@ void MainWindow::on_pushButton_login_clicked()
                 DeckItem *deckItem = new DeckItem(&deck);
                 m_library.addItem(deckItem);
                 m_library.addDeck(deckItem);
-                m_library.m_decks.push_back(&deck);
             }
 
             if(jsondoc["status"] != QJsonValue::Undefined)
