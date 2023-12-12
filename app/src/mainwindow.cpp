@@ -176,20 +176,23 @@ void MainWindow::on_pushButton_login_clicked()
             qDebug() << jsondoc;
 
             QString deckNames = jsonobj.value("decks").toString();
-            qDebug() << deckNames;
 
-            // split deckNames with ", "
-            QStringList deckNamesList = deckNames.split(", ");
-            for (auto &deckName : deckNamesList)
+            if(deckNames != "")
             {
-//                QJsonObject userDeck = jsonobj.value(deckName).toObject();
-//                qDebug() << userDeck;
+                // split deckNames with ", "
+                QStringList deckNamesList = deckNames.split(", ");
+                for (auto &deckName : deckNamesList)
+                {
+                    //                QJsonObject userDeck = jsonobj.value(deckName).toObject();
+                    //                qDebug() << userDeck;
 
-                Deck deck(deckName, Privacy::PRIVATE); // empty deck for now
-                DeckItem *deckItem = new DeckItem(&deck);
-                m_library.addItem(deckItem);
-                m_library.addDeck(deckItem);
+                    Deck deck(deckName, Privacy::PRIVATE); // empty deck for now
+                    DeckItem *deckItem = new DeckItem(&deck);
+                    m_library.addItem(deckItem);
+                    m_library.addDeck(deckItem);
+                }
             }
+
 
             if(jsondoc["status"] != QJsonValue::Undefined)
             {
