@@ -188,25 +188,97 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_library">
          <item>
-          <widget class="QGraphicsView" name="graphicsView_library"/>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_act">
-           <item>
-            <widget class="QPushButton" name="pushButton_createDeck">
-             <property name="text">
-              <string>Kreiraj novi špil</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton_startStudySession">
-             <property name="text">
-              <string>Započni učenje</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QTabWidget" name="tabWidget_library">
+           <property name="currentIndex">
+            <number>1</number>
+           </property>
+           <widget class="QWidget" name="tab_decks">
+            <attribute name="title">
+             <string>Moji špilovi</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <widget class="QGraphicsView" name="graphicsView_library"/>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_act">
+               <item>
+                <widget class="QPushButton" name="pushButton_createDeck">
+                 <property name="text">
+                  <string>Kreiraj novi špil</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_startStudySession">
+                 <property name="text">
+                  <string>Započni učenje</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="tab_browser">
+            <attribute name="title">
+             <string>Pretraži špilove</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QLineEdit" name="lineEdit_browser">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                   <horstretch>99</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>500</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="placeholderText">
+                  <string>Pretraži...</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_search">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Pretraži</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QGraphicsView" name="graphicsView_browser"/>
+             </item>
+            </layout>
+           </widget>
+          </widget>
          </item>
         </layout>
        </item>
@@ -400,16 +472,6 @@
        </item>
        <item>
         <layout class="QGridLayout" name="gridLayout_week">
-         <item row="0" column="1">
-          <widget class="QLabel" name="label_tuesday">
-           <property name="text">
-            <string>Utorak</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="5">
           <widget class="QLabel" name="label_saturday">
            <property name="text">
@@ -420,10 +482,23 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_monday">
+         <item row="1" column="6">
+          <widget class="QListWidget" name="listWidget_sunday"/>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="label_tuesday">
            <property name="text">
-            <string>Ponedeljak</string>
+            <string>Utorak</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="label_wednesday">
+           <property name="text">
+            <string>Sreda</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -450,19 +525,6 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="2">
-          <widget class="QLabel" name="label_wednesday">
-           <property name="text">
-            <string>Sreda</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QListWidget" name="listWidget_monday"/>
-         </item>
          <item row="0" column="6">
           <widget class="QLabel" name="label_sunday">
            <property name="text">
@@ -473,23 +535,33 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
-          <widget class="QListWidget" name="listWidget_tuesday"/>
-         </item>
-         <item row="1" column="2">
-          <widget class="QListWidget" name="listWidget_wednesday"/>
-         </item>
-         <item row="1" column="3">
-          <widget class="QListWidget" name="listWidget_thursday"/>
-         </item>
-         <item row="1" column="4">
-          <widget class="QListWidget" name="listWidget_friday"/>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_monday">
+           <property name="text">
+            <string>Ponedeljak</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
          </item>
          <item row="1" column="5">
           <widget class="QListWidget" name="listWidget_saturday"/>
          </item>
-         <item row="1" column="6">
-          <widget class="QListWidget" name="listWidget_sunday"/>
+         <item row="1" column="4">
+          <widget class="QListWidget" name="listWidget_friday"/>
+         </item>
+         <item row="1" column="3">
+          <widget class="QListWidget" name="listWidget_thursday"/>
+         </item>
+         <item row="1" column="2">
+          <widget class="QListWidget" name="listWidget_wednesday"/>
+         </item>
+         <item row="1" column="1">
+          <widget class="QListWidget" name="listWidget_tuesday"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QListWidget" name="listWidget_monday"/>
          </item>
         </layout>
        </item>
