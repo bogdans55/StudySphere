@@ -1,6 +1,7 @@
 #include "lib/mainwindow.h"
 #include "lib/createdeckdialog.h"
 #include "lib/createdeckwindow.h"
+#include "lib/libraryscene.h"
 #include "lib/logindialog.h"
 #include "lib/studysessionwindow.h"
 #include "ui_mainwindow.h"
@@ -29,9 +30,12 @@ MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWindow)
     , m_user()
+    , m_library()
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(LIBRARY);
+    ui->graphicsView_library->setScene(&m_library);
+
 }
 
 MainWindow::~MainWindow()
@@ -119,6 +123,11 @@ void MainWindow::on_calendarWidget_activated(const QDate &date)
 
 void MainWindow::on_pushButton_login_clicked()
 {
+    for (auto item : m_library.items())
+        delete item;
+    m_library.clear();
+    m_library.clearDeck();
+
     if(!m_loggedIn) // use getter instead?
     {
         QString username;
@@ -135,13 +144,7 @@ void MainWindow::on_pushButton_login_clicked()
 
         if(socket.waitForConnected()){
             QJsonObject request;
-            if(login.isRegister()){
-                request["action"] = "register";
-
-            }
-            else{
-                request["action"] = "login";
-            }
+            request["action"] = login.isRegister() ? "register" : "login";
             request["username"] = username;
             request["password"] = password;
 
@@ -167,9 +170,29 @@ void MainWindow::on_pushButton_login_clicked()
 
             QString loginResponse = stream.readAll();
             QJsonDocument jsondoc = QJsonDocument::fromJson(loginResponse.toUtf8());
+            QJsonObject jsonobj = jsondoc.object();
 
             qDebug() << jsondoc["status"];
             qDebug() << jsondoc;
+
+            QString deckNames = jsonobj.value("decks").toString();
+
+            if(deckNames != "")
+            {
+                // split deckNames with ", "
+                QStringList deckNamesList = deckNames.split(", ");
+                for (auto &deckName : deckNamesList)
+                {
+                    //                QJsonObject userDeck = jsonobj.value(deckName).toObject();
+                    //                qDebug() << userDeck;
+
+                    Deck deck(deckName, Privacy::PRIVATE); // empty deck for now
+                    DeckItem *deckItem = new DeckItem(&deck);
+                    m_library.addItem(deckItem);
+                    m_library.addDeck(deckItem);
+                }
+            }
+
 
             if(jsondoc["status"] != QJsonValue::Undefined)
             {

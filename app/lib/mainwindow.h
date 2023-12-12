@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "user.h"
+#include "libraryscene.h"
 
 #include <QWidget>
 
@@ -44,5 +45,6 @@ private:
     Ui::MainWindow *ui;
     bool m_loggedIn = false;
     User m_user;
+    LibraryScene m_library;
 };
 #endif // MAINWINDOW_H
