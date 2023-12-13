@@ -151,6 +151,8 @@ void MainWindow::on_pushButton_login_clicked()
         else{
             loginSuccess = loginUser(username, password);
             qDebug(loginSuccess ? "Logged in" : "Not Logged in");
+            if(!loginSuccess)
+                QMessageBox::critical(this, "Greška pri prijavljivanju", "Neuspešno prijavljivanje. Proverite korisničko ime i lozinku i probajte ponovo.");
         }
 
         m_loggedIn = loginSuccess;
