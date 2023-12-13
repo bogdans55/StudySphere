@@ -136,76 +136,24 @@ void MainWindow::on_pushButton_login_clicked()
         if (login.exec() != QDialog::Accepted) {
             return;
         }
+
         username = login.getUsername();
         password = login.getPassword();
 
-        QTcpSocket socket;
-        socket.connectToHost("127.0.0.1", 8080);
-
-        if(socket.waitForConnected()){
-            QJsonObject request;
-            request["action"] = login.isRegister() ? "register" : "login";
-            request["username"] = username;
-            request["password"] = password;
-
-            socket.write(QJsonDocument(request).toJson());
-            socket.waitForBytesWritten();
-            socket.waitForReadyRead();
-            QByteArray responseText = socket.readAll();
-            QTextStream stream(responseText);
-
-            qDebug() << "Recieved Data:";
-
-            QString response = stream.readAll();
-
-            if(request["action"] == "register" ){
-                if(response == "Username already exists, try again"){
-                    qDebug() << "Username already exists, try again";
-                    return;
-                }
-                qDebug() << response;
+        bool loginSuccess = false;
+        if(login.isRegister()){
+            if(registerUser(username, password)){
+                loginSuccess = loginUser(username, password);
+            }else{
+                qDebug() << "Register failed.";
             }
-
-            m_loggedIn = true; // use setter instead?
-
-
-            QJsonDocument jsondoc = QJsonDocument::fromJson(response.toUtf8());
-            QJsonObject jsonobj = jsondoc.object();
-
-            qDebug() << jsondoc["status"];
-            qDebug() << jsondoc;
-
-            QString deckNames = jsonobj.value("decks").toString();
-
-            if(deckNames != "")
-            {
-                // split deckNames with ", "
-                QStringList deckNamesList = deckNames.split(", ");
-                for (auto &deckName : deckNamesList)
-                {
-                    //                QJsonObject userDeck = jsonobj.value(deckName).toObject();
-                    //                qDebug() << userDeck;
-                    Deck deck(deckName.split('_')[0], Privacy::PRIVATE); // empty deck for now
-                    DeckItem *deckItem = new DeckItem(&deck);
-                    m_library.addItem(deckItem);
-                    m_library.addDeck(deckItem);
-                }
-            }
-
-
-            if(jsondoc["status"] != QJsonValue::Undefined && jsondoc["status"] != "Password incorrect, try again")
-            {
-                ui->label_username->setText(request["username"].toString());
-                ui->pushButton_login->setText("Odjavi se");
-                m_user.setUsername(request["username"].toString());
-                m_loggedIn = false;
-            }
-
-
-            socket.disconnectFromHost();
-        }else{
-            qDebug() << "Failed to connect to the server";
         }
+        else{
+            loginSuccess = loginUser(username, password);
+            qDebug(loginSuccess ? "Logged in" : "Not Logged in");
+        }
+
+        m_loggedIn = loginSuccess;
     }
     else
     {
@@ -216,3 +164,100 @@ void MainWindow::on_pushButton_login_clicked()
     }
 }
 
+bool MainWindow::loginUser(const QString& username, const QString& password){
+    QTcpSocket socket;
+    socket.connectToHost("127.0.0.1", 8080);
+
+    if(socket.waitForConnected()){
+        QJsonObject request;
+        request["action"] = "login";
+        request["username"] = username;
+        request["password"] = password;
+
+        socket.write(QJsonDocument(request).toJson());
+        socket.waitForBytesWritten();
+        socket.waitForReadyRead();
+        QByteArray responseText = socket.readAll();
+        QTextStream stream(responseText);
+
+        qDebug() << "Recieved Data:";
+
+        QString loginResponse = stream.readAll();
+
+        QJsonDocument jsondoc = QJsonDocument::fromJson(loginResponse.toUtf8());
+        QJsonObject jsonobj = jsondoc.object();
+
+        qDebug() << jsondoc["status"];
+        qDebug() << jsondoc;
+
+        QString deckNames = jsonobj.value("decks").toString();
+
+        if(deckNames != "")
+        {
+            // split deckNames with ", "
+            QStringList deckNamesList = deckNames.split(", ");
+            for (auto &deckName : deckNamesList)
+            {
+                Deck deck(deckName.split('_')[0], Privacy::PRIVATE); // empty deck for now
+                DeckItem *deckItem = new DeckItem(&deck);
+                m_library.addItem(deckItem);
+                m_library.addDeck(deckItem);
+            }
+        }
+
+        if(jsondoc["status"] != QJsonValue::Undefined && jsondoc["status"] != "Password incorrect, try again")
+        {
+            ui->label_username->setText(request["username"].toString());
+            ui->pushButton_login->setText("Odjavi se");
+            m_user.setUsername(request["username"].toString());
+        }
+        else{
+            return false;
+        }
+        socket.disconnectFromHost();
+        return true;
+    }else{
+        return false;
+        qDebug() << "Failed to connect to the server";
+    }
+}
+
+bool MainWindow::registerUser(const QString& username, const QString& password){
+    QTcpSocket socket;
+    socket.connectToHost("127.0.0.1", 8080);
+
+    if(socket.waitForConnected()){
+        QJsonObject request;
+        request["action"] = "register";
+        request["username"] = username;
+        request["password"] = password;
+
+        socket.write(QJsonDocument(request).toJson());
+        socket.waitForBytesWritten();
+        socket.waitForReadyRead();
+        QByteArray responseText = socket.readAll();
+        QTextStream stream(responseText);
+
+        qDebug() << "Recieved Data:";
+
+        QString registerResponse = stream.readAll();
+
+        QJsonDocument jsondoc = QJsonDocument::fromJson(registerResponse.toUtf8());
+        QJsonObject jsonobj = jsondoc.object();
+
+        if(jsondoc["status"] == "Username already exists, try again"){
+            qDebug() << "Username already exists, try again";
+            return false;
+        }
+        qDebug() << registerResponse;
+
+        qDebug() << jsondoc["status"];
+        qDebug() << jsondoc;
+
+        socket.disconnectFromHost();
+        return true;
+    }else{
+        qDebug() << "Failed to connect to the server";
+        return false;
+    }
+}

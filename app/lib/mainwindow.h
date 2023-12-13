@@ -41,10 +41,15 @@ private slots:
 
     void on_pushButton_login_clicked();
 
+
+
 private:
     Ui::MainWindow *ui;
     bool m_loggedIn = false;
     User m_user;
     LibraryScene m_library;
+
+    bool registerUser(const QString& username, const QString& password);
+    bool loginUser(const QString& username, const QString& password);
 };
 #endif // MAINWINDOW_H

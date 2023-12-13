@@ -215,20 +215,23 @@ void MyServer::saveDeck(QTcpSocket* socket, QJsonObject& jsonObject){
 
 void MyServer::registerUser(QTcpSocket* socket, QJsonObject& jsonObject){
     QString username = jsonObject["username"].toString();
-    QFile userFile(QDir(usersInfoFolder).absoluteFilePath(username + ".txt"));
-
-    QJsonObject response;
-
 
 
     QDir users(usersInfoFolder);
+    QJsonObject response;
 
     for(const QString &fileName : users.entryList()){
-        if(fileName == username){
+        if(fileName.split(".")[0] == username){
             response["status"] = "Username already exists, try again";
+            QTextStream stream(socket);
+            stream << QJsonDocument(response).toJson();
             return;
         }
     }
+
+    QFile userFile(QDir(usersInfoFolder).absoluteFilePath(username + ".txt"));
+
+
 
     try{
         userFile.open(QIODevice::WriteOnly);
