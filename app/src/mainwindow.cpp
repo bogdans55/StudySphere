@@ -185,8 +185,7 @@ void MainWindow::on_pushButton_login_clicked()
                 {
                     //                QJsonObject userDeck = jsonobj.value(deckName).toObject();
                     //                qDebug() << userDeck;
-
-                    Deck deck(deckName, Privacy::PRIVATE); // empty deck for now
+                    Deck deck(deckName.split('_')[0], Privacy::PRIVATE); // empty deck for now
                     DeckItem *deckItem = new DeckItem(&deck);
                     m_library.addItem(deckItem);
                     m_library.addDeck(deckItem);
@@ -194,7 +193,7 @@ void MainWindow::on_pushButton_login_clicked()
             }
 
 
-            if(jsondoc["status"] != QJsonValue::Undefined)
+            if(jsondoc["status"] != QJsonValue::Undefined && jsondoc["status"] != "Password incorrect, try again")
             {
                 ui->label_username->setText(request["username"].toString());
                 ui->pushButton_login->setText("Odjavi se");

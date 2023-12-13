@@ -49,6 +49,7 @@ void Library::removeDeck(Deck& deck, QString& username){
         request["action"] = "removeDeck";
         request["username"] = username;
         request["DeckId"] = QString::number(deck.deckId());
+        request["DeckName"] = deck.name();
 
         socket.write(QJsonDocument(request).toJson());
         socket.waitForBytesWritten();

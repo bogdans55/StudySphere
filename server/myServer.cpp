@@ -96,9 +96,10 @@ void MyServer::removeDeck(QTcpSocket* socket, QJsonObject& jsonObject){
 
     QString username = jsonObject["username"].toString();
     QString deckID = QString::number(jsonObject["DeckId"].toDouble());
+    QString deckName = jsonObject["DeckName"].toString();
     QDir deckFolder(QDir(userDecksFolder).absoluteFilePath(username));
     QJsonObject response;
-    QString filePath = deckFolder.absoluteFilePath(deckID + ".json");
+    QString filePath = deckFolder.absoluteFilePath(deckName + "_" + deckID + ".json");
 
     if(QFile::remove(filePath)){
         response["status"] = "Successfuly removed deck" + deckID + ".json";
@@ -193,8 +194,9 @@ void MyServer::saveDeck(QTcpSocket* socket, QJsonObject& jsonObject){
 
     QJsonObject deck = jsonObject["deck"].toObject();
     QString deckID = QString::number(deck["DeckId"].toDouble());
+    QString deckName = deck["Subject"].toString();
 
-    QString filePath = QDir(QDir(userDecksFolder).absoluteFilePath(username)).absoluteFilePath(deckID + ".json");
+    QString filePath = QDir(QDir(userDecksFolder).absoluteFilePath(username)).absoluteFilePath(deckName + "_" + deckID + ".json");
 
     QFile file(filePath);
 
@@ -222,7 +224,7 @@ void MyServer::registerUser(QTcpSocket* socket, QJsonObject& jsonObject){
     QDir users(usersInfoFolder);
 
     for(const QString &fileName : users.entryList()){
-        if(fileName.contains(username, Qt::CaseInsensitive)){
+        if(fileName == username){
             socket->write("Username already exists, try again");
             return;
         }
