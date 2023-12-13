@@ -225,7 +225,7 @@ void MyServer::registerUser(QTcpSocket* socket, QJsonObject& jsonObject){
 
     for(const QString &fileName : users.entryList()){
         if(fileName == username){
-            socket->write("Username already exists, try again");
+            response["status"] = "Username already exists, try again";
             return;
         }
     }

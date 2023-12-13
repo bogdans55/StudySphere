@@ -156,20 +156,20 @@ void MainWindow::on_pushButton_login_clicked()
 
             qDebug() << "Recieved Data:";
 
+            QString response = stream.readAll();
+
             if(request["action"] == "register" ){
-                QString registerResponse = stream.readAll();
-                if(registerResponse == "Username already exists, try again"){
+                if(response == "Username already exists, try again"){
                     qDebug() << "Username already exists, try again";
                     return;
                 }
-                qDebug() << registerResponse;
+                qDebug() << response;
             }
 
             m_loggedIn = true; // use setter instead?
 
 
-            QString loginResponse = stream.readAll();
-            QJsonDocument jsondoc = QJsonDocument::fromJson(loginResponse.toUtf8());
+            QJsonDocument jsondoc = QJsonDocument::fromJson(response.toUtf8());
             QJsonObject jsonobj = jsondoc.object();
 
             qDebug() << jsondoc["status"];
@@ -198,6 +198,7 @@ void MainWindow::on_pushButton_login_clicked()
                 ui->label_username->setText(request["username"].toString());
                 ui->pushButton_login->setText("Odjavi se");
                 m_user.setUsername(request["username"].toString());
+                m_loggedIn = false;
             }
 
 
