@@ -21,21 +21,16 @@ public:
     Card(const Card& card);
 
     ~Card();
-    void flipCard();
     void evaluateAnswer(unsigned evaluation);
 
     // Getters
     inline QString questionText() const {return m_questionText;}
     inline QString questionAnswer() const {return m_answerText;}
-    inline bool answerShowed() const {return m_answerShowed;}
     inline Difficulty questionDifficulty() const {return m_questionDifficulty;}
     inline Grading stats() const {return m_stats;}
 
     // Setters
     void setAnswerShowed(bool answerShowed);     // public?
-
-    void fromJson(const QJsonObject& json);
-    QJsonObject toJson() const;
 
     QVariant toVariant() const override;
     void fromVariant(const QVariant &variant) override;
@@ -43,7 +38,6 @@ public:
 protected:
     QString m_questionText;     // was CardContent
     QString m_answerText;       // was CardContent
-    bool m_answerShowed;
     Difficulty m_questionDifficulty;
     Grading m_stats;            // was CardStats
 

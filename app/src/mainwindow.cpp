@@ -68,10 +68,10 @@ void MainWindow::on_pushButton_createDeck_clicked()
 void MainWindow::on_pushButton_startStudySession_clicked()
 {
     QString deckName = ui->listWidget_library->currentItem()->text();
-    Deck deck;
+    Deck *deck = new Deck();
     User user;
-    JSONSerializer().load(deck, "../decks/" + deckName + ".json");
-    StudySession session(user, deck);
+    JSONSerializer().load(*deck, "../decks/" + deckName + ".json");
+    StudySession *session = new StudySession(user, deck);
     StudySessionWindow *useDeck = new StudySessionWindow(session);
     useDeck->setAttribute(Qt::WA_DeleteOnClose);
     useDeck->show();

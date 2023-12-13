@@ -40,54 +40,14 @@ Deck::Deck(const Deck& deck)
     m_rating(deck.m_rating)
 {}
 
-void Deck::addCard(Card card)
+void Deck::addCard(Card &card)
 {
-    m_cards.append(card);
+    m_cards.append(&card);
 }
 
 void Deck::updateRating(unsigned int grade)
 {
     m_rating.addNewGrade(grade);
-}
-
-void Deck::fromJson(const QJsonObject& json){
-    m_deckId = json["DeckID"].toVariant().toUInt();
-    m_name = json["Subject"].toString();
-    if(json["Subject"].toString() == "Private"){
-        m_privacy = Privacy::PRIVATE;
-    }
-    else{
-        m_privacy = Privacy::PUBLIC;
-    }
-    m_thumbnail = QImage(json["Thumbnail"].toString());
-
-    m_cards.clear();
-    QJsonArray cardsArray = json["FlashCards"].toArray();
-    for(const QJsonValue& cardValue : cardsArray){
-        Card card;
-        card.toJson();
-        m_cards.push_back(card);
-    }
-}
-
-QJsonObject Deck::toJson() const{
-    QJsonObject json;
-    json["DeckID"] = static_cast<int>(deckId());
-    json["Subject"] = name();
-    json["Privacy"] = (privacy() == Privacy::PRIVATE) ? "Private" : "Public";
-    json["Thumbnail"] = "systemDefault.png";
-    //TODO Thumbnail image saving, and naming
-
-    QJsonArray cardsArray;
-    for(const Card& card : cards()){
-        cardsArray.append(card.toJson());
-    }
-    json["Flashcards"] = cardsArray;
-    return json;
-}
-
-QString Deck::getFilePath(){
-    return  QString::number(deckId()).append(".json");
 }
 
 bool Deck::operator==(const Deck& deck){return this->deckId() == deck.deckId();}
@@ -100,8 +60,8 @@ QVariant Deck::toVariant() const{
     map.insert("Thumbnail", "systemDefault.png");     //TODO Thumbnail image saving, and naming
 
     QVariantList cardsList;
-    for (const Card &card : m_cards){ //cards?
-        cardsList.append(card.toVariant());
+    for (Card *card : m_cards){
+        cardsList.append((*card).toVariant());
         }
     map.insert("Flashcards", cardsList);
 
@@ -123,10 +83,11 @@ void Deck::fromVariant(const QVariant &variant){
     //qDeleteAll(&m_cards);
     m_cards.clear();
 
-    const auto cards = map.value("Flashcards").toList();
-    for(const auto &card : cards){
-        Card curr_card;
-        curr_card.fromVariant(card);
+    QVariantList cardsVariantList = map.value("Flashcards").toList();
+    for(QVariant card : cardsVariantList){
+        Card *curr_card = new Card();
+        curr_card->fromVariant(card);
+        qDebug() << curr_card->questionText();
         m_cards.push_back(curr_card);
     }
 }
