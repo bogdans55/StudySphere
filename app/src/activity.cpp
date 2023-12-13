@@ -3,15 +3,13 @@
 Activity::Activity()
     :m_activityText(),
     m_start(),
-    m_end(),
-    m_day()
+    m_end()
 {}
 
-Activity::Activity(QString activityText, QTime start, QTime end, Day day)
+Activity::Activity(QString activityText, QTime start, QTime end)
     :m_activityText(activityText),
     m_start(start),
-    m_end(end),
-    m_day(day)
+    m_end(end)
 {}
 
 Activity::~Activity()
