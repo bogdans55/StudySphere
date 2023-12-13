@@ -1,6 +1,7 @@
 #ifndef PLANNERSCENE_H
 #define PLANNERSCENE_H
 
+#include "lib/activity.h"
 #include <QGraphicsScene>
 #include <QMap>
 
@@ -20,7 +21,7 @@ public:
     inline auto activities() const { return m_activities; }
 
 private:
-    QMap<int, QStringList> m_activities; // values should be vector of activites?
+    QMap<int, QVector<Activity>> m_activities; // values should be vector of activites?
 };
 
 #endif // PLANNERSCENE_H

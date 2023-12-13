@@ -1,6 +1,7 @@
 #ifndef ACTIVITYITEM_H
 #define ACTIVITYITEM_H
 
+#include "lib/activity.h"
 #include <QGraphicsItem>
 
 class ActivityItem : public QGraphicsItem
@@ -12,7 +13,7 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
 private:
-//    Activity m_activity;
+    Activity m_activity;
 };
 
 #endif // ACTIVITYITEM_H

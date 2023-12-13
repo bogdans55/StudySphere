@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/scheduleitem.cpp \
     src/activity.cpp \
     src/activityitem.cpp \
     src/plannerscene.cpp \
@@ -55,7 +56,8 @@ HEADERS += \
     lib/user.h \
     lib/settings.h \
     lib/mainwindow.h \
-    lib/plannerscene.h
+    lib/plannerscene.h \
+    lib/scheduleitem.h
 
 FORMS += \
     forms/createdeckwindow.ui \

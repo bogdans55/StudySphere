@@ -1,19 +1,22 @@
 #include "lib/mainwindow.h"
 #include "lib/createdeckdialog.h"
 #include "lib/createdeckwindow.h"
+#include "lib/scheduleitem.h"
 #include "lib/studysessionwindow.h"
 #include "ui_mainwindow.h"
 
 #include <QApplication>
 #include <QMessageBox>
 
-#define LIBRARY  0
-#define TODO     1
-#define PLANER   2
-#define CALENDAR 3
-#define STATS    4
-#define SETTINGS 5
-#define HELP     6
+enum Page {
+    LIBRARY = 0,
+    TODO,
+    PLANER,
+    CALENDAR,
+    STATS,
+    SETTINGS,
+    HELP
+};
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
@@ -29,6 +32,18 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView_friday->setScene(&m_plannerFridayScene);
     ui->graphicsView_saturday->setScene(&m_plannerSaturdayScene);
     ui->graphicsView_sunday->setScene(&m_plannerSundayScene);
+
+    QVector<ScheduleItem*> scheduleItems;
+    for (int i = 0; i < 7; ++i) {
+        scheduleItems.append(new ScheduleItem());
+    }
+    m_plannerMondayScene.addItem(scheduleItems[0]);
+    m_plannerTuesdayScene.addItem(scheduleItems[1]);
+    m_plannerWednesdayScene.addItem(scheduleItems[2]);
+    m_plannerThursdayScene.addItem(scheduleItems[3]);
+    m_plannerFridayScene.addItem(scheduleItems[4]);
+    m_plannerSaturdayScene.addItem(scheduleItems[5]);
+    m_plannerSundayScene.addItem(scheduleItems[6]);
 }
 
 MainWindow::~MainWindow()

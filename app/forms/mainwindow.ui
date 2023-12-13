@@ -441,25 +441,53 @@
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QGraphicsView" name="graphicsView_monday"/>
+          <widget class="QGraphicsView" name="graphicsView_monday">
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+          </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QGraphicsView" name="graphicsView_tuesday"/>
+          <widget class="QGraphicsView" name="graphicsView_tuesday">
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+          </widget>
          </item>
          <item row="1" column="2">
-          <widget class="QGraphicsView" name="graphicsView_wednesday"/>
+          <widget class="QGraphicsView" name="graphicsView_wednesday">
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+          </widget>
          </item>
          <item row="1" column="3">
-          <widget class="QGraphicsView" name="graphicsView_thursday"/>
+          <widget class="QGraphicsView" name="graphicsView_thursday">
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+          </widget>
          </item>
          <item row="1" column="4">
-          <widget class="QGraphicsView" name="graphicsView_friday"/>
+          <widget class="QGraphicsView" name="graphicsView_friday">
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+          </widget>
          </item>
          <item row="1" column="5">
-          <widget class="QGraphicsView" name="graphicsView_saturday"/>
+          <widget class="QGraphicsView" name="graphicsView_saturday">
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+          </widget>
          </item>
          <item row="1" column="6">
-          <widget class="QGraphicsView" name="graphicsView_sunday"/>
+          <widget class="QGraphicsView" name="graphicsView_sunday">
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
