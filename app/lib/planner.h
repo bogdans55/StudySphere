@@ -8,9 +8,9 @@
 
 enum class Day
 {
-    MONDAY ,
-    TUESDAY,
-    WEDNESDAY,
+    MONDAY = 0 ,
+    TUESDAY ,
+    WEDNESDAY ,
     THURSDAY,
     FRIDAY,
     SATURDAY,

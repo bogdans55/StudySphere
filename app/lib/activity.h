@@ -3,9 +3,10 @@
 
 #include <QString>
 #include <QTime>
+#include "lib/serializable.h"
 
 
-class Activity
+class Activity : Serializable
 {
 public:
     Activity();
@@ -18,8 +19,8 @@ public:
     inline QTime end() const {return m_end;}
  //   inline Day day() const {return m_day;}
 
-//    QVariant toVariant() const override;
-//    void fromVariant(const QVariant &variant) override;
+    QVariant toVariant() const override;
+    void fromVariant(const QVariant &variant) override;
 
 
 private:
