@@ -19,6 +19,13 @@ MyServer::MyServer(QObject* parent) : QObject(parent){
 
     userDecksFolder = "userDecks";
     QDir().mkpath(userDecksFolder);
+
+    uniqueIdsFile = "uniqueIds.txt";
+}
+
+MyServer::~MyServer() {
+    qDebug() << "Desc";
+    //writeRemainingIDsToFile();
 }
 
 void MyServer::startServer(){
@@ -26,8 +33,26 @@ void MyServer::startServer(){
         qDebug() << "Server couldn't start! -- ERROR" << '\n';
     }
     else{
+        //writeNumbers();
         qDebug() << "Server started on port 8080";
     }
+}
+
+void MyServer::loadIds(){
+    QFile idsFile(uniqueIdsFile);
+
+    if(idsFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+        QByteArray fileData = idsFile.readAll();
+        QList<QByteArray> lines = fileData.split('\n');
+
+        for(auto& line : lines){
+            ids.append(line);
+        }
+    }
+    else{
+        qDebug() << "Couldn't open file: " << uniqueIdsFile;
+    }
+    idsFile.close();
 }
 
 void MyServer::loginUser(QTcpSocket* socket, QJsonObject& jsonObject){
@@ -76,11 +101,16 @@ void MyServer::readData()
     if (action == "login") {
         loginUser(socket, jsonObject);
     }else if (action == "saveDeck") {
+        qDebug() << "Deck is saving";
         saveDeck(socket, jsonObject);
     }else if(action == "register"){
         registerUser(socket, jsonObject);
     }else if(action == "removeDeck"){
         removeDeck(socket, jsonObject);
+    }else if(action == "generateId"){
+        loadIds();
+        sendId(socket);
+        writeRemainingIDsToFile();
     }
 
     socket ->close();
@@ -251,3 +281,52 @@ void MyServer::registerUser(QTcpSocket* socket, QJsonObject& jsonObject){
     QTextStream stream(socket);
     stream << QJsonDocument(response).toJson();
 }
+
+uint64_t MyServer::generateUniqueId(){
+    QString id = ids.front();
+    ids.pop_front();
+    return id.toULongLong();
+}
+
+void MyServer::sendId(QTcpSocket* socket){
+    QJsonObject response;
+    response["status"] = "Id generated";
+    uint64_t id = generateUniqueId();
+    response["DeckId"] = qint64(id);
+
+    QTextStream stream(socket);
+    stream << QJsonDocument(response).toJson();
+}
+
+void MyServer::writeRemainingIDsToFile() {
+    QFile file(uniqueIdsFile);
+
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream out(&file);
+
+        for (const QString& id : ids) {
+            out << id << '\n';
+        }
+
+        file.close();
+    }
+    else{
+        qDebug() << "Couldn't open file: " << uniqueIdsFile;
+    }
+}
+
+// void MyServer::writeNumbers(){
+//     QFile file(uniqueIdsFile);
+//     qDebug() << file.filesystemFileName();
+//     if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+//         QTextStream out(&file);
+//         qDebug() << "pisem";
+//         for (int i = 1; i <= 1000000; ++i) {
+//             out << QString::number(i) << '\n';
+//         }
+
+//         file.close();
+//     } else {
+//         qDebug() << "Couldn't open file for writing.";
+//     }
+// }

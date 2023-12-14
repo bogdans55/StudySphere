@@ -44,6 +44,7 @@ public:
     void addCard(Card card);
     void updateRating(unsigned grade);
 
+    void setId(uint64_t id);
     void fromJson(const QJsonObject& json);
     QJsonObject toJson() const;
     QString getFilePath();

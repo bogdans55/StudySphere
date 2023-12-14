@@ -13,7 +13,7 @@ Deck::Deck()
 {}
 
 Deck::Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest, const QImage &thumbnail)
-    : m_deckId(QRandomGenerator::global()->bounded(25600)),
+    : m_deckId(0),
     //TODO Smart Id choosing
     m_name(name),
     m_privacy(privacy),
@@ -24,7 +24,7 @@ Deck::Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest,
 {}
 
 Deck::Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest)
-    : m_deckId(QRandomGenerator::global()->bounded(25600)),
+    : m_deckId(0),
     m_name(name),
     m_privacy(privacy),
     m_deckStats(),
@@ -34,7 +34,7 @@ Deck::Deck(const QString &name, Privacy privacy, unsigned int numOfCardsPerTest)
 {}
 
 Deck::Deck(const QString &name, Privacy privacy)
-    : m_deckId(QRandomGenerator::global()->bounded(25600)),
+    : m_deckId(0),
     m_name(name),
     m_privacy(privacy),
     m_deckStats(),
@@ -51,6 +51,10 @@ void Deck::addCard(Card card)
 void Deck::updateRating(unsigned int grade)
 {
     m_rating.addNewGrade(grade);
+}
+
+void Deck::setId(uint64_t id){
+    m_deckId = id;
 }
 
 void Deck::fromJson(const QJsonObject& json){

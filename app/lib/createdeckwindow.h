@@ -39,6 +39,8 @@ private:
     Deck m_deck;
     QButtonGroup *m_questionDifficulty;
     User& m_user;
+
+    void generateId();
 };
 
 #endif // CREATEDECKWINDOW_H

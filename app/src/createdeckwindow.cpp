@@ -49,8 +49,6 @@ Difficulty CreateDeckWindow::getDifficulty() const
 
 void CreateDeckWindow::on_pushButton_finish_clicked()
 {
-    JSONSerializer *serializer = new JSONSerializer();
-    QJsonDocument doc = serializer ->createJson(m_deck);
 
 
     QTcpSocket socket;
@@ -58,6 +56,13 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
 
     if(socket.waitForConnected()){
         QJsonObject request;
+
+        generateId();
+
+        JSONSerializer *serializer = new JSONSerializer();
+        QJsonDocument doc = serializer ->createJson(m_deck);
+
+
         request["action"] = "saveDeck";
         request["username"] = m_user.username();
         request["deck"] = doc.toVariant().toJsonObject();
@@ -83,6 +88,31 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
     close();
 }
 
+void CreateDeckWindow::generateId(){
+
+    QTcpSocket socket;
+    socket.connectToHost("127.0.0.1", 8080);
+
+    if(socket.waitForConnected()){
+        QJsonObject request;
+
+        request["action"] = "generateId";
+        socket.write(QJsonDocument(request).toJson());
+        socket.waitForBytesWritten();
+        socket.waitForReadyRead();
+        QByteArray idResponse = socket.readAll();
+        QTextStream idStream(idResponse);
+
+        QString idResponseString = idStream.readAll();
+        QJsonDocument idJson = QJsonDocument::fromJson(idResponseString.toUtf8());
+        QJsonObject idObject = idJson.object();
+        m_deck.setId(idObject.value("DeckId").toVariant().toULongLong());
+
+        socket.disconnectFromHost();
+    }else{
+        qDebug() << "Failed to connect to the server";
+    }
+}
 
 void CreateDeckWindow::on_pushButton_add_clicked()
 {
