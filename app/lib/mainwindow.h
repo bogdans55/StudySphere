@@ -47,7 +47,7 @@ private:
     Ui::MainWindow *ui;
     bool m_loggedIn = false;
     User m_user;
-    LibraryScene m_library;
+    LibraryScene m_libraryScene;
 
     bool registerUser(const QString& username, const QString& password);
     bool loginUser(const QString& username, const QString& password);

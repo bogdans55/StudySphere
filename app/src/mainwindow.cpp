@@ -30,11 +30,11 @@ MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWindow)
     , m_user()
-    , m_library()
+    , m_libraryScene()
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(LIBRARY);
-    ui->graphicsView_library->setScene(&m_library);
+//    ui->graphicsView_library->setScene(&m_libraryScene);
 
 }
 
@@ -123,10 +123,10 @@ void MainWindow::on_calendarWidget_activated(const QDate &date)
 
 void MainWindow::on_pushButton_login_clicked()
 {
-    for (auto item : m_library.items())
-        delete item;
-    m_library.clear();
-    m_library.clearDeck();
+//    for (auto item : m_libraryScene.items())
+//        delete item;
+//    m_libraryScene.clear();
+//    m_libraryScene.clearDeck();
 
     if(!m_loggedIn) // use getter instead?
     {
@@ -198,12 +198,14 @@ bool MainWindow::loginUser(const QString& username, const QString& password){
         {
             // split deckNames with ", "
             QStringList deckNamesList = deckNames.split(", ");
-            for (auto &deckName : deckNamesList)
+            for (auto &deckNameID : deckNamesList)
             {
-                Deck deck(deckName.split('_')[0], Privacy::PRIVATE); // empty deck for now
-                DeckItem *deckItem = new DeckItem(&deck);
-                m_library.addItem(deckItem);
-                m_library.addDeck(deckItem);
+                auto deckName = deckNameID.split('_')[0];
+//                Deck deck(deckName, Privacy::PRIVATE); // empty deck for now
+//                DeckItem *deckItem = new DeckItem(&deck);
+//                m_libraryScene.addItem(deckItem);
+//                m_libraryScene.addDeck(deckItem);
+                ui->listWidget_library->addItem(deckName.split('_')[0]);
             }
         }
 
