@@ -35,9 +35,6 @@ public:
     QVariant toVariant() const override;
     void fromVariant(const QVariant &variant) override;
 
-    QVariant toVariant() const override;
-    void fromVariant(const QVariant &variant) override;
-
 protected:
     QString m_questionText;     // was CardContent
     QString m_answerText;       // was CardContent
