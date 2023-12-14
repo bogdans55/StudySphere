@@ -191,7 +191,7 @@ void MainWindow::on_pushButton_login_clicked()
     else
     {
         m_loggedIn = false; // use setter instead?
-
+        ui->listWidget_library->clear();
         ui->label_username->setText("Nema korisnika");
         ui->pushButton_login->setText("Prijavi se");
     }
@@ -216,7 +216,6 @@ bool MainWindow::loginUser(const QString& username, const QString& password){
         qDebug() << "Recieved Data:";
 
         QString loginResponse = stream.readAll();
-
         QJsonDocument jsondoc = QJsonDocument::fromJson(loginResponse.toUtf8());
         QJsonObject jsonobj = jsondoc.object();
 
@@ -224,7 +223,6 @@ bool MainWindow::loginUser(const QString& username, const QString& password){
         qDebug() << jsondoc;
 
         QString deckNames = jsonobj.value("decks").toString();
-
         if(deckNames != "")
         {
             // split deckNames with ", "

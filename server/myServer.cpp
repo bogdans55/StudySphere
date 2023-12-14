@@ -74,6 +74,7 @@ void MyServer::loginUser(QTcpSocket* socket, QJsonObject& jsonObject){
             stream << QJsonDocument(response).toJson();
         }else{
             sendUserDecks(socket, username);
+            // sendDeckById(socket, username, 1);
         }
     }catch(const QFile::FileError& error){
         qDebug() << "Username incorrect or file error: " << username;
@@ -127,8 +128,9 @@ void MyServer::removeDeck(QTcpSocket* socket, QJsonObject& jsonObject){
     QString username = jsonObject["username"].toString();
     QString deckID = QString::number(jsonObject["DeckId"].toDouble());
     QString deckName = jsonObject["DeckName"].toString();
-    QDir deckFolder(QDir(userDecksFolder).absoluteFilePath(username));
+    QDir deckFolder(QDir(QDir(userDecksFolder).absoluteFilePath(username)));
     QJsonObject response;
+
     QString filePath = deckFolder.absoluteFilePath(deckName + "_" + deckID + ".json");
 
     if(QFile::remove(filePath)){
@@ -171,6 +173,9 @@ void MyServer::searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery
                 response[deckName] = QJsonDocument::fromJson(deckData).object();
                 deckFile.close();
             }
+            else{
+                response["status"] = "Couldn't open deck!";
+            }
         }
     }
     else{
@@ -182,33 +187,80 @@ void MyServer::searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery
 
 }
 
-
 void MyServer::sendUserDecks(QTcpSocket* socket, const QString& username){
-    QDir deckFolder(QDir(userDecksFolder).absoluteFilePath(username));
-    QStringList filters;
-
-    filters << "*.json";
-
-    QStringList foundDecks;
+    QDir userFolder(QDir(userDecksFolder).absoluteFilePath(username));
+    QStringList userFilters;
 
     QJsonObject response;
 
-    for(const QString &fileName : deckFolder.entryList(filters)){
-        foundDecks.append(fileName);
-        qDebug() << fileName << '\n';
+    QStringList userDeckDirectories = userFolder.entryList(userFilters, QDir::Dirs | QDir::NoDotAndDotDot);
+
+    if(!userDeckDirectories.isEmpty()){
+        response["status"] = "success";
+        QStringList foundDecks;
+
+
+        QStringList deckFilters;
+        deckFilters << "*.json";
+
+        for(const QString &folderName : userDeckDirectories){
+            QDir deckFolder(userFolder.absoluteFilePath(folderName));
+            for(const QString& deckFile : deckFolder.entryList(deckFilters)){
+                foundDecks.append(deckFile);
+            }
+        }
+
+        if (!foundDecks.isEmpty()) {
+            response["decks"] = foundDecks.join(", ");
+        } else {
+            response["status"] = "no results";
+        }
+    }
+    else{
+        response["status"] = "no results";
     }
 
-    if(!foundDecks.isEmpty()){
+    QTextStream stream(socket);
+    stream << QJsonDocument(response).toJson();
+}
+
+void MyServer::sendDeckById(QTcpSocket* socket, const QString& username, const uint64_t& deckId){
+    QDir userFolder(QDir(userDecksFolder).absoluteFilePath(username));
+    QStringList userFilters;
+    userFilters << "*_" + QString::number(deckId);
+    QJsonObject response;
+
+    QStringList userDeckDirectories = userFolder.entryList(userFilters, QDir::Dirs | QDir::NoDotAndDotDot);
+
+    if(!userDeckDirectories.isEmpty()){
         response["status"] = "success";
-        //TODO find more elegant solution to pack found decks in response
-        response["decks"] = foundDecks.join(", ");
-        for(const QString& deckName : foundDecks){
-            QFile deckFile(deckFolder.absoluteFilePath(deckName));
-            if(deckFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-                QByteArray deckData = deckFile.readAll();
-                response[deckName] = QJsonDocument::fromJson(deckData).object();
-                deckFile.close();
+        QStringList foundDecks;
+
+
+        QStringList deckFilters;
+        deckFilters << "*.json";
+
+        for(const QString &folderName : userDeckDirectories){
+            QDir deckFolder(userFolder.absoluteFilePath(folderName));
+            for(const QString& deckName : deckFolder.entryList(deckFilters)){
+                foundDecks.append(deckName);
+
+                QFile deckFile(deckFolder.absoluteFilePath(deckName));
+                if(deckFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+                    QByteArray deckData = deckFile.readAll();
+                    response[deckName] = QJsonDocument::fromJson(deckData).object();
+                    deckFile.close();
+                }else{
+                    response["status"] = "Couldn't open deck!";
+                    qDebug() << response["status"].toString();
+                }
             }
+        }
+
+        if (!foundDecks.isEmpty()) {
+            response["decks"] = foundDecks.join(", ");
+        } else {
+            response["status"] = "no results";
         }
     }
     else{
@@ -225,8 +277,8 @@ void MyServer::saveDeck(QTcpSocket* socket, QJsonObject& jsonObject){
     QJsonObject deck = jsonObject["deck"].toObject();
     QString deckID = QString::number(deck["DeckId"].toDouble());
     QString deckName = deck["Subject"].toString();
-
-    QString filePath = QDir(QDir(userDecksFolder).absoluteFilePath(username)).absoluteFilePath(deckName + "_" + deckID + ".json");
+    QDir().mkdir(QDir(QDir(userDecksFolder).absoluteFilePath(username)).absoluteFilePath(deckName + "_" + deckID));
+    QString filePath = QDir(QDir(QDir(userDecksFolder).absoluteFilePath(username)).absoluteFilePath(deckName + "_" + deckID)).absoluteFilePath(deckName + "_" + deckID + ".json");
 
     QFile file(filePath);
 
@@ -330,3 +382,22 @@ void MyServer::writeRemainingIDsToFile() {
 //         qDebug() << "Couldn't open file for writing.";
 //     }
 // }
+
+// void MyServer::makePublic(QTcpSocket* socket, QJsonObject& jsonObject){
+//     QString username = jsonObject["username"].toString();
+//     QString deckID = QString::number(jsonObject["DeckId"].toDouble());
+
+//     QString userDeckPath = QDir(userDecksFolder).absoluteFilePath(username).absoluteFilePath(deckName + "_" + deckID + ".json");
+//     QFile userDeckFile(userDeckPath);
+
+//     if (!userDeckFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+//         // Handle error: Unable to open user's deck file
+//         return;
+//     }
+
+//     QByteArray deckData = userDeckFile.readAll();
+//     userDeckFile.close();
+// }
+
+
+
