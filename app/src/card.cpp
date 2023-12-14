@@ -64,3 +64,40 @@ void Card::fromVariant(const QVariant &variant){
         m_questionDifficulty = Difficulty::HARD;
     }
 }
+
+QVariant Card::toVariant() const{
+    QVariantMap map;
+    map.insert("question", m_questionText);
+    map.insert("answer", m_answerText);
+    QString difficultyStr;
+    switch (m_questionDifficulty) {
+    case Difficulty::EASY:
+        difficultyStr = "EASY";
+        break;
+    case Difficulty::MEDIUM:
+        difficultyStr = "MEDIUM";
+        break;
+    case Difficulty::HARD:
+        difficultyStr = "HARD";
+        break;
+        // Add default case or error handling for unexpected values
+    }
+    map.insert("difficulty", difficultyStr);
+    return map;
+}
+
+void Card::fromVariant(const QVariant &variant){
+    QVariantMap map = variant.toMap();
+    m_questionText = map.value("question").toString();
+    m_answerText = map.value("answer").toString();
+    QString questionDifficultyStr = map.value("difficulty").toString();
+    if(questionDifficultyStr == "EASY"){
+        m_questionDifficulty = Difficulty::EASY;
+    }
+    else if(questionDifficultyStr == "MEDIUM"){
+        m_questionDifficulty = Difficulty::MEDIUM;
+    }
+    else if(questionDifficultyStr == "HARD"){
+        m_questionDifficulty = Difficulty::HARD;
+    }
+}

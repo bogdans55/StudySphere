@@ -1,6 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "user.h"
+#include "libraryscene.h"
+
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -38,7 +41,17 @@ private slots:
 
     void on_calendarWidget_activated(const QDate &date);
 
+    void on_pushButton_login_clicked();
+
+
+
 private:
     Ui::MainWindow *ui;
+    bool m_loggedIn = false;
+    User m_user;
+    LibraryScene m_libraryScene;
+
+    bool registerUser(const QString& username, const QString& password);
+    bool loginUser(const QString& username, const QString& password);
 };
 #endif // MAINWINDOW_H

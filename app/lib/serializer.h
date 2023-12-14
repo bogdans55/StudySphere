@@ -2,6 +2,7 @@
 #define SERIALIZER_H
 
 #include "lib/serializable.h"
+#include <QString>
 
 class Serializer
 {

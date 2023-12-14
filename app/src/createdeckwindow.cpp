@@ -3,21 +3,26 @@
 #include "lib/card.h"
 #include "lib/serializer.h"
 #include "lib/jsonserializer.h"
+#include <QTcpSocket>
+#include <QTcpServer>
 
-CreateDeckWindow::CreateDeckWindow(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::CreateDeckWindow)
-{
-    ui->setupUi(this);
-}
-
-CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, QWidget *parent) :
+CreateDeckWindow::CreateDeckWindow(User& user, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CreateDeckWindow),
-    m_deck(name, privacy)
+    m_user(user)
 {
     ui->setupUi(this);
 }
+
+CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, User& user, QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::CreateDeckWindow),
+    m_deck(name, privacy),
+    m_user(user)
+{
+    ui->setupUi(this);
+}
+
 
 CreateDeckWindow::~CreateDeckWindow()
 {
@@ -46,12 +51,69 @@ Difficulty CreateDeckWindow::getDifficulty() const
 void CreateDeckWindow::on_pushButton_finish_clicked()
 {
 
-    // m_deck.toJson();
-    JSONSerializer *serializer = new JSONSerializer();
-    serializer->save(m_deck, "../decks/" + m_deck.name() + ".json");
+
+    QTcpSocket socket;
+    socket.connectToHost("127.0.0.1", 8080);
+
+    if(socket.waitForConnected()){
+        QJsonObject request;
+
+        generateId();
+
+        JSONSerializer *serializer = new JSONSerializer();
+        QJsonDocument doc = serializer ->createJson(m_deck);
+
+
+        request["action"] = "saveDeck";
+        request["username"] = m_user.username();
+        request["deck"] = doc.toVariant().toJsonObject();
+
+        socket.write(QJsonDocument(request).toJson());
+        socket.waitForBytesWritten();
+        socket.waitForReadyRead();
+
+        QByteArray responseData = socket.readAll();
+        QTextStream stream(responseData);
+
+        qDebug() << "Recieved Data:";
+        while (!stream.atEnd()) {
+            qDebug() << stream.readLine();
+        }
+
+        socket.disconnectFromHost();
+    }else{
+        qDebug() << "Failed to connect to the server";
+    }
+
+
     close();
 }
 
+void CreateDeckWindow::generateId(){
+
+    QTcpSocket socket;
+    socket.connectToHost("127.0.0.1", 8080);
+
+    if(socket.waitForConnected()){
+        QJsonObject request;
+
+        request["action"] = "generateId";
+        socket.write(QJsonDocument(request).toJson());
+        socket.waitForBytesWritten();
+        socket.waitForReadyRead();
+        QByteArray idResponse = socket.readAll();
+        QTextStream idStream(idResponse);
+
+        QString idResponseString = idStream.readAll();
+        QJsonDocument idJson = QJsonDocument::fromJson(idResponseString.toUtf8());
+        QJsonObject idObject = idJson.object();
+        m_deck.setId(idObject.value("DeckId").toVariant().toULongLong());
+
+        socket.disconnectFromHost();
+    }else{
+        qDebug() << "Failed to connect to the server";
+    }
+}
 
 void CreateDeckWindow::on_pushButton_add_clicked()
 {

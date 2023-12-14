@@ -41,6 +41,7 @@ public:
 
     void addCard(Card &card);
     void updateRating(unsigned grade);
+    void setId(uint64_t id);
 
     bool operator==(const Deck& deck);
 
