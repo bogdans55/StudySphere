@@ -185,7 +185,6 @@ bool MainWindow::loginUser(const QString& username, const QString& password){
         qDebug() << "Recieved Data:";
 
         QString loginResponse = stream.readAll();
-
         QJsonDocument jsondoc = QJsonDocument::fromJson(loginResponse.toUtf8());
         QJsonObject jsonobj = jsondoc.object();
 
@@ -193,7 +192,6 @@ bool MainWindow::loginUser(const QString& username, const QString& password){
         qDebug() << jsondoc;
 
         QString deckNames = jsonobj.value("decks").toString();
-
         if(deckNames != "")
         {
             // split deckNames with ", "

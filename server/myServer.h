@@ -41,6 +41,7 @@ private:
     void loadIds();
     void writeRemainingIDsToFile();
     void writeNumbers();
+    void makePublic(QTcpSocket* socket, QJsonObject& jsonObject);
 
 };
 
