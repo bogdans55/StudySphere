@@ -160,7 +160,7 @@ void MainWindow::on_pushButton_login_clicked()
     else
     {
         m_loggedIn = false; // use setter instead?
-
+        ui->listWidget_library->clear();
         ui->label_username->setText("Nema korisnika");
         ui->pushButton_login->setText("Prijavi se");
     }
