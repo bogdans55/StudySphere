@@ -190,7 +190,7 @@
          <item>
           <widget class="QTabWidget" name="tabWidget_library">
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="tab_decks">
             <attribute name="title">
@@ -198,7 +198,7 @@
             </attribute>
             <layout class="QVBoxLayout" name="verticalLayout_2">
              <item>
-              <widget class="QGraphicsView" name="graphicsView_library"/>
+              <widget class="QListWidget" name="listWidget_library"/>
              </item>
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_act">
@@ -274,7 +274,7 @@
               </layout>
              </item>
              <item>
-              <widget class="QGraphicsView" name="graphicsView_browser"/>
+              <widget class="QListWidget" name="listWidget_browser"/>
              </item>
             </layout>
            </widget>
