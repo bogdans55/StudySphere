@@ -20,6 +20,8 @@ public:
 
     inline StudySession* session() const {return m_session;}
 
+    void evaluate(int grade);
+
 private slots:
     void on_pushButton_flip_clicked();
 

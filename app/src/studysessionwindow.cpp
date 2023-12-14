@@ -36,10 +36,9 @@ void StudySessionWindow::on_pushButton_flip_clicked()
     m_session->flipCard();
 }
 
-
-void StudySessionWindow::on_pushButton_skip_clicked()
+void StudySessionWindow::evaluate(int grade) // should be enum grade
 {
-    m_session->getCurrentCard().evaluateAnswer(0);
+    m_session->getCurrentCard().evaluateAnswer(grade);
     if(m_session->hasNextCard()){
         m_session->nextCard();
         ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
@@ -47,44 +46,28 @@ void StudySessionWindow::on_pushButton_skip_clicked()
     else{
         close();
     }
+}
+
+void StudySessionWindow::on_pushButton_skip_clicked()
+{
+    evaluate(0);
 }
 
 
 void StudySessionWindow::on_pushButton_bad_clicked()
 {
-    m_session->getCurrentCard().evaluateAnswer(1);
-    if(m_session->hasNextCard()){
-        m_session->nextCard();
-        ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
-    }
-    else{
-        close();
-    }
+    evaluate(1);
 }
 
 
 void StudySessionWindow::on_pushButton_mid_clicked()
 {
-    m_session->getCurrentCard().evaluateAnswer(2);
-    if(m_session->hasNextCard()){
-        m_session->nextCard();
-        ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
-    }
-    else{
-        close();
-    }
+    evaluate(2);
 }
 
 
 void StudySessionWindow::on_pushButton_good_clicked()
 {
-    m_session->getCurrentCard().evaluateAnswer(3);
-    if(m_session->hasNextCard()){
-        m_session->nextCard();
-        ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
-    }
-    else{
-        close();
-    }
+    evaluate(3);
 }
 
