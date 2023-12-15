@@ -41,32 +41,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->stackedWidget->setCurrentIndex(LIBRARY);
 //    ui->graphicsView_library->setScene(&m_libraryScene);
 
-    loadDecks();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
-void MainWindow::loadDecks()
-{
-    ui->listWidget_library->clear();
-
-    // load all file names from decks folder located in 'decks'
-    QDirIterator it("../decks", QDirIterator::Subdirectories);
-    while (it.hasNext()) {
-        QString fileName = it.next();
-        if (fileName.endsWith(".json")) {
-            // remove "../decks/" and ".json" from file name
-            fileName.remove(0, 9);
-            fileName.remove(fileName.length() - 5, 5);
-            ui->listWidget_library->addItem(fileName);
-        }
-    }
-
-}
-
 
 void MainWindow::on_pushButton_createDeck_clicked()
 {
@@ -189,6 +169,25 @@ void MainWindow::on_calendarWidget_activated(const QDate &date)
         QMessageBox::information(this, date.toString(), "aktivnosti za taj dan npr");
 }
 
+void MainWindow::setEnabled(bool value)
+{
+    // TODO add every ui (input) element
+    ui->pushButton_library->setEnabled(value);
+    ui->pushButton_todo->setEnabled(value);
+    ui->pushButton_planer->setEnabled(value);
+    ui->pushButton_calendar->setEnabled(value);
+    ui->pushButton_stats->setEnabled(value);
+    ui->pushButton_settings->setEnabled(value);
+    ui->pushButton_help->setEnabled(value);
+    ui->pushButton_createDeck->setEnabled(value);
+    ui->pushButton_startStudySession->setEnabled(value);
+    ui->pushButton_addTodo->setEnabled(value);
+    ui->pushButton_deleteTodo->setEnabled(value);
+    ui->pushButton_deleteAllTodos->setEnabled(value);
+    ui->pushButton_addActivity->setEnabled(value);
+    ui->pushButton_addEvent->setEnabled(value);
+}
+
 void MainWindow::on_pushButton_login_clicked()
 {
 //    for (auto item : m_libraryScene.items())
@@ -221,6 +220,8 @@ void MainWindow::on_pushButton_login_clicked()
             qDebug(loginSuccess ? "Logged in" : "Not Logged in");
             if(!loginSuccess)
                 QMessageBox::critical(this, "Greška pri prijavljivanju", "Neuspešno prijavljivanje. Proverite korisničko ime i lozinku i probajte ponovo.");
+            else
+                setEnabled(true);
         }
 
         m_loggedIn = loginSuccess;
@@ -231,6 +232,8 @@ void MainWindow::on_pushButton_login_clicked()
         ui->listWidget_library->clear();
         ui->label_username->setText("Nema korisnika");
         ui->pushButton_login->setText("Prijavi se");
+        setEnabled(false);
+        // load library page?
     }
 }
 

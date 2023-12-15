@@ -25,6 +25,9 @@
     <layout class="QVBoxLayout" name="verticalLayout_buttons">
      <item>
       <widget class="QPushButton" name="pushButton_library">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -38,6 +41,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_todo">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -51,6 +57,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_planer">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -64,6 +73,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_calendar">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -77,6 +89,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_stats">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -136,6 +151,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_settings">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -149,6 +167,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="pushButton_help">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -194,6 +215,9 @@
           <layout class="QHBoxLayout" name="horizontalLayout_act">
            <item>
             <widget class="QPushButton" name="pushButton_createDeck">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="text">
               <string>Kreiraj novi špil</string>
              </property>
@@ -201,6 +225,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="pushButton_startStudySession">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="text">
               <string>Započni učenje</string>
              </property>
@@ -214,6 +241,9 @@
      </widget>
      <widget class="QWidget" name="page_todo">
       <widget class="QPushButton" name="pushButton_addTodo">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>590</x>
@@ -247,6 +277,9 @@
        </property>
       </widget>
       <widget class="QPushButton" name="pushButton_deleteTodo">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>460</x>
@@ -260,6 +293,9 @@
        </property>
       </widget>
       <widget class="QPushButton" name="pushButton_deleteAllTodos">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>590</x>
@@ -357,6 +393,9 @@
            </item>
            <item row="4" column="1">
             <widget class="QPushButton" name="pushButton_addActivity">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="text">
               <string>Dodaj</string>
              </property>
@@ -523,6 +562,9 @@
            </item>
            <item row="2" column="1">
             <widget class="QPushButton" name="pushButton_addEvent">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="text">
               <string>Dodaj događaj</string>
              </property>
