@@ -87,11 +87,46 @@ void MainWindow::on_pushButton_startStudySession_clicked()
 {
     QString deckName = ui->listWidget_library->currentItem()->text();
     Deck *deck = new Deck();
-    User user;
-    JSONSerializer().load(*deck, "../decks/" + deckName + ".json");
 
+    QTcpSocket socket;
+    socket.connectToHost("127.0.0.1", 8080);
 
-    StudySession *session = new StudySession(user, deck);
+    if(socket.waitForConnected()){
+        QJsonObject request;
+        request["action"] = "sendDeck";
+        request["username"] = m_user.username();
+        request["DeckId"] = deckName.split('_')[1].split('.')[0];
+        qDebug() << request;
+
+        socket.write(QJsonDocument(request).toJson());
+        socket.waitForBytesWritten();
+        socket.waitForReadyRead();
+
+        QByteArray responseText = socket.readAll();
+        QTextStream stream(responseText);
+
+        qDebug() << "Recieved Data:";
+
+        QString deckResponse = stream.readAll();
+        QJsonDocument jsondoc = QJsonDocument::fromJson(deckResponse.toUtf8());
+        QJsonObject jsonobj = jsondoc.object();
+
+        qDebug() << jsondoc["status"];
+        qDebug() << jsondoc;
+        QString deckNames = jsonobj.value("decks").toString();
+        JSONSerializer jsonSerializer;
+
+        QJsonObject deckObject = jsondoc[deckName].toObject();
+        QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
+
+        jsonSerializer.loadJson(*deck, deckDocument);
+
+        socket.disconnectFromHost();
+    }else{
+        qDebug() << "Failed to connect to the server";
+    }
+
+    StudySession *session = new StudySession(m_user, deck);
     StudySessionWindow *useDeck = new StudySessionWindow(session);
     useDeck->setAttribute(Qt::WA_DeleteOnClose);
     useDeck->show();
@@ -231,12 +266,13 @@ bool MainWindow::loginUser(const QString& username, const QString& password){
             QStringList deckNamesList = deckNames.split(", ");
             for (auto &deckNameID : deckNamesList)
             {
-                auto deckName = deckNameID.split('_')[0];
+                // auto deckName = deckNameID.split('_')[0];
 //                Deck deck(deckName, Privacy::PRIVATE); // empty deck for now
 //                DeckItem *deckItem = new DeckItem(&deck);
 //                m_libraryScene.addItem(deckItem);
 //                m_libraryScene.addDeck(deckItem);
-                ui->listWidget_library->addItem(deckName.split('_')[0]);
+                // ui->listWidget_library->addItem(deckName.split('_')[0]);
+                ui->listWidget_library->addItem(deckNameID);
             }
         }
 

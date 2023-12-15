@@ -112,6 +112,8 @@ void MyServer::readData()
         loadIds();
         sendId(socket);
         writeRemainingIDsToFile();
+    }else if(action == "sendDeck"){
+        sendDeckById(socket, jsonObject["username"].toString(), jsonObject["DeckId"].toString());
     }
 
     socket ->close();
@@ -224,10 +226,10 @@ void MyServer::sendUserDecks(QTcpSocket* socket, const QString& username){
     stream << QJsonDocument(response).toJson();
 }
 
-void MyServer::sendDeckById(QTcpSocket* socket, const QString& username, const uint64_t& deckId){
+void MyServer::sendDeckById(QTcpSocket* socket, const QString& username, const QString& deckId){
     QDir userFolder(QDir(userDecksFolder).absoluteFilePath(username));
     QStringList userFilters;
-    userFilters << "*_" + QString::number(deckId);
+    userFilters << "*_" + deckId;
     QJsonObject response;
 
     QStringList userDeckDirectories = userFolder.entryList(userFilters, QDir::Dirs | QDir::NoDotAndDotDot);
@@ -255,12 +257,6 @@ void MyServer::sendDeckById(QTcpSocket* socket, const QString& username, const u
                     qDebug() << response["status"].toString();
                 }
             }
-        }
-
-        if (!foundDecks.isEmpty()) {
-            response["decks"] = foundDecks.join(", ");
-        } else {
-            response["status"] = "no results";
         }
     }
     else{

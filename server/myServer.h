@@ -42,7 +42,7 @@ private:
     void writeRemainingIDsToFile();
     void writeNumbers();
     void makePublic(QTcpSocket* socket, QJsonObject& jsonObject);
-    void sendDeckById(QTcpSocket* socket, const QString& username, const uint64_t& deckId);
+    void sendDeckById(QTcpSocket* socket, const QString& username, const QString& deckId);
 
 };
 
