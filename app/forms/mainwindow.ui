@@ -269,7 +269,7 @@
            <item row="2" column="0">
             <widget class="QLabel" name="label_duration">
              <property name="text">
-              <string>Trajanje aktivnosti:</string>
+              <string>Kraj aktivnosti:</string>
              </property>
             </widget>
            </item>
@@ -336,17 +336,7 @@
             <widget class="QTimeEdit" name="timeEdit_start"/>
            </item>
            <item row="2" column="1">
-            <widget class="QSpinBox" name="spinBox_duration">
-             <property name="suffix">
-              <string>min</string>
-             </property>
-             <property name="maximum">
-              <number>1399</number>
-             </property>
-             <property name="singleStep">
-              <number>10</number>
-             </property>
-            </widget>
+            <widget class="QTimeEdit" name="timeEdit_end"/>
            </item>
           </layout>
          </item>

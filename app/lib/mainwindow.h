@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "lib/planner.h"
 #include "lib/plannerscene.h"
 #include <QWidget>
 
@@ -37,8 +38,11 @@ private slots:
 
     void on_calendarWidget_activated(const QDate &date);
 
+    void on_pushButton_addActivity_clicked();
+
 private:
     Ui::MainWindow *ui;
+
     PlannerScene m_plannerMondayScene;
     PlannerScene m_plannerTuesdayScene;
     PlannerScene m_plannerWednesdayScene;
@@ -46,5 +50,7 @@ private:
     PlannerScene m_plannerFridayScene;
     PlannerScene m_plannerSaturdayScene;
     PlannerScene m_plannerSundayScene;
+
+    Planner m_planner;
 };
 #endif // MAINWINDOW_H

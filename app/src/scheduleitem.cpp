@@ -26,7 +26,6 @@ void ScheduleItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
             hours = "0";
         hours += QString::number(i-1) + ":00";
         QPointF textPosition(0, (i-1)*height()/24 + painter->font().pointSize() + 2);
-        qDebug() << painter->font().pointSize();
         painter->drawText(textPosition, hours);
 
         painter->setPen(QPen(QColor::fromRgb(200, 200, 200)));

@@ -8,8 +8,8 @@
 
 enum class Day
 {
-    MONDAY = 0 ,
-    TUESDAY ,
+    MONDAY = 0,
+    TUESDAY,
     WEDNESDAY ,
     THURSDAY,
     FRIDAY,
@@ -22,7 +22,7 @@ class Planner : public Serializable
 {
 private:
 
-    QMap <Day, QVector<Activity>> m_map;
+    QMap<Day, QVector<Activity>> m_activities;
 
 public:
     Planner();
@@ -31,7 +31,12 @@ public:
     QVariant toVariant() const override;
     void fromVariant(const QVariant &variant) override;
 
-    void addActivity(Activity activity, Day day);
+    void addActivity(Day day, Activity activity);
+
+    static Day dayFromString(QString dayString);
+    static QString dayToString(Day day);
+
+    inline QMap<Day, QVector<Activity>> activities() const { return m_activities; }
 
 };
 

@@ -1,46 +1,46 @@
 #include "lib/planner.h"
 
 Planner::Planner()
-    :m_map()
+    :m_activities()
 {}
 
 Planner::~Planner(){}
 
-void Planner::addActivity(Activity activity, Day day){
-    m_map[day].push_back(activity);
+void Planner::addActivity(Day day, Activity activity){
+    m_activities[day].push_back(activity);
 }
 
-QString dayToString(Day day){
+QString Planner::dayToString(Day day){
     switch (day) {
     case Day::MONDAY:
-        return "MONDAY";
+        return "Ponedeljak";
         break;
     case Day::TUESDAY:
-        return "TUESDAY";
+        return "Utorak";
         break;
     case Day::WEDNESDAY:
-        return "WEDNESDAY";
+        return "Sreda";
         break;
     case Day::THURSDAY:
-        return "THURSDAY";
+        return "Četvrtak";
         break;
     case Day::FRIDAY:
-        return "FRIDAY";
+        return "Petak";
         break;
     case Day::SATURDAY:
-        return "SATURDAY";
+        return "Subota";
         break;
     case Day::SUNDAY:
-        return "SUNDAY";
+        return "Nedelja";
         break;
     }
 }
 
 QVariant Planner::toVariant() const{
     QVariantMap result;
-    for (const auto& day : m_map.keys()) {
+    for (const auto& day : m_activities.keys()) {
         QVariantList activitiesList;
-        for (const Activity& activity : m_map.value(day)) {
+        for (const Activity& activity : m_activities.value(day)) {
             activitiesList.append(activity.toVariant());
         }
         result.insert(dayToString(day), activitiesList);
@@ -48,14 +48,14 @@ QVariant Planner::toVariant() const{
     return result;
 }
 
-Day dayFromString(QString dayString){
-    if (dayString == "MONDAY")    return Day::MONDAY;
-    else if (dayString == "TUESDAY")   return Day::TUESDAY;
-    else if (dayString == "WEDNESDAY") return Day::WEDNESDAY;
-    else if (dayString == "THURSDAY")  return Day::THURSDAY;
-    else if (dayString == "FRIDAY")    return Day::FRIDAY;
-    else if (dayString == "SATURDAY")  return Day::SATURDAY;
-    else if (dayString == "SUNDAY")    return Day::SUNDAY;
+Day Planner::dayFromString(QString dayString){
+    if (dayString == "Ponedeljak")    return Day::MONDAY;
+    else if (dayString == "Utorak")   return Day::TUESDAY;
+    else if (dayString == "Sreda") return Day::WEDNESDAY;
+    else if (dayString == "Četvrtak")  return Day::THURSDAY;
+    else if (dayString == "Petak")    return Day::FRIDAY;
+    else if (dayString == "Subota")  return Day::SATURDAY;
+    else if (dayString == "Nedelja")    return Day::SUNDAY;
     else                                  return Day::MONDAY;
 }
 
@@ -70,7 +70,7 @@ void Planner::fromVariant(const QVariant& variant) {
             activity.fromVariant(variant);
             activities.append(activity);
         }
-        m_map.insert(day, activities);
+        m_activities.insert(day, activities);
     }
 }
 

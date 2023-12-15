@@ -21,6 +21,7 @@ enum Page {
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWindow)
+    , m_planner()
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(LIBRARY);
@@ -127,5 +128,26 @@ void MainWindow::on_calendarWidget_activated(const QDate &date)
         QMessageBox::information(this, date.toString(), "nema nista");
     else
         QMessageBox::information(this, date.toString(), "aktivnosti za taj dan npr");
+}
+
+
+void MainWindow::on_pushButton_addActivity_clicked()
+{
+    QString name = ui->lineEdit_activityName->text();
+
+    QTime startTime = ui->timeEdit_start->time();
+    QTime endTime = ui->timeEdit_end->time();
+    
+    if (startTime >= endTime) {
+        QMessageBox::warning(this, "Pogrešan unos", "Vreme početka aktivnosti mora biti pre vremena kraja!");
+        return;
+    }
+
+    QString dayString = ui->comboBox_day->currentText();
+    Day day = Planner::dayFromString(dayString);
+
+    Activity activity(name, startTime, endTime);
+
+    m_planner.addActivity(day, activity);
 }
 
