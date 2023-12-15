@@ -50,8 +50,6 @@ Difficulty CreateDeckWindow::getDifficulty() const
 
 void CreateDeckWindow::on_pushButton_finish_clicked()
 {
-
-
     QTcpSocket socket;
     socket.connectToHost("127.0.0.1", 8080);
 
@@ -60,13 +58,17 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
 
         generateId();
 
-        JSONSerializer *serializer = new JSONSerializer();
-        QJsonDocument doc = serializer ->createJson(m_deck);
+        JSONSerializer serializer;
+        QJsonDocument doc = serializer.createJson(m_deck);
 
+
+        qDebug() << doc;
 
         request["action"] = "saveDeck";
         request["username"] = m_user.username();
         request["deck"] = doc.toVariant().toJsonObject();
+
+        qDebug() << request;
 
         socket.write(QJsonDocument(request).toJson());
         socket.waitForBytesWritten();
@@ -74,6 +76,8 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
 
         QByteArray responseData = socket.readAll();
         QTextStream stream(responseData);
+
+        qDebug() << responseData;
 
         qDebug() << "Recieved Data:";
         while (!stream.atEnd()) {
@@ -127,7 +131,7 @@ void CreateDeckWindow::on_pushButton_add_clicked()
     QString m_answer = getAnswerText();
     Difficulty m_difficulty = getDifficulty();
 
-    Card m_card (m_question, m_answer, m_difficulty);
+    Card *m_card = new Card(m_question, m_answer, m_difficulty);
 
     m_deck.addCard(m_card);
 

@@ -39,7 +39,7 @@ public:
     inline QImage thumbnail() const {return m_thumbnail;}
     inline Grading rating() const {return m_rating;}
 
-    void addCard(Card &card);
+    void addCard(Card *card);
     void updateRating(unsigned grade);
     void setId(uint64_t id);
 
