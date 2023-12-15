@@ -10,6 +10,7 @@ class MyServer : public QObject{
 
 public:
     explicit MyServer(QObject *parent = nullptr);
+    ~MyServer();
 
 signals:
 
@@ -24,6 +25,8 @@ private:
     QString publicDecksFolder;
     QString usersInfoFolder;
     QString userDecksFolder;
+    QString uniqueIdsFile;
+    QVector<QString> ids;
 
     void registerUser(QTcpSocket* socket, QJsonObject& jsonObject);
     void loginUser(QTcpSocket* socket, QJsonObject& jsonObject);
@@ -32,7 +35,15 @@ private:
     void saveDeck(QTcpSocket* socket, QJsonObject& jsonObject);
     void saveDeckForUser(const QString& username, const QString& deckName, QByteArray& deckData);
     void removeDeck(QTcpSocket* socket, QJsonObject& jsonObject);
+    void sendId(QTcpSocket* socket);
     void readData();
+    uint64_t generateUniqueId();
+    void loadIds();
+    void writeRemainingIDsToFile();
+    void writeNumbers();
+    void makePublic(QTcpSocket* socket, QJsonObject& jsonObject);
+    void sendDeckById(QTcpSocket* socket, const QString& username, const QString& deckId);
+
 };
 
 #endif // MYSERVER_H

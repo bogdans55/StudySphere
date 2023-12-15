@@ -39,7 +39,8 @@ void Library::loadDecksFromFolder(const QString folderPath){
     }
 }
 
-void Library::removeDeck(Deck& deck, QString& username){
+void removeDeck(Deck& deck, QString& username){
+/*
 
     QTcpSocket socket;
     socket.connectToHost("127.0.0.1", 8080);
@@ -49,6 +50,7 @@ void Library::removeDeck(Deck& deck, QString& username){
         request["action"] = "removeDeck";
         request["username"] = username;
         request["DeckId"] = QString::number(deck.deckId());
+        request["DeckName"] = deck.name();
 
         socket.write(QJsonDocument(request).toJson());
         socket.waitForBytesWritten();
@@ -63,15 +65,22 @@ void Library::removeDeck(Deck& deck, QString& username){
             qDebug() << stream.readLine();
         }
 
-        socket.disconnectFromHost();
-    }else{
-        qDebug() << "Failed to connect to the server";
-    }
+        QString filePath = deck.getFilePath();
+
+        QFile file(filePath);
+        if(file.remove()){
+            qDebug() << "File removed: " << filePath;
+        }
+        else{
+            qDebug() << "Failed to remove file: " << filePath;
+            //TODO error handling if needed...
+        }
+    }*/
 }
 
 void Library::importDeck(const QString& filePath){
 
-    QFile file(filePath);
+    /*QFile file(filePath);
     if(file.open(QIODevice::ReadOnly | QIODevice::Text)){
         QJsonDocument document = QJsonDocument::fromJson(file.readAll());
         QJsonArray deckArray = document.array();
@@ -82,11 +91,11 @@ void Library::importDeck(const QString& filePath){
             m_decks.push_back(deck);
         }
         file.close();
-    }
+    }*/
 }
 
 void Library::exportDeck(const QVector<Deck>& decks, const QString& filePath){
-    QJsonArray deckArray;
+    /*QJsonArray deckArray;
     for(const Deck& deck : decks){
         deckArray.append(deck.toJson());
     }
@@ -97,7 +106,7 @@ void Library::exportDeck(const QVector<Deck>& decks, const QString& filePath){
     if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
         file.write(document.toJson());
         file.close();
-    }
+    }*/
 }
 
 

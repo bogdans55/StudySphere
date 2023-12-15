@@ -23,6 +23,7 @@ CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, User& user, QW
     ui->setupUi(this);
 }
 
+
 CreateDeckWindow::~CreateDeckWindow()
 {
     delete ui;
@@ -49,18 +50,25 @@ Difficulty CreateDeckWindow::getDifficulty() const
 
 void CreateDeckWindow::on_pushButton_finish_clicked()
 {
-    JSONSerializer *serializer = new JSONSerializer();
-    QJsonDocument doc = serializer ->createJson(m_deck);
-
-
     QTcpSocket socket;
     socket.connectToHost("127.0.0.1", 8080);
 
     if(socket.waitForConnected()){
         QJsonObject request;
+
+        generateId();
+
+        JSONSerializer serializer;
+        QJsonDocument doc = serializer.createJson(m_deck);
+
+
+        qDebug() << doc;
+
         request["action"] = "saveDeck";
         request["username"] = m_user.username();
         request["deck"] = doc.toVariant().toJsonObject();
+
+        qDebug() << request;
 
         socket.write(QJsonDocument(request).toJson());
         socket.waitForBytesWritten();
@@ -68,6 +76,8 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
 
         QByteArray responseData = socket.readAll();
         QTextStream stream(responseData);
+
+        qDebug() << responseData;
 
         qDebug() << "Recieved Data:";
         while (!stream.atEnd()) {
@@ -83,6 +93,31 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
     close();
 }
 
+void CreateDeckWindow::generateId(){
+
+    QTcpSocket socket;
+    socket.connectToHost("127.0.0.1", 8080);
+
+    if(socket.waitForConnected()){
+        QJsonObject request;
+
+        request["action"] = "generateId";
+        socket.write(QJsonDocument(request).toJson());
+        socket.waitForBytesWritten();
+        socket.waitForReadyRead();
+        QByteArray idResponse = socket.readAll();
+        QTextStream idStream(idResponse);
+
+        QString idResponseString = idStream.readAll();
+        QJsonDocument idJson = QJsonDocument::fromJson(idResponseString.toUtf8());
+        QJsonObject idObject = idJson.object();
+        m_deck.setId(idObject.value("DeckId").toVariant().toULongLong());
+
+        socket.disconnectFromHost();
+    }else{
+        qDebug() << "Failed to connect to the server";
+    }
+}
 
 void CreateDeckWindow::on_pushButton_add_clicked()
 {
@@ -96,7 +131,7 @@ void CreateDeckWindow::on_pushButton_add_clicked()
     QString m_answer = getAnswerText();
     Difficulty m_difficulty = getDifficulty();
 
-    Card m_card (m_question, m_answer, m_difficulty);
+    Card *m_card = new Card(m_question, m_answer, m_difficulty);
 
     m_deck.addCard(m_card);
 

@@ -18,11 +18,11 @@ add_executable(server
   myServer.cpp
 )
 
-target_link_libraries(server Qt${QT_VERSION_MAJOR}::Core)
-
 find_package(Qt6 REQUIRED COMPONENTS Network)
-target_link_libraries(server Qt${QT_VERSION_MAJOR}::Network)
-
+target_link_libraries(server PRIVATE
+  Qt${QT_VERSION_MAJOR}::Core
+  Qt${QT_VERSION_MAJOR}::Network
+)
 include(GNUInstallDirs)
 install(TARGETS server
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}

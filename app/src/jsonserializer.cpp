@@ -22,6 +22,11 @@ QJsonDocument JSONSerializer::createJson(const Serializable& serializable){
     return doc;
 }
 
+void JSONSerializer::loadJson(Serializable& serializable, QJsonDocument& jsonDeck){
+    serializable.fromVariant(jsonDeck.toVariant());
+}
+
+
 void JSONSerializer::load(Serializable &serializable, const QString &filepath)
 {
     QFile file(filepath);

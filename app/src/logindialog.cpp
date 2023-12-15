@@ -35,7 +35,6 @@ void LoginDialog::on_pushButton_openRegister_clicked()
 
     if (m_password != confirmPassword)
     {
-        ui->lineEdit_username_reg->clear();
         ui->lineEdit_password_reg->clear();
         ui->lineEdit_confirmPassword->clear();
 

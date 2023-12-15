@@ -30,7 +30,7 @@ void Browser::loadPublicDecks(){
 
 void Browser::importDeck(QString& filePath){
 
-    QFile file(filePath);
+    /*QFile file(filePath);
     if(file.open(QIODevice::ReadOnly | QIODevice::Text)){
         QJsonDocument document = QJsonDocument::fromJson(file.readAll());
         QJsonArray deckArray = document.array();
@@ -41,7 +41,7 @@ void Browser::importDeck(QString& filePath){
             m_publicDeckList.push_back(deck);
         }
         file.close();
-    }
+    }*/
 }
 
 void Browser::searchDecks(const QString& searchQuery){

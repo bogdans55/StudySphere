@@ -13,6 +13,7 @@ public:
     void save(const Serializable &serializable, const QString &filepath, const QString &rootname = "") override;
     void load(Serializable &serializable, const QString &filepath) override;
     QJsonDocument createJson(const Serializable& serializable);
+    void loadJson(Serializable& serializable, QJsonDocument& jsonDeck);
 
 };
 

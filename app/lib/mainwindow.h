@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "user.h"
+#include "libraryscene.h"
 
 #include <QWidget>
 
@@ -16,6 +17,8 @@ class MainWindow : public QWidget
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    void setEnabled(bool value);
 
 private slots:
     void on_pushButton_createDeck_clicked();
@@ -40,9 +43,15 @@ private slots:
 
     void on_pushButton_login_clicked();
 
+
+
 private:
     Ui::MainWindow *ui;
     bool m_loggedIn = false;
     User m_user;
+    LibraryScene m_libraryScene;
+
+    bool registerUser(const QString& username, const QString& password);
+    bool loginUser(const QString& username, const QString& password);
 };
 #endif // MAINWINDOW_H
