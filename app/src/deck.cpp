@@ -40,9 +40,9 @@ Deck::Deck(const Deck& deck)
     m_rating(deck.m_rating)
 {}
 
-void Deck::addCard(Card &card)
+void Deck::addCard(Card *card)
 {
-    m_cards.append(&card);
+    m_cards.append(card);
 }
 
 void Deck::updateRating(unsigned int grade)
@@ -60,9 +60,12 @@ QVariant Deck::toVariant() const{
     map.insert("Thumbnail", "systemDefault.png");     //TODO Thumbnail image saving, and naming
 
     QVariantList cardsList;
-    for (Card *card : m_cards){
-        cardsList.append((*card).toVariant());
-        }
+
+    for(int i = 0;i < m_cards.length();i++){
+        Card card = *(m_cards[i]);
+        cardsList.append(card.toVariant());
+    }
+
     map.insert("Flashcards", cardsList);
 
     return map;
