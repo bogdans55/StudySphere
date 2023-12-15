@@ -89,6 +89,8 @@ void MainWindow::on_pushButton_startStudySession_clicked()
     Deck *deck = new Deck();
     User user;
     JSONSerializer().load(*deck, "../decks/" + deckName + ".json");
+
+
     StudySession *session = new StudySession(user, deck);
     StudySessionWindow *useDeck = new StudySessionWindow(session);
     useDeck->setAttribute(Qt::WA_DeleteOnClose);

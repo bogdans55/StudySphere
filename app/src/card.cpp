@@ -43,7 +43,9 @@ QVariant Card::toVariant() const{
     case Difficulty::HARD:
         difficultyStr = "HARD";
         break;
-        // Add default case or error handling for unexpected values
+    default:
+        difficultyStr = "HARD";
+        break;
     }
     map.insert("difficulty", difficultyStr);
     return map;
