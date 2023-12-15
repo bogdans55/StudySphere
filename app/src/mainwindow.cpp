@@ -211,6 +211,7 @@ void MainWindow::on_pushButton_login_clicked()
         if(login.isRegister()){
             if(registerUser(username, password)){
                 loginSuccess = loginUser(username, password);
+                setEnabled(true);
             }else{
                 qDebug() << "Register failed.";
             }
