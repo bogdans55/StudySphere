@@ -1,15 +1,13 @@
 #include "lib/mainwindow.h"
 #include "lib/createdeckdialog.h"
 #include "lib/createdeckwindow.h"
+#include "lib/scheduleitem.h"
 #include "lib/libraryscene.h"
 #include "lib/logindialog.h"
 #include "lib/studysessionwindow.h"
 #include "lib/jsonserializer.h"
 #include "ui_mainwindow.h"
 #include "lib/user.h"
-
-#include <QApplication>
-#include <QMessageBox>
 
 #include <QTcpServer>
 #include <QTcpSocket>
@@ -33,10 +31,10 @@ enum Page {
     HELP
 };
 
-
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWindow)
+    , m_planner()
     , m_user()
     , m_libraryScene()
 {
@@ -44,6 +42,22 @@ MainWindow::MainWindow(QWidget *parent)
     ui->stackedWidget->setCurrentIndex(LIBRARY);
 //    ui->graphicsView_library->setScene(&m_libraryScene);
 
+    for (int i = 0; i < 7; ++i) {
+        m_plannerScenes.push_back(new PlannerScene());
+    }
+    ui->graphicsView_monday->setScene(m_plannerScenes[Day::MONDAY]);
+    ui->graphicsView_tuesday->setScene(m_plannerScenes[Day::TUESDAY]);
+    ui->graphicsView_wednesday->setScene(m_plannerScenes[Day::WEDNESDAY]);
+    ui->graphicsView_thursday->setScene(m_plannerScenes[Day::THURSDAY]);
+    ui->graphicsView_friday->setScene(m_plannerScenes[Day::FRIDAY]);
+    ui->graphicsView_saturday->setScene(m_plannerScenes[Day::SATURDAY]);
+    ui->graphicsView_sunday->setScene(m_plannerScenes[Day::SUNDAY]);
+
+    QVector<ScheduleItem*> scheduleItems;
+    for (int i = 0; i < 7; ++i) {
+        scheduleItems.append(new ScheduleItem());
+        m_plannerScenes[i]->addItem(scheduleItems[i]);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -170,6 +184,43 @@ void MainWindow::on_calendarWidget_activated(const QDate &date)
         QMessageBox::information(this, date.toString(), "nema nista");
     else
         QMessageBox::information(this, date.toString(), "aktivnosti za taj dan npr");
+}
+
+void MainWindow::on_pushButton_addActivity_clicked()
+{
+    QString name = ui->lineEdit_activityName->text();
+
+    QTime startTime = ui->timeEdit_start->time();
+    QTime endTime = ui->timeEdit_end->time();
+    
+    if (startTime >= endTime) {
+        QMessageBox::warning(this, "Pogrešan unos", "Vreme početka aktivnosti mora biti pre vremena kraja!");
+        return;
+    }
+
+    QString dayString = ui->comboBox_day->currentText();
+    Day day = Planner::dayFromString(dayString);
+
+    Activity activity(name, startTime, endTime);
+
+    m_planner.addActivity(day, activity);
+
+    ActivityItem *activityItem = new ActivityItem(activity);
+    m_plannerScenes[day]->addActivity(activityItem);
+    m_plannerScenes[day]->addItem(activityItem);
+
+    QGraphicsTextItem *activityTime = new QGraphicsTextItem();
+    activityTime->setPlainText(startTime.toString("hh:mm"));
+    activityTime->setPos(activityItem->pos());
+    m_plannerScenes[day]->addItem(activityTime);
+
+    QGraphicsTextItem *activityText = new QGraphicsTextItem();
+    activityText->setPlainText(name);
+    qreal textWidth = 80;   // hardcoded
+    activityText->setTextWidth(textWidth);
+    activityText->setPos(activityItem->pos().x(), activityItem->pos().y() + activityTime->boundingRect().height());
+    m_plannerScenes[day]->addItem(activityText);
+
 }
 
 void MainWindow::setEnabled(bool value)
