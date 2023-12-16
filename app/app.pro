@@ -64,7 +64,7 @@ HEADERS += \
     lib/settings.h \
     lib/mainwindow.h \
     lib/plannerscene.h \
-    lib/scheduleitem.h
+    lib/scheduleitem.h \
     lib/logindialog.h
 
 FORMS += \
@@ -73,9 +73,6 @@ FORMS += \
     forms/mainwindow.ui \
     forms/studysessionwindow.ui \
     forms/logindialog.ui
-
-RESOURCES += \
-    res/icons.qrc
 
 RESOURCES += \
     res/icons.qrc
