@@ -23,13 +23,16 @@
 #include <QMessageBox>
 #include <QDirIterator>
 
-#define LIBRARY  0
-#define TODO     1
-#define PLANER   2
-#define CALENDAR 3
-#define STATS    4
-#define SETTINGS 5
-#define HELP     6
+enum Page {
+    LIBRARY = 0,
+    TODO,
+    PLANER,
+    CALENDAR,
+    STATS,
+    SETTINGS,
+    HELP
+};
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
