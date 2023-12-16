@@ -3,9 +3,22 @@
 
 StudySessionWindow::StudySessionWindow(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::StudySessionWindow)
+    ui(new Ui::StudySessionWindow),
+    m_session(new StudySession())
 {
     ui->setupUi(this);
+    m_session->startSession();
+    ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
+}
+
+StudySessionWindow::StudySessionWindow(StudySession *session, QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::StudySessionWindow),
+    m_session(session)
+{
+    ui->setupUi(this);
+    m_session->startSession();
+    ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
 }
 
 StudySessionWindow::~StudySessionWindow()
@@ -15,30 +28,46 @@ StudySessionWindow::~StudySessionWindow()
 
 void StudySessionWindow::on_pushButton_flip_clicked()
 {
-    // TODO flip card (show answer/question)
+    if(m_session->answerShowed())
+        ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
+    else
+        ui->textEdit_card->setText(m_session->getCurrentCard().questionAnswer());
+
+    m_session->flipCard();
 }
 
+void StudySessionWindow::evaluate(int grade) // should be enum grade
+{
+    m_session->getCurrentCard().evaluateAnswer(grade);
+    if(m_session->hasNextCard()){
+        m_session->nextCard();
+        ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
+    }
+    else{
+        close();
+    }
+}
 
 void StudySessionWindow::on_pushButton_skip_clicked()
 {
-    // TODO skip question and load next card
+    evaluate(0);
 }
 
 
 void StudySessionWindow::on_pushButton_bad_clicked()
 {
-    // TODO save users grade and load next card
+    evaluate(1);
 }
 
 
 void StudySessionWindow::on_pushButton_mid_clicked()
 {
-    // TODO save users grade and load next card
+    evaluate(2);
 }
 
 
 void StudySessionWindow::on_pushButton_good_clicked()
 {
-    // TODO save users grade and load next card
+    evaluate(3);
 }
 

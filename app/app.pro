@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -9,6 +9,9 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/deckitem.cpp \
+    src/libraryscene.cpp \
+    src/logindialog.cpp \
     src/cardstats.cpp \
     src/createdeckwindow.cpp \
     src/createdeckdialog.cpp \
@@ -30,6 +33,7 @@ SOURCES += \
     src/mainwindow.cpp
 
 HEADERS += \
+    lib/deckitem.h \
     lib/createdeckwindow.h \
     lib/createdeckdialog.h \
     lib/browser.h \
@@ -41,6 +45,7 @@ HEADERS += \
     lib/grading.h \
     lib/imagecard.h \
     lib/jsonserializer.h \
+    lib/libraryscene.h \
     lib/plaincard.h \
     lib/serializable.h \
     lib/serializer.h \
@@ -49,13 +54,18 @@ HEADERS += \
     lib/studysessionwindow.h \
     lib/user.h \
     lib/settings.h \
-    lib/mainwindow.h
+    lib/mainwindow.h \
+    lib/logindialog.h
 
 FORMS += \
     forms/createdeckwindow.ui \
     forms/createdeckdialog.ui \
     forms/mainwindow.ui \
-    forms/studysessionwindow.ui
+    forms/studysessionwindow.ui \
+    forms/logindialog.ui
+
+RESOURCES += \
+    res/icons.qrc
 
 RESOURCES += \
     res/icons.qrc

@@ -5,6 +5,7 @@
 #include <QString>
 #include <QButtonGroup>
 #include "deck.h"
+#include "user.h"
 
 namespace Ui {
 class CreateDeckWindow;
@@ -15,9 +16,9 @@ class CreateDeckWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit CreateDeckWindow(QWidget *parent = nullptr);
+    explicit CreateDeckWindow(User& user, QWidget *parent = nullptr);
 
-    CreateDeckWindow( QString name, Privacy privacy, QWidget *parent = nullptr);
+    CreateDeckWindow( QString name, Privacy privacy, User& user, QWidget *parent = nullptr);
 
     ~CreateDeckWindow();
 
@@ -37,6 +38,9 @@ private:
     Ui::CreateDeckWindow *ui;
     Deck m_deck;
     QButtonGroup *m_questionDifficulty;
+    User& m_user;
+
+    void generateId();
 };
 
 #endif // CREATEDECKWINDOW_H
