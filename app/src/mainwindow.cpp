@@ -26,25 +26,22 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(LIBRARY);
 
-    ui->graphicsView_monday->setScene(&m_plannerMondayScene);
-    ui->graphicsView_tuesday->setScene(&m_plannerTuesdayScene);
-    ui->graphicsView_wednesday->setScene(&m_plannerWednesdayScene);
-    ui->graphicsView_thursday->setScene(&m_plannerThursdayScene);
-    ui->graphicsView_friday->setScene(&m_plannerFridayScene);
-    ui->graphicsView_saturday->setScene(&m_plannerSaturdayScene);
-    ui->graphicsView_sunday->setScene(&m_plannerSundayScene);
+    for (int i = 0; i < 7; ++i) {
+        m_plannerScenes.push_back(new PlannerScene());
+    }
+    ui->graphicsView_monday->setScene(m_plannerScenes[Day::MONDAY]);
+    ui->graphicsView_tuesday->setScene(m_plannerScenes[Day::TUESDAY]);
+    ui->graphicsView_wednesday->setScene(m_plannerScenes[Day::WEDNESDAY]);
+    ui->graphicsView_thursday->setScene(m_plannerScenes[Day::THURSDAY]);
+    ui->graphicsView_friday->setScene(m_plannerScenes[Day::FRIDAY]);
+    ui->graphicsView_saturday->setScene(m_plannerScenes[Day::SATURDAY]);
+    ui->graphicsView_sunday->setScene(m_plannerScenes[Day::SUNDAY]);
 
     QVector<ScheduleItem*> scheduleItems;
     for (int i = 0; i < 7; ++i) {
         scheduleItems.append(new ScheduleItem());
+        m_plannerScenes[i]->addItem(scheduleItems[i]);
     }
-    m_plannerMondayScene.addItem(scheduleItems[0]);
-    m_plannerTuesdayScene.addItem(scheduleItems[1]);
-    m_plannerWednesdayScene.addItem(scheduleItems[2]);
-    m_plannerThursdayScene.addItem(scheduleItems[3]);
-    m_plannerFridayScene.addItem(scheduleItems[4]);
-    m_plannerSaturdayScene.addItem(scheduleItems[5]);
-    m_plannerSundayScene.addItem(scheduleItems[6]);
 }
 
 MainWindow::~MainWindow()
@@ -149,5 +146,22 @@ void MainWindow::on_pushButton_addActivity_clicked()
     Activity activity(name, startTime, endTime);
 
     m_planner.addActivity(day, activity);
+
+    ActivityItem *activityItem = new ActivityItem(activity);
+    m_plannerScenes[day]->addActivity(activityItem);
+    m_plannerScenes[day]->addItem(activityItem);
+
+    QGraphicsTextItem *activityTime = new QGraphicsTextItem();
+    activityTime->setPlainText(startTime.toString("hh:mm"));
+    activityTime->setPos(activityItem->pos());
+    m_plannerScenes[day]->addItem(activityTime);
+
+    QGraphicsTextItem *activityText = new QGraphicsTextItem();
+    activityText->setPlainText(name);
+    qreal textWidth = 80;   // hardcoded
+    activityText->setTextWidth(textWidth);
+    activityText->setPos(activityItem->pos().x(), activityItem->pos().y() + activityTime->boundingRect().height());
+    m_plannerScenes[day]->addItem(activityText);
+
 }
 

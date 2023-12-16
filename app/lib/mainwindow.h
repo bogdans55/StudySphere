@@ -43,13 +43,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    PlannerScene m_plannerMondayScene;
-    PlannerScene m_plannerTuesdayScene;
-    PlannerScene m_plannerWednesdayScene;
-    PlannerScene m_plannerThursdayScene;
-    PlannerScene m_plannerFridayScene;
-    PlannerScene m_plannerSaturdayScene;
-    PlannerScene m_plannerSundayScene;
+    QVector<PlannerScene*> m_plannerScenes;
 
     Planner m_planner;
 };

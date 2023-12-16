@@ -6,7 +6,7 @@
 #include <QVector>
 #include <QMap>
 
-enum class Day
+enum Day
 {
     MONDAY = 0,
     TUESDAY,
