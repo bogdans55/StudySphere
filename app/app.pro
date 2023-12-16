@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,6 +14,9 @@ SOURCES += \
     src/activity.cpp \
     src/activityitem.cpp \
     src/plannerscene.cpp \
+    src/deckitem.cpp \
+    src/libraryscene.cpp \
+    src/logindialog.cpp \
     src/cardstats.cpp \
     src/createdeckwindow.cpp \
     src/createdeckdialog.cpp \
@@ -37,6 +40,7 @@ SOURCES += \
 HEADERS += \
     lib/activity.h \
     lib/activityitem.h \
+    lib/deckitem.h \
     lib/createdeckwindow.h \
     lib/createdeckdialog.h \
     lib/browser.h \
@@ -48,6 +52,7 @@ HEADERS += \
     lib/grading.h \
     lib/imagecard.h \
     lib/jsonserializer.h \
+    lib/libraryscene.h \
     lib/plaincard.h \
     lib/planner.h \
     lib/serializable.h \
@@ -60,12 +65,17 @@ HEADERS += \
     lib/mainwindow.h \
     lib/plannerscene.h \
     lib/scheduleitem.h
+    lib/logindialog.h
 
 FORMS += \
     forms/createdeckwindow.ui \
     forms/createdeckdialog.ui \
     forms/mainwindow.ui \
-    forms/studysessionwindow.ui
+    forms/studysessionwindow.ui \
+    forms/logindialog.ui
+
+RESOURCES += \
+    res/icons.qrc
 
 RESOURCES += \
     res/icons.qrc

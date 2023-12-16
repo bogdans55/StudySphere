@@ -3,6 +3,9 @@
 
 #include "lib/planner.h"
 #include "lib/plannerscene.h"
+#include "user.h"
+#include "libraryscene.h"
+
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -16,6 +19,8 @@ class MainWindow : public QWidget
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    void setEnabled(bool value);
 
 private slots:
     void on_pushButton_createDeck_clicked();
@@ -40,11 +45,19 @@ private slots:
 
     void on_pushButton_addActivity_clicked();
 
+    void on_pushButton_login_clicked();
+
 private:
     Ui::MainWindow *ui;
 
     QVector<PlannerScene*> m_plannerScenes;
-
     Planner m_planner;
+
+    bool m_loggedIn = false;
+    User m_user;
+    LibraryScene m_libraryScene;
+
+    bool registerUser(const QString& username, const QString& password);
+    bool loginUser(const QString& username, const QString& password);
 };
 #endif // MAINWINDOW_H

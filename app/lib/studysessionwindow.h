@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "lib/studysession.h"
+
 namespace Ui {
 class StudySessionWindow;
 }
@@ -13,7 +15,12 @@ class StudySessionWindow : public QWidget
 
 public:
     explicit StudySessionWindow(QWidget *parent = nullptr);
+    StudySessionWindow(StudySession *session, QWidget *parent = nullptr);
     ~StudySessionWindow();
+
+    inline StudySession* session() const {return m_session;}
+
+    void evaluate(int grade);
 
 private slots:
     void on_pushButton_flip_clicked();
@@ -28,6 +35,7 @@ private slots:
 
 private:
     Ui::StudySessionWindow *ui;
+    StudySession *m_session;
 };
 
 #endif // STUDYSESSIONWINDOW_H
