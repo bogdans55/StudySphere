@@ -9,6 +9,10 @@
 
 #include <QWidget>
 
+#include <QDir>
+#include <QCoreApplication>
+#include <QStandardPaths>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -49,6 +53,7 @@ private slots:
     void on_pushButton_login_clicked();
 
     void on_comboBox_language_currentIndexChanged(int index);
+    void on_comboBox_theme_currentIndexChanged(int index);
 
 private:
     Ui::MainWindow *ui;

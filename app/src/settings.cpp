@@ -21,6 +21,18 @@ Settings::~Settings()
 void Settings::setTheme(const Theme &newTheme)
 {
     m_theme = newTheme;
+    QString styleSheetPath;
+
+    if (m_theme == DARK) {
+        styleSheetPath = "../app/assets/Diffnes/Diffnes.qss";
+    } else {
+        styleSheetPath = "../app/assets/Medize/Medize.qss";
+    }
+
+    QFile styleSheetFile(styleSheetPath);
+    styleSheetFile.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(styleSheetFile.readAll());
+    qApp->setStyleSheet(styleSheet);
 }
 
 void Settings::setVolume(const double &newVolume)

@@ -75,6 +75,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
 void MainWindow::on_pushButton_createDeck_clicked()
 {
     CreateDeckDialog popUp(this);
@@ -82,7 +83,7 @@ void MainWindow::on_pushButton_createDeck_clicked()
         QString name = popUp.getDeckName();
         Privacy privacy = popUp.getDeckPrivacy();
 
-        CreateDeckWindow *createDeck = new CreateDeckWindow(name,privacy,m_user);
+        CreateDeckWindow *createDeck = new CreateDeckWindow(name, privacy);
         createDeck->setAttribute(Qt::WA_DeleteOnClose);
         createDeck->show();
 
@@ -92,53 +93,9 @@ void MainWindow::on_pushButton_createDeck_clicked()
 
 void MainWindow::on_pushButton_startStudySession_clicked()
 {
-    QString deckName = ui->listWidget_library->currentItem()->text();
-    Deck *deck = new Deck();
-
-    QTcpSocket socket;
-    socket.connectToHost("127.0.0.1", 8080);
-
-    if(socket.waitForConnected()){
-        QJsonObject request;
-        request["action"] = "sendDeck";
-        request["username"] = m_user.username();
-        request["DeckId"] = deckName.split('_')[1].split('.')[0];
-        qDebug() << request;
-
-        socket.write(QJsonDocument(request).toJson());
-        socket.waitForBytesWritten();
-        socket.waitForReadyRead();
-
-        QByteArray responseText = socket.readAll();
-        QTextStream stream(responseText);
-
-        qDebug() << "Recieved Data:";
-
-        QString deckResponse = stream.readAll();
-        QJsonDocument jsondoc = QJsonDocument::fromJson(deckResponse.toUtf8());
-        QJsonObject jsonobj = jsondoc.object();
-
-        qDebug() << jsondoc["status"];
-        qDebug() << jsondoc;
-        QString deckNames = jsonobj.value("decks").toString();
-        JSONSerializer jsonSerializer;
-
-        QJsonObject deckObject = jsondoc[deckName].toObject();
-        QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
-
-        jsonSerializer.loadJson(*deck, deckDocument);
-
-        socket.disconnectFromHost();
-    }else{
-        qDebug() << "Failed to connect to the server";
-    }
-
-    StudySession *session = new StudySession(m_user, deck);
-    StudySessionWindow *useDeck = new StudySessionWindow(session);
+    StudySessionWindow *useDeck = new StudySessionWindow();
     useDeck->setAttribute(Qt::WA_DeleteOnClose);
     useDeck->show();
-
-
 }
 
 
@@ -414,3 +371,7 @@ void MainWindow::on_comboBox_language_currentIndexChanged(int index)
     ui->retranslateUi(this);
 }
 
+void MainWindow::on_comboBox_theme_currentIndexChanged(int index)
+{
+    m_settings.setTheme(static_cast<Theme>(index));
+}

@@ -202,7 +202,11 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
+<<<<<<< HEAD
       <number>0</number>
+=======
+      <number>5</number>
+>>>>>>> 28a0ac0 (Added themes for application)
      </property>
      <widget class="QWidget" name="page_library">
       <layout class="QVBoxLayout" name="verticalLayout_3">
