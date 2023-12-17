@@ -20,9 +20,12 @@
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWindow)
+    , m_settings()
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(LIBRARY);
+
+    m_settings.setTheme(static_cast<Theme>(0));
 
     QFile file(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/todoFile.txt");
     //    QString path = QDir(QCoreApplication::applicationDirPath()).filePath("/info/todoFile.txt");
@@ -191,3 +194,8 @@ void MainWindow::updateTodoFile()
     file.close();
 }
 
+
+void MainWindow::on_comboBox_theme_currentIndexChanged(int index)
+{
+    m_settings.setTheme(static_cast<Theme>(index));
+}

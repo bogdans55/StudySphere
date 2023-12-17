@@ -7,6 +7,8 @@
 #include <QCoreApplication>
 #include <QStandardPaths>
 
+#include "lib/settings.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -47,8 +49,12 @@ private slots:
 
     void on_pushButton_deleteAllTodos_clicked();
 
+    void on_comboBox_theme_currentIndexChanged(int index);
+
 private:
     Ui::MainWindow *ui;
+
+    Settings m_settings;
 
     QString path = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/todoFile.txt";
 

@@ -10,8 +10,8 @@ enum Language{
 };
 
 enum Theme{
-    DARK,
-    LIGHT
+    LIGHT = 0,
+    DARK = 1
 };
 
 class Settings
