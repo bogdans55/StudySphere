@@ -12,8 +12,13 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
     // hardcoded
-    inline int width() const { return 100; }    // horizontal scroll is off so we can use large values
-    inline int height() const { return 1440; }
+    inline unsigned width() const { return m_width; }
+    inline unsigned height() const { return 1440; }
+
+    void setWidth(unsigned width);
+
+private:
+    unsigned m_width = 180;
 };
 
 #endif // SCHEDULEITEM_H
