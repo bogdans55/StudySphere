@@ -9,7 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    src/calendar.cpp \
+    src/calendarevent.cpp \
     src/planner.cpp \
     src/scheduleitem.cpp \
     src/activity.cpp \
@@ -41,7 +41,7 @@ SOURCES += \
 HEADERS += \
     lib/activity.h \
     lib/activityitem.h \
-    lib/calendar.h \
+    lib/calendarevent.h \
     lib/deckitem.h \
     lib/createdeckwindow.h \
     lib/createdeckdialog.h \
