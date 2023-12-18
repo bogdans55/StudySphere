@@ -56,6 +56,7 @@ MainWindow::MainWindow(QWidget *parent)
     QVector<ScheduleItem*> scheduleItems;
     for (int i = 0; i < 7; ++i) {
         scheduleItems.append(new ScheduleItem());
+        scheduleItems[i]->setWidth(ui->graphicsView_monday->width());
         m_plannerScenes[i]->addItem(scheduleItems[i]);
     }
 }
@@ -216,7 +217,7 @@ void MainWindow::on_pushButton_addActivity_clicked()
 
     QGraphicsTextItem *activityText = new QGraphicsTextItem();
     activityText->setPlainText(name);
-    qreal textWidth = 80;   // hardcoded
+    qreal textWidth = ui->graphicsView_monday->width() - 10; // hardcoded reduction for scroll bar
     activityText->setTextWidth(textWidth);
     activityText->setPos(activityItem->pos().x(), activityItem->pos().y() + activityTime->boundingRect().height());
     m_plannerScenes[day]->addItem(activityText);
@@ -244,10 +245,14 @@ void MainWindow::setEnabled(bool value)
 
 void MainWindow::on_pushButton_login_clicked()
 {
-//    for (auto item : m_libraryScene.items())
-//        delete item;
-//    m_libraryScene.clear();
+//    m_libraryScene.clear(); // clear calls delete on all items on scene
 //    m_libraryScene.clearDeck();
+    for (auto scene : m_plannerScenes)
+    {
+        scene->clear(); // clear calls delete on all items on scene
+        scene->addItem(new ScheduleItem());
+        scene->clearActivities();
+    }
 
     if(!m_loggedIn) // use getter instead?
     {
