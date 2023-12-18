@@ -20,8 +20,8 @@ QVariant Activity::toVariant() const
 {
     QVariantMap map;
     map.insert("activity", m_activityText);
-    map.insert("start", m_start);
-    map.insert("end", m_end);
+    map.insert("start", m_start.toString());
+    map.insert("end", m_end.toString());
     return map;
 }
 
