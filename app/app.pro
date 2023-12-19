@@ -10,7 +10,6 @@ CONFIG += c++17
 
 SOURCES += \
     src/calendar.cpp \
-    src/calendarevent.cpp \
     src/planner.cpp \
     src/scheduleitem.cpp \
     src/activity.cpp \
@@ -43,7 +42,6 @@ HEADERS += \
     lib/activity.h \
     lib/activityitem.h \
     lib/calendar.h \
-    lib/calendarevent.h \
     lib/deckitem.h \
     lib/createdeckwindow.h \
     lib/createdeckdialog.h \

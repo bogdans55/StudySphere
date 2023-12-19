@@ -4,11 +4,14 @@
 #include "lib/calendarevent.h"
 #include <QMap>
 #include "lib/serializable.h"
+#include <QDate>
+#include <QPair>
+#include <QTime>
 
 class Calendar : public Serializable
 {
 private:
-    QMap<QDateTime, QString> m_events;
+    QMap<QDate, QPair<QTime, QString>> m_events;
 public:
     Calendar();
     ~Calendar();
@@ -17,9 +20,9 @@ public:
     QVariant toVariant() const override;
     void fromVariant(const QVariant &variant) override;
 
-    void addEvent(CalendarEvent event);
+    void addEvent(QDate date, QTime time, QString text);
 
-    inline QMap<QDateTime, QString> events() const {return m_events;}
+    inline QMap<QDate,  QPair<QTime, QString>> events() const {return m_events;}
 };
 
 
