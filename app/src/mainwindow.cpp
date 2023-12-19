@@ -58,6 +58,9 @@ MainWindow::MainWindow(QWidget *parent)
         scheduleItems.append(new ScheduleItem());
         m_plannerScenes[i]->addItem(scheduleItems[i]);
     }
+
+    ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
+    ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
 }
 
 MainWindow::~MainWindow()
@@ -174,16 +177,32 @@ void MainWindow::on_pushButton_help_clicked()
     ui->stackedWidget->setCurrentIndex(HELP);
 }
 
+void MainWindow::on_pushButton_addEvent_clicked()
+{
+    QString eventName = ui->lineEdit_event->text();
+    QDate date = ui->dateTimeEdit_eventTime->dateTime().date();
+    QTime time = ui->dateTimeEdit_eventTime->dateTime().time();
+
+    m_calendar.addEvent(date, time, eventName);
+
+    ui->lineEdit_event->clear();
+    ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
+    ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
+}
 
 void MainWindow::on_calendarWidget_activated(const QDate &date)
 {
-    // work in progress!
-
-//    qDebug() << date;
-    if(date.dayOfWeek() == 7)
-        QMessageBox::information(this, date.toString(), "nema nista");
+    QString message = "Na izabrani dan imate sledeće dogadjaje:\n";
+    if(!m_calendar.events().contains(date))
+        QMessageBox::information(this, date.toString("dd.MM.yyyy."), "Na izabrani dan nemate nijedan dogadjaj!");
     else
-        QMessageBox::information(this, date.toString(), "aktivnosti za taj dan npr");
+    {
+        for(auto event : m_calendar.events()[date])
+        {
+            message += "\t" + event.first.toString("hh:mm") + " - " + event.second + "\n";
+        }
+        QMessageBox::information(this, date.toString("dd.MM.yyyy."), message);
+    }
 }
 
 void MainWindow::on_pushButton_addActivity_clicked()
@@ -192,7 +211,7 @@ void MainWindow::on_pushButton_addActivity_clicked()
 
     QTime startTime = ui->timeEdit_start->time();
     QTime endTime = ui->timeEdit_end->time();
-    
+
     if (startTime >= endTime) {
         QMessageBox::warning(this, "Pogrešan unos", "Vreme početka aktivnosti mora biti pre vremena kraja!");
         return;
@@ -220,7 +239,6 @@ void MainWindow::on_pushButton_addActivity_clicked()
     activityText->setTextWidth(textWidth);
     activityText->setPos(activityItem->pos().x(), activityItem->pos().y() + activityTime->boundingRect().height());
     m_plannerScenes[day]->addItem(activityText);
-
 }
 
 void MainWindow::setEnabled(bool value)
@@ -390,3 +408,5 @@ bool MainWindow::registerUser(const QString& username, const QString& password){
         return false;
     }
 }
+
+

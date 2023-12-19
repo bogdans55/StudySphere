@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "lib/calendar.h"
 #include "lib/planner.h"
 #include "lib/plannerscene.h"
 #include "user.h"
@@ -47,11 +48,15 @@ private slots:
 
     void on_pushButton_login_clicked();
 
+    void on_pushButton_addEvent_clicked();
+
 private:
     Ui::MainWindow *ui;
 
     QVector<PlannerScene*> m_plannerScenes;
     Planner m_planner;
+
+    Calendar m_calendar;
 
     bool m_loggedIn = false;
     User m_user;

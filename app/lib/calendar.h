@@ -1,7 +1,6 @@
 #ifndef CALENDAR_H
 #define CALENDAR_H
 
-#include "lib/calendarevent.h"
 #include <QMap>
 #include "lib/serializable.h"
 #include <QDate>
@@ -11,7 +10,7 @@
 class Calendar : public Serializable
 {
 private:
-    QMap<QDate, QPair<QTime, QString>> m_events;
+    QMap<QDate, QVector<QPair<QTime, QString>>> m_events;
 public:
     Calendar();
     ~Calendar();
@@ -22,7 +21,7 @@ public:
 
     void addEvent(QDate date, QTime time, QString text);
 
-    inline QMap<QDate,  QPair<QTime, QString>> events() const {return m_events;}
+    inline QMap<QDate, QVector<QPair<QTime, QString>>> events() const {return m_events;}
 };
 
 

@@ -576,7 +576,14 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QDateTimeEdit" name="dateTimeEdit_eventTime"/>
+            <widget class="QDateTimeEdit" name="dateTimeEdit_eventTime">
+             <property name="displayFormat">
+              <string>dd.MM.yyyy. HH:mm</string>
+             </property>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
            <item row="2" column="1">
             <widget class="QPushButton" name="pushButton_addEvent">
