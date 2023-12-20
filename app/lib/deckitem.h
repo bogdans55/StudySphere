@@ -8,19 +8,20 @@ class Deck;
 
 class DeckItem : public QGraphicsItem
 {
-public:
-    DeckItem(Deck *deck);
+  public:
+	DeckItem(Deck *deck);
 
-    QRectF boundingRect() const override;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+	QRectF boundingRect() const override;
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-    inline int width() const { return 200; }
-    inline int height() const { return 500; }
+	inline int width() const { return 200; }
 
-    inline Deck deck() const { return m_deck; }
+	inline int height() const { return 500; }
 
-private:
-    Deck m_deck;
+	inline Deck deck() const { return m_deck; }
+
+  private:
+	Deck m_deck;
 };
 
 #endif // DECKITEM_H

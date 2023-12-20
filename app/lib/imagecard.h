@@ -6,22 +6,24 @@
 
 class ImageCard : public Card
 {
-public:
-    ImageCard();
-    ImageCard(QString questionText, QString answerText, Difficulty questionDifficulty);
-    ImageCard(QString questionText, QString answerText, Difficulty questionDifficulty, QImage questionImage, QImage answerImage);
-    ~ImageCard();
+  public:
+	ImageCard();
+	ImageCard(QString questionText, QString answerText, Difficulty questionDifficulty);
+	ImageCard(QString questionText, QString answerText, Difficulty questionDifficulty, QImage questionImage,
+			  QImage answerImage);
+	~ImageCard();
 
-    // Getters
-    inline QImage questionImage() const { return m_questionImage; }
-    inline QImage answerImage() const { return m_answerImage; }
+	// Getters
+	inline QImage questionImage() const { return m_questionImage; }
 
-    void setQuestionImage(const QImage& questionImage);
-    void setAnswerImage(const QImage& answerImage);
+	inline QImage answerImage() const { return m_answerImage; }
 
-private:
-    QImage m_questionImage;
-    QImage m_answerImage;
+	void setQuestionImage(const QImage &questionImage);
+	void setAnswerImage(const QImage &answerImage);
+
+  private:
+	QImage m_questionImage;
+	QImage m_answerImage;
 };
 
 #endif // IMAGECARD_H

@@ -6,10 +6,9 @@
 
 class DeckRating : public Grading
 {
-public:
-    DeckRating();
-    ~DeckRating();
-
+  public:
+	DeckRating();
+	~DeckRating();
 };
 
 #endif // DECKRATING_H

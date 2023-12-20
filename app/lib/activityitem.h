@@ -6,26 +6,27 @@
 
 class ActivityItem : public QGraphicsItem
 {
-public:
-    ActivityItem(Activity activity);
+  public:
+	ActivityItem(Activity activity);
 
-    QRectF boundingRect() const override;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+	QRectF boundingRect() const override;
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-    inline unsigned width() const { return m_width; }
-    inline unsigned height() const { return m_activity.start().secsTo(m_activity.end()) / 60; }
+	inline unsigned width() const { return m_width; }
 
-    void setWidth(unsigned width);
-    void setColor(QColor color);
+	inline unsigned height() const { return m_activity.start().secsTo(m_activity.end()) / 60; }
 
-    inline Activity activity() const { return m_activity; }
+	void setWidth(unsigned width);
+	void setColor(QColor color);
 
-private:
-    Activity m_activity;
+	inline Activity activity() const { return m_activity; }
 
-    unsigned m_width;
+  private:
+	Activity m_activity;
 
-    QColor m_color;
+	unsigned m_width;
+
+	QColor m_color;
 };
 
 #endif // ACTIVITYITEM_H

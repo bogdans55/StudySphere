@@ -1,73 +1,65 @@
 #include "lib/studysessionwindow.h"
 #include "ui_studysessionwindow.h"
 
-StudySessionWindow::StudySessionWindow(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::StudySessionWindow),
-    m_session(new StudySession())
+StudySessionWindow::StudySessionWindow(QWidget *parent)
+	: QWidget(parent), ui(new Ui::StudySessionWindow), m_session(new StudySession())
 {
-    ui->setupUi(this);
-    m_session->startSession();
-    ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
+	ui->setupUi(this);
+	m_session->startSession();
+	ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
 }
 
-StudySessionWindow::StudySessionWindow(StudySession *session, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::StudySessionWindow),
-    m_session(session)
+StudySessionWindow::StudySessionWindow(StudySession *session, QWidget *parent)
+	: QWidget(parent), ui(new Ui::StudySessionWindow), m_session(session)
 {
-    ui->setupUi(this);
-    m_session->startSession();
-    ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
+	ui->setupUi(this);
+	m_session->startSession();
+	ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
 }
 
 StudySessionWindow::~StudySessionWindow()
 {
-    delete ui;
+	delete ui;
 }
 
 void StudySessionWindow::on_pushButton_flip_clicked()
 {
-    if(m_session->answerShowed())
-        ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
-    else
-        ui->textEdit_card->setText(m_session->getCurrentCard().questionAnswer());
+	if (m_session->answerShowed())
+		ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
+	else
+		ui->textEdit_card->setText(m_session->getCurrentCard().questionAnswer());
 
-    m_session->flipCard();
+	m_session->flipCard();
 }
 
 void StudySessionWindow::evaluate(int grade) // should be enum grade
 {
-    m_session->getCurrentCard().evaluateAnswer(grade);
-    if(m_session->hasNextCard()){
-        m_session->nextCard();
-        ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
-    }
-    else{
-        close();
-    }
+	m_session->getCurrentCard().evaluateAnswer(grade);
+	if (m_session->hasNextCard()) {
+		m_session->nextCard();
+		ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
+	}
+	else {
+		close();
+	}
 }
 
 void StudySessionWindow::on_pushButton_skip_clicked()
 {
-    evaluate(0);
+	evaluate(0);
 }
-
 
 void StudySessionWindow::on_pushButton_bad_clicked()
 {
-    evaluate(1);
+	evaluate(1);
 }
-
 
 void StudySessionWindow::on_pushButton_mid_clicked()
 {
-    evaluate(2);
+	evaluate(2);
 }
-
 
 void StudySessionWindow::on_pushButton_good_clicked()
 {
-    evaluate(3);
+	evaluate(3);
 }
-

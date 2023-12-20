@@ -2,46 +2,47 @@
 #define CARD_H
 
 #include "lib/grading.h"
+#include "lib/serializable.h"
 #include <QJsonObject>
-#include"lib/serializable.h"
 
 // in .h .cpp ?
 enum class Difficulty
 {
-    EASY,
-    MEDIUM,
-    HARD
+	EASY,
+	MEDIUM,
+	HARD
 };
 
 class Card : public Serializable
 {
-public:
-    Card();
-    Card(QString m_questionText, QString m_answerText, Difficulty m_questionDifficulty);
-    Card(const Card& card);
+  public:
+	Card();
+	Card(QString m_questionText, QString m_answerText, Difficulty m_questionDifficulty);
+	Card(const Card &card);
 
-    ~Card();
-    void evaluateAnswer(unsigned evaluation);
+	~Card();
+	void evaluateAnswer(unsigned evaluation);
 
-    // Getters
-    inline QString questionText() const {return m_questionText;}
-    inline QString questionAnswer() const {return m_answerText;}
-    inline Difficulty questionDifficulty() const {return m_questionDifficulty;}
-    inline Grading stats() const {return m_stats;}
+	// Getters
+	inline QString questionText() const { return m_questionText; }
 
-    // Setters
-    void setAnswerShowed(bool answerShowed);     // public?
+	inline QString questionAnswer() const { return m_answerText; }
 
-    QVariant toVariant() const override;
-    void fromVariant(const QVariant &variant) override;
+	inline Difficulty questionDifficulty() const { return m_questionDifficulty; }
 
-protected:
-    QString m_questionText;     // was CardContent
-    QString m_answerText;       // was CardContent
-    Difficulty m_questionDifficulty;
-    Grading m_stats;            // was CardStats
+	inline Grading stats() const { return m_stats; }
 
+	// Setters
+	void setAnswerShowed(bool answerShowed); // public?
+
+	QVariant toVariant() const override;
+	void fromVariant(const QVariant &variant) override;
+
+  protected:
+	QString m_questionText; // was CardContent
+	QString m_answerText;	// was CardContent
+	Difficulty m_questionDifficulty;
+	Grading m_stats; // was CardStats
 };
-
 
 #endif // CARD_H

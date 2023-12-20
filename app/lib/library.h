@@ -1,28 +1,30 @@
 #ifndef LIBRARY_H
 #define LIBRARY_H
 
-#include <QString>
-#include <QVector>
 #include "deck.h"
 #include <QImage>
+#include <QString>
+#include <QVector>
 
-class Library{
+class Library
+{
 
-public:
-    static Library& instance();
+  public:
+	static Library &instance();
 
-    void addDeck(const Deck& deck);
-    void removeDeck(Deck& deck, QString& username);
-    void importDeck(const QString& filePath);
-    void exportDeck(const QVector<Deck>& decks, const QString& filePath);
-private:
-    QVector<Deck> m_decks;
+	void addDeck(const Deck &deck);
+	void removeDeck(Deck &deck, QString &username);
+	void importDeck(const QString &filePath);
+	void exportDeck(const QVector<Deck> &decks, const QString &filePath);
 
-    Library();
-    Library(const Library&) = delete;
-    void operator=(const Library&) = delete;
+  private:
+	QVector<Deck> m_decks;
 
-    void loadDecksFromFolder(const QString folderPath);
+	Library();
+	Library(const Library &) = delete;
+	void operator=(const Library &) = delete;
+
+	void loadDecksFromFolder(const QString folderPath);
 };
 
 #endif // LIBRARY_H

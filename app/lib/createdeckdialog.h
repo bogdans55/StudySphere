@@ -2,27 +2,28 @@
 #define CREATEDECKDIALOG_H
 
 #include "lib/deck.h"
-#include <QDialog>
 #include <QButtonGroup>
+#include <QDialog>
 
-namespace Ui {
+namespace Ui
+{
 class CreateDeckDialog;
 }
 
 class CreateDeckDialog : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
-public:
-    explicit CreateDeckDialog(QWidget *parent = nullptr);
-    ~CreateDeckDialog();
+  public:
+	explicit CreateDeckDialog(QWidget *parent = nullptr);
+	~CreateDeckDialog();
 
-    QString getDeckName() const;
-    Privacy getDeckPrivacy() const;
+	QString getDeckName() const;
+	Privacy getDeckPrivacy() const;
 
-private:
-    Ui::CreateDeckDialog *ui;
-    QButtonGroup *deckPrivacy;
+  private:
+	Ui::CreateDeckDialog *ui;
+	QButtonGroup *deckPrivacy;
 };
 
 #endif // CREATEDECKDIALOG_H

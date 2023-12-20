@@ -7,18 +7,18 @@
 
 class PlannerScene : public QGraphicsScene
 {
-public:
-    explicit PlannerScene(QObject *parent = nullptr);
+  public:
+	explicit PlannerScene(QObject *parent = nullptr);
 
-    inline auto activities() const { return m_activities; }
+	inline auto activities() const { return m_activities; }
 
-    void addActivity(ActivityItem *activityItem);
-    void clearActivities();
+	void addActivity(ActivityItem *activityItem);
+	void clearActivities();
 
-private:
-    QVector<Activity> m_activities;
-    QVector<QColor> m_activityColors;
-    unsigned m_colorPicker;
+  private:
+	QVector<Activity> m_activities;
+	QVector<QColor> m_activityColors;
+	unsigned m_colorPicker;
 };
 
 #endif // PLANNERSCENE_H
