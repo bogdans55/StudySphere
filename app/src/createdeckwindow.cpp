@@ -3,6 +3,8 @@
 #include "lib/jsonserializer.h"
 #include "lib/serializer.h"
 #include "ui_createdeckwindow.h"
+
+#include <QMessageBox>
 #include <QTcpServer>
 #include <QTcpSocket>
 
@@ -35,13 +37,8 @@ QString CreateDeckWindow::getAnswerText() const
 
 Difficulty CreateDeckWindow::getDifficulty() const
 {
-	if (m_questionDifficulty->checkedId() == 1)
-		return Difficulty::EASY;
-	else if (m_questionDifficulty->checkedId() == 2)
-		return Difficulty::MEDIUM;
-	else
-		return Difficulty::HARD;
-} // default difficulty set to HARD, change if needed
+	return (Difficulty)m_questionDifficulty->checkedId();
+}
 
 void CreateDeckWindow::on_pushButton_finish_clicked()
 {
@@ -79,6 +76,10 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
 		}
 
 		socket.disconnectFromHost();
+
+		QMessageBox::information(this, "Uspešno kreiran špil", "Vaš špil je uspešno kreiran i sačuvan!");
+
+		//        delete m_deck;
 	}
 	else {
 		qDebug() << "Failed to connect to the server";
@@ -117,21 +118,23 @@ void CreateDeckWindow::generateId()
 
 void CreateDeckWindow::on_pushButton_add_clicked()
 {
-
 	m_questionDifficulty = new QButtonGroup(this);
-	m_questionDifficulty->addButton(ui->radioButton_easy, 1);
-	m_questionDifficulty->addButton(ui->radioButton_medium, 2);
-	m_questionDifficulty->addButton(ui->radioButton_hard, 3);
+	m_questionDifficulty->addButton(ui->radioButton_easy, Difficulty::EASY);
+	m_questionDifficulty->addButton(ui->radioButton_medium, Difficulty::MEDIUM);
+	m_questionDifficulty->addButton(ui->radioButton_hard, Difficulty::HARD);
 
 	QString m_question = getQuestionText();
 	QString m_answer = getAnswerText();
 	Difficulty m_difficulty = getDifficulty();
 
-	Card *m_card = new Card(m_question, m_answer, m_difficulty);
+	Card *card = new Card(m_question, m_answer, m_difficulty);
 
-	m_deck.addCard(m_card);
+	m_deck.addCard(card);
 
 	ui->textEdit_question->clear();
 	ui->textEdit_answer->clear();
-	// TODO clear radio buttons
+
+	m_questionDifficulty->setExclusive(false);
+	m_questionDifficulty->checkedButton()->setChecked(false);
+	m_questionDifficulty->setExclusive(true);
 }

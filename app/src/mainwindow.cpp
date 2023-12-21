@@ -210,7 +210,6 @@ void MainWindow::on_pushButton_addActivity_clicked()
 
 void MainWindow::setEnabled(bool value)
 {
-	// TODO add every ui (input) element
 	ui->pushButton_library->setEnabled(value);
 	ui->pushButton_todo->setEnabled(value);
 	ui->pushButton_planer->setEnabled(value);
@@ -278,7 +277,7 @@ void MainWindow::on_pushButton_login_clicked()
 		ui->label_username->setText("Nema korisnika");
 		ui->pushButton_login->setText("Prijavi se");
 		setEnabled(false);
-		// load library page?
+		ui->stackedWidget->setCurrentIndex(LIBRARY);
 	}
 }
 

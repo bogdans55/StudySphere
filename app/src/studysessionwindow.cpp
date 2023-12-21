@@ -1,6 +1,8 @@
 #include "lib/studysessionwindow.h"
 #include "ui_studysessionwindow.h"
 
+#include <QMessageBox>
+
 StudySessionWindow::StudySessionWindow(QWidget *parent)
 	: QWidget(parent), ui(new Ui::StudySessionWindow), m_session(new StudySession())
 {
@@ -32,7 +34,7 @@ void StudySessionWindow::on_pushButton_flip_clicked()
 	m_session->flipCard();
 }
 
-void StudySessionWindow::evaluate(int grade) // should be enum grade
+void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 {
 	m_session->getCurrentCard().evaluateAnswer(grade);
 	if (m_session->hasNextCard()) {
@@ -40,6 +42,7 @@ void StudySessionWindow::evaluate(int grade) // should be enum grade
 		ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
 	}
 	else {
+		QMessageBox::information(this, "Gotova sesija", "Uspešno ste prešli sva odabrana pitanja!");
 		close();
 	}
 }

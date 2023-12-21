@@ -6,9 +6,9 @@
 #include <QJsonObject>
 
 // in .h .cpp ?
-enum class Difficulty
+enum Difficulty
 {
-	EASY,
+	EASY = 0,
 	MEDIUM,
 	HARD
 };

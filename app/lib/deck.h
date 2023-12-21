@@ -8,7 +8,7 @@
 #include <QString>
 #include <QVector>
 
-enum class Privacy
+enum Privacy
 {
 	PRIVATE,
 	PUBLIC
