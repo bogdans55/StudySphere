@@ -31,32 +31,71 @@
       <widget class="QTextEdit" name="textEdit_question"/>
      </item>
      <item row="1" column="0">
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="icon">
+        <iconset resource="../res/icons.qrc">
+         <normaloff>:/icons/image.png</normaloff>:/icons/image.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="label_questionImage">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
       <widget class="QLabel" name="label_answer">
        <property name="text">
         <string>Odgovor:</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
+     <item row="3" column="1">
       <widget class="QTextEdit" name="textEdit_answer"/>
      </item>
-     <item row="4" column="1">
-      <spacer name="verticalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
+     <item row="4" column="0">
+      <widget class="QPushButton" name="pushButton">
+       <property name="icon">
+        <iconset resource="../res/icons.qrc">
+         <normaloff>:/icons/image.png</normaloff>:/icons/image.png</iconset>
        </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::MinimumExpanding</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
+       <property name="iconSize">
         <size>
-         <width>20</width>
-         <height>50</height>
+         <width>32</width>
+         <height>32</height>
         </size>
        </property>
-      </spacer>
+      </widget>
      </item>
-     <item row="2" column="1">
+     <item row="4" column="1">
+      <widget class="QLabel" name="label_answerImage">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_difficulty">
+       <property name="text">
+        <string>Težina:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
       <layout class="QVBoxLayout" name="verticalLayout_difficulty">
        <item>
         <widget class="QRadioButton" name="radioButton_easy">
@@ -81,12 +120,21 @@
        </item>
       </layout>
      </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_difficulty">
-       <property name="text">
-        <string>Težina:</string>
+     <item row="7" column="1">
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
        </property>
-      </widget>
+       <property name="sizeType">
+        <enum>QSizePolicy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>50</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>

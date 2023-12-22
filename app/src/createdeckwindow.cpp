@@ -4,6 +4,7 @@
 #include "lib/serializer.h"
 #include "ui_createdeckwindow.h"
 
+#include <QFileDialog>
 #include <QMessageBox>
 #include <QTcpServer>
 #include <QTcpSocket>
@@ -18,6 +19,9 @@ CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, User &user, QW
 	: QWidget(parent), ui(new Ui::CreateDeckWindow), m_deck(name, privacy), m_user(user)
 {
 	ui->setupUi(this);
+
+	ui->label_questionImage->setVisible(false);
+	ui->label_answerImage->setVisible(false);
 }
 
 CreateDeckWindow::~CreateDeckWindow()
@@ -137,4 +141,26 @@ void CreateDeckWindow::on_pushButton_add_clicked()
 	m_questionDifficulty->setExclusive(false);
 	m_questionDifficulty->checkedButton()->setChecked(false);
 	m_questionDifficulty->setExclusive(true);
+
+	ui->label_questionImage->setVisible(false);
+	ui->label_answerImage->setVisible(false);
+}
+
+void CreateDeckWindow::loadPicture(QLabel *label)
+{
+	QString imagePath =
+		QFileDialog::getOpenFileName(this, "Select Image", "", "Image Files (*.png *.jpg *.bmp *.gif);;All Files (*)");
+
+	label->setPixmap(QPixmap(imagePath).scaledToWidth(ui->textEdit_question->width() / 2));
+	label->setVisible(true);
+}
+
+void CreateDeckWindow::on_pushButton_2_clicked()
+{
+	loadPicture(ui->label_questionImage);
+}
+
+void CreateDeckWindow::on_pushButton_clicked()
+{
+	loadPicture(ui->label_answerImage);
 }
