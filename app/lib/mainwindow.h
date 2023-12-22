@@ -5,6 +5,7 @@
 #include "lib/plannerscene.h"
 #include "user.h"
 #include "libraryscene.h"
+#include "settings.h"
 
 #include <QWidget>
 
@@ -46,6 +47,8 @@ private slots:
     void on_pushButton_addActivity_clicked();
 
     void on_pushButton_login_clicked();
+
+    void on_comboBox_language_currentIndexChanged(int index);
 
 private:
     Ui::MainWindow *ui;

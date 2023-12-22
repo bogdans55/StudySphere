@@ -75,7 +75,8 @@ FORMS += \
     forms/logindialog.ui
 
 RESOURCES += \
-    res/icons.qrc
+    res/icons.qrc \
+    res/translations.qrc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

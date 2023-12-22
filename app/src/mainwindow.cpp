@@ -59,10 +59,19 @@ MainWindow::MainWindow(QWidget *parent)
         scheduleItems[i]->setWidth(ui->graphicsView_monday->width());
         m_plannerScenes[i]->addItem(scheduleItems[i]);
     }
+
+    QApplication* app = qobject_cast<QApplication*>(QApplication::instance());
+    Settings& settings = Settings::instance(app);
+
+    settings.setLanguage(Language::SERBIAN);
+    ui->retranslateUi(this);
 }
 
 MainWindow::~MainWindow()
 {
+    for (auto scene : m_plannerScenes) {
+        delete scene;
+    }
     delete ui;
 }
 
@@ -342,7 +351,7 @@ bool MainWindow::loginUser(const QString& username, const QString& password){
         if(jsondoc["status"] != QJsonValue::Undefined && jsondoc["status"] != "Password incorrect, try again")
         {
             ui->label_username->setText(request["username"].toString());
-            ui->pushButton_login->setText("Odjavi se");
+            ui->pushButton_login->setText(tr("Odjavi se"));
             m_user.setUsername(request["username"].toString());
         }
         else{
@@ -395,3 +404,13 @@ bool MainWindow::registerUser(const QString& username, const QString& password){
         return false;
     }
 }
+
+void MainWindow::on_comboBox_language_currentIndexChanged(int index)
+{
+    QApplication* app = qobject_cast<QApplication*>(QApplication::instance());
+    Settings& settings = Settings::instance(app);
+
+    settings.setLanguage(index);
+    ui->retranslateUi(this);
+}
+
