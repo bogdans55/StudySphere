@@ -59,10 +59,14 @@ class MainWindow : public QWidget
 	Planner m_planner;
 
 	bool m_loggedIn = false;
+    bool m_plannerLoaded = false;
 	User m_user;
 	LibraryScene m_libraryScene;
 
+    void savePlanner();
+
 	bool registerUser(const QString &username, const QString &password);
 	bool loginUser(const QString &username, const QString &password);
+    void showActivities();
 };
 #endif // MAINWINDOW_H
