@@ -54,6 +54,7 @@ private:
     Planner m_planner;
 
     bool m_loggedIn = false;
+    bool m_plannerLoaded = false;
     User m_user;
     LibraryScene m_libraryScene;
 

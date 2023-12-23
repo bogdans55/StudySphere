@@ -183,41 +183,43 @@ void MainWindow::on_pushButton_todo_clicked()
 void MainWindow::on_pushButton_planer_clicked()
 {
     ui->stackedWidget->setCurrentIndex(PLANER);
+    if(!m_plannerLoaded){
+        QTcpSocket socket;
+        socket.connectToHost("127.0.0.1", 8080);
 
-    QTcpSocket socket;
-    socket.connectToHost("127.0.0.1", 8080);
+        if(socket.waitForConnected()){
+            QJsonObject request;
+            request["action"] = "getPlanner";
+            request["username"] = m_user.username();
+            qDebug() << request;
 
-    if(socket.waitForConnected()){
-        QJsonObject request;
-        request["action"] = "getPlanner";
-        request["username"] = m_user.username();
-        qDebug() << request;
+            socket.write(QJsonDocument(request).toJson());
+            socket.waitForBytesWritten();
+            socket.waitForReadyRead();
 
-        socket.write(QJsonDocument(request).toJson());
-        socket.waitForBytesWritten();
-        socket.waitForReadyRead();
+            QByteArray responseText = socket.readAll();
+            QTextStream stream(responseText);
 
-        QByteArray responseText = socket.readAll();
-        QTextStream stream(responseText);
+            QString plannerResponse = stream.readAll();
+            QJsonDocument jsondoc = QJsonDocument::fromJson(plannerResponse.toUtf8());
+            QJsonObject jsonobj = jsondoc.object();
 
-        QString plannerResponse = stream.readAll();
-        QJsonDocument jsondoc = QJsonDocument::fromJson(plannerResponse.toUtf8());
-        QJsonObject jsonobj = jsondoc.object();
+            qDebug() << jsondoc;
 
-        qDebug() << jsondoc;
+            JSONSerializer jsonSerializer;
 
-        JSONSerializer jsonSerializer;
+            QJsonObject deckObject = jsondoc["planner"].toObject();
+            QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 
-        QJsonObject deckObject = jsondoc["planner"].toObject();
-        QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
+            jsonSerializer.loadJson(m_planner, deckDocument);
 
-        jsonSerializer.loadJson(m_planner, deckDocument);
-
-        socket.disconnectFromHost();
-    }else{
-        qDebug() << "Failed to connect to the server";
+            socket.disconnectFromHost();
+        }else{
+            qDebug() << "Failed to connect to the server";
+        }
+        showActivities();
+        m_plannerLoaded = true;
     }
-    showActivities();
 }
 
 
