@@ -21,7 +21,7 @@ class Deck : public Serializable
 	QString m_name;
 	QVector<Card *> m_cards;
 	Privacy m_privacy;
-	DeckStats m_deckStats;
+    DeckStats* m_deckStats;
 	QImage m_thumbnail;
 	Grading m_rating;
 
@@ -39,7 +39,7 @@ class Deck : public Serializable
 
 	inline Privacy privacy() const { return m_privacy; }
 
-	inline DeckStats deckStats() const { return m_deckStats; }
+    inline DeckStats* deckStats() { return m_deckStats; }
 
 	inline QImage thumbnail() const { return m_thumbnail; }
 
