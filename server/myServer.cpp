@@ -21,6 +21,9 @@ MyServer::MyServer(QObject* parent) : QObject(parent){
     QDir().mkpath(userDecksFolder);
 
     uniqueIdsFile = "uniqueIds.txt";
+
+    plannerFolder = "plannerFolder";
+    QDir().mkpath(plannerFolder);
 }
 
 MyServer::~MyServer() {
@@ -114,6 +117,11 @@ void MyServer::readData()
         writeRemainingIDsToFile();
     }else if(action == "sendDeck"){
         sendDeckById(socket, jsonObject["username"].toString(), jsonObject["DeckId"].toString());
+    }else if(action == "savePlanner"){
+        QJsonObject planner = jsonObject["planner"].toObject();
+        savePlanner(socket, jsonObject["username"].toString(), planner);
+    }else if(action == "sendPlanner"){
+        sendPlanner(socket, jsonObject["username"].toString());
     }
 
     socket ->close();
@@ -124,6 +132,29 @@ void MyServer::newConnection(){
     connect(socket, &QTcpSocket::readyRead, this, &MyServer::readData);
 
 }
+
+void MyServer::savePlanner(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject){
+
+    QString filePath = QDir(plannerFolder).absoluteFilePath(username + ".json");
+    QFile file(filePath);
+
+    if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
+        QTextStream stream(&file);
+        stream << QJsonDocument(jsonObject).toJson();
+        file.close();
+        qDebug() << "Planner saved on path: " << filePath;
+    }else{
+        qDebug() << "Error saving deck:" << file.errorString();
+    }
+
+    QJsonObject response;
+    response["status"] = "Planner saved successfully";
+}
+
+void MyServer::sendPlanner(QTcpSocket* socket, const QString& username){
+
+}
+
 
 void MyServer::removeDeck(QTcpSocket* socket, QJsonObject& jsonObject){
 

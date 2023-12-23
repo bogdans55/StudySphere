@@ -63,8 +63,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-
-
+    savePlanner();
     delete ui;
 }
 

@@ -26,6 +26,7 @@ private:
     QString usersInfoFolder;
     QString userDecksFolder;
     QString uniqueIdsFile;
+    QString plannerFolder;
     QVector<QString> ids;
 
     void registerUser(QTcpSocket* socket, QJsonObject& jsonObject);
@@ -33,6 +34,8 @@ private:
     void sendUserDecks(QTcpSocket* socket, const QString& searchQuery);
     void searchAndSendDecks(QTcpSocket* socket, const QString& searchQuery);
     void saveDeck(QTcpSocket* socket, QJsonObject& jsonObject);
+    void savePlanner(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject);
+    void sendPlanner(QTcpSocket* socket, const QString& username);
     void saveDeckForUser(const QString& username, const QString& deckName, QByteArray& deckData);
     void removeDeck(QTcpSocket* socket, QJsonObject& jsonObject);
     void sendId(QTcpSocket* socket);
