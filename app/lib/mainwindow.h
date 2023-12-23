@@ -57,6 +57,8 @@ private:
     User m_user;
     LibraryScene m_libraryScene;
 
+    void savePlanner();
+
     bool registerUser(const QString& username, const QString& password);
     bool loginUser(const QString& username, const QString& password);
 };
