@@ -61,5 +61,6 @@ private:
 
     bool registerUser(const QString& username, const QString& password);
     bool loginUser(const QString& username, const QString& password);
+    void showActivities();
 };
 #endif // MAINWINDOW_H

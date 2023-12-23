@@ -217,6 +217,7 @@ void MainWindow::on_pushButton_planer_clicked()
     }else{
         qDebug() << "Failed to connect to the server";
     }
+    showActivities();
 }
 
 
@@ -292,6 +293,34 @@ void MainWindow::on_pushButton_addActivity_clicked()
     m_plannerScenes[day]->addItem(activityText);
 
 }
+
+void MainWindow::showActivities(){
+    for(auto day : m_planner.activities().keys())
+    {
+        for(auto currentActivity : m_planner.activities().value(day)){
+            QString name = currentActivity.activityText();
+
+            QTime startTime = currentActivity.start();
+
+            ActivityItem *activityItem = new ActivityItem(currentActivity);
+            m_plannerScenes[day]->addActivity(activityItem);
+            m_plannerScenes[day]->addItem(activityItem);
+
+            QGraphicsTextItem *activityTime = new QGraphicsTextItem();
+            activityTime->setPlainText(startTime.toString("hh:mm"));
+            activityTime->setPos(activityItem->pos());
+            m_plannerScenes[day]->addItem(activityTime);
+
+            QGraphicsTextItem *activityText = new QGraphicsTextItem();
+            activityText->setPlainText(name);
+            qreal textWidth = ui->graphicsView_monday->width() - 10; // hardcoded reduction for scroll bar
+            activityText->setTextWidth(textWidth);
+            activityText->setPos(activityItem->pos().x(), activityItem->pos().y() + activityTime->boundingRect().height());
+            m_plannerScenes[day]->addItem(activityText);
+        }
+    }
+}
+
 
 void MainWindow::setEnabled(bool value)
 {
