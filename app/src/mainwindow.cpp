@@ -370,21 +370,11 @@ void MainWindow::showActivities()
 
 void MainWindow::setupTableView()
 {
-//    ui->tableWidget_library->setRowCount(0);
-    ui->tableWidget_library->setColumnCount(0);
-    ui->tableWidget_library->setRowHeight(0, ui->tableWidget_library->height()/2);
-    ui->tableWidget_library->setRowHeight(1, 30);
-    ui->tableWidget_library->setRowHeight(2, ui->tableWidget_library->height()/2);
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-    ui->tableWidget_library->setRowCount(ui->tableWidget_library->rowCount() + 1);
-    ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
-
-    QPushButton *btn = new QPushButton("text", ui->tableWidget_library);
-    ui->tableWidget_library->setCellWidget(ui->tableWidget_library->rowCount() - 1,
-                                           ui->tableWidget_library->columnCount() - 1, btn);
+	//    ui->tableWidget_library->setRowCount(0);
+	ui->tableWidget_library->setColumnCount(0);
+	ui->tableWidget_library->setRowHeight(0, ui->tableWidget_library->height() / 2);
+	ui->tableWidget_library->setRowHeight(1, 30);
+	ui->tableWidget_library->setRowHeight(2, ui->tableWidget_library->height() / 2);
 }
 
 void MainWindow::setEnabled(bool value)
@@ -451,13 +441,13 @@ void MainWindow::on_pushButton_login_clicked()
 		m_loggedIn = loginSuccess;
 	}
 	else {
-        // logout
+		// logout
 		m_loggedIn = false; // use setter instead?
 							//		ui->listWidget_library->clear();
 		ui->label_username->setText("Nema korisnika");
 		ui->pushButton_login->setText("Prijavi se");
 		setEnabled(false);
-        ui->tableWidget_library->clear();
+		ui->tableWidget_library->clear();
 		ui->stackedWidget->setCurrentIndex(LIBRARY);
 	}
 }
@@ -492,15 +482,15 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 		if (deckNames != "") {
 			// split deckNames with ", "
 			QStringList deckNamesList = deckNames.split(", ");
-            unsigned counter = 0;
-            for (auto &deckNameID : deckNamesList) {
-                // auto deckName = deckNameID.split('_')[0];
-                QPushButton *btn = new QPushButton(deckNameID, ui->tableWidget_library);
-                if (counter % 2 == 0)
-                    ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
-                ui->tableWidget_library->setCellWidget(counter % 2 * 2, counter / 2, btn);
-                counter++;
-            }
+			unsigned counter = 0;
+			for (auto &deckNameID : deckNamesList) {
+				// auto deckName = deckNameID.split('_')[0];
+				QPushButton *btn = new QPushButton(deckNameID, ui->tableWidget_library);
+				if (counter % 2 == 0)
+					ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
+				ui->tableWidget_library->setCellWidget(counter % 2 * 2, counter / 2, btn);
+				counter++;
+			}
 		}
 
 		if (jsondoc["status"] != QJsonValue::Undefined && jsondoc["status"] != "Password incorrect, try again") {

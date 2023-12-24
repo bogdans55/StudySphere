@@ -20,6 +20,13 @@ MyServer::MyServer(QObject *parent) : QObject(parent)
 	userDecksFolder = "userDecks";
 	QDir().mkpath(userDecksFolder);
 
+    uniqueIdsFile = "uniqueIds.txt";
+
+	calendarFolder = "calendarFolder";
+	QDir().mkpath(calendarFolder);
+
+    plannerFolder = "plannerFolder";
+    QDir().mkpath(plannerFolder);
 	uniqueIdsFile = "uniqueIds.txt";
 }
 
@@ -125,6 +132,32 @@ void MyServer::readData()
 	else if (action == "sendDeck") {
 		sendDeckById(socket, jsonObject["username"].toString(), jsonObject["DeckId"].toString());
 	}
+    if (action == "login") {
+        loginUser(socket, jsonObject);
+    }else if (action == "saveDeck") {
+        qDebug() << "Deck is saving";
+        saveDeck(socket, jsonObject);
+    }else if(action == "register"){
+        registerUser(socket, jsonObject);
+    }else if(action == "removeDeck"){
+        removeDeck(socket, jsonObject);
+    }else if(action == "generateId"){
+        loadIds();
+        sendId(socket);
+        writeRemainingIDsToFile();
+    }else if(action == "sendDeck"){
+        sendDeckById(socket, jsonObject["username"].toString(), jsonObject["DeckId"].toString());
+	}else if(action == "saveCalendar"){
+		QJsonObject planner = jsonObject["calendar"].toObject();
+		saveCalendar(socket, jsonObject["username"].toString(), planner);
+	}else if(action == "getCalendar"){
+		getCalendar(socket, jsonObject["username"].toString());
+	}else if(action == "savePlanner"){
+        QJsonObject planner = jsonObject["planner"].toObject();
+        savePlanner(socket, jsonObject["username"].toString(), planner);
+    }else if(action == "getPlanner"){
+        sendPlanner(socket, jsonObject["username"].toString());
+    }
 
 	socket->close();
 }
@@ -135,8 +168,46 @@ void MyServer::newConnection()
 	connect(socket, &QTcpSocket::readyRead, this, &MyServer::readData);
 }
 
-void MyServer::removeDeck(QTcpSocket *socket, QJsonObject &jsonObject)
-{
+void MyServer::savePlanner(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject){
+
+    QString filePath = QDir(plannerFolder).absoluteFilePath(username + ".json");
+    QFile file(filePath);
+
+    if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
+        QTextStream stream(&file);
+        stream << QJsonDocument(jsonObject).toJson();
+        file.close();
+        qDebug() << "Planner saved on path: " << filePath;
+    }else{
+        qDebug() << "Error saving deck:" << file.errorString();
+    }
+
+    QJsonObject response;
+    response["status"] = "Planner saved successfully";
+}
+
+void MyServer::sendPlanner(QTcpSocket* socket, const QString& username){
+
+    QString filePath = QDir(plannerFolder).absoluteFilePath(username + ".json");
+    QFile file(filePath);
+    QJsonObject response;
+
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text)){
+        QByteArray plannerData = file.readAll();
+        response["planner"] = QJsonDocument::fromJson(plannerData).object();
+        response["status"] = "Successful!";
+        file.close();
+    }else{
+        response["status"] = "Error getting planner!";
+        qDebug() << "Error opening planner file:" << file.errorString();
+    }
+
+    QTextStream stream(socket);
+    stream << QJsonDocument(response).toJson();
+}
+
+
+void MyServer::removeDeck(QTcpSocket* socket, QJsonObject& jsonObject){
 
 	QString username = jsonObject["username"].toString();
 	QString deckID = QString::number(jsonObject["DeckId"].toDouble());
@@ -377,6 +448,7 @@ void MyServer::writeRemainingIDsToFile()
 		}
 
 		file.close();
+		ids.clear();
 	}
 	else {
 		qDebug() << "Couldn't open file: " << uniqueIdsFile;
@@ -414,3 +486,42 @@ void MyServer::writeRemainingIDsToFile()
 //     QByteArray deckData = userDeckFile.readAll();
 //     userDeckFile.close();
 // }
+
+void MyServer::saveCalendar(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject){
+
+	QString filePath = QDir(calendarFolder).absoluteFilePath(username + ".json");
+	QFile file(filePath);
+
+	if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
+		QTextStream stream(&file);
+		stream << QJsonDocument(jsonObject).toJson();
+		file.close();
+		qDebug() << "Calendar saved on path: " << filePath;
+	}else{
+		qDebug() << "Error saving deck:" << file.errorString();
+	}
+
+	QJsonObject response;
+	response["status"] = "Calendar saved successfully";
+}
+
+void MyServer::getCalendar(QTcpSocket* socket, const QString& username){
+
+	QString filePath = QDir(calendarFolder).absoluteFilePath(username + ".json");
+	QFile file(filePath);
+	QJsonObject response;
+
+	if(file.open(QIODevice::ReadOnly | QIODevice::Text)){
+		QByteArray calendarData = file.readAll();
+		response["calendar"] = QJsonDocument::fromJson(calendarData).object();
+		response["status"] = "Successful!";
+		file.close();
+	}else{
+		response["status"] = "Error getting calendar!";
+		qDebug() << "Error opening calendar file:" << file.errorString();
+	}
+
+	QTextStream stream(socket);
+	stream << QJsonDocument(response).toJson();
+}
+

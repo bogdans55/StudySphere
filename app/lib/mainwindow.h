@@ -55,8 +55,6 @@ class MainWindow : public QWidget
 
 	void on_pushButton_addEvent_clicked();
 
-	void on_pushButton_clicked();
-
   private:
 	Ui::MainWindow *ui;
 
