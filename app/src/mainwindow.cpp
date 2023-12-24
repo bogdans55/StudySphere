@@ -62,12 +62,15 @@ MainWindow::MainWindow(QWidget *parent)
 		scheduleItems[i]->setWidth(ui->graphicsView_monday->width());
 		m_plannerScenes[i]->addItem(scheduleItems[i]);
 	}
+
+    connect(ui->listWidget_todos, &QListWidget::itemChanged, this, &MainWindow::onTodoItemChanged);
 }
 
 MainWindow::~MainWindow()
 {
 	saveCalendar();
     savePlanner();
+//    saveToDoList();
 	delete ui;
 }
 
@@ -580,10 +583,13 @@ void MainWindow::on_pushButton_addTodo_clicked()
 {
     QListWidgetItem* item = new QListWidgetItem();
     item->setCheckState(Qt::Unchecked);
-    item->setText(ui->textEdit_todo->toPlainText());
+    item->setText(ui->lineEdit_todo->text());
+
+    m_toDoList.addToDo(item->text(), item->checkState());
+
     ui->listWidget_todos->addItem(item);
-    ui->textEdit_todo->clear();
-    ui->textEdit_todo->setFocus();
+    ui->lineEdit_todo->clear();
+    ui->lineEdit_todo->setFocus();
 }
 
 void MainWindow::on_pushButton_deleteTodo_clicked()
@@ -592,38 +598,60 @@ void MainWindow::on_pushButton_deleteTodo_clicked()
 
     if (currentRow >= 0) {
         QListWidgetItem* item = ui->listWidget_todos->takeItem(currentRow);
-        delete item;
 
-        MainWindow::updateTodoFile();
+        m_toDoList.deleteToDo(item->text());
+        delete item;
     }
 }
 
 void MainWindow::on_pushButton_deleteAllTodos_clicked()
 {
+    m_toDoList.deleteAllToDos();
     ui->listWidget_todos->clear();
-
-    MainWindow::updateTodoFile();
 }
 
-void MainWindow::updateTodoFile()
-{
-    QFile file(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/todoFile.txt");
+void MainWindow::onTodoItemChanged(QListWidgetItem* item) {
+    if (item) {
+        m_toDoList.checkToDo(item->text(), item->checkState());
 
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-        QMessageBox::information(0, "Error", file.errorString());
-        return;
+        if (item->checkState() == Qt::Checked) {
+            item->setBackground(QBrush(QColor(140, 255, 140)));
+        } else {
+            item->setBackground(QBrush(Qt::white));
+        }
     }
-
-    QTextStream out(&file);
-
-    for (int i = 0; i < ui->listWidget_todos->count(); ++i) {
-        out << ui->listWidget_todos->item(i)->text() << '\n';
-    }
-
-    file.close();
 }
 
-void MainWindow::on_comboBox_theme_currentIndexChanged(int index)
-{
-    m_settings.setTheme(static_cast<Theme>(index));
+void MainWindow::saveToDoList(){
+    QTcpSocket socket;
+    socket.connectToHost("127.0.0.1", 8080);
+
+    if(socket.waitForConnected()){
+        QJsonObject request;
+
+        JSONSerializer serializer;
+        QJsonDocument doc = serializer.createJson(m_planner);
+
+
+        qDebug() << doc;
+
+        request["action"] = "saveToDoList";
+        request["username"] = m_user.username();
+        request["planner"] = doc.toVariant().toJsonObject();
+
+        qDebug() << request;
+
+        socket.write(QJsonDocument(request).toJson());
+        socket.waitForBytesWritten();
+        socket.waitForReadyRead();
+
+        QByteArray responseData = socket.readAll();
+        QTextStream stream(responseData);
+
+        qDebug() << stream.readAll();
+
+        socket.disconnectFromHost();
+    }else{
+        qDebug() << "Failed to connect to the server";
+    }
 }

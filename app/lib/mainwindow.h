@@ -9,6 +9,7 @@
 #include "user.h"
 
 #include <QWidget>
+#include <QListWidgetItem>
 
 #include <QDir>
 #include <QCoreApplication>
@@ -68,6 +69,9 @@ class MainWindow : public QWidget
 
     void on_pushButton_deleteAllTodos_clicked();
 
+    void onTodoItemChanged(QListWidgetItem* item);
+
+
   private:
 	Ui::MainWindow *ui;
 
@@ -92,5 +96,7 @@ class MainWindow : public QWidget
 
     void savePlanner();
     void showActivities();
+
+    void saveToDoList();
 };
 #endif // MAINWINDOW_H

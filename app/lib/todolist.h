@@ -16,11 +16,11 @@ public:
     QVariant toVariant() const override;
     void fromVariant(const QVariant &variant) override;
 
-    void addToDo(QString text, bool isDone);
-    void deleteToDo(QString text, bool isDone);
-    bool deleteAllToDos();
+    void addToDo(const QString& text, bool isDone);
+    void deleteToDo(const QString& text);
+    void deleteAllToDos();
 
-    //    void checkToDo(QString text, bool isDone);
+    void checkToDo(const QString& text, bool isDone);
 
     inline QVector<QPair<QString, bool>> toDos() const {return m_listToDos;}
 

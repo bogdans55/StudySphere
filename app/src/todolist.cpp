@@ -13,7 +13,7 @@ ToDoList::ToDoList()
 ToDoList::~ToDoList()
 {}
 
-void ToDoList::addToDo(QString text, bool done){
+void ToDoList::addToDo(const QString& text, bool done){
     QPair<QString, bool> pair (text, done);
     m_listToDos.push_back(pair);
 }
@@ -29,6 +29,15 @@ void ToDoList::deleteToDo(const QString& text) {
 
 void ToDoList::deleteAllToDos() {
     m_listToDos.clear();
+}
+
+void ToDoList::checkToDo(const QString& text, bool isDone) {
+    for (auto& todo : m_listToDos) {
+        if (todo.first == text) {
+            todo.second = isDone;
+            return;
+        }
+    }
 }
 
 QVariant ToDoList::toVariant() const {
