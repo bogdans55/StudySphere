@@ -15,6 +15,9 @@ class MyServer : public QObject
 
   signals:
 
+  public slots:
+	void startServer();
+
   private slots:
 	void newConnection();
 
@@ -25,7 +28,7 @@ private:
     QString userDecksFolder;
     QString uniqueIdsFile;
     QVector<QString> ids;
-	  QString calendarFolder;
+	QString calendarFolder;
     QString plannerFolder;
 
     void registerUser(QTcpSocket* socket, QJsonObject& jsonObject);
@@ -45,7 +48,8 @@ private:
     void sendDeckById(QTcpSocket* socket, const QString& username, const QString& deckId);
     void savePlanner(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject);
     void sendPlanner(QTcpSocket* socket, const QString& username);
-	  void saveCalendar(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject);
-	  void getCalendar(QTcpSocket* socket, const QString& username);
+	void saveCalendar(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject);
+	void getCalendar(QTcpSocket* socket, const QString& username);
+};
 
 #endif // MYSERVER_H

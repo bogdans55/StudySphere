@@ -301,6 +301,7 @@ void MainWindow::on_calendarWidget_activated(const QDate &date)
         }
         QMessageBox::information(this, date.toString("dd.MM.yyyy."), message);
     }
+}
 
 void MainWindow::on_pushButton_addActivity_clicked()
 {
