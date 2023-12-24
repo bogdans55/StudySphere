@@ -151,16 +151,21 @@ void CreateDeckWindow::loadPicture(QLabel *label)
 	QString imagePath =
 		QFileDialog::getOpenFileName(this, "Select Image", "", "Image Files (*.png *.jpg *.bmp *.gif);;All Files (*)");
 
-	label->setPixmap(QPixmap(imagePath).scaledToWidth(ui->textEdit_question->width() / 2));
-	label->setVisible(true);
+	qDebug() << imagePath;
+	if (!imagePath.isEmpty()) {
+		label->setPixmap(QPixmap(imagePath).scaledToWidth(ui->textEdit_question->width() / 2));
+		label->setVisible(true);
+	}
+	else
+		label->setVisible(false);
 }
 
-void CreateDeckWindow::on_pushButton_2_clicked()
+void CreateDeckWindow::on_pushButton_addQuestionImage_clicked()
 {
 	loadPicture(ui->label_questionImage);
 }
 
-void CreateDeckWindow::on_pushButton_clicked()
+void CreateDeckWindow::on_pushButton_addAnswerImage_clicked()
 {
 	loadPicture(ui->label_answerImage);
 }

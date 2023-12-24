@@ -33,9 +33,9 @@ class CreateDeckWindow : public QWidget
 
 	void on_pushButton_add_clicked();
 
-	void on_pushButton_2_clicked();
+	void on_pushButton_addQuestionImage_clicked();
 
-	void on_pushButton_clicked();
+	void on_pushButton_addAnswerImage_clicked();
 
   private:
 	Ui::CreateDeckWindow *ui;
