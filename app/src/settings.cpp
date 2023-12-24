@@ -1,6 +1,7 @@
 #include "lib/settings.h"
 
 #include<QTranslator>
+#include<QFile>
 
 Settings& Settings::instance(QApplication* app) {
     static Settings settingsInstance(app);  // Static local variable ensures a single instance
@@ -18,22 +19,36 @@ Settings::~Settings()
     delete m_translator;
 }
 
-void Settings::setTheme(const Theme &newTheme)
+void Settings::setTheme(const int index)
 {
-    m_theme = newTheme;
-    QString styleSheetPath;
+    QString styleSheetName;
 
-    if (m_theme == DARK) {
-        styleSheetPath = "../app/assets/Diffnes/Diffnes.qss";
-    } else {
-        styleSheetPath = "../app/assets/Medize/Medize.qss";
+    switch (index) {
+    case DARK:
+        styleSheetName = "Diffnes";
+        m_theme = DARK;
+        break;
+    case LIGHT:
+        styleSheetName = "Medize";
+        m_theme = LIGHT;
+        break;
+        // Add more cases for other themes if needed
+
+    default:
+        qDebug() << "Unsupported theme index!";
+        return;
     }
 
-    QFile styleSheetFile(styleSheetPath);
-    styleSheetFile.open(QFile::ReadOnly);
-    QString styleSheet = QLatin1String(styleSheetFile.readAll());
-    qApp->setStyleSheet(styleSheet);
+    if (!styleSheetName.isEmpty()) {
+        QString styleSheetPath = QString("../app/assets/%1/%1.qss").arg(styleSheetName);
+        QFile styleSheetFile(styleSheetPath);
+        styleSheetFile.open(QFile::ReadOnly);
+        QString styleSheet = QLatin1String(styleSheetFile.readAll());
+        qApp->setStyleSheet(styleSheet);
+        qDebug() << "Theme changed!" << m_theme;
+    }
 }
+
 
 void Settings::setVolume(const double &newVolume)
 {
@@ -74,5 +89,4 @@ void Settings::setLanguage(const int index)
             qDebug() << "Failed to load translation file:" << filePath;
         }
     }
-
 }

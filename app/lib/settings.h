@@ -35,7 +35,7 @@ public:
     static Settings& instance(QApplication* app);
 
     void setLanguage(const int index);
-    void setTheme(const Theme &newTheme);
+    void setTheme(const int index);
     void setVolume(const double &newVolume);
     void setSound(const bool &newSound);
 };

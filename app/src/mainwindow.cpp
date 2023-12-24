@@ -64,6 +64,7 @@ MainWindow::MainWindow(QWidget *parent)
     Settings& settings = Settings::instance(app);
 
     settings.setLanguage(Language::SERBIAN);
+    settings.setTheme(Theme::DARK);
     ui->retranslateUi(this);
 }
 
@@ -83,7 +84,7 @@ void MainWindow::on_pushButton_createDeck_clicked()
         QString name = popUp.getDeckName();
         Privacy privacy = popUp.getDeckPrivacy();
 
-        CreateDeckWindow *createDeck = new CreateDeckWindow(name, privacy);
+        CreateDeckWindow *createDeck = new CreateDeckWindow(name, privacy, m_user);
         createDeck->setAttribute(Qt::WA_DeleteOnClose);
         createDeck->show();
 
@@ -373,5 +374,9 @@ void MainWindow::on_comboBox_language_currentIndexChanged(int index)
 
 void MainWindow::on_comboBox_theme_currentIndexChanged(int index)
 {
-    m_settings.setTheme(static_cast<Theme>(index));
+    QApplication* app = qobject_cast<QApplication*>(QApplication::instance());
+    Settings& settings = Settings::instance(app);
+
+    settings.setTheme(index);
+    ui->retranslateUi(this);
 }

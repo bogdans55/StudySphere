@@ -53,6 +53,7 @@ private slots:
     void on_pushButton_login_clicked();
 
     void on_comboBox_language_currentIndexChanged(int index);
+
     void on_comboBox_theme_currentIndexChanged(int index);
 
 private:
