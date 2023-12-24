@@ -4,6 +4,7 @@
 #include "deck.h"
 #include "user.h"
 #include <QButtonGroup>
+#include <QLabel>
 #include <QString>
 #include <QWidget>
 
@@ -32,6 +33,10 @@ class CreateDeckWindow : public QWidget
 
 	void on_pushButton_add_clicked();
 
+	void on_pushButton_addQuestionImage_clicked();
+
+	void on_pushButton_addAnswerImage_clicked();
+
   private:
 	Ui::CreateDeckWindow *ui;
 	Deck m_deck;
@@ -39,6 +44,7 @@ class CreateDeckWindow : public QWidget
 	User &m_user;
 
 	void generateId();
+	void loadPicture(QLabel *label);
 };
 
 #endif // CREATEDECKWINDOW_H
