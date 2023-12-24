@@ -1,0 +1,31 @@
+#ifndef TODOLIST_H
+#define TODOLIST_H
+
+#include <QVector>
+#include <QPair>
+
+#include "lib/serializable.h"
+
+class ToDoList : public Serializable
+{
+
+public:
+    ToDoList();
+    ~ToDoList();
+
+    QVariant toVariant() const override;
+    void fromVariant(const QVariant &variant) override;
+
+    void addToDo(QString text, bool isDone);
+    void deleteToDo(QString text, bool isDone);
+    bool deleteAllToDos();
+
+    //    void checkToDo(QString text, bool isDone);
+
+    inline QVector<QPair<QString, bool>> toDos() const {return m_listToDos;}
+
+private:
+    QVector<QPair<QString, bool>> m_listToDos;
+};
+
+#endif // TODOLIST_H

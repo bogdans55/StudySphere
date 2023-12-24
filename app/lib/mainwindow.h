@@ -4,6 +4,7 @@
 #include "lib/calendar.h"
 #include "lib/planner.h"
 #include "lib/plannerscene.h"
+#include "lib/todolist.h"
 #include "libraryscene.h"
 #include "user.h"
 
@@ -74,6 +75,8 @@ class MainWindow : public QWidget
 	Planner m_planner;
 
     Calendar m_calendar;
+
+    ToDoList m_toDoList;
 
 	bool m_calendarLoaded = false;
 	void saveCalendar();

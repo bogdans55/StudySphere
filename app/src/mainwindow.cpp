@@ -35,7 +35,7 @@ enum Page
 };
 
 MainWindow::MainWindow(QWidget *parent)
-	: QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_user(), m_libraryScene()
+    : QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_user(), m_libraryScene(), m_toDoList()
 {
 	ui->setupUi(this);
 	ui->stackedWidget->setCurrentIndex(LIBRARY);
@@ -576,15 +576,15 @@ void MainWindow::saveCalendar(){
 	}
 }
 
-
 void MainWindow::on_pushButton_addTodo_clicked()
 {
-    QListWidgetItem* item = new QListWidgetItem(ui->textEdit_todo->toPlainText(), ui->listWidget_todos);
+    QListWidgetItem* item = new QListWidgetItem();
+    item->setCheckState(Qt::Unchecked);
+    item->setText(ui->textEdit_todo->toPlainText());
     ui->listWidget_todos->addItem(item);
     ui->textEdit_todo->clear();
     ui->textEdit_todo->setFocus();
 }
-
 
 void MainWindow::on_pushButton_deleteTodo_clicked()
 {
@@ -597,7 +597,6 @@ void MainWindow::on_pushButton_deleteTodo_clicked()
         MainWindow::updateTodoFile();
     }
 }
-
 
 void MainWindow::on_pushButton_deleteAllTodos_clicked()
 {
@@ -623,7 +622,6 @@ void MainWindow::updateTodoFile()
 
     file.close();
 }
-
 
 void MainWindow::on_comboBox_theme_currentIndexChanged(int index)
 {
