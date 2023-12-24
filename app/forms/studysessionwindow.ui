@@ -36,9 +36,9 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_card">
        <item>
-        <widget class="QLabel" name="label_cardName">
+        <widget class="QLabel" name="label_card">
          <property name="text">
-          <string>Kartica</string>
+          <string>Pitanje</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -49,6 +49,13 @@
         <widget class="QTextEdit" name="textEdit_card">
          <property name="readOnly">
           <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_cardImage">
+         <property name="text">
+          <string>TextLabel</string>
          </property>
         </widget>
        </item>
