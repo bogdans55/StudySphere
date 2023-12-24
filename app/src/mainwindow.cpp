@@ -36,8 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
 	: QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_user(), m_libraryScene()
 {
 	ui->setupUi(this);
-	ui->stackedWidget->setCurrentIndex(LIBRARY);
-	//    ui->graphicsView_library->setScene(&m_libraryScene);
+    ui->stackedWidget->setCurrentIndex(LIBRARY);
 	setupTableView();
 
 	for (int i = 0; i < 7; ++i) {
@@ -119,7 +118,6 @@ void MainWindow::on_pushButton_createDeck_clicked()
 
 void MainWindow::on_pushButton_startStudySession_clicked()
 {
-	//	QString deckName = ui->listWidget_library->currentItem()->text();
 	QString deckName = "";
 	Deck *deck = new Deck();
 
@@ -370,7 +368,6 @@ void MainWindow::showActivities()
 
 void MainWindow::setupTableView()
 {
-	//    ui->tableWidget_library->setRowCount(0);
 	ui->tableWidget_library->setColumnCount(0);
 	ui->tableWidget_library->setRowHeight(0, ui->tableWidget_library->height() / 2);
 	ui->tableWidget_library->setRowHeight(1, 30);
@@ -397,8 +394,6 @@ void MainWindow::setEnabled(bool value)
 
 void MainWindow::on_pushButton_login_clicked()
 {
-	//    m_libraryScene.clear(); // clear calls delete on all items on scene
-	//    m_libraryScene.clearDeck();
 	for (auto scene : m_plannerScenes) {
 		scene->clear(); // clear calls delete on all items on scene
 		scene->addItem(new ScheduleItem());
@@ -442,13 +437,13 @@ void MainWindow::on_pushButton_login_clicked()
 	}
 	else {
 		// logout
-		m_loggedIn = false; // use setter instead?
-							//		ui->listWidget_library->clear();
+        m_loggedIn = false; // use setter instead?
 		ui->label_username->setText("Nema korisnika");
 		ui->pushButton_login->setText("Prijavi se");
 		setEnabled(false);
 		ui->tableWidget_library->clear();
 		ui->stackedWidget->setCurrentIndex(LIBRARY);
+        setupTableView();
 	}
 }
 

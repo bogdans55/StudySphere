@@ -37,7 +37,6 @@ SOURCES += \
     src/user.cpp \
     src/settings.cpp \
     src/mainwindow.cpp \
-    src/calendar.cpp
 
 HEADERS += \
     lib/activity.h \
@@ -69,7 +68,6 @@ HEADERS += \
     lib/plannerscene.h \
     lib/scheduleitem.h \
     lib/logindialog.h \
-    lib/calendar.h
 
 FORMS += \
     forms/createdeckwindow.ui \
