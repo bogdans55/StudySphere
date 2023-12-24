@@ -38,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
 	ui->setupUi(this);
 	ui->stackedWidget->setCurrentIndex(LIBRARY);
 	//    ui->graphicsView_library->setScene(&m_libraryScene);
+	setupTableView();
 
 	for (int i = 0; i < 7; ++i) {
 		m_plannerScenes.push_back(new PlannerScene());
@@ -50,6 +51,9 @@ MainWindow::MainWindow(QWidget *parent)
 	ui->graphicsView_saturday->setScene(m_plannerScenes[Day::SATURDAY]);
 	ui->graphicsView_sunday->setScene(m_plannerScenes[Day::SUNDAY]);
 
+	ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
+	ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
+
 	QVector<ScheduleItem *> scheduleItems;
 	for (int i = 0; i < 7; ++i) {
 		scheduleItems.append(new ScheduleItem());
@@ -60,7 +64,44 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+	saveCalendar();
+	savePlanner();
 	delete ui;
+}
+
+void MainWindow::savePlanner()
+{
+	QTcpSocket socket;
+	socket.connectToHost("127.0.0.1", 8080);
+
+	if (socket.waitForConnected()) {
+		QJsonObject request;
+
+		JSONSerializer serializer;
+		QJsonDocument doc = serializer.createJson(m_planner);
+
+		qDebug() << doc;
+
+		request["action"] = "savePlanner";
+		request["username"] = m_user.username();
+		request["planner"] = doc.toVariant().toJsonObject();
+
+		qDebug() << request;
+
+		socket.write(QJsonDocument(request).toJson());
+		socket.waitForBytesWritten();
+		socket.waitForReadyRead();
+
+		QByteArray responseData = socket.readAll();
+		QTextStream stream(responseData);
+
+		qDebug() << stream.readAll();
+
+		socket.disconnectFromHost();
+	}
+	else {
+		qDebug() << "Failed to connect to the server";
+	}
 }
 
 void MainWindow::on_pushButton_createDeck_clicked()
@@ -78,7 +119,8 @@ void MainWindow::on_pushButton_createDeck_clicked()
 
 void MainWindow::on_pushButton_startStudySession_clicked()
 {
-	QString deckName = ui->listWidget_library->currentItem()->text();
+	//	QString deckName = ui->listWidget_library->currentItem()->text();
+	QString deckName = "";
 	Deck *deck = new Deck();
 
 	QTcpSocket socket;
@@ -139,11 +181,86 @@ void MainWindow::on_pushButton_todo_clicked()
 void MainWindow::on_pushButton_planer_clicked()
 {
 	ui->stackedWidget->setCurrentIndex(PLANER);
+	if (!m_plannerLoaded) {
+		QTcpSocket socket;
+		socket.connectToHost("127.0.0.1", 8080);
+
+		if (socket.waitForConnected()) {
+			QJsonObject request;
+			request["action"] = "getPlanner";
+			request["username"] = m_user.username();
+			qDebug() << request;
+
+			socket.write(QJsonDocument(request).toJson());
+			socket.waitForBytesWritten();
+			socket.waitForReadyRead();
+
+			QByteArray responseText = socket.readAll();
+			QTextStream stream(responseText);
+
+			QString plannerResponse = stream.readAll();
+			QJsonDocument jsondoc = QJsonDocument::fromJson(plannerResponse.toUtf8());
+			QJsonObject jsonobj = jsondoc.object();
+
+			qDebug() << jsondoc;
+
+			JSONSerializer jsonSerializer;
+
+			QJsonObject deckObject = jsondoc["planner"].toObject();
+			QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
+
+			jsonSerializer.loadJson(m_planner, deckDocument);
+
+			socket.disconnectFromHost();
+		}
+		else {
+			qDebug() << "Failed to connect to the server";
+		}
+		showActivities();
+		m_plannerLoaded = true;
+	}
 }
 
 void MainWindow::on_pushButton_calendar_clicked()
 {
 	ui->stackedWidget->setCurrentIndex(CALENDAR);
+	if (!m_calendarLoaded) {
+		QTcpSocket socket;
+		socket.connectToHost("127.0.0.1", 8080);
+
+		if (socket.waitForConnected()) {
+			QJsonObject request;
+			request["action"] = "getCalendar";
+			request["username"] = m_user.username();
+			qDebug() << request;
+
+			socket.write(QJsonDocument(request).toJson());
+			socket.waitForBytesWritten();
+			socket.waitForReadyRead();
+
+			QByteArray responseText = socket.readAll();
+			QTextStream stream(responseText);
+
+			QString calendarResponse = stream.readAll();
+			QJsonDocument jsondoc = QJsonDocument::fromJson(calendarResponse.toUtf8());
+			QJsonObject jsonobj = jsondoc.object();
+
+			qDebug() << jsondoc;
+
+			JSONSerializer jsonSerializer;
+
+			QJsonObject deckObject = jsondoc["calendar"].toObject();
+			QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
+
+			jsonSerializer.loadJson(m_calendar, deckDocument);
+
+			socket.disconnectFromHost();
+		}
+		else {
+			qDebug() << "Failed to connect to the server";
+		}
+		m_calendarLoaded = true;
+	}
 }
 
 void MainWindow::on_pushButton_stats_clicked()
@@ -161,15 +278,30 @@ void MainWindow::on_pushButton_help_clicked()
 	ui->stackedWidget->setCurrentIndex(HELP);
 }
 
+void MainWindow::on_pushButton_addEvent_clicked()
+{
+	QString eventName = ui->lineEdit_event->text();
+	QDate date = ui->dateTimeEdit_eventTime->dateTime().date();
+	QTime time = ui->dateTimeEdit_eventTime->dateTime().time();
+
+	m_calendar.addEvent(date, time, eventName);
+
+	ui->lineEdit_event->clear();
+	ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
+	ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
+}
+
 void MainWindow::on_calendarWidget_activated(const QDate &date)
 {
-	// work in progress!
-
-	//    qDebug() << date;
-	if (date.dayOfWeek() == 7)
-		QMessageBox::information(this, date.toString(), "nema nista");
-	else
-		QMessageBox::information(this, date.toString(), "aktivnosti za taj dan npr");
+	QString message = "Na izabrani dan imate sledeće dogadjaje:\n";
+	if (!m_calendar.events().contains(date))
+		QMessageBox::information(this, date.toString("dd.MM.yyyy."), "Na izabrani dan nemate nijedan dogadjaj!");
+	else {
+		for (auto event : m_calendar.events()[date]) {
+			message += "\t" + event.first.toString("hh:mm") + " - " + event.second + "\n";
+		}
+		QMessageBox::information(this, date.toString("dd.MM.yyyy."), message);
+	}
 }
 
 void MainWindow::on_pushButton_addActivity_clicked()
@@ -206,6 +338,53 @@ void MainWindow::on_pushButton_addActivity_clicked()
 	activityText->setTextWidth(textWidth);
 	activityText->setPos(activityItem->pos().x(), activityItem->pos().y() + activityTime->boundingRect().height());
 	m_plannerScenes[day]->addItem(activityText);
+}
+
+void MainWindow::showActivities()
+{
+	for (auto day : m_planner.activities().keys()) {
+		for (auto currentActivity : m_planner.activities().value(day)) {
+			QString name = currentActivity.activityText();
+
+			QTime startTime = currentActivity.start();
+
+			ActivityItem *activityItem = new ActivityItem(currentActivity);
+			m_plannerScenes[day]->addActivity(activityItem);
+			m_plannerScenes[day]->addItem(activityItem);
+
+			QGraphicsTextItem *activityTime = new QGraphicsTextItem();
+			activityTime->setPlainText(startTime.toString("hh:mm"));
+			activityTime->setPos(activityItem->pos());
+			m_plannerScenes[day]->addItem(activityTime);
+
+			QGraphicsTextItem *activityText = new QGraphicsTextItem();
+			activityText->setPlainText(name);
+			qreal textWidth = ui->graphicsView_monday->width() - 10; // hardcoded reduction for scroll bar
+			activityText->setTextWidth(textWidth);
+			activityText->setPos(activityItem->pos().x(),
+								 activityItem->pos().y() + activityTime->boundingRect().height());
+			m_plannerScenes[day]->addItem(activityText);
+		}
+	}
+}
+
+void MainWindow::setupTableView()
+{
+//    ui->tableWidget_library->setRowCount(0);
+    ui->tableWidget_library->setColumnCount(0);
+    ui->tableWidget_library->setRowHeight(0, ui->tableWidget_library->height()/2);
+    ui->tableWidget_library->setRowHeight(1, 30);
+    ui->tableWidget_library->setRowHeight(2, ui->tableWidget_library->height()/2);
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    ui->tableWidget_library->setRowCount(ui->tableWidget_library->rowCount() + 1);
+    ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
+
+    QPushButton *btn = new QPushButton("text", ui->tableWidget_library);
+    ui->tableWidget_library->setCellWidget(ui->tableWidget_library->rowCount() - 1,
+                                           ui->tableWidget_library->columnCount() - 1, btn);
 }
 
 void MainWindow::setEnabled(bool value)
@@ -272,11 +451,13 @@ void MainWindow::on_pushButton_login_clicked()
 		m_loggedIn = loginSuccess;
 	}
 	else {
+        // logout
 		m_loggedIn = false; // use setter instead?
-		ui->listWidget_library->clear();
+							//		ui->listWidget_library->clear();
 		ui->label_username->setText("Nema korisnika");
 		ui->pushButton_login->setText("Prijavi se");
 		setEnabled(false);
+        ui->tableWidget_library->clear();
 		ui->stackedWidget->setCurrentIndex(LIBRARY);
 	}
 }
@@ -311,15 +492,15 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 		if (deckNames != "") {
 			// split deckNames with ", "
 			QStringList deckNamesList = deckNames.split(", ");
-			for (auto &deckNameID : deckNamesList) {
-				// auto deckName = deckNameID.split('_')[0];
-				//                Deck deck(deckName, Privacy::PRIVATE); // empty deck for now
-				//                DeckItem *deckItem = new DeckItem(&deck);
-				//                m_libraryScene.addItem(deckItem);
-				//                m_libraryScene.addDeck(deckItem);
-				// ui->listWidget_library->addItem(deckName.split('_')[0]);
-				ui->listWidget_library->addItem(deckNameID);
-			}
+            unsigned counter = 0;
+            for (auto &deckNameID : deckNamesList) {
+                // auto deckName = deckNameID.split('_')[0];
+                QPushButton *btn = new QPushButton(deckNameID, ui->tableWidget_library);
+                if (counter % 2 == 0)
+                    ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
+                ui->tableWidget_library->setCellWidget(counter % 2 * 2, counter / 2, btn);
+                counter++;
+            }
 		}
 
 		if (jsondoc["status"] != QJsonValue::Undefined && jsondoc["status"] != "Password incorrect, try again") {
@@ -378,5 +559,40 @@ bool MainWindow::registerUser(const QString &username, const QString &password)
 	else {
 		qDebug() << "Failed to connect to the server";
 		return false;
+	}
+}
+
+void MainWindow::saveCalendar()
+{
+	QTcpSocket socket;
+	socket.connectToHost("127.0.0.1", 8080);
+
+	if (socket.waitForConnected()) {
+		QJsonObject request;
+
+		JSONSerializer serializer;
+		QJsonDocument doc = serializer.createJson(m_calendar);
+
+		qDebug() << doc;
+
+		request["action"] = "saveCalendar";
+		request["username"] = m_user.username();
+		request["calendar"] = doc.toVariant().toJsonObject();
+
+		qDebug() << request;
+
+		socket.write(QJsonDocument(request).toJson());
+		socket.waitForBytesWritten();
+		socket.waitForReadyRead();
+
+		QByteArray responseData = socket.readAll();
+		QTextStream stream(responseData);
+
+		qDebug() << stream.readAll();
+
+		socket.disconnectFromHost();
+	}
+	else {
+		qDebug() << "Failed to connect to the server";
 	}
 }

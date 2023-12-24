@@ -35,7 +35,8 @@ SOURCES += \
     src/studysessionwindow.cpp \
     src/user.cpp \
     src/settings.cpp \
-    src/mainwindow.cpp
+    src/mainwindow.cpp \
+    src/calendar.cpp
 
 HEADERS += \
     lib/activity.h \
@@ -65,7 +66,8 @@ HEADERS += \
     lib/mainwindow.h \
     lib/plannerscene.h \
     lib/scheduleitem.h \
-    lib/logindialog.h
+    lib/logindialog.h \
+    lib/calendar.h
 
 FORMS += \
     forms/createdeckwindow.ui \
