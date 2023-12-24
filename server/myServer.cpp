@@ -448,6 +448,7 @@ void MyServer::writeRemainingIDsToFile()
 		}
 
 		file.close();
+		ids.clear();
 	}
 	else {
 		qDebug() << "Couldn't open file: " << uniqueIdsFile;
