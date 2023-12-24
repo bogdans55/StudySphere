@@ -65,6 +65,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+	saveCalendar();
     delete ui;
 }
 
@@ -156,8 +157,44 @@ void MainWindow::on_pushButton_planer_clicked()
 void MainWindow::on_pushButton_calendar_clicked()
 {
     ui->stackedWidget->setCurrentIndex(CALENDAR);
-}
+	if(!m_calendarLoaded){
+		QTcpSocket socket;
+		socket.connectToHost("127.0.0.1", 8080);
 
+		if(socket.waitForConnected()){
+			QJsonObject request;
+			request["action"] = "getCalendar";
+			request["username"] = m_user.username();
+			qDebug() << request;
+
+			socket.write(QJsonDocument(request).toJson());
+			socket.waitForBytesWritten();
+			socket.waitForReadyRead();
+
+			QByteArray responseText = socket.readAll();
+			QTextStream stream(responseText);
+
+			QString calendarResponse = stream.readAll();
+			QJsonDocument jsondoc = QJsonDocument::fromJson(calendarResponse.toUtf8());
+			QJsonObject jsonobj = jsondoc.object();
+
+			qDebug() << jsondoc;
+
+			JSONSerializer jsonSerializer;
+
+			QJsonObject deckObject = jsondoc["calendar"].toObject();
+			QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
+
+			jsonSerializer.loadJson(m_calendar, deckDocument);
+
+			socket.disconnectFromHost();
+		}else{
+			qDebug() << "Failed to connect to the server";
+		}
+		m_calendarLoaded = true;
+	}
+
+}
 
 void MainWindow::on_pushButton_stats_clicked()
 {
@@ -409,4 +446,37 @@ bool MainWindow::registerUser(const QString& username, const QString& password){
     }
 }
 
+void MainWindow::saveCalendar(){
+	QTcpSocket socket;
+	socket.connectToHost("127.0.0.1", 8080);
+
+	if(socket.waitForConnected()){
+		QJsonObject request;
+
+		JSONSerializer serializer;
+		QJsonDocument doc = serializer.createJson(m_calendar);
+
+
+		qDebug() << doc;
+
+		request["action"] = "saveCalendar";
+		request["username"] = m_user.username();
+		request["calendar"] = doc.toVariant().toJsonObject();
+
+		qDebug() << request;
+
+		socket.write(QJsonDocument(request).toJson());
+		socket.waitForBytesWritten();
+		socket.waitForReadyRead();
+
+		QByteArray responseData = socket.readAll();
+		QTextStream stream(responseData);
+
+		qDebug() << stream.readAll();
+
+		socket.disconnectFromHost();
+	}else{
+		qDebug() << "Failed to connect to the server";
+	}
+}
 

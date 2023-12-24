@@ -62,6 +62,10 @@ private:
     User m_user;
     LibraryScene m_libraryScene;
 
+	bool m_calendarLoaded = false;
+	void saveCalendar();
+	void refreshCalendar();
+
     bool registerUser(const QString& username, const QString& password);
     bool loginUser(const QString& username, const QString& password);
 };

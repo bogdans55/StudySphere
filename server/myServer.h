@@ -27,6 +27,7 @@ private:
     QString userDecksFolder;
     QString uniqueIdsFile;
     QVector<QString> ids;
+	QString calendarFolder;
 
     void registerUser(QTcpSocket* socket, QJsonObject& jsonObject);
     void loginUser(QTcpSocket* socket, QJsonObject& jsonObject);
@@ -44,6 +45,8 @@ private:
     void makePublic(QTcpSocket* socket, QJsonObject& jsonObject);
     void sendDeckById(QTcpSocket* socket, const QString& username, const QString& deckId);
 
+	void saveCalendar(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject);
+	void getCalendar(QTcpSocket* socket, const QString& username);
 };
 
 #endif // MYSERVER_H
