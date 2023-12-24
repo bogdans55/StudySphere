@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "lib/calendar.h"
 #include "lib/planner.h"
 #include "lib/plannerscene.h"
 #include "libraryscene.h"
@@ -52,11 +53,22 @@ class MainWindow : public QWidget
 
 	void on_pushButton_login_clicked();
 
+    void on_pushButton_addEvent_clicked();
+
   private:
 	Ui::MainWindow *ui;
 
 	QVector<PlannerScene *> m_plannerScenes;
 	Planner m_planner;
+
+    Calendar m_calendar;
+
+	bool m_calendarLoaded = false;
+	void saveCalendar();
+	void refreshCalendar();
+
+    bool registerUser(const QString& username, const QString& password);
+    bool loginUser(const QString& username, const QString& password);
 
 	bool m_loggedIn = false;
     bool m_plannerLoaded = false;
@@ -64,9 +76,6 @@ class MainWindow : public QWidget
 	LibraryScene m_libraryScene;
 
     void savePlanner();
-
-	bool registerUser(const QString &username, const QString &password);
-	bool loginUser(const QString &username, const QString &password);
     void showActivities();
 };
 #endif // MAINWINDOW_H

@@ -22,6 +22,9 @@ MyServer::MyServer(QObject *parent) : QObject(parent)
 
     uniqueIdsFile = "uniqueIds.txt";
 
+	calendarFolder = "calendarFolder";
+	QDir().mkpath(calendarFolder);
+
     plannerFolder = "plannerFolder";
     QDir().mkpath(plannerFolder);
 	uniqueIdsFile = "uniqueIds.txt";
@@ -144,7 +147,12 @@ void MyServer::readData()
         writeRemainingIDsToFile();
     }else if(action == "sendDeck"){
         sendDeckById(socket, jsonObject["username"].toString(), jsonObject["DeckId"].toString());
-    }else if(action == "savePlanner"){
+	}else if(action == "saveCalendar"){
+		QJsonObject planner = jsonObject["calendar"].toObject();
+		saveCalendar(socket, jsonObject["username"].toString(), planner);
+	}else if(action == "getCalendar"){
+		getCalendar(socket, jsonObject["username"].toString());
+	}else if(action == "savePlanner"){
         QJsonObject planner = jsonObject["planner"].toObject();
         savePlanner(socket, jsonObject["username"].toString(), planner);
     }else if(action == "getPlanner"){
@@ -477,3 +485,42 @@ void MyServer::writeRemainingIDsToFile()
 //     QByteArray deckData = userDeckFile.readAll();
 //     userDeckFile.close();
 // }
+
+void MyServer::saveCalendar(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject){
+
+	QString filePath = QDir(calendarFolder).absoluteFilePath(username + ".json");
+	QFile file(filePath);
+
+	if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
+		QTextStream stream(&file);
+		stream << QJsonDocument(jsonObject).toJson();
+		file.close();
+		qDebug() << "Calendar saved on path: " << filePath;
+	}else{
+		qDebug() << "Error saving deck:" << file.errorString();
+	}
+
+	QJsonObject response;
+	response["status"] = "Calendar saved successfully";
+}
+
+void MyServer::getCalendar(QTcpSocket* socket, const QString& username){
+
+	QString filePath = QDir(calendarFolder).absoluteFilePath(username + ".json");
+	QFile file(filePath);
+	QJsonObject response;
+
+	if(file.open(QIODevice::ReadOnly | QIODevice::Text)){
+		QByteArray calendarData = file.readAll();
+		response["calendar"] = QJsonDocument::fromJson(calendarData).object();
+		response["status"] = "Successful!";
+		file.close();
+	}else{
+		response["status"] = "Error getting calendar!";
+		qDebug() << "Error opening calendar file:" << file.errorString();
+	}
+
+	QTextStream stream(socket);
+	stream << QJsonDocument(response).toJson();
+}
+
