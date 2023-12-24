@@ -3,6 +3,8 @@
 #include "lib/jsonserializer.h"
 #include "lib/serializer.h"
 #include "ui_createdeckwindow.h"
+#include "lib/imagecard.h"
+#include "lib/plaincard.h"
 
 #include <QFileDialog>
 #include <QMessageBox>
@@ -127,18 +129,29 @@ void CreateDeckWindow::on_pushButton_add_clicked()
 	m_questionDifficulty->addButton(ui->radioButton_medium, Difficulty::MEDIUM);
 	m_questionDifficulty->addButton(ui->radioButton_hard, Difficulty::HARD);
 
-	QString m_question = getQuestionText();
-	QString m_answer = getAnswerText();
-	Difficulty m_difficulty = getDifficulty();
+    QString questionText = getQuestionText();
+    QString answerText = getAnswerText();
+    Difficulty difficulty = getDifficulty();
 
-	Card *card = new Card(m_question, m_answer, m_difficulty);
+    QPixmap answerImage = ui->label_answer->pixmap();
+    QPixmap questionImage = ui->label_question->pixmap();
+
+    Card *card;
+
+    if(answerImage.isNull() && questionImage.isNull()){
+        card = new PlainCard(questionText, answerText, difficulty);
+    }
+    else{
+        card = new ImageCard(questionText, answerText, difficulty, questionImage, answerImage);
+    }
+
 
 	m_deck.addCard(card);
 
 	ui->textEdit_question->clear();
 	ui->textEdit_answer->clear();
 
-	m_questionDifficulty->setExclusive(false);
+    m_questionDifficulty->setExclusive(false);
 	m_questionDifficulty->checkedButton()->setChecked(false);
 	m_questionDifficulty->setExclusive(true);
 

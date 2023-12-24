@@ -6,19 +6,19 @@ ImageCard::ImageCard(QString questionText, QString answerText, Difficulty questi
 	: Card(questionText, answerText, questionDifficulty)
 {}
 
-ImageCard::ImageCard(QString questionText, QString answerText, Difficulty questionDifficulty, QImage questionImage,
-					 QImage answerImage)
+ImageCard::ImageCard(QString questionText, QString answerText, Difficulty questionDifficulty, QPixmap questionImage,
+                     QPixmap answerImage)
 	: Card(questionText, answerText, questionDifficulty), m_questionImage(questionImage), m_answerImage(answerImage)
 {}
 
 ImageCard::~ImageCard() {}
 
-void ImageCard::setQuestionImage(const QImage &questionImage)
+void ImageCard::setQuestionImage(const QPixmap &questionImage)
 {
 	m_questionImage = questionImage;
 }
 
-void ImageCard::setAnswerImage(const QImage &answerImage)
+void ImageCard::setAnswerImage(const QPixmap &answerImage)
 {
 	m_answerImage = answerImage;
 }

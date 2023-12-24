@@ -3,27 +3,28 @@
 
 #include "card.h"
 #include <QImage>
+#include <QPixmap>
 
 class ImageCard : public Card
 {
   public:
 	ImageCard();
 	ImageCard(QString questionText, QString answerText, Difficulty questionDifficulty);
-	ImageCard(QString questionText, QString answerText, Difficulty questionDifficulty, QImage questionImage,
-			  QImage answerImage);
+    ImageCard(QString questionText, QString answerText, Difficulty questionDifficulty, QPixmap questionImage,
+              QPixmap answerImage);
 	~ImageCard();
 
 	// Getters
-	inline QImage questionImage() const { return m_questionImage; }
+    inline QPixmap questionImage() const { return m_questionImage; }
 
-	inline QImage answerImage() const { return m_answerImage; }
+    inline QPixmap answerImage() const { return m_answerImage; }
 
-	void setQuestionImage(const QImage &questionImage);
-	void setAnswerImage(const QImage &answerImage);
+    void setQuestionImage(const QPixmap &questionImage);
+    void setAnswerImage(const QPixmap &answerImage);
 
   private:
-	QImage m_questionImage;
-	QImage m_answerImage;
+    QPixmap m_questionImage;
+    QPixmap m_answerImage;
 };
 
 #endif // IMAGECARD_H
