@@ -3,31 +3,40 @@
 
 #include <QWidget>
 
-namespace Ui {
+#include "lib/studysession.h"
+
+namespace Ui
+{
 class StudySessionWindow;
 }
 
 class StudySessionWindow : public QWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 
-public:
-    explicit StudySessionWindow(QWidget *parent = nullptr);
-    ~StudySessionWindow();
+  public:
+	explicit StudySessionWindow(QWidget *parent = nullptr);
+	StudySessionWindow(StudySession *session, QWidget *parent = nullptr);
+	~StudySessionWindow();
 
-private slots:
-    void on_pushButton_flip_clicked();
+	inline StudySession *session() const { return m_session; }
 
-    void on_pushButton_skip_clicked();
+	void evaluate(int grade);
 
-    void on_pushButton_bad_clicked();
+  private slots:
+	void on_pushButton_flip_clicked();
 
-    void on_pushButton_mid_clicked();
+	void on_pushButton_skip_clicked();
 
-    void on_pushButton_good_clicked();
+	void on_pushButton_bad_clicked();
 
-private:
-    Ui::StudySessionWindow *ui;
+	void on_pushButton_mid_clicked();
+
+	void on_pushButton_good_clicked();
+
+  private:
+	Ui::StudySessionWindow *ui;
+	StudySession *m_session;
 };
 
 #endif // STUDYSESSIONWINDOW_H

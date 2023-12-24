@@ -1,25 +1,21 @@
 #ifndef USER_H
 #define USER_H
 
-#include<QString>
-#include<iostream>
+#include <QString>
 
 class User
 {
-private:
-    QString m_username;
-    QString m_name;
+  private:
+	QString m_username;
 
-public:
-    User(const QString &m_username, const QString &m_name);
-    ~User();
+  public:
+	User(const QString &m_username);
+	User();
+	~User();
 
+	inline QString username() const { return m_username; }
 
-
-    inline QString username() const {return m_username;}
-    inline QString name() const {return m_name;}
-    void setUsername(const QString &newUsername);
-    void setName(const QString &newName);
+	void setUsername(const QString &newUsername);
 };
 
 #endif // USER_H
