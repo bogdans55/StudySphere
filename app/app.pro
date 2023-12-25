@@ -76,6 +76,7 @@ FORMS += \
 
 RESOURCES += \
     res/icons.qrc \
+    res/themes.qrc \
     res/translations.qrc
 
 # Default rules for deployment.

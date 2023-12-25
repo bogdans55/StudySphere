@@ -40,7 +40,7 @@ void Settings::setTheme(const int index)
     }
 
     if (!styleSheetName.isEmpty()) {
-        QString styleSheetPath = QString("../app/assets/%1/%1.qss").arg(styleSheetName);
+        QString styleSheetPath = QString("../app/res/themes/%1.qss").arg(styleSheetName);
         QFile styleSheetFile(styleSheetPath);
         styleSheetFile.open(QFile::ReadOnly);
         QString styleSheet = QLatin1String(styleSheetFile.readAll());
@@ -66,11 +66,11 @@ void Settings::setLanguage(const int index)
 
     switch (index) {
         case ENGLISH:
-            languageFileName = "english.qm";
+            languageFileName = "english";
             m_language = ENGLISH;
             break;
         case SERBIAN:
-            languageFileName = "serbian.qm";
+            languageFileName = "serbian";
             m_language = SERBIAN;
             break;
         // Add more cases for other languages
@@ -81,7 +81,7 @@ void Settings::setLanguage(const int index)
     }
 
     if (!languageFileName.isEmpty()) {
-        QString filePath = QString("../app/res/languages/%1").arg(languageFileName);
+        QString filePath = QString("../app/res/languages/%1.qm").arg(languageFileName);
         if (m_translator->load(filePath)) {
             m_app->installTranslator(m_translator);
             qDebug() << "Translation done!" << m_language;
