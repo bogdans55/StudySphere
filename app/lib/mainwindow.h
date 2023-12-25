@@ -31,7 +31,9 @@ class MainWindow : public QWidget
   private slots:
 	void on_pushButton_createDeck_clicked();
 
-	void on_pushButton_startStudySession_clicked();
+	//	void on_pushButton_startStudySession_clicked();
+
+	void deckButton_clicked();
 
 	void on_pushButton_library_clicked();
 
@@ -55,8 +57,8 @@ class MainWindow : public QWidget
 
 	void on_pushButton_addEvent_clicked();
 
-protected:
-    void resizeEvent(QResizeEvent *event) override;
+  protected:
+	void resizeEvent(QResizeEvent *event) override;
 
   private:
 	Ui::MainWindow *ui;

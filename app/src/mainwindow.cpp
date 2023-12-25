@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
 	: QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_user(), m_libraryScene()
 {
 	ui->setupUi(this);
-    ui->stackedWidget->setCurrentIndex(LIBRARY);
+	ui->stackedWidget->setCurrentIndex(LIBRARY);
 
 	for (int i = 0; i < 7; ++i) {
 		m_plannerScenes.push_back(new PlannerScene());
@@ -115,9 +115,14 @@ void MainWindow::on_pushButton_createDeck_clicked()
 	}
 }
 
-void MainWindow::on_pushButton_startStudySession_clicked()
+// void MainWindow::on_pushButton_startStudySession_clicked()
+void MainWindow::deckButton_clicked()
 {
-	QString deckName = "";
+	QPushButton *chosenDeck = qobject_cast<QPushButton *>(sender());
+	qDebug() << chosenDeck;
+
+	QString deckName = chosenDeck->text();
+	qDebug() << deckName;
 	Deck *deck = new Deck();
 
 	QTcpSocket socket;
@@ -284,21 +289,22 @@ void MainWindow::on_pushButton_addEvent_clicked()
 	m_calendar.addEvent(date, time, eventName);
 
 	ui->lineEdit_event->clear();
-    ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
-    ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
+	ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
+	ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
-    QWidget::resizeEvent(event);
+	QWidget::resizeEvent(event);
 
-    setupTableView();
-    for (int row = 0; row < ui->tableWidget_library->rowCount(); row+=2) {
-        for (int col = 0; col < ui->tableWidget_library->columnCount(); ++col) {
-            ui->tableWidget_library->cellWidget(row, col)->setFixedWidth(ui->tableWidget_library->columnWidth(0)*0.9);
-            qDebug() << row << col;
-        }
-    }
+	setupTableView();
+	int rows = ui->tableWidget_library->rowCount();
+	int cols = ui->tableWidget_library->columnCount();
+	for (auto row = 0; row < rows; row += 2) {
+		for (auto col = 0; col < cols; ++col) {
+			ui->tableWidget_library->cellWidget(row, col)->setFixedWidth(ui->tableWidget_library->columnWidth(0) * 0.9);
+		}
+	}
 }
 
 void MainWindow::on_calendarWidget_activated(const QDate &date)
@@ -380,9 +386,9 @@ void MainWindow::showActivities()
 
 void MainWindow::setupTableView()
 {
-    ui->tableWidget_library->setRowHeight(0, ui->tableWidget_library->height() * 0.45);
-    ui->tableWidget_library->setRowHeight(1, ui->tableWidget_library->height() * 0.05);
-    ui->tableWidget_library->setRowHeight(2, ui->tableWidget_library->height() * 0.45);
+	ui->tableWidget_library->setRowHeight(0, ui->tableWidget_library->height() * 0.45);
+	ui->tableWidget_library->setRowHeight(1, ui->tableWidget_library->height() * 0.05);
+	ui->tableWidget_library->setRowHeight(2, ui->tableWidget_library->height() * 0.45);
 }
 
 void MainWindow::setEnabled(bool value)
@@ -448,20 +454,20 @@ void MainWindow::on_pushButton_login_clicked()
 	}
 	else {
 		// logout
-        m_loggedIn = false; // use setter instead?
+		m_loggedIn = false; // use setter instead?
 		ui->label_username->setText("Nema korisnika");
 		ui->pushButton_login->setText("Prijavi se");
 		setEnabled(false);
 		ui->tableWidget_library->clear();
 		ui->stackedWidget->setCurrentIndex(LIBRARY);
-        ui->tableWidget_library->setColumnCount(0);
-        setupTableView();
+		ui->tableWidget_library->setColumnCount(0);
+		setupTableView();
 	}
 }
 
 bool MainWindow::loginUser(const QString &username, const QString &password)
 {
-    setupTableView();
+	setupTableView();
 	QTcpSocket socket;
 	socket.connectToHost("127.0.0.1", 8080);
 
@@ -494,11 +500,12 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 			for (auto &deckNameID : deckNamesList) {
 				// auto deckName = deckNameID.split('_')[0];
 				QPushButton *btn = new QPushButton(deckNameID, ui->tableWidget_library);
-                if (counter % 2 == 0) {
-                    ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
-                    ui->tableWidget_library->setColumnWidth(counter / 2, 200); // hardcoded
-                }
-                btn->setFixedWidth(ui->tableWidget_library->columnWidth(0)*0.9);
+				connect(btn, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
+				if (counter % 2 == 0) {
+					ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
+					ui->tableWidget_library->setColumnWidth(counter / 2, 200); // hardcoded
+				}
+				btn->setFixedWidth(ui->tableWidget_library->columnWidth(0) * 0.9);
 				ui->tableWidget_library->setCellWidget(counter % 2 * 2, counter / 2, btn);
 				counter++;
 			}
