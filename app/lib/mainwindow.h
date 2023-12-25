@@ -55,6 +55,9 @@ class MainWindow : public QWidget
 
 	void on_pushButton_addEvent_clicked();
 
+protected:
+    void resizeEvent(QResizeEvent *event) override;
+
   private:
 	Ui::MainWindow *ui;
 

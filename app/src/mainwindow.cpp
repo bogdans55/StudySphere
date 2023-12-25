@@ -37,7 +37,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
 	ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(LIBRARY);
-	setupTableView();
 
 	for (int i = 0; i < 7; ++i) {
 		m_plannerScenes.push_back(new PlannerScene());
@@ -285,8 +284,21 @@ void MainWindow::on_pushButton_addEvent_clicked()
 	m_calendar.addEvent(date, time, eventName);
 
 	ui->lineEdit_event->clear();
-	ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
-	ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
+    ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
+    ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
+}
+
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+    QWidget::resizeEvent(event);
+
+    setupTableView();
+    for (int row = 0; row < ui->tableWidget_library->rowCount(); row+=2) {
+        for (int col = 0; col < ui->tableWidget_library->columnCount(); ++col) {
+            ui->tableWidget_library->cellWidget(row, col)->setFixedWidth(ui->tableWidget_library->columnWidth(0)*0.9);
+            qDebug() << row << col;
+        }
+    }
 }
 
 void MainWindow::on_calendarWidget_activated(const QDate &date)
@@ -368,10 +380,9 @@ void MainWindow::showActivities()
 
 void MainWindow::setupTableView()
 {
-	ui->tableWidget_library->setColumnCount(0);
-	ui->tableWidget_library->setRowHeight(0, ui->tableWidget_library->height() / 2);
-	ui->tableWidget_library->setRowHeight(1, 30);
-	ui->tableWidget_library->setRowHeight(2, ui->tableWidget_library->height() / 2);
+    ui->tableWidget_library->setRowHeight(0, ui->tableWidget_library->height() * 0.45);
+    ui->tableWidget_library->setRowHeight(1, ui->tableWidget_library->height() * 0.05);
+    ui->tableWidget_library->setRowHeight(2, ui->tableWidget_library->height() * 0.45);
 }
 
 void MainWindow::setEnabled(bool value)
@@ -443,12 +454,14 @@ void MainWindow::on_pushButton_login_clicked()
 		setEnabled(false);
 		ui->tableWidget_library->clear();
 		ui->stackedWidget->setCurrentIndex(LIBRARY);
+        ui->tableWidget_library->setColumnCount(0);
         setupTableView();
 	}
 }
 
 bool MainWindow::loginUser(const QString &username, const QString &password)
 {
+    setupTableView();
 	QTcpSocket socket;
 	socket.connectToHost("127.0.0.1", 8080);
 
@@ -481,8 +494,11 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 			for (auto &deckNameID : deckNamesList) {
 				// auto deckName = deckNameID.split('_')[0];
 				QPushButton *btn = new QPushButton(deckNameID, ui->tableWidget_library);
-				if (counter % 2 == 0)
-					ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
+                if (counter % 2 == 0) {
+                    ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
+                    ui->tableWidget_library->setColumnWidth(counter / 2, 200); // hardcoded
+                }
+                btn->setFixedWidth(ui->tableWidget_library->columnWidth(0)*0.9);
 				ui->tableWidget_library->setCellWidget(counter % 2 * 2, counter / 2, btn);
 				counter++;
 			}

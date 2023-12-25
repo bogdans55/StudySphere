@@ -146,14 +146,14 @@ void CreateDeckWindow::on_pushButton_add_clicked()
 	ui->label_answerImage->setVisible(false);
 }
 
-void CreateDeckWindow::loadPicture(QLabel *label)
+void CreateDeckWindow::loadPicture(QLabel *label, QPixmap& image)
 {
 	QString imagePath =
 		QFileDialog::getOpenFileName(this, "Select Image", "", "Image Files (*.png *.jpg *.bmp *.gif);;All Files (*)");
 
-	qDebug() << imagePath;
 	if (!imagePath.isEmpty()) {
-		label->setPixmap(QPixmap(imagePath).scaledToWidth(ui->textEdit_question->width() / 2));
+        image = QPixmap(imagePath);
+        label->setPixmap(image.scaledToWidth(ui->textEdit_question->width()));
 		label->setVisible(true);
 	}
 	else
@@ -162,10 +162,24 @@ void CreateDeckWindow::loadPicture(QLabel *label)
 
 void CreateDeckWindow::on_pushButton_addQuestionImage_clicked()
 {
-	loadPicture(ui->label_questionImage);
+    loadPicture(ui->label_questionImage, m_questionImage);
 }
 
 void CreateDeckWindow::on_pushButton_addAnswerImage_clicked()
 {
-	loadPicture(ui->label_answerImage);
+    loadPicture(ui->label_answerImage, m_answerImage);
+}
+
+void CreateDeckWindow::resizeEvent(QResizeEvent *event)
+
+{
+    QWidget::resizeEvent(event);
+
+    ui->label_questionImage->setPixmap(m_questionImage.scaledToWidth(ui->textEdit_question->width()));
+    ui->label_answerImage->setPixmap(m_answerImage.scaledToWidth(ui->textEdit_question->width()));
+
+//    ui->label_answerImage->setFixedWidth(ui->textEdit_question->width());
+//    ui->label_questionImage->setFixedWidth(ui->textEdit_question->width());
+
+    qDebug() << m_questionImage;
 }
