@@ -15,7 +15,7 @@ CreateDeckWindow::CreateDeckWindow(User &user, QWidget *parent)
 }
 
 CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, User &user, QWidget *parent)
-	: QWidget(parent), ui(new Ui::CreateDeckWindow), m_deck(name, privacy), m_user(user)
+    : QWidget(parent), ui(new Ui::CreateDeckWindow), m_deck(name, user, privacy), m_user(user)
 {
 	ui->setupUi(this);
 }

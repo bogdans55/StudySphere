@@ -43,7 +43,7 @@ class StudySession
 
 	void startSession();
 	void endSession();
-	void chooseCardSequence(unsigned num_cards);
+    void chooseCardSequence(unsigned numCards);
 	void nextCard();
 	Card getCurrentCard();
 	void saveStatus();

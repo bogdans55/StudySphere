@@ -8,7 +8,8 @@
 // in .h .cpp ?
 enum Difficulty
 {
-	EASY = 0,
+    UNUSED = 0,
+    EASY,
 	MEDIUM,
 	HARD
 };

@@ -1,6 +1,7 @@
 #include "lib/studysession.h"
 
 #include <QDebug>
+#include <QRandomGenerator>
 #include <algorithm>
 #include <numeric>
 #include <random>
@@ -28,13 +29,26 @@ void StudySession::endSession()
 	m_timeEnded = time(NULL);
 }
 
-void StudySession::chooseCardSequence(unsigned num_cards)
+void StudySession::chooseCardSequence(unsigned numCards)
 {
-	QVector<unsigned> cardIndices(num_cards);
-	std::iota(cardIndices.begin(), cardIndices.end(), 0);
-	std::random_device rd;
-	std::mt19937 g(rd());
-	std::shuffle(cardIndices.begin(), cardIndices.end(), g);
+    QVector<unsigned> cardIndices(numCards);
+    QVector<bool> visited(numCards);
+    for (int i = 0;i < numCards;i++){
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::vector<double> probabilities = {0.4, 0.3, 0.2, 0.1};
+        std::discrete_distribution<> distribution(probabilities.begin(), probabilities.end());
+        QVector<unsigned> cardDiffIndices;
+        while(cardDiffIndices.isEmpty()){
+            int difficulty = distribution(gen);
+            for (int j = 0;j < numCards;j++)
+                if(m_deck->cards()[j]->questionDifficulty() == difficulty && !visited[j])
+                    cardDiffIndices.append(j);
+        }
+        int selectedIndex = QRandomGenerator::global()->bounded(cardDiffIndices.size());
+        visited[selectedIndex] = true;
+        cardIndices[i] = selectedIndex;
+    }
 	m_currentCardIndex = 0;
 	m_cardSequence = cardIndices;
 	for (int i = 0; i < cardIndices.length(); i++)

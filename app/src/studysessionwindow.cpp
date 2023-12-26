@@ -36,7 +36,7 @@ void StudySessionWindow::on_pushButton_flip_clicked()
 
 void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 {
-	m_session->getCurrentCard().evaluateAnswer(grade);
+    m_session->deck()->deckStats()->addGrade(m_session->currentCardIndex(), grade);
 	if (m_session->hasNextCard()) {
 		m_session->nextCard();
 		ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
