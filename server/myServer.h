@@ -47,7 +47,7 @@ private:
     void makePublic(QTcpSocket* socket, QJsonObject& jsonObject);
     void sendDeckById(QTcpSocket* socket, const QString& username, const QString& deckId);
     void savePlanner(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject);
-    void sendPlanner(QTcpSocket* socket, const QString& username);
+	void getPlanner(QTcpSocket* socket, const QString& username);
 	void saveCalendar(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject);
 	void getCalendar(QTcpSocket* socket, const QString& username);
 };

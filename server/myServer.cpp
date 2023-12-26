@@ -85,7 +85,6 @@ void MyServer::loginUser(QTcpSocket *socket, QJsonObject &jsonObject)
 		}
 		else {
 			sendUserDecks(socket, username);
-			// sendDeckById(socket, username, 1);
 		}
 	}
 	catch (const QFile::FileError &error) {
@@ -128,24 +127,8 @@ void MyServer::readData()
 		loadIds();
 		sendId(socket);
 		writeRemainingIDsToFile();
-	}
-	else if (action == "sendDeck") {
-		sendDeckById(socket, jsonObject["username"].toString(), jsonObject["DeckId"].toString());
-	}
-    if (action == "login") {
-        loginUser(socket, jsonObject);
-    }else if (action == "saveDeck") {
-        qDebug() << "Deck is saving";
-        saveDeck(socket, jsonObject);
-    }else if(action == "register"){
-        registerUser(socket, jsonObject);
-    }else if(action == "removeDeck"){
-        removeDeck(socket, jsonObject);
-    }else if(action == "generateId"){
-        loadIds();
-        sendId(socket);
-        writeRemainingIDsToFile();
-    }else if(action == "sendDeck"){
+		ids.clear();
+	}else if(action == "sendDeck"){
         sendDeckById(socket, jsonObject["username"].toString(), jsonObject["DeckId"].toString());
 	}else if(action == "saveCalendar"){
 		QJsonObject planner = jsonObject["calendar"].toObject();
@@ -156,7 +139,7 @@ void MyServer::readData()
         QJsonObject planner = jsonObject["planner"].toObject();
         savePlanner(socket, jsonObject["username"].toString(), planner);
     }else if(action == "getPlanner"){
-        sendPlanner(socket, jsonObject["username"].toString());
+		getPlanner(socket, jsonObject["username"].toString());
     }
 
 	socket->close();
@@ -186,7 +169,7 @@ void MyServer::savePlanner(QTcpSocket* socket, const QString& username, QJsonObj
     response["status"] = "Planner saved successfully";
 }
 
-void MyServer::sendPlanner(QTcpSocket* socket, const QString& username){
+void MyServer::getPlanner(QTcpSocket* socket, const QString& username){
 
     QString filePath = QDir(plannerFolder).absoluteFilePath(username + ".json");
     QFile file(filePath);
