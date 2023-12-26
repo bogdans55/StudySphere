@@ -142,7 +142,7 @@ void MyServer::readData()
         QJsonObject planner = jsonObject["planner"].toObject();
         savePlanner(socket, jsonObject["username"].toString(), planner);
     }else if(action == "getPlanner"){
-        sendPlanner(socket, jsonObject["username"].toString());
+		getPlanner(socket, jsonObject["username"].toString());
     }
 
 	socket->close();
@@ -172,7 +172,7 @@ void MyServer::savePlanner(QTcpSocket* socket, const QString& username, QJsonObj
     response["status"] = "Planner saved successfully";
 }
 
-void MyServer::sendPlanner(QTcpSocket* socket, const QString& username){
+void MyServer::getPlanner(QTcpSocket* socket, const QString& username){
 
     QString filePath = QDir(plannerFolder).absoluteFilePath(username + ".json");
     QFile file(filePath);
