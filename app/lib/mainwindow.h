@@ -92,12 +92,13 @@ class MainWindow : public QWidget
 
 	bool m_loggedIn = false;
     bool m_plannerLoaded = false;
+	bool m_todoLoaded = false;
 	User m_user;
 	LibraryScene m_libraryScene;
 
     void savePlanner();
     void showActivities();
-
     void saveToDoList();
+	void saveOnServer();
 };
 #endif // MAINWINDOW_H

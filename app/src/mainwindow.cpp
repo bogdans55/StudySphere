@@ -68,10 +68,22 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-	saveCalendar();
-    savePlanner();
-//    saveToDoList();
+	if(m_loggedIn){
+		saveOnServer();
+	}
 	delete ui;
+}
+
+void MainWindow::saveOnServer(){
+	if(m_calendarLoaded){
+		saveCalendar();
+	}
+	if(m_plannerLoaded){
+		savePlanner();
+	}
+	if(m_todoLoaded){
+		saveToDoList();
+	}
 }
 
 void MainWindow::savePlanner(){
@@ -139,6 +151,33 @@ void MainWindow::on_pushButton_library_clicked()
 void MainWindow::on_pushButton_todo_clicked()
 {
 	ui->stackedWidget->setCurrentIndex(TODO);
+	if(!m_todoLoaded){
+
+		QJsonObject requestObject;
+		requestObject["action"] = "getTodo";
+		requestObject["username"] = m_user.username();
+
+		QJsonDocument request(requestObject);
+		QJsonObject jsonObj = sendRequest(request);
+
+		JSONSerializer jsonSerializer;
+
+		QJsonObject deckObject = jsonObj["todo"].toObject();
+		QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
+
+		jsonSerializer.loadJson(m_toDoList, deckDocument);
+
+
+		showActivities();
+		m_todoLoaded = true;
+
+		for(auto todo : m_toDoList.toDos()){
+			QListWidgetItem* item = new QListWidgetItem();
+			item->setCheckState(todo.second ? Qt::Checked : Qt::Unchecked);
+			item->setText(todo.first);
+			ui->listWidget_todos->addItem(item);
+		}
+	}
 }
 
 void MainWindow::on_pushButton_planer_clicked()
@@ -368,6 +407,12 @@ void MainWindow::on_pushButton_login_clicked()
 		ui->label_username->setText("Nema korisnika");
 		ui->pushButton_login->setText("Prijavi se");
 		setEnabled(false);
+		saveOnServer();
+
+		//TODO clear calendar -> planner -> todo if they are loaded
+		m_todoLoaded = false;
+		m_plannerLoaded = false;
+		m_calendarLoaded = false;
 		ui->stackedWidget->setCurrentIndex(LIBRARY);
 	}
 }
@@ -514,35 +559,19 @@ void MainWindow::onTodoItemChanged(QListWidgetItem* item) {
 }
 
 void MainWindow::saveToDoList(){
-    QTcpSocket socket;
-    socket.connectToHost("127.0.0.1", 8080);
-
-    if(socket.waitForConnected()){
-        QJsonObject request;
+		QJsonObject requestObject;
 
         JSONSerializer serializer;
-        QJsonDocument doc = serializer.createJson(m_planner);
+		QJsonDocument doc = serializer.createJson(m_toDoList);
 
+		qDebug() << doc;
 
-        qDebug() << doc;
+		requestObject["action"] = "saveTodo";
+		requestObject["username"] = m_user.username();
+		requestObject["todo"] = doc.toVariant().toJsonObject();
 
-        request["action"] = "saveToDoList";
-        request["username"] = m_user.username();
-        request["planner"] = doc.toVariant().toJsonObject();
+		QJsonDocument request(requestObject);
+		QJsonObject jsonObj = sendRequest(request);
 
-        qDebug() << request;
-
-        socket.write(QJsonDocument(request).toJson());
-        socket.waitForBytesWritten();
-        socket.waitForReadyRead();
-
-        QByteArray responseData = socket.readAll();
-        QTextStream stream(responseData);
-
-        qDebug() << stream.readAll();
-
-        socket.disconnectFromHost();
-    }else{
-        qDebug() << "Failed to connect to the server";
-    }
+		qDebug() << jsonObj;
 }
