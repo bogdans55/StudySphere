@@ -128,10 +128,7 @@ void MyServer::readData()
 		sendId(socket);
 		writeRemainingIDsToFile();
 		ids.clear();
-	}
-	else if (action == "sendDeck") {
-		sendDeckById(socket, jsonObject["username"].toString(), jsonObject["DeckId"].toString());
-    }else if(action == "sendDeck"){
+	}else if(action == "sendDeck"){
         sendDeckById(socket, jsonObject["username"].toString(), jsonObject["DeckId"].toString());
 	}else if(action == "saveCalendar"){
 		QJsonObject planner = jsonObject["calendar"].toObject();

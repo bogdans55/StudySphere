@@ -89,8 +89,7 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
 }
 
 void CreateDeckWindow::generateId()
-{
-
+{	
 	QTcpSocket socket;
 	socket.connectToHost("127.0.0.1", 8080);
 
