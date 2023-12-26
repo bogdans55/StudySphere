@@ -207,198 +207,187 @@
      <widget class="QWidget" name="page_library">
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_library">
-         <item>
-          <widget class="QListWidget" name="listWidget_library"/>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_act">
+        <widget class="QTabWidget" name="tabWidget_library">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="tab_decks">
+          <attribute name="title">
+           <string>Moji špilovi</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>
-            <widget class="QPushButton" name="pushButton_createDeck">
-             <property name="enabled">
+            <widget class="QTableWidget" name="tableWidget_library">
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::NoSelection</enum>
+             </property>
+             <property name="showGrid">
               <bool>false</bool>
              </property>
-             <property name="text">
-              <string>Kreiraj novi špil</string>
+             <property name="cornerButtonEnabled">
+              <bool>false</bool>
              </property>
+             <property name="rowCount">
+              <number>4</number>
+             </property>
+             <property name="columnCount">
+              <number>0</number>
+             </property>
+             <attribute name="horizontalHeaderVisible">
+              <bool>false</bool>
+             </attribute>
+             <attribute name="horizontalHeaderHighlightSections">
+              <bool>false</bool>
+             </attribute>
+             <attribute name="verticalHeaderVisible">
+              <bool>false</bool>
+             </attribute>
+             <attribute name="verticalHeaderHighlightSections">
+              <bool>false</bool>
+             </attribute>
+             <row/>
+             <row/>
+             <row/>
+             <row/>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_startStudySession">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="text">
-              <string>Započni učenje</string>
-             </property>
-            </widget>
+            <layout class="QHBoxLayout" name="horizontalLayout_act">
+             <item>
+              <widget class="QPushButton" name="pushButton_createDeck">
+               <property name="text">
+                <string>Kreiraj novi špil</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_startStudySession">
+               <property name="text">
+                <string>Započni učenje</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
-          <widget class="QTabWidget" name="tabWidget_library">
-           <property name="currentIndex">
-            <number>0</number>
-           </property>
-           <widget class="QWidget" name="tab_decks">
-            <attribute name="title">
-             <string>Moji špilovi</string>
-            </attribute>
-            <layout class="QVBoxLayout" name="verticalLayout_2">
+         </widget>
+         <widget class="QWidget" name="tab_browser">
+          <attribute name="title">
+           <string>Pretraži špilove</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout">
              <item>
-              <widget class="QListWidget" name="listWidget_library"/>
+              <widget class="QLineEdit" name="lineEdit_browser">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                 <horstretch>99</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>500</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="placeholderText">
+                <string>Pretraži...</string>
+               </property>
+              </widget>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_act">
-               <item>
-                <widget class="QPushButton" name="pushButton_createDeck">
-                 <property name="text">
-                  <string>Kreiraj novi špil</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pushButton_startStudySession">
-                 <property name="text">
-                  <string>Započni učenje</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="tab_browser">
-            <attribute name="title">
-             <string>Pretraži špilove</string>
-            </attribute>
-            <layout class="QVBoxLayout" name="verticalLayout_5">
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout">
-               <item>
-                <widget class="QLineEdit" name="lineEdit_browser">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-                   <horstretch>99</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>500</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="placeholderText">
-                  <string>Pretraži...</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pushButton_search">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Pretraži</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QListWidget" name="listWidget_browser"/>
+              <widget class="QPushButton" name="pushButton_search">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Pretraži</string>
+               </property>
+              </widget>
              </item>
             </layout>
-           </widget>
-          </widget>
-         </item>
-        </layout>
+           </item>
+           <item>
+            <widget class="QTableWidget" name="tableWidget_browser"/>
+           </item>
+          </layout>
+         </widget>
+        </widget>
        </item>
       </layout>
      </widget>
      <widget class="QWidget" name="page_todo">
-      <widget class="QPushButton" name="pushButton_addTodo">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>590</x>
-         <y>20</y>
-         <width>111</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Dodaj aktivnost</string>
-       </property>
-      </widget>
-      <widget class="QListWidget" name="listWidget_todos">
-       <property name="geometry">
-        <rect>
-         <x>5</x>
-         <y>71</y>
-         <width>701</width>
-         <height>451</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QTextEdit" name="textEdit_todo">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>20</y>
-         <width>561</width>
-         <height>31</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton_deleteTodo">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>460</x>
-         <y>540</y>
-         <width>111</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Obriši</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton_deleteAllTodos">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>590</x>
-         <y>540</y>
-         <width>111</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Obriši sve</string>
-       </property>
-      </widget>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="2" column="3">
+        <widget class="QPushButton" name="pushButton_deleteAllTodos">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Obriši sve</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="3">
+        <widget class="QPushButton" name="pushButton_addTodo">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Dodaj aktivnost</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="4">
+        <widget class="QListWidget" name="listWidget_todos"/>
+       </item>
+       <item row="2" column="2">
+        <widget class="QPushButton" name="pushButton_deleteTodo">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Obriši</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="3">
+        <widget class="QLineEdit" name="lineEdit_todo"/>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="page_planer">
       <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -426,7 +415,7 @@
            <item row="2" column="0">
             <widget class="QLabel" name="label_duration">
              <property name="text">
-              <string>Trajanje aktivnosti:</string>
+              <string>Kraj aktivnosti:</string>
              </property>
             </widget>
            </item>
@@ -496,17 +485,7 @@
             <widget class="QTimeEdit" name="timeEdit_start"/>
            </item>
            <item row="2" column="1">
-            <widget class="QSpinBox" name="spinBox_duration">
-             <property name="suffix">
-              <string>min</string>
-             </property>
-             <property name="maximum">
-              <number>1399</number>
-             </property>
-             <property name="singleStep">
-              <number>10</number>
-             </property>
-            </widget>
+            <widget class="QTimeEdit" name="timeEdit_end"/>
            </item>
           </layout>
          </item>
@@ -583,6 +562,16 @@
            </property>
           </widget>
          </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="label_wednesday">
+           <property name="text">
+            <string>Sreda</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="6">
           <widget class="QLabel" name="label_sunday">
            <property name="text">
@@ -593,33 +582,54 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_monday">
-           <property name="text">
-            <string>Ponedeljak</string>
+         <item row="1" column="0">
+          <widget class="QGraphicsView" name="graphicsView_monday">
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
            </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QGraphicsView" name="graphicsView_tuesday">
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QGraphicsView" name="graphicsView_wednesday">
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QGraphicsView" name="graphicsView_thursday">
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4">
+          <widget class="QGraphicsView" name="graphicsView_friday">
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
            </property>
           </widget>
          </item>
          <item row="1" column="5">
-          <widget class="QListWidget" name="listWidget_saturday"/>
+          <widget class="QGraphicsView" name="graphicsView_saturday">
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+          </widget>
          </item>
-         <item row="1" column="4">
-          <widget class="QListWidget" name="listWidget_friday"/>
-         </item>
-         <item row="1" column="3">
-          <widget class="QListWidget" name="listWidget_thursday"/>
-         </item>
-         <item row="1" column="2">
-          <widget class="QListWidget" name="listWidget_wednesday"/>
-         </item>
-         <item row="1" column="1">
-          <widget class="QListWidget" name="listWidget_tuesday"/>
-         </item>
-         <item row="1" column="0">
-          <widget class="QListWidget" name="listWidget_monday"/>
+         <item row="1" column="6">
+          <widget class="QGraphicsView" name="graphicsView_sunday">
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -649,7 +659,14 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QDateTimeEdit" name="dateTimeEdit_eventTime"/>
+            <widget class="QDateTimeEdit" name="dateTimeEdit_eventTime">
+             <property name="displayFormat">
+              <string>dd.MM.yyyy. HH:mm</string>
+             </property>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
            <item row="2" column="1">
             <widget class="QPushButton" name="pushButton_addEvent">

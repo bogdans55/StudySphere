@@ -4,18 +4,17 @@
 PlainCard::PlainCard() : Card() {}
 
 PlainCard::PlainCard(QString questionText, QString answerText, Difficulty questionDifficulty)
-    : Card(questionText, answerText, questionDifficulty)
+	: Card(questionText, answerText, questionDifficulty)
 {}
 
-PlainCard::~PlainCard()
-{}
+PlainCard::~PlainCard() {}
 
-//void PlainCard::flipCard()
+// void PlainCard::flipCard()
 //{
-//    Card::flipCard(); // base
-//}
+//     Card::flipCard(); // base
+// }
 
-//void PlainCard::evaluateAnswer(unsigned evaluation)
+// void PlainCard::evaluateAnswer(unsigned evaluation)
 //{
-//    Card::evaluateAnswer(evaluation); // base
-//}
+//     Card::evaluateAnswer(evaluation); // base
+// }

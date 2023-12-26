@@ -1,24 +1,25 @@
 #ifndef MYSERVER_H
 #define MYSERVER_H
 
+#include <QJsonObject>
 #include <QObject>
 #include <QTcpServer>
-#include <QJsonObject>
 
-class MyServer : public QObject{
-    Q_OBJECT
+class MyServer : public QObject
+{
+	Q_OBJECT
 
-public:
-    explicit MyServer(QObject *parent = nullptr);
-    ~MyServer();
+  public:
+	explicit MyServer(QObject *parent = nullptr);
+	~MyServer();
 
-signals:
+  signals:
 
-public slots:
-    void startServer();
+  public slots:
+	void startServer();
 
-private slots:
-    void newConnection();
+  private slots:
+	void newConnection();
 
 private:
     QTcpServer *server;
@@ -27,6 +28,9 @@ private:
     QString userDecksFolder;
     QString uniqueIdsFile;
     QVector<QString> ids;
+	QString calendarFolder;
+    QString plannerFolder;
+	QString todoFolder;
 
     void registerUser(QTcpSocket* socket, QJsonObject& jsonObject);
     void loginUser(QTcpSocket* socket, QJsonObject& jsonObject);
@@ -43,7 +47,12 @@ private:
     void writeNumbers();
     void makePublic(QTcpSocket* socket, QJsonObject& jsonObject);
     void sendDeckById(QTcpSocket* socket, const QString& username, const QString& deckId);
-
+    void savePlanner(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject);
+	void getPlanner(QTcpSocket* socket, const QString& username);
+	void saveCalendar(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject);
+	void getCalendar(QTcpSocket* socket, const QString& username);
+	void saveTodo(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject);
+	void getTodo(QTcpSocket* socket, const QString& username);
 };
 
 #endif // MYSERVER_H

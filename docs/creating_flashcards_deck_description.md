@@ -1,4 +1,4 @@
-Opis slučaja upotrebe "kreiranje špila kartica":
+Opis slučaja upotrebe "Kreiranje špila kartica":
 
     Kratak opis: 
         Korisnik kreira novi špil, zatim kreira kartice, jednu po jednu, i dodaje ih u špil. Aplikacija na kraju sačuva špil na serveru. 
@@ -18,7 +18,7 @@ Opis slučaja upotrebe "kreiranje špila kartica":
         3. Korisnik unosi naziv špila.
         4. Korisnik bira da li će špil biti javan ili privatni.
         5. Sve dok korisnik ne klikne dugme "Završi dodavanje":
-            5.1. Prelazi se na slučaj upotrebe "kreiranje jedne kartice". Po završetku, vraća se na korak 5.
+            5.1. Prelazi se na slučaj upotrebe "Kreiranje jedne kartice". Po završetku, vraća se na korak 5.
         6. Aplikacija prikazuje kreirane kartice.
         7. Ako korisnik želi da napravi još kartica, klikne dugme "Dodaj karticu".
             7.1. Prelazi se na korak 5.

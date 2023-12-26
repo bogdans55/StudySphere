@@ -10,16 +10,16 @@ class DectItem;
 
 class LibraryScene : public QGraphicsScene
 {
-public:
-    explicit LibraryScene(QObject *parent = nullptr);
+  public:
+	explicit LibraryScene(QObject *parent = nullptr);
 
-    inline QVector<Deck> decks() const { return m_decks; }
+	inline QVector<Deck> decks() const { return m_decks; }
 
-    void addDeck(DeckItem *deckItem);
-    void clearDeck();
+	void addDeck(DeckItem *deckItem);
+	void clearDeck();
 
-private:
-    QVector<Deck> m_decks;
+  private:
+	QVector<Deck> m_decks;
 };
 
 #endif // LIBRARYSCENE_H

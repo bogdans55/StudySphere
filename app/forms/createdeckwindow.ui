@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>CreateDeckWindow</class>
  <widget class="QWidget" name="CreateDeckWindow">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,80 +20,138 @@
    <iconset resource="../res/icons.qrc">
     <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
-   <item>
-    <layout class="QFormLayout" name="formLayout_card">
-     <item row="0" column="0">
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
       <widget class="QLabel" name="label_question">
        <property name="text">
         <string>Pitanje:</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QTextEdit" name="textEdit_question"/>
+     <item>
+      <widget class="QPushButton" name="pushButton_addQuestionImage">
+       <property name="icon">
+        <iconset resource="../res/icons.qrc">
+         <normaloff>:/icons/image.png</normaloff>:/icons/image.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
+      </widget>
      </item>
-     <item row="1" column="0">
+    </layout>
+   </item>
+   <item row="0" column="1">
+    <widget class="QTextEdit" name="textEdit_question"/>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLabel" name="label_questionImage">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
       <widget class="QLabel" name="label_answer">
        <property name="text">
         <string>Odgovor:</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QTextEdit" name="textEdit_answer"/>
-     </item>
-     <item row="4" column="1">
-      <spacer name="verticalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
+     <item>
+      <widget class="QPushButton" name="pushButton_addAnswerImage">
+       <property name="icon">
+        <iconset resource="../res/icons.qrc">
+         <normaloff>:/icons/image.png</normaloff>:/icons/image.png</iconset>
        </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::MinimumExpanding</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
+       <property name="iconSize">
         <size>
-         <width>20</width>
-         <height>50</height>
+         <width>32</width>
+         <height>32</height>
         </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="2" column="1">
-      <layout class="QVBoxLayout" name="verticalLayout_difficulty">
-       <item>
-        <widget class="QRadioButton" name="radioButton_easy">
-         <property name="text">
-          <string>Lako</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QRadioButton" name="radioButton_medium">
-         <property name="text">
-          <string>Srednje</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QRadioButton" name="radioButton_hard">
-         <property name="text">
-          <string>Teško</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_difficulty">
-       <property name="text">
-        <string>Težina:</string>
        </property>
       </widget>
      </item>
     </layout>
    </item>
-   <item>
+   <item row="2" column="1">
+    <widget class="QTextEdit" name="textEdit_answer"/>
+   </item>
+   <item row="3" column="1">
+    <widget class="QLabel" name="label_answerImage">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_difficulty">
+     <property name="text">
+      <string>Težina:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <layout class="QVBoxLayout" name="verticalLayout_difficulty">
+     <item>
+      <widget class="QRadioButton" name="radioButton_easy">
+       <property name="text">
+        <string>Lako</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+       <property name="autoExclusive">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton_medium">
+       <property name="text">
+        <string>Srednje</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioButton_hard">
+       <property name="text">
+        <string>Teško</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="5" column="1">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::MinimumExpanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>521</width>
+       <height>50</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="6" column="0" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout_buttons">
      <item>
       <spacer name="horizontalSpacer_2">
