@@ -45,7 +45,7 @@ private:
     void loadIds();
     void writeRemainingIDsToFile();
     void writeNumbers();
-    void makePublic(QTcpSocket* socket, QJsonObject& jsonObject);
+	void makePublic(QJsonObject& jsonObject);
     void sendDeckById(QTcpSocket* socket, const QString& username, const QString& deckId);
     void savePlanner(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject);
 	void getPlanner(QTcpSocket* socket, const QString& username);

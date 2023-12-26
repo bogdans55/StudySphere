@@ -73,7 +73,9 @@ class MainWindow : public QWidget
 
     void onTodoItemChanged(QListWidgetItem* item);
 
-protected:
+	void on_pushButton_search_clicked();
+
+  protected:
     void resizeEvent(QResizeEvent *event) override;
 
 

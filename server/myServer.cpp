@@ -144,13 +144,13 @@ void MyServer::readData()
         savePlanner(socket, jsonObject["username"].toString(), planner);
     }else if(action == "getPlanner"){
 		getPlanner(socket, jsonObject["username"].toString());
-    }
-	else if(action == "getTodo"){
+    }else if(action == "getTodo"){
 		getTodo(socket, jsonObject["username"].toString());
-	}
-	else if(action == "saveTodo"){
+	}else if(action == "saveTodo"){
 		QJsonObject todo = jsonObject["todo"].toObject();
 		saveTodo(socket, jsonObject["username"].toString(), todo);
+	}else if(action == "search"){
+		searchAndSendDecks(socket, jsonObject["searchQuery"].toString());
 	}
 
 	socket->close();
@@ -226,40 +226,28 @@ void MyServer::searchAndSendDecks(QTcpSocket *socket, const QString &searchQuery
 {
 	QDir deckFolder(publicDecksFolder);
 	QStringList filters;
-	filters << "*.json";
 
 	QStringList foundDecks;
 
 	QJsonObject response;
+	QVector<QString> separatedSearchQuery = searchQuery.split(" ");
 
-	for (const QString &fileName : deckFolder.entryList(filters)) {
-		// if(fileName.contains(searchQuery, Qt::CaseInsensitive)){
-		//     foundDecks.append(fileName);
-		//     qDebug() << fileName << '\n';
-		// }
-		// Add search options, separate login from browser search
-		foundDecks.append(fileName);
-		qDebug() << fileName << '\n';
+	for (const QString &fileName : deckFolder.entryList(filters, QDir::Dirs)) {
+		for(auto search : separatedSearchQuery){
+			if(fileName.contains(search, Qt::CaseInsensitive)){
+				foundDecks.append(fileName);
+				qDebug() << fileName << '\n';
+			}
+		}
 	}
 
 	if (!foundDecks.isEmpty()) {
 		response["status"] = "success";
-		// TODO find more elegant solution to pack found decks in response
 		response["decks"] = foundDecks.join(", ");
-		for (const QString &deckName : foundDecks) {
-			QFile deckFile(deckFolder.absoluteFilePath(deckName));
-			if (deckFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-				QByteArray deckData = deckFile.readAll();
-				response[deckName] = QJsonDocument::fromJson(deckData).object();
-				deckFile.close();
-			}
-			else {
-				response["status"] = "Couldn't open deck!";
-			}
-		}
 	}
 	else {
 		response["status"] = "no results";
+		response["decks"] = "";
 	}
 
 	QTextStream stream(socket);
@@ -365,6 +353,9 @@ void MyServer::saveDeck(QTcpSocket *socket, QJsonObject &jsonObject)
 		stream << QJsonDocument(deck).toJson();
 		file.close();
 		qDebug() << "Deck saved on path: " << filePath;
+		if(deck["Privacy"] == "Public"){
+			makePublic(jsonObject);
+		}
 	}
 	else {
 		qDebug() << "Error saving deck:" << file.errorString();
@@ -464,21 +455,28 @@ void MyServer::writeRemainingIDsToFile()
 //     }
 // }
 
-// void MyServer::makePublic(QTcpSocket* socket, QJsonObject& jsonObject){
-//     QString username = jsonObject["username"].toString();
-//     QString deckID = QString::number(jsonObject["DeckId"].toDouble());
+void MyServer::makePublic(QJsonObject& jsonObject){
+	QString username = jsonObject["username"].toString();
 
-//     QString userDeckPath = QDir(userDecksFolder).absoluteFilePath(username).absoluteFilePath(deckName + "_" + deckID
-//     + ".json"); QFile userDeckFile(userDeckPath);
+	QJsonObject deck = jsonObject["deck"].toObject();
+	QString deckID = QString::number(deck["DeckId"].toDouble());
+	QString deckName = deck["Subject"].toString();
+	QDir().mkdir(QDir(publicDecksFolder).absoluteFilePath(deckName + "_" + deckID));
+	QString filePath = QDir(QDir(publicDecksFolder).absoluteFilePath(deckName + "_" + deckID))
+			.absoluteFilePath(deckName + "_" + deckID + ".json");
 
-//     if (!userDeckFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-//         // Handle error: Unable to open user's deck file
-//         return;
-//     }
+	QFile file(filePath);
 
-//     QByteArray deckData = userDeckFile.readAll();
-//     userDeckFile.close();
-// }
+	if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+		QTextStream stream(&file);
+		stream << QJsonDocument(deck).toJson();
+		file.close();
+		qDebug() << "Public deck saved on path: " << filePath;
+	}
+	else {
+		qDebug() << "Error saving public deck:" << file.errorString();
+	}
+}
 
 void MyServer::saveCalendar(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject){
 

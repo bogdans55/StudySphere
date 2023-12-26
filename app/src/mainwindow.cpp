@@ -634,3 +634,45 @@ void MainWindow::saveToDoList(){
 
 		qDebug() << jsonObj;
 }
+
+void MainWindow::on_pushButton_search_clicked()
+{
+	QJsonObject requestObject;
+	requestObject["action"] = "search";
+	requestObject["searchQuery"] = ui->lineEdit_browser->text().trimmed();
+	qDebug() << "Recieved Data:";
+
+	QJsonDocument request(requestObject);
+	QJsonObject jsonObj = sendRequest(request);
+
+	if (jsonObj["status"] == "No result") {
+		return;
+	}
+
+	qDebug() << jsonObj["status"];
+
+	QString deckNames = jsonObj.value("decks").toString();
+	if (deckNames != "") {
+		QStringList deckNamesList = deckNames.split(", ");
+		unsigned counter = 0;
+		for (auto &deckNameID : deckNamesList) {
+			QPushButton *button = new QPushButton(deckNameID, ui->tableWidget_browser);
+			connect(button, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
+			button->setStyleSheet("color: transparent; margin-left: 25%;");
+
+			QLabel *label = new QLabel(deckNameID.split("_")[0], ui->tableWidget_browser);
+			label->setAlignment(Qt::AlignCenter);
+			label->setStyleSheet("text-align: center; margin-left: 25%");
+
+			if (counter % 2 == 0) {
+				ui->tableWidget_browser->setColumnCount(ui->tableWidget_library->columnCount() + 1);
+				ui->tableWidget_browser->setColumnWidth(counter / 2, 220); // hardcoded
+			}
+
+			ui->tableWidget_browser->setCellWidget(counter % 2 * 2, counter / 2, button);
+			ui->tableWidget_browser->setCellWidget(counter % 2 * 2 + 1, counter / 2, label);
+			counter++;
+		}
+	}
+}
+
