@@ -35,7 +35,7 @@ enum Page
 };
 
 MainWindow::MainWindow(QWidget *parent)
-    : QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_user(), m_libraryScene(), m_toDoList()
+    : QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_toDoList(), m_user(), m_libraryScene()
 {
 	ui->setupUi(this);
 	ui->stackedWidget->setCurrentIndex(LIBRARY);
@@ -80,8 +80,8 @@ void MainWindow::saveOnServer(){
 		savePlanner();
 	}
 	if(m_todoLoaded){
-		saveToDoList();
-	}
+        saveToDoList();
+    }
 }
 
 void MainWindow::savePlanner(){
@@ -272,15 +272,8 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 {
 	QWidget::resizeEvent(event);
 
-	setupTableView();
-	//    int rows = ui->tableWidget_library->rowCount();
-	//    int cols = ui->tableWidget_library->columnCount();
-	//    for (auto row = 0; row < rows; row += 2) {
-	//        for (auto col = 0; col < cols; ++col) {
-	//            ui->tableWidget_library->cellWidget(row, col)->setFixedWidth(ui->tableWidget_library->columnWidth(0) *
-	//            0.9);
-	//        }
-	//    }
+    setupTableView();
+
 	for (auto scene : m_plannerScenes) {
 		for (auto item : scene->items()) {
 			if (dynamic_cast<QGraphicsTextItem *>(item)) {
@@ -375,11 +368,12 @@ void MainWindow::showActivities()
 
 void MainWindow::setupTableView()
 {
-	ui->tableWidget_library->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableWidget_library->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-	ui->tableWidget_library->setRowHeight(0, ui->tableWidget_library->height() * 0.45);
-	ui->tableWidget_library->setRowHeight(1, ui->tableWidget_library->height() * 0.05);
-	ui->tableWidget_library->setRowHeight(2, ui->tableWidget_library->height() * 0.45);
+    ui->tableWidget_library->setRowHeight(0, ui->tableWidget_library->height() * 0.44);
+    ui->tableWidget_library->setRowHeight(1, ui->tableWidget_library->height() * 0.05);
+    ui->tableWidget_library->setRowHeight(2, ui->tableWidget_library->height() * 0.44);
+    ui->tableWidget_library->setRowHeight(3, ui->tableWidget_library->height() * 0.05);
 }
 
 void MainWindow::setEnabled(bool value)
@@ -444,14 +438,15 @@ void MainWindow::on_pushButton_login_clicked()
 		m_loggedIn = loginSuccess;
 	}
 	else {
-		// logout
+        // logout
 		m_loggedIn = false; // use setter instead?
 		ui->label_username->setText("Nema korisnika");
 		ui->pushButton_login->setText("Prijavi se");
 		setEnabled(false);
-		saveOnServer();
+        ui->tableWidget_library->clear();
 
-		//TODO clear calendar -> planner -> todo if they are loaded
+        m_planner.activities().clear();
+        m_calendar.events().clear();
 		m_todoLoaded = false;
 		m_plannerLoaded = false;
 		m_calendarLoaded = false;
@@ -459,8 +454,7 @@ void MainWindow::on_pushButton_login_clicked()
 		ui->tableWidget_library->setColumnCount(0);
 		setupTableView();
 
-		savePlanner();
-		saveCalendar();
+        saveOnServer();
 	}
 }
 
@@ -494,6 +488,7 @@ QJsonObject MainWindow::sendRequest(QJsonDocument &request){
 
 bool MainWindow::loginUser(const QString &username, const QString &password)
 {
+    setupTableView();
 	QJsonObject requestObject;
 
 	requestObject["action"] = "login";
@@ -507,32 +502,30 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 	qDebug() << jsonObj["status"];
 	qDebug() << jsonObj;
 
-		QString loginResponse = stream.readAll();
-		QJsonDocument jsondoc = QJsonDocument::fromJson(loginResponse.toUtf8());
-		QJsonObject jsonobj = jsondoc.object();
 
-		qDebug() << jsondoc["status"];
-		qDebug() << jsondoc;
+    QString deckNames = jsonObj.value("decks").toString();
+    if (deckNames != "") {
+        QStringList deckNamesList = deckNames.split(", ");
+        unsigned counter = 0;
+        for (auto &deckNameID : deckNamesList) {
+            QPushButton *button = new QPushButton(deckNameID, ui->tableWidget_library);
+            connect(button, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
+            button->setStyleSheet("color: transparent; margin-left: 25%;");
 
-		QString deckNames = jsonobj.value("decks").toString();
-		if (deckNames != "") {
-			// split deckNames with ", "
-			QStringList deckNamesList = deckNames.split(", ");
-			unsigned counter = 0;
-			for (auto &deckNameID : deckNamesList) {
-				// auto deckName = deckNameID.split('_')[0];
-				QPushButton *btn = new QPushButton(deckNameID, ui->tableWidget_library);
-				connect(btn, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
-				if (counter % 2 == 0) {
-					ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
-					ui->tableWidget_library->setColumnWidth(counter / 2, 200); // hardcoded
-				}
-				btn->setFixedWidth(ui->tableWidget_library->columnWidth(0) * 0.9);
-				ui->tableWidget_library->setCellWidget(counter % 2 * 2, counter / 2, btn);
-				counter++;
-			}
-		}
-	}
+            QLabel *label = new QLabel(deckNameID.split("_")[0], ui->tableWidget_library);
+            label->setAlignment(Qt::AlignCenter);
+            label->setStyleSheet("text-align: center; margin-left: 25%");
+
+            if (counter % 2 == 0) {
+                ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
+                ui->tableWidget_library->setColumnWidth(counter / 2, 220); // hardcoded
+            }
+
+            ui->tableWidget_library->setCellWidget(counter % 2 * 2, counter / 2, button);
+            ui->tableWidget_library->setCellWidget(counter % 2 * 2 + 1, counter / 2, label);
+            counter++;
+        }
+    }
 
 	if (jsonObj["status"] != QJsonValue::Undefined && jsonObj["status"] != "Password incorrect, try again") {
 		ui->label_username->setText(request["username"].toString());

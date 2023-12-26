@@ -65,9 +65,6 @@ class MainWindow : public QWidget
 
 	void on_pushButton_addEvent_clicked();
 
-  protected:
-	void resizeEvent(QResizeEvent *event) override;
-
 	void on_pushButton_addTodo_clicked();
 
     void on_pushButton_deleteTodo_clicked();
@@ -75,6 +72,9 @@ class MainWindow : public QWidget
     void on_pushButton_deleteAllTodos_clicked();
 
     void onTodoItemChanged(QListWidgetItem* item);
+
+protected:
+    void resizeEvent(QResizeEvent *event) override;
 
 
   private:
@@ -104,7 +104,7 @@ class MainWindow : public QWidget
     void savePlanner();
     void showActivities();
     void saveToDoList();
-	void saveOnServer();
+    void saveOnServer();
 
 	void setupTableView();
 };
