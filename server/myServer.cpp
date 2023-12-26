@@ -27,6 +27,10 @@ MyServer::MyServer(QObject *parent) : QObject(parent)
 
     plannerFolder = "plannerFolder";
     QDir().mkpath(plannerFolder);
+
+	todoFolder = "todoFolder";
+	QDir().mkpath(todoFolder);
+
 	uniqueIdsFile = "uniqueIds.txt";
 }
 
@@ -141,6 +145,13 @@ void MyServer::readData()
     }else if(action == "getPlanner"){
 		getPlanner(socket, jsonObject["username"].toString());
     }
+	else if(action == "getTodo"){
+		getTodo(socket, jsonObject["username"].toString());
+	}
+	else if(action == "saveTodo"){
+		QJsonObject todo = jsonObject["todo"].toObject();
+		saveTodo(socket, jsonObject["username"].toString(), todo);
+	}
 
 	socket->close();
 }
@@ -480,7 +491,7 @@ void MyServer::saveCalendar(QTcpSocket* socket, const QString& username, QJsonOb
 		file.close();
 		qDebug() << "Calendar saved on path: " << filePath;
 	}else{
-		qDebug() << "Error saving deck:" << file.errorString();
+		qDebug() << "Error saving calendar:" << file.errorString();
 	}
 
 	QJsonObject response;
@@ -507,3 +518,40 @@ void MyServer::getCalendar(QTcpSocket* socket, const QString& username){
 	stream << QJsonDocument(response).toJson();
 }
 
+void MyServer::getTodo(QTcpSocket* socket, const QString& username){
+
+	QString filePath = QDir(todoFolder).absoluteFilePath(username + ".json");
+	QFile file(filePath);
+	QJsonObject response;
+
+	if(file.open(QIODevice::ReadOnly | QIODevice::Text)){
+		QByteArray todoData = file.readAll();
+		response["todo"] = QJsonDocument::fromJson(todoData).object();
+		response["status"] = "Successful!";
+		file.close();
+	}else{
+		response["status"] = "Error getting todoList!";
+		qDebug() << "Error opening todoList file:" << file.errorString();
+	}
+
+	QTextStream stream(socket);
+	stream << QJsonDocument(response).toJson();
+}
+
+void MyServer::saveTodo(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject){
+
+	QString filePath = QDir(todoFolder).absoluteFilePath(username + ".json");
+	QFile file(filePath);
+
+	if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
+		QTextStream stream(&file);
+		stream << QJsonDocument(jsonObject).toJson();
+		file.close();
+		qDebug() << "Todo list saved on path: " << filePath;
+	}else{
+		qDebug() << "Error saving todo list:" << file.errorString();
+	}
+
+	QJsonObject response;
+	response["status"] = "Todo list saved successfully";
+}

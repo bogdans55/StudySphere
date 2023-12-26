@@ -20,6 +20,8 @@
 #include <QApplication>
 #include <QDirIterator>
 #include <QMessageBox>
+#include <QStandardPaths>
+#include <QFile>
 
 enum Page
 {
@@ -33,7 +35,7 @@ enum Page
 };
 
 MainWindow::MainWindow(QWidget *parent)
-	: QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_user(), m_libraryScene()
+    : QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_user(), m_libraryScene(), m_toDoList()
 {
 	ui->setupUi(this);
 	ui->stackedWidget->setCurrentIndex(LIBRARY);
@@ -60,13 +62,28 @@ MainWindow::MainWindow(QWidget *parent)
 		scheduleItems[i]->setWidth(ui->graphicsView_monday->width());
 		m_plannerScenes[i]->addItem(scheduleItems[i]);
 	}
+
+    connect(ui->listWidget_todos, &QListWidget::itemChanged, this, &MainWindow::onTodoItemChanged);
 }
 
 MainWindow::~MainWindow()
 {
-	saveCalendar();
-    savePlanner();
+	if(m_loggedIn){
+		saveOnServer();
+	}
 	delete ui;
+}
+
+void MainWindow::saveOnServer(){
+	if(m_calendarLoaded){
+		saveCalendar();
+	}
+	if(m_plannerLoaded){
+		savePlanner();
+	}
+	if(m_todoLoaded){
+		saveToDoList();
+	}
 }
 
 void MainWindow::savePlanner(){
@@ -134,6 +151,33 @@ void MainWindow::on_pushButton_library_clicked()
 void MainWindow::on_pushButton_todo_clicked()
 {
 	ui->stackedWidget->setCurrentIndex(TODO);
+	if(!m_todoLoaded){
+
+		QJsonObject requestObject;
+		requestObject["action"] = "getTodo";
+		requestObject["username"] = m_user.username();
+
+		QJsonDocument request(requestObject);
+		QJsonObject jsonObj = sendRequest(request);
+
+		JSONSerializer jsonSerializer;
+
+		QJsonObject deckObject = jsonObj["todo"].toObject();
+		QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
+
+		jsonSerializer.loadJson(m_toDoList, deckDocument);
+
+
+		showActivities();
+		m_todoLoaded = true;
+
+		for(auto todo : m_toDoList.toDos()){
+			QListWidgetItem* item = new QListWidgetItem();
+			item->setCheckState(todo.second ? Qt::Checked : Qt::Unchecked);
+			item->setText(todo.first);
+			ui->listWidget_todos->addItem(item);
+		}
+	}
 }
 
 void MainWindow::on_pushButton_planer_clicked()
@@ -363,6 +407,12 @@ void MainWindow::on_pushButton_login_clicked()
 		ui->label_username->setText("Nema korisnika");
 		ui->pushButton_login->setText("Prijavi se");
 		setEnabled(false);
+		saveOnServer();
+
+		//TODO clear calendar -> planner -> todo if they are loaded
+		m_todoLoaded = false;
+		m_plannerLoaded = false;
+		m_calendarLoaded = false;
 		ui->stackedWidget->setCurrentIndex(LIBRARY);
 	}
 }
@@ -465,3 +515,63 @@ void MainWindow::saveCalendar(){
 	QJsonObject jsonObj = sendRequest(request);
 }
 
+void MainWindow::on_pushButton_addTodo_clicked()
+{
+    QListWidgetItem* item = new QListWidgetItem();
+    item->setCheckState(Qt::Unchecked);
+    item->setText(ui->lineEdit_todo->text());
+
+    m_toDoList.addToDo(item->text(), item->checkState());
+
+    ui->listWidget_todos->addItem(item);
+    ui->lineEdit_todo->clear();
+    ui->lineEdit_todo->setFocus();
+}
+
+void MainWindow::on_pushButton_deleteTodo_clicked()
+{
+    int currentRow = ui->listWidget_todos->currentRow();
+
+    if (currentRow >= 0) {
+        QListWidgetItem* item = ui->listWidget_todos->takeItem(currentRow);
+
+        m_toDoList.deleteToDo(item->text());
+        delete item;
+    }
+}
+
+void MainWindow::on_pushButton_deleteAllTodos_clicked()
+{
+    m_toDoList.deleteAllToDos();
+    ui->listWidget_todos->clear();
+}
+
+void MainWindow::onTodoItemChanged(QListWidgetItem* item) {
+    if (item) {
+        m_toDoList.checkToDo(item->text(), item->checkState());
+
+        if (item->checkState() == Qt::Checked) {
+            item->setBackground(QBrush(QColor(140, 255, 140)));
+        } else {
+            item->setBackground(QBrush(Qt::white));
+        }
+    }
+}
+
+void MainWindow::saveToDoList(){
+		QJsonObject requestObject;
+
+        JSONSerializer serializer;
+		QJsonDocument doc = serializer.createJson(m_toDoList);
+
+		qDebug() << doc;
+
+		requestObject["action"] = "saveTodo";
+		requestObject["username"] = m_user.username();
+		requestObject["todo"] = doc.toVariant().toJsonObject();
+
+		QJsonDocument request(requestObject);
+		QJsonObject jsonObj = sendRequest(request);
+
+		qDebug() << jsonObj;
+}

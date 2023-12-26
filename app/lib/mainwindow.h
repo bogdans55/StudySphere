@@ -4,10 +4,18 @@
 #include "lib/calendar.h"
 #include "lib/planner.h"
 #include "lib/plannerscene.h"
+#include "lib/todolist.h"
 #include "libraryscene.h"
 #include "user.h"
 
 #include <QWidget>
+#include <QListWidgetItem>
+
+#include <QDir>
+#include <QCoreApplication>
+#include <QStandardPaths>
+
+#include "lib/settings.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -55,6 +63,15 @@ class MainWindow : public QWidget
 
     void on_pushButton_addEvent_clicked();
 
+	void on_pushButton_addTodo_clicked();
+
+    void on_pushButton_deleteTodo_clicked();
+
+    void on_pushButton_deleteAllTodos_clicked();
+
+    void onTodoItemChanged(QListWidgetItem* item);
+
+
   private:
 	Ui::MainWindow *ui;
 
@@ -62,6 +79,8 @@ class MainWindow : public QWidget
 	Planner m_planner;
 
     Calendar m_calendar;
+
+    ToDoList m_toDoList;
 
 	bool m_calendarLoaded = false;
 	void saveCalendar();
@@ -73,10 +92,13 @@ class MainWindow : public QWidget
 
 	bool m_loggedIn = false;
     bool m_plannerLoaded = false;
+	bool m_todoLoaded = false;
 	User m_user;
 	LibraryScene m_libraryScene;
 
     void savePlanner();
     void showActivities();
+    void saveToDoList();
+	void saveOnServer();
 };
 #endif // MAINWINDOW_H

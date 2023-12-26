@@ -17,6 +17,8 @@ StudySessionWindow::StudySessionWindow(StudySession *session, QWidget *parent)
 	ui->setupUi(this);
 	m_session->startSession();
 	ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
+
+	ui->label_cardImage->setVisible(false);
 }
 
 StudySessionWindow::~StudySessionWindow()
@@ -26,10 +28,14 @@ StudySessionWindow::~StudySessionWindow()
 
 void StudySessionWindow::on_pushButton_flip_clicked()
 {
-	if (m_session->answerShowed())
+	if (m_session->answerShowed()) {
 		ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
-	else
+		ui->label_card->setText("Pitanje");
+	}
+	else {
 		ui->textEdit_card->setText(m_session->getCurrentCard().questionAnswer());
+		ui->label_card->setText("Odgovor");
+	}
 
 	m_session->flipCard();
 }
@@ -40,6 +46,7 @@ void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 	if (m_session->hasNextCard()) {
 		m_session->nextCard();
 		ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
+		ui->label_card->setText("Pitanje");
 	}
 	else {
 		QMessageBox::information(this, "Gotova sesija", "Uspešno ste prešli sva odabrana pitanja!");
