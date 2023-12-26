@@ -442,19 +442,21 @@ void MainWindow::on_pushButton_login_clicked()
 
 bool MainWindow::loginUser(const QString &username, const QString &password)
 {
-	QTcpSocket socket;
-	socket.connectToHost("127.0.0.1", 8080);
+	QTcpSocket *socket = new QTcpSocket(this);
+	socket->connectToHost("127.0.0.1", 8080);
 
-	if (socket.waitForConnected()) {
+	if (socket->waitForConnected()) {
 		QJsonObject request;
+
 		request["action"] = "login";
 		request["username"] = username;
 		request["password"] = password;
 
-		socket.write(QJsonDocument(request).toJson());
-		socket.waitForBytesWritten();
-		socket.waitForReadyRead();
-		QByteArray responseText = socket.readAll();
+		socket->write(QJsonDocument(request).toJson());
+
+		socket->waitForBytesWritten();
+		socket->waitForReadyRead();
+		QByteArray responseText = socket->readAll();
 		QTextStream stream(responseText);
 
 		qDebug() << "Recieved Data:";
@@ -468,15 +470,8 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 
 		QString deckNames = jsonobj.value("decks").toString();
 		if (deckNames != "") {
-			// split deckNames with ", "
 			QStringList deckNamesList = deckNames.split(", ");
 			for (auto &deckNameID : deckNamesList) {
-				// auto deckName = deckNameID.split('_')[0];
-				//                Deck deck(deckName, Privacy::PRIVATE); // empty deck for now
-				//                DeckItem *deckItem = new DeckItem(&deck);
-				//                m_libraryScene.addItem(deckItem);
-				//                m_libraryScene.addDeck(deckItem);
-				// ui->listWidget_library->addItem(deckName.split('_')[0]);
 				ui->listWidget_library->addItem(deckNameID);
 			}
 		}
@@ -489,30 +484,32 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 		else {
 			return false;
 		}
-		socket.disconnectFromHost();
+		socket->disconnectFromHost();
+		socket->deleteLater();
 		return true;
 	}
 	else {
-		return false;
+		socket->deleteLater();
 		qDebug() << "Failed to connect to the server";
+		return false;
 	}
 }
 
 bool MainWindow::registerUser(const QString &username, const QString &password)
 {
-	QTcpSocket socket;
-	socket.connectToHost("127.0.0.1", 8080);
+	QTcpSocket *socket = new QTcpSocket(this);
+	socket->connectToHost("127.0.0.1", 8080);
 
-	if (socket.waitForConnected()) {
+	if (socket->waitForConnected()) {
 		QJsonObject request;
 		request["action"] = "register";
 		request["username"] = username;
 		request["password"] = password;
 
-		socket.write(QJsonDocument(request).toJson());
-		socket.waitForBytesWritten();
-		socket.waitForReadyRead();
-		QByteArray responseText = socket.readAll();
+		socket->write(QJsonDocument(request).toJson());
+		socket->waitForBytesWritten();
+		socket->waitForReadyRead();
+		QByteArray responseText = socket->readAll();
 		QTextStream stream(responseText);
 
 		qDebug() << "Recieved Data:";
@@ -531,10 +528,12 @@ bool MainWindow::registerUser(const QString &username, const QString &password)
 		qDebug() << jsondoc["status"];
 		qDebug() << jsondoc;
 
-		socket.disconnectFromHost();
+		socket->disconnectFromHost();
+		socket->deleteLater();
 		return true;
 	}
 	else {
+		socket->deleteLater();
 		qDebug() << "Failed to connect to the server";
 		return false;
 	}

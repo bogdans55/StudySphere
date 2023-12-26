@@ -108,7 +108,6 @@ void CreateDeckWindow::generateId()
 		QJsonDocument idJson = QJsonDocument::fromJson(idResponseString.toUtf8());
 		QJsonObject idObject = idJson.object();
 		m_deck.setId(idObject.value("DeckId").toVariant().toULongLong());
-
 		socket.disconnectFromHost();
 	}
 	else {
