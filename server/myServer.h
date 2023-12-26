@@ -30,6 +30,7 @@ private:
     QVector<QString> ids;
 	QString calendarFolder;
     QString plannerFolder;
+	QString todoFolder;
 
     void registerUser(QTcpSocket* socket, QJsonObject& jsonObject);
     void loginUser(QTcpSocket* socket, QJsonObject& jsonObject);
@@ -47,9 +48,11 @@ private:
     void makePublic(QTcpSocket* socket, QJsonObject& jsonObject);
     void sendDeckById(QTcpSocket* socket, const QString& username, const QString& deckId);
     void savePlanner(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject);
-    void sendPlanner(QTcpSocket* socket, const QString& username);
+	void getPlanner(QTcpSocket* socket, const QString& username);
 	void saveCalendar(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject);
 	void getCalendar(QTcpSocket* socket, const QString& username);
+	void saveTodo(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject);
+	void getTodo(QTcpSocket* socket, const QString& username);
 };
 
 #endif // MYSERVER_H

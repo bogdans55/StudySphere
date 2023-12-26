@@ -34,6 +34,7 @@ SOURCES += \
     src/plaincard.cpp \
     src/studysession.cpp \
     src/studysessionwindow.cpp \
+    src/todolist.cpp \
     src/user.cpp \
     src/settings.cpp \
     src/mainwindow.cpp \
@@ -62,6 +63,7 @@ HEADERS += \
     lib/studysession.h \
     lib/library.h \
     lib/studysessionwindow.h \
+    lib/todolist.h \
     lib/user.h \
     lib/settings.h \
     lib/mainwindow.h \

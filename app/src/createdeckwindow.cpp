@@ -93,8 +93,7 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
 }
 
 void CreateDeckWindow::generateId()
-{
-
+{	
 	QTcpSocket socket;
 	socket.connectToHost("127.0.0.1", 8080);
 
@@ -112,7 +111,6 @@ void CreateDeckWindow::generateId()
 		QJsonDocument idJson = QJsonDocument::fromJson(idResponseString.toUtf8());
 		QJsonObject idObject = idJson.object();
 		m_deck.setId(idObject.value("DeckId").toVariant().toULongLong());
-
 		socket.disconnectFromHost();
 	}
 	else {

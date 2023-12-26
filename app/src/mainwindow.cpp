@@ -20,6 +20,8 @@
 #include <QApplication>
 #include <QDirIterator>
 #include <QMessageBox>
+#include <QStandardPaths>
+#include <QFile>
 
 enum Page
 {
@@ -33,7 +35,7 @@ enum Page
 };
 
 MainWindow::MainWindow(QWidget *parent)
-	: QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_user(), m_libraryScene()
+    : QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_user(), m_libraryScene(), m_toDoList()
 {
 	ui->setupUi(this);
 	ui->stackedWidget->setCurrentIndex(LIBRARY);
@@ -58,48 +60,43 @@ MainWindow::MainWindow(QWidget *parent)
 		scheduleItems[i]->setWidth(ui->graphicsView_monday->width());
 		m_plannerScenes[i]->addItem(scheduleItems[i]);
 	}
+
+    connect(ui->listWidget_todos, &QListWidget::itemChanged, this, &MainWindow::onTodoItemChanged);
 }
 
 MainWindow::~MainWindow()
 {
-	saveCalendar();
-	savePlanner();
+	if(m_loggedIn){
+		saveOnServer();
+	}
 	delete ui;
 }
 
-void MainWindow::savePlanner()
-{
-	QTcpSocket socket;
-	socket.connectToHost("127.0.0.1", 8080);
-
-	if (socket.waitForConnected()) {
-		QJsonObject request;
-
-		JSONSerializer serializer;
-		QJsonDocument doc = serializer.createJson(m_planner);
-
-		qDebug() << doc;
-
-		request["action"] = "savePlanner";
-		request["username"] = m_user.username();
-		request["planner"] = doc.toVariant().toJsonObject();
-
-		qDebug() << request;
-
-		socket.write(QJsonDocument(request).toJson());
-		socket.waitForBytesWritten();
-		socket.waitForReadyRead();
-
-		QByteArray responseData = socket.readAll();
-		QTextStream stream(responseData);
-
-		qDebug() << stream.readAll();
-
-		socket.disconnectFromHost();
+void MainWindow::saveOnServer(){
+	if(m_calendarLoaded){
+		saveCalendar();
 	}
-	else {
-		qDebug() << "Failed to connect to the server";
+	if(m_plannerLoaded){
+		savePlanner();
 	}
+	if(m_todoLoaded){
+		saveToDoList();
+	}
+}
+
+void MainWindow::savePlanner(){
+
+	QJsonObject requestObject;
+
+	JSONSerializer serializer;
+	QJsonDocument doc = serializer.createJson(m_planner);
+
+	requestObject["action"] = "savePlanner";
+	requestObject["username"] = m_user.username();
+	requestObject["planner"] = doc.toVariant().toJsonObject();
+
+	QJsonDocument request(requestObject);
+	QJsonObject jsonObj = sendRequest(request);
 }
 
 void MainWindow::on_pushButton_createDeck_clicked()
@@ -125,44 +122,23 @@ void MainWindow::deckButton_clicked()
 	qDebug() << deckName;
 	Deck *deck = new Deck();
 
-	QTcpSocket socket;
-	socket.connectToHost("127.0.0.1", 8080);
+	QJsonObject requestObject;
+	requestObject["action"] = "sendDeck";
+	requestObject["username"] = m_user.username();
+	requestObject["DeckId"] = deckName.split('_')[1].split('.')[0];
 
-	if (socket.waitForConnected()) {
-		QJsonObject request;
-		request["action"] = "sendDeck";
-		request["username"] = m_user.username();
-		request["DeckId"] = deckName.split('_')[1].split('.')[0];
-		qDebug() << request;
+	QJsonDocument request(requestObject);
+	QJsonObject jsonObj = sendRequest(request);
 
-		socket.write(QJsonDocument(request).toJson());
-		socket.waitForBytesWritten();
-		socket.waitForReadyRead();
+	qDebug() << jsonObj;
 
-		QByteArray responseText = socket.readAll();
-		QTextStream stream(responseText);
+	QString deckNames = jsonObj.value("decks").toString();
+	JSONSerializer jsonSerializer;
 
-		qDebug() << "Recieved Data:";
+	QJsonObject deckObject = jsonObj[deckName].toObject();
+	QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 
-		QString deckResponse = stream.readAll();
-		QJsonDocument jsondoc = QJsonDocument::fromJson(deckResponse.toUtf8());
-		QJsonObject jsonobj = jsondoc.object();
-
-		qDebug() << jsondoc["status"];
-		qDebug() << jsondoc;
-		QString deckNames = jsonobj.value("decks").toString();
-		JSONSerializer jsonSerializer;
-
-		QJsonObject deckObject = jsondoc[deckName].toObject();
-		QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
-
-		jsonSerializer.loadJson(*deck, deckDocument);
-
-		socket.disconnectFromHost();
-	}
-	else {
-		qDebug() << "Failed to connect to the server";
-	}
+	jsonSerializer.loadJson(*deck, deckDocument);
 
 	StudySession *session = new StudySession(m_user, deck);
 	StudySessionWindow *useDeck = new StudySessionWindow(session);
@@ -178,89 +154,81 @@ void MainWindow::on_pushButton_library_clicked()
 void MainWindow::on_pushButton_todo_clicked()
 {
 	ui->stackedWidget->setCurrentIndex(TODO);
+	if(!m_todoLoaded){
+
+		QJsonObject requestObject;
+		requestObject["action"] = "getTodo";
+		requestObject["username"] = m_user.username();
+
+		QJsonDocument request(requestObject);
+		QJsonObject jsonObj = sendRequest(request);
+
+		JSONSerializer jsonSerializer;
+
+		QJsonObject deckObject = jsonObj["todo"].toObject();
+		QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
+
+		jsonSerializer.loadJson(m_toDoList, deckDocument);
+
+
+		showActivities();
+		m_todoLoaded = true;
+
+		for(auto todo : m_toDoList.toDos()){
+			QListWidgetItem* item = new QListWidgetItem();
+			item->setCheckState(todo.second ? Qt::Checked : Qt::Unchecked);
+			item->setText(todo.first);
+			ui->listWidget_todos->addItem(item);
+		}
+	}
 }
 
 void MainWindow::on_pushButton_planer_clicked()
 {
 	ui->stackedWidget->setCurrentIndex(PLANER);
-	if (!m_plannerLoaded) {
-		QTcpSocket socket;
-		socket.connectToHost("127.0.0.1", 8080);
+    if(!m_plannerLoaded){
 
-		if (socket.waitForConnected()) {
-			QJsonObject request;
-			request["action"] = "getPlanner";
-			request["username"] = m_user.username();
-			qDebug() << request;
+		QJsonObject requestObject;
+		requestObject["action"] = "getPlanner";
+		requestObject["username"] = m_user.username();
 
-			socket.write(QJsonDocument(request).toJson());
-			socket.waitForBytesWritten();
-			socket.waitForReadyRead();
+		QJsonDocument request(requestObject);
+		QJsonObject jsonObj = sendRequest(request);
 
-			QByteArray responseText = socket.readAll();
-			QTextStream stream(responseText);
+		JSONSerializer jsonSerializer;
 
-			QString plannerResponse = stream.readAll();
-			QJsonDocument jsondoc = QJsonDocument::fromJson(plannerResponse.toUtf8());
-			QJsonObject jsonobj = jsondoc.object();
+		QJsonObject deckObject = jsonObj["planner"].toObject();
+		QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 
-			qDebug() << jsondoc;
+		jsonSerializer.loadJson(m_planner, deckDocument);
 
-			JSONSerializer jsonSerializer;
 
-			QJsonObject deckObject = jsondoc["planner"].toObject();
-			QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
-
-			jsonSerializer.loadJson(m_planner, deckDocument);
-
-			socket.disconnectFromHost();
-		}
-		else {
-			qDebug() << "Failed to connect to the server";
-		}
-		showActivities();
-		m_plannerLoaded = true;
-	}
+        showActivities();
+        m_plannerLoaded = true;
+    }
 }
 
 void MainWindow::on_pushButton_calendar_clicked()
 {
-	ui->stackedWidget->setCurrentIndex(CALENDAR);
-	if (!m_calendarLoaded) {
-		QTcpSocket socket;
-		socket.connectToHost("127.0.0.1", 8080);
+    ui->stackedWidget->setCurrentIndex(CALENDAR);
+	if(!m_calendarLoaded){
 
-		if (socket.waitForConnected()) {
-			QJsonObject request;
-			request["action"] = "getCalendar";
-			request["username"] = m_user.username();
-			qDebug() << request;
+		QJsonObject requestObject;
+		requestObject["action"] = "getCalendar";
+		requestObject["username"] = m_user.username();
 
-			socket.write(QJsonDocument(request).toJson());
-			socket.waitForBytesWritten();
-			socket.waitForReadyRead();
+		QJsonDocument request(requestObject);
+		QJsonObject jsonObj = sendRequest(request);
 
-			QByteArray responseText = socket.readAll();
-			QTextStream stream(responseText);
+		qDebug() << jsonObj;
 
-			QString calendarResponse = stream.readAll();
-			QJsonDocument jsondoc = QJsonDocument::fromJson(calendarResponse.toUtf8());
-			QJsonObject jsonobj = jsondoc.object();
+		JSONSerializer jsonSerializer;
 
-			qDebug() << jsondoc;
+		QJsonObject deckObject = jsonObj["calendar"].toObject();
+		QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 
-			JSONSerializer jsonSerializer;
+		jsonSerializer.loadJson(m_calendar, deckDocument);
 
-			QJsonObject deckObject = jsondoc["calendar"].toObject();
-			QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
-
-			jsonSerializer.loadJson(m_calendar, deckDocument);
-
-			socket.disconnectFromHost();
-		}
-		else {
-			qDebug() << "Failed to connect to the server";
-		}
 		m_calendarLoaded = true;
 	}
 }
@@ -481,7 +449,12 @@ void MainWindow::on_pushButton_login_clicked()
 		ui->label_username->setText("Nema korisnika");
 		ui->pushButton_login->setText("Prijavi se");
 		setEnabled(false);
-		ui->tableWidget_library->clear();
+		saveOnServer();
+
+		//TODO clear calendar -> planner -> todo if they are loaded
+		m_todoLoaded = false;
+		m_plannerLoaded = false;
+		m_calendarLoaded = false;
 		ui->stackedWidget->setCurrentIndex(LIBRARY);
 		ui->tableWidget_library->setColumnCount(0);
 		setupTableView();
@@ -491,25 +464,48 @@ void MainWindow::on_pushButton_login_clicked()
 	}
 }
 
-bool MainWindow::loginUser(const QString &username, const QString &password)
-{
-	setupTableView();
-	QTcpSocket socket;
-	socket.connectToHost("127.0.0.1", 8080);
+QJsonObject MainWindow::sendRequest(QJsonDocument &request){
+	QTcpSocket *socket = new QTcpSocket(this);
+	socket->connectToHost("127.0.0.1", 8080);
 
-	if (socket.waitForConnected()) {
-		QJsonObject request;
-		request["action"] = "login";
-		request["username"] = username;
-		request["password"] = password;
+	if(socket ->waitForConnected()){
 
-		socket.write(QJsonDocument(request).toJson());
-		socket.waitForBytesWritten();
-		socket.waitForReadyRead();
-		QByteArray responseText = socket.readAll();
+		socket->write(request.toJson());
+
+		socket->waitForBytesWritten();
+		socket->waitForReadyRead();
+		QByteArray responseText = socket->readAll();
 		QTextStream stream(responseText);
 
-		qDebug() << "Recieved Data:";
+		QString response = stream.readAll();
+		QJsonDocument jsonDoc = QJsonDocument::fromJson(response.toUtf8());
+		QJsonObject jsonObj = jsonDoc.object();
+		socket->disconnectFromHost();
+		socket->deleteLater();
+		return jsonObj;
+	}else {
+		socket->deleteLater();
+		QJsonObject response;
+		response["status"] = "Failed to connect to the server";
+		qDebug() << response["status"];
+		return response;
+	}
+}
+
+bool MainWindow::loginUser(const QString &username, const QString &password)
+{
+	QJsonObject requestObject;
+
+	requestObject["action"] = "login";
+	requestObject["username"] = username;
+	requestObject["password"] = password;
+
+	qDebug() << "Recieved Data:";
+	QJsonDocument request(requestObject);
+	QJsonObject jsonObj = sendRequest(request);
+
+	qDebug() << jsonObj["status"];
+	qDebug() << jsonObj;
 
 		QString loginResponse = stream.readAll();
 		QJsonDocument jsondoc = QJsonDocument::fromJson(loginResponse.toUtf8());
@@ -536,97 +532,112 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 				counter++;
 			}
 		}
+	}
 
-		if (jsondoc["status"] != QJsonValue::Undefined && jsondoc["status"] != "Password incorrect, try again") {
-			ui->label_username->setText(request["username"].toString());
-			ui->pushButton_login->setText("Odjavi se");
-			m_user.setUsername(request["username"].toString());
-		}
-		else {
-			return false;
-		}
-		socket.disconnectFromHost();
-		return true;
+	if (jsonObj["status"] != QJsonValue::Undefined && jsonObj["status"] != "Password incorrect, try again") {
+		ui->label_username->setText(request["username"].toString());
+		ui->pushButton_login->setText("Odjavi se");
+		m_user.setUsername(request["username"].toString());
 	}
 	else {
 		return false;
-		qDebug() << "Failed to connect to the server";
 	}
+	return true;
 }
 
 bool MainWindow::registerUser(const QString &username, const QString &password)
 {
-	QTcpSocket socket;
-	socket.connectToHost("127.0.0.1", 8080);
+	QJsonObject requestObject;
+	requestObject["action"] = "register";
+	requestObject["username"] = username;
+	requestObject["password"] = password;
 
-	if (socket.waitForConnected()) {
-		QJsonObject request;
-		request["action"] = "register";
-		request["username"] = username;
-		request["password"] = password;
+	qDebug() << "Recieved Data:";
 
-		socket.write(QJsonDocument(request).toJson());
-		socket.waitForBytesWritten();
-		socket.waitForReadyRead();
-		QByteArray responseText = socket.readAll();
-		QTextStream stream(responseText);
+	QJsonDocument request(requestObject);
+	QJsonObject jsonObj = sendRequest(request);
 
-		qDebug() << "Recieved Data:";
-
-		QString registerResponse = stream.readAll();
-
-		QJsonDocument jsondoc = QJsonDocument::fromJson(registerResponse.toUtf8());
-		QJsonObject jsonobj = jsondoc.object();
-
-		if (jsondoc["status"] == "Username already exists, try again") {
-			qDebug() << "Username already exists, try again";
-			return false;
-		}
-		qDebug() << registerResponse;
-
-		qDebug() << jsondoc["status"];
-		qDebug() << jsondoc;
-
-		socket.disconnectFromHost();
-		return true;
-	}
-	else {
-		qDebug() << "Failed to connect to the server";
+	if (jsonObj["status"] == "Username already exists, try again") {
+		qDebug() << "Username already exists, try again";
 		return false;
 	}
+
+	qDebug() << jsonObj["status"];
+	return true;
 }
 
-void MainWindow::saveCalendar()
+void MainWindow::saveCalendar(){
+
+	QJsonObject requestObject;
+
+	JSONSerializer serializer;
+	QJsonDocument doc = serializer.createJson(m_calendar);
+
+	requestObject["action"] = "saveCalendar";
+	requestObject["username"] = m_user.username();
+	requestObject["calendar"] = doc.toVariant().toJsonObject();
+
+	QJsonDocument request(requestObject);
+	QJsonObject jsonObj = sendRequest(request);
+}
+
+void MainWindow::on_pushButton_addTodo_clicked()
 {
-	QTcpSocket socket;
-	socket.connectToHost("127.0.0.1", 8080);
+    QListWidgetItem* item = new QListWidgetItem();
+    item->setCheckState(Qt::Unchecked);
+    item->setText(ui->lineEdit_todo->text());
 
-	if (socket.waitForConnected()) {
-		QJsonObject request;
+    m_toDoList.addToDo(item->text(), item->checkState());
 
-		JSONSerializer serializer;
-		QJsonDocument doc = serializer.createJson(m_calendar);
+    ui->listWidget_todos->addItem(item);
+    ui->lineEdit_todo->clear();
+    ui->lineEdit_todo->setFocus();
+}
+
+void MainWindow::on_pushButton_deleteTodo_clicked()
+{
+    int currentRow = ui->listWidget_todos->currentRow();
+
+    if (currentRow >= 0) {
+        QListWidgetItem* item = ui->listWidget_todos->takeItem(currentRow);
+
+        m_toDoList.deleteToDo(item->text());
+        delete item;
+    }
+}
+
+void MainWindow::on_pushButton_deleteAllTodos_clicked()
+{
+    m_toDoList.deleteAllToDos();
+    ui->listWidget_todos->clear();
+}
+
+void MainWindow::onTodoItemChanged(QListWidgetItem* item) {
+    if (item) {
+        m_toDoList.checkToDo(item->text(), item->checkState());
+
+        if (item->checkState() == Qt::Checked) {
+            item->setBackground(QBrush(QColor(140, 255, 140)));
+        } else {
+            item->setBackground(QBrush(Qt::white));
+        }
+    }
+}
+
+void MainWindow::saveToDoList(){
+		QJsonObject requestObject;
+
+        JSONSerializer serializer;
+		QJsonDocument doc = serializer.createJson(m_toDoList);
 
 		qDebug() << doc;
 
-		request["action"] = "saveCalendar";
-		request["username"] = m_user.username();
-		request["calendar"] = doc.toVariant().toJsonObject();
+		requestObject["action"] = "saveTodo";
+		requestObject["username"] = m_user.username();
+		requestObject["todo"] = doc.toVariant().toJsonObject();
 
-		qDebug() << request;
+		QJsonDocument request(requestObject);
+		QJsonObject jsonObj = sendRequest(request);
 
-		socket.write(QJsonDocument(request).toJson());
-		socket.waitForBytesWritten();
-		socket.waitForReadyRead();
-
-		QByteArray responseData = socket.readAll();
-		QTextStream stream(responseData);
-
-		qDebug() << stream.readAll();
-
-		socket.disconnectFromHost();
-	}
-	else {
-		qDebug() << "Failed to connect to the server";
-	}
+		qDebug() << jsonObj;
 }

@@ -1,3 +1,6 @@
+#include <QApplication>
+#include <QFile>
+
 #include "lib/settings.h"
 
 Settings::Settings() : m_language(SERBIAN), m_theme(DARK), m_volume(1.0), m_sound(true) {}
