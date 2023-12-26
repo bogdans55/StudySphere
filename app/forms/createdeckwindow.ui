@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>CreateDeckWindow</class>
  <widget class="QWidget" name="CreateDeckWindow">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -107,6 +110,9 @@
       <widget class="QRadioButton" name="radioButton_easy">
        <property name="text">
         <string>Lako</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

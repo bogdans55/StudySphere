@@ -131,6 +131,11 @@ void CreateDeckWindow::on_pushButton_add_clicked()
 	QString m_answer = getAnswerText();
 	Difficulty m_difficulty = getDifficulty();
 
+	if (m_question.trimmed().isEmpty() or m_answer.trimmed().isEmpty()) {
+		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili sva neophodna polja!");
+		return;
+	}
+
 	Card *card = new Card(m_question, m_answer, m_difficulty);
 
 	m_deck.addCard(card);

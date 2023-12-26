@@ -286,11 +286,18 @@ void MainWindow::on_pushButton_addEvent_clicked()
 	QDate date = ui->dateTimeEdit_eventTime->dateTime().date();
 	QTime time = ui->dateTimeEdit_eventTime->dateTime().time();
 
+	if (eventName.trimmed().isEmpty()) {
+		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili polje za naziv dogadjaja!");
+		return;
+	}
+
 	m_calendar.addEvent(date, time, eventName);
 
 	ui->lineEdit_event->clear();
 	ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
 	ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
+
+	QMessageBox::information(this, "Uspešan unos", "Uspešno ste dodali novi dogadjaj!");
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
@@ -298,11 +305,20 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 	QWidget::resizeEvent(event);
 
 	setupTableView();
-	int rows = ui->tableWidget_library->rowCount();
-	int cols = ui->tableWidget_library->columnCount();
-	for (auto row = 0; row < rows; row += 2) {
-		for (auto col = 0; col < cols; ++col) {
-			ui->tableWidget_library->cellWidget(row, col)->setFixedWidth(ui->tableWidget_library->columnWidth(0) * 0.9);
+	//    int rows = ui->tableWidget_library->rowCount();
+	//    int cols = ui->tableWidget_library->columnCount();
+	//    for (auto row = 0; row < rows; row += 2) {
+	//        for (auto col = 0; col < cols; ++col) {
+	//            ui->tableWidget_library->cellWidget(row, col)->setFixedWidth(ui->tableWidget_library->columnWidth(0) *
+	//            0.9);
+	//        }
+	//    }
+	for (auto scene : m_plannerScenes) {
+		for (auto item : scene->items()) {
+			if (dynamic_cast<QGraphicsTextItem *>(item)) {
+				QGraphicsTextItem *textItem = static_cast<QGraphicsTextItem *>(item);
+				textItem->setTextWidth(ui->graphicsView_monday->width() - 10);
+			}
 		}
 	}
 }
@@ -326,6 +342,11 @@ void MainWindow::on_pushButton_addActivity_clicked()
 
 	QTime startTime = ui->timeEdit_start->time();
 	QTime endTime = ui->timeEdit_end->time();
+
+	if (name.trimmed().isEmpty()) {
+		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili polje za naziv aktivnosti!");
+		return;
+	}
 
 	if (startTime >= endTime) {
 		QMessageBox::warning(this, "Pogrešan unos", "Vreme početka aktivnosti mora biti pre vremena kraja!");
@@ -386,6 +407,8 @@ void MainWindow::showActivities()
 
 void MainWindow::setupTableView()
 {
+	ui->tableWidget_library->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
 	ui->tableWidget_library->setRowHeight(0, ui->tableWidget_library->height() * 0.45);
 	ui->tableWidget_library->setRowHeight(1, ui->tableWidget_library->height() * 0.05);
 	ui->tableWidget_library->setRowHeight(2, ui->tableWidget_library->height() * 0.45);
@@ -462,6 +485,9 @@ void MainWindow::on_pushButton_login_clicked()
 		ui->stackedWidget->setCurrentIndex(LIBRARY);
 		ui->tableWidget_library->setColumnCount(0);
 		setupTableView();
+
+		savePlanner();
+		saveCalendar();
 	}
 }
 
