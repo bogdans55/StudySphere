@@ -37,7 +37,7 @@ SOURCES += \
     src/todolist.cpp \
     src/user.cpp \
     src/settings.cpp \
-    src/mainwindow.cpp
+    src/mainwindow.cpp \
 
 HEADERS += \
     lib/activity.h \
@@ -69,7 +69,7 @@ HEADERS += \
     lib/mainwindow.h \
     lib/plannerscene.h \
     lib/scheduleitem.h \
-    lib/logindialog.h
+    lib/logindialog.h \
 
 FORMS += \
     forms/createdeckwindow.ui \

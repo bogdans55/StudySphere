@@ -1,6 +1,8 @@
 #include "lib/createdeckdialog.h"
 #include "ui_createdeckdialog.h"
 
+#include <QMessageBox>
+
 CreateDeckDialog::CreateDeckDialog(QWidget *parent) : QDialog(parent), ui(new Ui::CreateDeckDialog)
 {
 	ui->setupUi(this);
@@ -23,5 +25,12 @@ QString CreateDeckDialog::getDeckName() const
 Privacy CreateDeckDialog::getDeckPrivacy() const
 {
 	return deckPrivacy->checkedId() == 1 ? Privacy::PRIVATE : Privacy::PUBLIC;
-	//    return deckPrivacy->checkedId();
+}
+
+void CreateDeckDialog::on_buttonBox_done_accepted()
+{
+	if (getDeckName().trimmed().isEmpty()) {
+		QMessageBox::critical(this, "Pogrešan unos", "Niste popunili polje za naziv špila!");
+		reject();
+	}
 }

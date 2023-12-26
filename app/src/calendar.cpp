@@ -1,24 +1,23 @@
 #include "lib/calendar.h"
 
-Calendar::Calendar()
-    :m_events()
-{}
+Calendar::Calendar() : m_events() {}
 
-Calendar::~Calendar()
-{}
+Calendar::~Calendar() {}
 
-void Calendar::addEvent(QDate date, QTime time,  QString text){
-    QPair<QTime, QString> pair (time, text);
-    m_events[date].push_back(pair);
+void Calendar::addEvent(QDate date, QTime time, QString text)
+{
+	QPair<QTime, QString> pair(time, text);
+	m_events[date].push_back(pair);
 }
 
-QVariant Calendar::toVariant() const {
+QVariant Calendar::toVariant() const
+{
 	QVariantMap result;
 
-	for (const auto& date : m_events.keys()) {
+	for (const auto &date : m_events.keys()) {
 		QVariantList eventsList;
 
-		for (const auto& event : m_events[date]) {
+		for (const auto &event : m_events[date]) {
 			QVariantMap eventMap;
 			eventMap.insert("date", date);
 			eventMap.insert("time", event.first);
@@ -32,14 +31,16 @@ QVariant Calendar::toVariant() const {
 
 	return result;
 }
-void Calendar::fromVariant(const QVariant& variant){
+
+void Calendar::fromVariant(const QVariant &variant)
+{
 	QVariantMap map = variant.toMap();
 
-	for (const auto& dateKey : map.keys()) {
+	for (const auto &dateKey : map.keys()) {
 		QDate date = QDate::fromString(dateKey, "ddd MMM dd yyyy");
 		QVariantList eventsList = map.value(dateKey).toList();
 
-		for (const auto& eventVariant : eventsList) {
+		for (const auto &eventVariant : eventsList) {
 			QVariantMap eventMap = eventVariant.toMap();
 
 			QTime time = QTime::fromString(eventMap.value("time").toString());

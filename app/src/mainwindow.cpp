@@ -35,11 +35,10 @@ enum Page
 };
 
 MainWindow::MainWindow(QWidget *parent)
-    : QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_user(), m_libraryScene(), m_toDoList()
+    : QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_toDoList(), m_user(), m_libraryScene()
 {
 	ui->setupUi(this);
 	ui->stackedWidget->setCurrentIndex(LIBRARY);
-	//    ui->graphicsView_library->setScene(&m_libraryScene);
 
 	for (int i = 0; i < 7; ++i) {
 		m_plannerScenes.push_back(new PlannerScene());
@@ -52,9 +51,8 @@ MainWindow::MainWindow(QWidget *parent)
 	ui->graphicsView_saturday->setScene(m_plannerScenes[Day::SATURDAY]);
 	ui->graphicsView_sunday->setScene(m_plannerScenes[Day::SUNDAY]);
 
-
-    ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
-    ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
+	ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
+	ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
 
 	QVector<ScheduleItem *> scheduleItems;
 	for (int i = 0; i < 7; ++i) {
@@ -82,8 +80,8 @@ void MainWindow::saveOnServer(){
 		savePlanner();
 	}
 	if(m_todoLoaded){
-		saveToDoList();
-	}
+        saveToDoList();
+    }
 }
 
 void MainWindow::savePlanner(){
@@ -114,9 +112,14 @@ void MainWindow::on_pushButton_createDeck_clicked()
 	}
 }
 
-void MainWindow::on_pushButton_startStudySession_clicked()
+// void MainWindow::on_pushButton_startStudySession_clicked()
+void MainWindow::deckButton_clicked()
 {
-	QString deckName = ui->listWidget_library->currentItem()->text();
+	QPushButton *chosenDeck = qobject_cast<QPushButton *>(sender());
+	qDebug() << chosenDeck;
+
+	QString deckName = chosenDeck->text();
+	qDebug() << deckName;
 	Deck *deck = new Deck();
 
 	QJsonObject requestObject;
@@ -230,7 +233,6 @@ void MainWindow::on_pushButton_calendar_clicked()
 	}
 }
 
-
 void MainWindow::on_pushButton_stats_clicked()
 {
 	ui->stackedWidget->setCurrentIndex(STATS);
@@ -248,43 +250,69 @@ void MainWindow::on_pushButton_help_clicked()
 
 void MainWindow::on_pushButton_addEvent_clicked()
 {
-    QString eventName = ui->lineEdit_event->text();
-    QDate date = ui->dateTimeEdit_eventTime->dateTime().date();
-    QTime time = ui->dateTimeEdit_eventTime->dateTime().time();
+	QString eventName = ui->lineEdit_event->text();
+	QDate date = ui->dateTimeEdit_eventTime->dateTime().date();
+	QTime time = ui->dateTimeEdit_eventTime->dateTime().time();
 
-    m_calendar.addEvent(date, time, eventName);
+	if (eventName.trimmed().isEmpty()) {
+		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili polje za naziv dogadjaja!");
+		return;
+	}
 
-    ui->lineEdit_event->clear();
-    ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
-    ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
+	m_calendar.addEvent(date, time, eventName);
+
+	ui->lineEdit_event->clear();
+	ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
+	ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
+
+	QMessageBox::information(this, "Uspešan unos", "Uspešno ste dodali novi dogadjaj!");
+}
+
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+	QWidget::resizeEvent(event);
+
+    setupTableView();
+
+	for (auto scene : m_plannerScenes) {
+		for (auto item : scene->items()) {
+			if (dynamic_cast<QGraphicsTextItem *>(item)) {
+				QGraphicsTextItem *textItem = static_cast<QGraphicsTextItem *>(item);
+				textItem->setTextWidth(ui->graphicsView_monday->width() - 10);
+			}
+		}
+	}
 }
 
 void MainWindow::on_calendarWidget_activated(const QDate &date)
 {
-    QString message = "Na izabrani dan imate sledeće dogadjaje:\n";
-    if(!m_calendar.events().contains(date))
-        QMessageBox::information(this, date.toString("dd.MM.yyyy."), "Na izabrani dan nemate nijedan dogadjaj!");
-    else
-    {
-        for(auto event : m_calendar.events()[date])
-        {
-            message += "\t" + event.first.toString("hh:mm") + " - " + event.second + "\n";
-        }
-        QMessageBox::information(this, date.toString("dd.MM.yyyy."), message);
-    }
+	QString message = "Na izabrani dan imate sledeće dogadjaje:\n";
+	if (!m_calendar.events().contains(date))
+		QMessageBox::information(this, date.toString("dd.MM.yyyy."), "Na izabrani dan nemate nijedan dogadjaj!");
+	else {
+		for (auto event : m_calendar.events()[date]) {
+			message += "\t" + event.first.toString("hh:mm") + " - " + event.second + "\n";
+		}
+		QMessageBox::information(this, date.toString("dd.MM.yyyy."), message);
+	}
 }
 
 void MainWindow::on_pushButton_addActivity_clicked()
 {
 	QString name = ui->lineEdit_activityName->text();
 
-    QTime startTime = ui->timeEdit_start->time();
-    QTime endTime = ui->timeEdit_end->time();
+	QTime startTime = ui->timeEdit_start->time();
+	QTime endTime = ui->timeEdit_end->time();
 
-    if (startTime >= endTime) {
-        QMessageBox::warning(this, "Pogrešan unos", "Vreme početka aktivnosti mora biti pre vremena kraja!");
-        return;
-    }
+	if (name.trimmed().isEmpty()) {
+		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili polje za naziv aktivnosti!");
+		return;
+	}
+
+	if (startTime >= endTime) {
+		QMessageBox::warning(this, "Pogrešan unos", "Vreme početka aktivnosti mora biti pre vremena kraja!");
+		return;
+	}
 
 	QString dayString = ui->comboBox_day->currentText();
 	Day day = Planner::dayFromString(dayString);
@@ -302,41 +330,51 @@ void MainWindow::on_pushButton_addActivity_clicked()
 	activityTime->setPos(activityItem->pos());
 	m_plannerScenes[day]->addItem(activityTime);
 
-    QGraphicsTextItem *activityText = new QGraphicsTextItem();
-    activityText->setPlainText(name);
-    qreal textWidth = ui->graphicsView_monday->width() - 10; // hardcoded reduction for scroll bar
-    activityText->setTextWidth(textWidth);
-    activityText->setPos(activityItem->pos().x(), activityItem->pos().y() + activityTime->boundingRect().height());
-    m_plannerScenes[day]->addItem(activityText);
+	QGraphicsTextItem *activityText = new QGraphicsTextItem();
+	activityText->setPlainText(name);
+	qreal textWidth = ui->graphicsView_monday->width() - 10; // hardcoded reduction for scroll bar
+	activityText->setTextWidth(textWidth);
+	activityText->setPos(activityItem->pos().x(), activityItem->pos().y() + activityTime->boundingRect().height());
+	m_plannerScenes[day]->addItem(activityText);
 }
 
-void MainWindow::showActivities(){
-    for(auto day : m_planner.activities().keys())
-    {
-        for(auto currentActivity : m_planner.activities().value(day)){
-            QString name = currentActivity.activityText();
+void MainWindow::showActivities()
+{
+	for (auto day : m_planner.activities().keys()) {
+		for (auto currentActivity : m_planner.activities().value(day)) {
+			QString name = currentActivity.activityText();
 
-            QTime startTime = currentActivity.start();
+			QTime startTime = currentActivity.start();
 
-            ActivityItem *activityItem = new ActivityItem(currentActivity);
-            m_plannerScenes[day]->addActivity(activityItem);
-            m_plannerScenes[day]->addItem(activityItem);
+			ActivityItem *activityItem = new ActivityItem(currentActivity);
+			m_plannerScenes[day]->addActivity(activityItem);
+			m_plannerScenes[day]->addItem(activityItem);
 
-            QGraphicsTextItem *activityTime = new QGraphicsTextItem();
-            activityTime->setPlainText(startTime.toString("hh:mm"));
-            activityTime->setPos(activityItem->pos());
-            m_plannerScenes[day]->addItem(activityTime);
+			QGraphicsTextItem *activityTime = new QGraphicsTextItem();
+			activityTime->setPlainText(startTime.toString("hh:mm"));
+			activityTime->setPos(activityItem->pos());
+			m_plannerScenes[day]->addItem(activityTime);
 
-            QGraphicsTextItem *activityText = new QGraphicsTextItem();
-            activityText->setPlainText(name);
-            qreal textWidth = ui->graphicsView_monday->width() - 10; // hardcoded reduction for scroll bar
-            activityText->setTextWidth(textWidth);
-            activityText->setPos(activityItem->pos().x(), activityItem->pos().y() + activityTime->boundingRect().height());
-            m_plannerScenes[day]->addItem(activityText);
-        }
-    }
+			QGraphicsTextItem *activityText = new QGraphicsTextItem();
+			activityText->setPlainText(name);
+			qreal textWidth = ui->graphicsView_monday->width() - 10; // hardcoded reduction for scroll bar
+			activityText->setTextWidth(textWidth);
+			activityText->setPos(activityItem->pos().x(),
+								 activityItem->pos().y() + activityTime->boundingRect().height());
+			m_plannerScenes[day]->addItem(activityText);
+		}
+	}
 }
 
+void MainWindow::setupTableView()
+{
+    ui->tableWidget_library->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    ui->tableWidget_library->setRowHeight(0, ui->tableWidget_library->height() * 0.44);
+    ui->tableWidget_library->setRowHeight(1, ui->tableWidget_library->height() * 0.05);
+    ui->tableWidget_library->setRowHeight(2, ui->tableWidget_library->height() * 0.44);
+    ui->tableWidget_library->setRowHeight(3, ui->tableWidget_library->height() * 0.05);
+}
 
 void MainWindow::setEnabled(bool value)
 {
@@ -358,8 +396,6 @@ void MainWindow::setEnabled(bool value)
 
 void MainWindow::on_pushButton_login_clicked()
 {
-	//    m_libraryScene.clear(); // clear calls delete on all items on scene
-	//    m_libraryScene.clearDeck();
 	for (auto scene : m_plannerScenes) {
 		scene->clear(); // clear calls delete on all items on scene
 		scene->addItem(new ScheduleItem());
@@ -402,18 +438,23 @@ void MainWindow::on_pushButton_login_clicked()
 		m_loggedIn = loginSuccess;
 	}
 	else {
+        // logout
 		m_loggedIn = false; // use setter instead?
-		ui->listWidget_library->clear();
 		ui->label_username->setText("Nema korisnika");
 		ui->pushButton_login->setText("Prijavi se");
 		setEnabled(false);
-		saveOnServer();
+        ui->tableWidget_library->clear();
 
-		//TODO clear calendar -> planner -> todo if they are loaded
+        m_planner.activities().clear();
+        m_calendar.events().clear();
 		m_todoLoaded = false;
 		m_plannerLoaded = false;
 		m_calendarLoaded = false;
 		ui->stackedWidget->setCurrentIndex(LIBRARY);
+		ui->tableWidget_library->setColumnCount(0);
+		setupTableView();
+
+        saveOnServer();
 	}
 }
 
@@ -447,6 +488,7 @@ QJsonObject MainWindow::sendRequest(QJsonDocument &request){
 
 bool MainWindow::loginUser(const QString &username, const QString &password)
 {
+    setupTableView();
 	QJsonObject requestObject;
 
 	requestObject["action"] = "login";
@@ -460,13 +502,30 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 	qDebug() << jsonObj["status"];
 	qDebug() << jsonObj;
 
-	QString deckNames = jsonObj.value("decks").toString();
-	if (deckNames != "") {
-		QStringList deckNamesList = deckNames.split(", ");
-		for (auto &deckNameID : deckNamesList) {
-			ui->listWidget_library->addItem(deckNameID);
-		}
-	}
+
+    QString deckNames = jsonObj.value("decks").toString();
+    if (deckNames != "") {
+        QStringList deckNamesList = deckNames.split(", ");
+        unsigned counter = 0;
+        for (auto &deckNameID : deckNamesList) {
+            QPushButton *button = new QPushButton(deckNameID, ui->tableWidget_library);
+            connect(button, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
+            button->setStyleSheet("color: transparent; margin-left: 25%;");
+
+            QLabel *label = new QLabel(deckNameID.split("_")[0], ui->tableWidget_library);
+            label->setAlignment(Qt::AlignCenter);
+            label->setStyleSheet("text-align: center; margin-left: 25%");
+
+            if (counter % 2 == 0) {
+                ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
+                ui->tableWidget_library->setColumnWidth(counter / 2, 220); // hardcoded
+            }
+
+            ui->tableWidget_library->setCellWidget(counter % 2 * 2, counter / 2, button);
+            ui->tableWidget_library->setCellWidget(counter % 2 * 2 + 1, counter / 2, label);
+            counter++;
+        }
+    }
 
 	if (jsonObj["status"] != QJsonValue::Undefined && jsonObj["status"] != "Password incorrect, try again") {
 		ui->label_username->setText(request["username"].toString());

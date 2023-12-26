@@ -21,6 +21,9 @@ class CreateDeckDialog : public QDialog
 	QString getDeckName() const;
 	Privacy getDeckPrivacy() const;
 
+  private slots:
+	void on_buttonBox_done_accepted();
+
   private:
 	Ui::CreateDeckDialog *ui;
 	QButtonGroup *deckPrivacy;

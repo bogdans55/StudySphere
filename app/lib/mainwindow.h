@@ -39,7 +39,9 @@ class MainWindow : public QWidget
   private slots:
 	void on_pushButton_createDeck_clicked();
 
-	void on_pushButton_startStudySession_clicked();
+	//	void on_pushButton_startStudySession_clicked();
+
+	void deckButton_clicked();
 
 	void on_pushButton_library_clicked();
 
@@ -61,7 +63,7 @@ class MainWindow : public QWidget
 
 	void on_pushButton_login_clicked();
 
-    void on_pushButton_addEvent_clicked();
+	void on_pushButton_addEvent_clicked();
 
 	void on_pushButton_addTodo_clicked();
 
@@ -71,6 +73,9 @@ class MainWindow : public QWidget
 
     void onTodoItemChanged(QListWidgetItem* item);
 
+protected:
+    void resizeEvent(QResizeEvent *event) override;
+
 
   private:
 	Ui::MainWindow *ui;
@@ -78,7 +83,7 @@ class MainWindow : public QWidget
 	QVector<PlannerScene *> m_plannerScenes;
 	Planner m_planner;
 
-    Calendar m_calendar;
+	Calendar m_calendar;
 
     ToDoList m_toDoList;
 
@@ -99,6 +104,8 @@ class MainWindow : public QWidget
     void savePlanner();
     void showActivities();
     void saveToDoList();
-	void saveOnServer();
+    void saveOnServer();
+
+	void setupTableView();
 };
 #endif // MAINWINDOW_H
