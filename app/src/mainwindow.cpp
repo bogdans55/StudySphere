@@ -20,6 +20,7 @@
 #include <QApplication>
 #include <QDirIterator>
 #include <QFile>
+#include <QFileDialog>
 #include <QMessageBox>
 #include <QStandardPaths>
 
@@ -177,7 +178,7 @@ void MainWindow::on_pushButton_todo_clicked()
 		showActivities();
 		m_todoLoaded = true;
 
-		for (auto todo : m_toDoList.toDos()) {
+        for (auto &todo : m_toDoList.toDos()) {
 			QListWidgetItem *item = new QListWidgetItem();
 			item->setCheckState(todo.second ? Qt::Checked : Qt::Unchecked);
 			item->setText(todo.first);
@@ -717,7 +718,12 @@ void MainWindow::on_pushButton_search_clicked()
 
 void MainWindow::on_pushButton_importDecks_clicked()
 {
-	// TODO
+	QStringList filePaths =
+		QFileDialog::getOpenFileNames(nullptr, "Choose JSON Files", "", "JSON Files (*.json);;All Files (*)");
+
+    qDebug() << filePaths;
+
+    // TODO iterate thru list and save each deck on server
 }
 
 void MainWindow::on_pushButton_exportDecks_clicked()
