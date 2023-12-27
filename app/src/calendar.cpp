@@ -10,7 +10,8 @@ void Calendar::addEvent(QDate date, QTime time, QString text)
 	m_events[date].push_back(pair);
 }
 
-void Calendar::deleteAll(){
+void Calendar::deleteAll()
+{
 	m_events.clear();
 }
 
