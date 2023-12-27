@@ -14,7 +14,7 @@
    <string>StudySphere</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../res/icons.qrc">
+   <iconset>
     <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
   </property>
   <property name="inputMethodHints">
@@ -202,7 +202,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page_library">
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -1037,8 +1037,6 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../res/icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

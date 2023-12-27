@@ -1,6 +1,7 @@
 #include "lib/mainwindow.h"
 #include "lib/createdeckdialog.h"
 #include "lib/createdeckwindow.h"
+#include "lib/deckpreviewwindow.h"
 #include "lib/jsonserializer.h"
 #include "lib/libraryscene.h"
 #include "lib/logindialog.h"
@@ -113,8 +114,15 @@ void MainWindow::createDeck_clicked()
 
 		CreateDeckWindow *createDeck = new CreateDeckWindow(name, privacy, m_user);
 		createDeck->setAttribute(Qt::WA_DeleteOnClose);
-		createDeck->show();
-	}
+        createDeck->show();
+    }
+}
+
+void MainWindow::deckPreview_clicked()
+{
+    DeckPreviewWindow *preview = new DeckPreviewWindow();
+    preview->setAttribute(Qt::WA_DeleteOnClose);
+    preview->show();
 }
 
 // void MainWindow::on_pushButton_startStudySession_clicked()
@@ -696,7 +704,7 @@ void MainWindow::on_pushButton_search_clicked()
 			QPushButton *button = new QPushButton(deckNameID, ui->tableWidget_browser);
 
 			//          preview
-			//          connect(button, &QPushButton::clicked, this, &MainWindow::deckPreview_clicked);
+            connect(button, &QPushButton::clicked, this, &MainWindow::deckPreview_clicked);
 			button->setStyleSheet("color: transparent; margin-left: 25%;");
 
 			QLabel *label = new QLabel(deckNameID.split("_")[0], ui->tableWidget_browser);

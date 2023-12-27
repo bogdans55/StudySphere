@@ -46,7 +46,7 @@ class MainWindow : public QWidget
 
 	void createDeck_clicked();
 
-	//    void deckPreview_clicked();
+    void deckPreview_clicked();
 
 	void on_pushButton_library_clicked();
 
