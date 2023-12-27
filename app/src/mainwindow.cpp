@@ -20,6 +20,7 @@
 #include <QApplication>
 #include <QDirIterator>
 #include <QFile>
+#include <QFileDialog>
 #include <QMessageBox>
 #include <QStandardPaths>
 
@@ -178,10 +179,11 @@ void MainWindow::on_pushButton_todo_clicked()
 		showActivities();
 		m_todoLoaded = true;
 
-		for (auto todo : m_toDoList.toDos()) {
+        for (auto &todo : m_toDoList.toDos()) {
 			QListWidgetItem *item = new QListWidgetItem();
 			item->setCheckState(todo.second ? Qt::Checked : Qt::Unchecked);
 			item->setText(todo.first);
+			emit onTodoItemChanged(item);
 			ui->listWidget_todos->addItem(item);
 		}
 	}
@@ -389,7 +391,7 @@ void MainWindow::setEnabled(bool value)
 	ui->pushButton_stats->setEnabled(value);
 	ui->pushButton_settings->setEnabled(value);
 	ui->pushButton_help->setEnabled(value);
-    ui->pushButton_importDecks->setEnabled(value);
+	ui->pushButton_importDecks->setEnabled(value);
 	ui->pushButton_exportDecks->setEnabled(value);
 	ui->pushButton_addTodo->setEnabled(value);
 	ui->pushButton_deleteTodo->setEnabled(value);
@@ -467,7 +469,6 @@ void MainWindow::on_pushButton_login_clicked()
 		ui->tableWidget_browser->setColumnCount(0);
 		setupTableView(ui->tableWidget_library);
 		setupTableView(ui->tableWidget_browser);
-
 	}
 }
 
@@ -602,6 +603,11 @@ void MainWindow::saveCalendar()
 
 void MainWindow::on_pushButton_addTodo_clicked()
 {
+	if (ui->lineEdit_todo->text().trimmed().isEmpty()) {
+		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili polje za naziv aktivnosti!");
+		return;
+	}
+
 	QListWidgetItem *item = new QListWidgetItem();
 	item->setCheckState(Qt::Unchecked);
 	item->setText(ui->lineEdit_todo->text());
@@ -713,7 +719,12 @@ void MainWindow::on_pushButton_search_clicked()
 
 void MainWindow::on_pushButton_importDecks_clicked()
 {
-	// TODO
+	QStringList filePaths =
+		QFileDialog::getOpenFileNames(nullptr, "Choose JSON Files", "", "JSON Files (*.json);;All Files (*)");
+
+    qDebug() << filePaths;
+
+    // TODO iterate thru list and save each deck on server
 }
 
 void MainWindow::on_pushButton_exportDecks_clicked()
@@ -723,6 +734,5 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 
 void MainWindow::on_pushButton_addToLibrary_clicked()
 {
-    // TODO
+	// TODO
 }
-

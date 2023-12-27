@@ -85,6 +85,7 @@ void Planner::fromVariant(const QVariant &variant)
 	}
 }
 
-void Planner::deleteAll(){
+void Planner::deleteAll()
+{
 	m_activities.clear();
 }

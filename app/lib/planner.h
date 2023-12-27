@@ -34,6 +34,7 @@ class Planner : public Serializable
 	static Day dayFromString(QString dayString);
 	static QString dayToString(Day day);
 	void deleteAll();
+
 	inline QMap<Day, QVector<Activity>> activities() const { return m_activities; }
 };
 

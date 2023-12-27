@@ -80,13 +80,13 @@ class MainWindow : public QWidget
 
 	void on_pushButton_search_clicked();
 
-    void on_pushButton_importDecks_clicked();
+	void on_pushButton_importDecks_clicked();
 
-    void on_pushButton_exportDecks_clicked();
+	void on_pushButton_exportDecks_clicked();
 
-    void on_pushButton_addToLibrary_clicked();
+	void on_pushButton_addToLibrary_clicked();
 
-protected:
+  protected:
 	void resizeEvent(QResizeEvent *event) override;
 
   private:
