@@ -130,6 +130,7 @@ void MainWindow::deckButton_clicked()
 	requestObject["action"] = "sendDeck";
 	requestObject["username"] = m_user.username();
 	requestObject["DeckId"] = deckName.split('_')[1].split('.')[0];
+	requestObject["Privacy"] = deck->privacy() == Privacy::PRIVATE ? "PRIVATE" : "PUBLIC";
 
 	QJsonDocument request(requestObject);
 	QJsonObject jsonObj = sendRequest(request);

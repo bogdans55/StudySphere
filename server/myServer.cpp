@@ -113,6 +113,7 @@ void MyServer::readData()
 	QJsonObject jsonObject = doc.object();
 
 	QString action = jsonObject["action"].toString();
+	Privacy privacy = jsonObject["Privacy"].toString() == "PRIVACY" ? Privacy::PRIVATE : Privacy::PUBLIC;
 
 	if (action == "login") {
 		loginUser(socket, jsonObject);
@@ -133,7 +134,7 @@ void MyServer::readData()
 		writeRemainingIDsToFile();
 		ids.clear();
 	}else if(action == "sendDeck"){
-        sendDeckById(socket, jsonObject["username"].toString(), jsonObject["DeckId"].toString());
+		sendDeckById(socket, jsonObject["username"].toString(), jsonObject["DeckId"].toString(), privacy);
 	}else if(action == "saveCalendar"){
 		QJsonObject planner = jsonObject["calendar"].toObject();
 		saveCalendar(socket, jsonObject["username"].toString(), planner);
@@ -292,14 +293,20 @@ void MyServer::sendUserDecks(QTcpSocket *socket, const QString &username)
 	stream << QJsonDocument(response).toJson();
 }
 
-void MyServer::sendDeckById(QTcpSocket *socket, const QString &username, const QString &deckId)
+void MyServer::sendDeckById(QTcpSocket *socket, const QString &username, const QString &deckId, Privacy& privacy)
 {
-	QDir userFolder(QDir(userDecksFolder).absoluteFilePath(username));
+	QDir folder;
+	if(privacy == Privacy::PRIVATE){
+		folder = (QDir(userDecksFolder).absoluteFilePath(username));
+
+	}else{
+		folder = ((QDir(publicDecksFolder)));
+	}
 	QStringList userFilters;
 	userFilters << "*_" + deckId;
 	QJsonObject response;
 
-	QStringList userDeckDirectories = userFolder.entryList(userFilters, QDir::Dirs | QDir::NoDotAndDotDot);
+	QStringList userDeckDirectories = folder.entryList(userFilters, QDir::Dirs | QDir::NoDotAndDotDot);
 
 	if (!userDeckDirectories.isEmpty()) {
 		response["status"] = "success";
@@ -309,7 +316,7 @@ void MyServer::sendDeckById(QTcpSocket *socket, const QString &username, const Q
 		deckFilters << "*.json";
 
 		for (const QString &folderName : userDeckDirectories) {
-			QDir deckFolder(userFolder.absoluteFilePath(folderName));
+			QDir deckFolder(folder.absoluteFilePath(folderName));
 			for (const QString &deckName : deckFolder.entryList(deckFilters)) {
 				foundDecks.append(deckName);
 
