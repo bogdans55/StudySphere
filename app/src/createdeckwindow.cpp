@@ -4,6 +4,7 @@
 #include "lib/serializer.h"
 #include "ui_createdeckwindow.h"
 
+#include <QFileDialog>
 #include <QMessageBox>
 #include <QTcpServer>
 #include <QTcpSocket>
@@ -18,6 +19,18 @@ CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, User &user, QW
     : QWidget(parent), ui(new Ui::CreateDeckWindow), m_deck(name, user, privacy), m_user(user)
 {
 	ui->setupUi(this);
+
+	ui->label_questionImage->setVisible(false);
+	ui->label_answerImage->setVisible(false);
+
+	m_questionDifficulty = new QButtonGroup(this);
+	m_questionDifficulty->addButton(ui->radioButton_easy, Difficulty::EASY);
+	m_questionDifficulty->addButton(ui->radioButton_medium, Difficulty::MEDIUM);
+	m_questionDifficulty->addButton(ui->radioButton_hard, Difficulty::HARD);
+
+	m_questionDifficulty->setExclusive(false);
+	m_questionDifficulty->checkedButton()->setChecked(false);
+	m_questionDifficulty->setExclusive(true);
 }
 
 CreateDeckWindow::~CreateDeckWindow()
@@ -90,7 +103,6 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
 
 void CreateDeckWindow::generateId()
 {
-
 	QTcpSocket socket;
 	socket.connectToHost("127.0.0.1", 8080);
 
@@ -108,7 +120,6 @@ void CreateDeckWindow::generateId()
 		QJsonDocument idJson = QJsonDocument::fromJson(idResponseString.toUtf8());
 		QJsonObject idObject = idJson.object();
 		m_deck.setId(idObject.value("DeckId").toVariant().toULongLong());
-
 		socket.disconnectFromHost();
 	}
 	else {
@@ -118,14 +129,14 @@ void CreateDeckWindow::generateId()
 
 void CreateDeckWindow::on_pushButton_add_clicked()
 {
-	m_questionDifficulty = new QButtonGroup(this);
-	m_questionDifficulty->addButton(ui->radioButton_easy, Difficulty::EASY);
-	m_questionDifficulty->addButton(ui->radioButton_medium, Difficulty::MEDIUM);
-	m_questionDifficulty->addButton(ui->radioButton_hard, Difficulty::HARD);
-
 	QString m_question = getQuestionText();
 	QString m_answer = getAnswerText();
 	Difficulty m_difficulty = getDifficulty();
+
+	if (m_question.trimmed().isEmpty() or m_answer.trimmed().isEmpty() or m_questionDifficulty->checkedId() == -1) {
+		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili sva neophodna polja!");
+		return;
+	}
 
 	Card *card = new Card(m_question, m_answer, m_difficulty);
 
@@ -137,4 +148,45 @@ void CreateDeckWindow::on_pushButton_add_clicked()
 	m_questionDifficulty->setExclusive(false);
 	m_questionDifficulty->checkedButton()->setChecked(false);
 	m_questionDifficulty->setExclusive(true);
+
+	ui->label_questionImage->setVisible(false);
+	ui->label_answerImage->setVisible(false);
+}
+
+void CreateDeckWindow::loadPicture(QLabel *label, QPixmap &image)
+{
+	QString imagePath =
+		QFileDialog::getOpenFileName(this, "Select Image", "", "Image Files (*.png *.jpg *.bmp *.gif);;All Files (*)");
+
+	if (!imagePath.isEmpty()) {
+		image = QPixmap(imagePath);
+		label->setPixmap(image.scaledToWidth(ui->textEdit_question->width()));
+		label->setVisible(true);
+	}
+	else
+		label->setVisible(false);
+}
+
+void CreateDeckWindow::on_pushButton_addQuestionImage_clicked()
+{
+	loadPicture(ui->label_questionImage, m_questionImage);
+}
+
+void CreateDeckWindow::on_pushButton_addAnswerImage_clicked()
+{
+	loadPicture(ui->label_answerImage, m_answerImage);
+}
+
+void CreateDeckWindow::resizeEvent(QResizeEvent *event)
+
+{
+	QWidget::resizeEvent(event);
+
+	ui->label_questionImage->setPixmap(m_questionImage.scaledToWidth(ui->textEdit_question->width()));
+	ui->label_answerImage->setPixmap(m_answerImage.scaledToWidth(ui->textEdit_question->width()));
+
+	//    ui->label_answerImage->setFixedWidth(ui->textEdit_question->width());
+	//    ui->label_questionImage->setFixedWidth(ui->textEdit_question->width());
+
+	qDebug() << m_questionImage;
 }
