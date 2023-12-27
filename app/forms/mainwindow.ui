@@ -209,7 +209,42 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_library">
          <item>
-          <widget class="QListWidget" name="listWidget_library"/>
+          <widget class="QTableWidget" name="tableWidget_library">
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::NoSelection</enum>
+           </property>
+           <property name="showGrid">
+            <bool>false</bool>
+           </property>
+           <property name="cornerButtonEnabled">
+            <bool>false</bool>
+           </property>
+           <property name="rowCount">
+            <number>4</number>
+           </property>
+           <property name="columnCount">
+            <number>0</number>
+           </property>
+           <attribute name="horizontalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="horizontalHeaderHighlightSections">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="verticalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
+           <attribute name="verticalHeaderHighlightSections">
+            <bool>false</bool>
+           </attribute>
+           <row/>
+           <row/>
+           <row/>
+           <row/>
+          </widget>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_act">
@@ -229,7 +264,7 @@
               <bool>false</bool>
              </property>
              <property name="text">
-              <string>Započni učenje</string>
+              <string>Započni učenje (deprecated)</string>
              </property>
             </widget>
            </item>
@@ -240,74 +275,57 @@
       </layout>
      </widget>
      <widget class="QWidget" name="page_todo">
-      <widget class="QPushButton" name="pushButton_addTodo">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>590</x>
-         <y>20</y>
-         <width>111</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Dodaj aktivnost</string>
-       </property>
-      </widget>
-      <widget class="QListWidget" name="listWidget_todos">
-       <property name="geometry">
-        <rect>
-         <x>5</x>
-         <y>71</y>
-         <width>701</width>
-         <height>451</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QTextEdit" name="textEdit_todo">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>20</y>
-         <width>561</width>
-         <height>31</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton_deleteTodo">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>460</x>
-         <y>540</y>
-         <width>111</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Obriši</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton_deleteAllTodos">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>590</x>
-         <y>540</y>
-         <width>111</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Obriši sve</string>
-       </property>
-      </widget>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="2" column="3">
+        <widget class="QPushButton" name="pushButton_deleteAllTodos">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Obriši sve</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="3">
+        <widget class="QPushButton" name="pushButton_addTodo">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Dodaj aktivnost</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="4">
+        <widget class="QListWidget" name="listWidget_todos"/>
+       </item>
+       <item row="2" column="2">
+        <widget class="QPushButton" name="pushButton_deleteTodo">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Obriši</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="3">
+        <widget class="QLineEdit" name="lineEdit_todo"/>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="page_planer">
       <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -576,7 +594,14 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QDateTimeEdit" name="dateTimeEdit_eventTime"/>
+            <widget class="QDateTimeEdit" name="dateTimeEdit_eventTime">
+             <property name="displayFormat">
+              <string>dd.MM.yyyy. HH:mm</string>
+             </property>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
            <item row="2" column="1">
             <widget class="QPushButton" name="pushButton_addEvent">

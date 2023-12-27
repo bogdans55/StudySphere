@@ -5,10 +5,9 @@
 
 class CardStats : public Grading
 {
-public:
-    CardStats();
-    ~CardStats();
-
+  public:
+	CardStats();
+	~CardStats();
 };
 
 #endif // CARDSTATS_H

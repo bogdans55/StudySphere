@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/calendar.cpp \
     src/planner.cpp \
     src/scheduleitem.cpp \
     src/activity.cpp \
@@ -33,13 +34,15 @@ SOURCES += \
     src/plaincard.cpp \
     src/studysession.cpp \
     src/studysessionwindow.cpp \
+    src/todolist.cpp \
     src/user.cpp \
     src/settings.cpp \
-    src/mainwindow.cpp
+    src/mainwindow.cpp \
 
 HEADERS += \
     lib/activity.h \
     lib/activityitem.h \
+    lib/calendar.h \
     lib/deckitem.h \
     lib/createdeckwindow.h \
     lib/createdeckdialog.h \
@@ -60,12 +63,13 @@ HEADERS += \
     lib/studysession.h \
     lib/library.h \
     lib/studysessionwindow.h \
+    lib/todolist.h \
     lib/user.h \
     lib/settings.h \
     lib/mainwindow.h \
     lib/plannerscene.h \
     lib/scheduleitem.h \
-    lib/logindialog.h
+    lib/logindialog.h \
 
 FORMS += \
     forms/createdeckwindow.ui \

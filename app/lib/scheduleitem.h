@@ -5,20 +5,21 @@
 
 class ScheduleItem : public QGraphicsItem
 {
-public:
-    ScheduleItem();
+  public:
+	ScheduleItem();
 
-    QRectF boundingRect() const override;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+	QRectF boundingRect() const override;
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-    // hardcoded
-    inline unsigned width() const { return m_width; }
-    inline unsigned height() const { return 1440; }
+	// hardcoded
+	inline unsigned width() const { return m_width; }
 
-    void setWidth(unsigned width);
+	inline unsigned height() const { return 1440; }
 
-private:
-    unsigned m_width = 180;
+	void setWidth(unsigned width);
+
+  private:
+	unsigned m_width = 180;
 };
 
 #endif // SCHEDULEITEM_H

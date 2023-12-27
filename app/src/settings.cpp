@@ -1,3 +1,6 @@
+#include <QApplication>
+#include <QFile>
+
 #include "lib/settings.h"
 
 #include<QTranslator>
@@ -52,12 +55,12 @@ void Settings::setTheme(const int index)
 
 void Settings::setVolume(const double &newVolume)
 {
-    m_volume = newVolume;
+	m_volume = newVolume;
 }
 
 void Settings::setSound(const bool &newSound)
 {
-    m_sound = newSound;
+	m_sound = newSound;
 }
 
 void Settings::setLanguage(const int index)
