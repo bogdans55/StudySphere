@@ -64,6 +64,10 @@ MainWindow::MainWindow(QWidget *parent)
     settings.setLanguage(Language::SERBIAN);
     settings.setTheme(Theme::DARK);
     ui->retranslateUi(this);
+    ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
+    ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
+
+    connect(ui->listWidget_todos, &QListWidget::itemChanged, this, &MainWindow::onTodoItemChanged);
 }
 
 MainWindow::~MainWindow()
