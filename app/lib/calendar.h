@@ -20,6 +20,7 @@ class Calendar : public Serializable
 	void fromVariant(const QVariant &variant) override;
 
 	void addEvent(QDate date, QTime time, QString text);
+	void deleteAll();
 
 	inline QMap<QDate, QVector<QPair<QTime, QString>>> events() const { return m_events; }
 };

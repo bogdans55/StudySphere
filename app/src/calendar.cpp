@@ -10,6 +10,10 @@ void Calendar::addEvent(QDate date, QTime time, QString text)
 	m_events[date].push_back(pair);
 }
 
+void Calendar::deleteAll(){
+	m_events.clear();
+}
+
 QVariant Calendar::toVariant() const
 {
 	QVariantMap result;

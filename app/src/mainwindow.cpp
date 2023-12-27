@@ -446,15 +446,17 @@ void MainWindow::on_pushButton_login_clicked()
 	}
 	else {
 		// logout
+		saveOnServer();
 		m_loggedIn = false; // use setter instead?
 		ui->label_username->setText("Nema korisnika");
 		ui->pushButton_login->setText("Prijavi se");
 		setEnabled(false);
 		ui->tableWidget_library->clear();
 		ui->tableWidget_browser->clear();
-
-		m_planner.activities().clear();
-		m_calendar.events().clear();
+		m_planner.deleteAll();
+		m_calendar.deleteAll();
+		m_toDoList.deleteAllToDos();
+		ui->listWidget_todos->clear();
 		m_todoLoaded = false;
 		m_plannerLoaded = false;
 		m_calendarLoaded = false;
@@ -465,7 +467,6 @@ void MainWindow::on_pushButton_login_clicked()
 		setupTableView(ui->tableWidget_library);
 		setupTableView(ui->tableWidget_browser);
 
-		saveOnServer();
 	}
 }
 
