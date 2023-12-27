@@ -8,7 +8,39 @@ DeckPreviewWindow::DeckPreviewWindow(QWidget *parent) :
     ui->setupUi(this);
 }
 
+DeckPreviewWindow::DeckPreviewWindow(Deck deck, QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::DeckPreviewWindow),
+    m_deck(deck)
+{
+
+}
+
 DeckPreviewWindow::~DeckPreviewWindow()
 {
     delete ui;
 }
+
+void DeckPreviewWindow::on_pushButton_flip_preview_clicked()
+{
+    // TODO
+}
+
+
+void DeckPreviewWindow::on_pushButton_cancel_clicked()
+{
+    // TODO
+}
+
+
+void DeckPreviewWindow::on_pushButton_add_clicked()
+{
+    // TODO
+}
+
+
+void DeckPreviewWindow::on_pushButton_next_clicked()
+{
+    // TODO
+}
+

@@ -120,6 +120,9 @@ void MainWindow::createDeck_clicked()
 
 void MainWindow::deckPreview_clicked()
 {
+    // TODO load deck
+
+    // DeckPreviewWindow *preview = new DeckPreviewWindow(deck);
     DeckPreviewWindow *preview = new DeckPreviewWindow();
     preview->setAttribute(Qt::WA_DeleteOnClose);
     preview->show();
@@ -129,10 +132,8 @@ void MainWindow::deckPreview_clicked()
 void MainWindow::deckButton_clicked()
 {
 	QPushButton *chosenDeck = qobject_cast<QPushButton *>(sender());
-	qDebug() << chosenDeck;
 
-	QString deckName = chosenDeck->text();
-	qDebug() << deckName;
+    QString deckName = chosenDeck->text();
 	Deck *deck = new Deck();
 
 	QJsonObject requestObject;
@@ -416,7 +417,7 @@ void MainWindow::on_pushButton_login_clicked()
 		scene->clear(); // clear calls delete on all items on scene
 		scene->addItem(new ScheduleItem());
 		scene->clearActivities();
-	}
+    }
 
 	if (!m_loggedIn) // use getter instead?
 	{
@@ -512,8 +513,8 @@ QJsonObject MainWindow::sendRequest(QJsonDocument &request)
 
 bool MainWindow::loginUser(const QString &username, const QString &password)
 {
-	setupTableView(ui->tableWidget_library);
-	setupTableView(ui->tableWidget_browser);
+    setupTableView(ui->tableWidget_library);
+    setupTableView(ui->tableWidget_browser);
 	QJsonObject requestObject;
 
 	requestObject["action"] = "login";
@@ -681,6 +682,7 @@ void MainWindow::saveToDoList()
 void MainWindow::on_pushButton_search_clicked()
 {
 	ui->tableWidget_browser->clear();
+    setupTableView(ui->tableWidget_browser);
 
 	QJsonObject requestObject;
 	requestObject["action"] = "search";
@@ -702,8 +704,6 @@ void MainWindow::on_pushButton_search_clicked()
 		unsigned counter = 0;
 		for (auto &deckNameID : deckNamesList) {
 			QPushButton *button = new QPushButton(deckNameID, ui->tableWidget_browser);
-
-			//          preview
             connect(button, &QPushButton::clicked, this, &MainWindow::deckPreview_clicked);
 			button->setStyleSheet("color: transparent; margin-left: 25%;");
 

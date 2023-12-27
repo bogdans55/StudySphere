@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>DeckPreviewWindow</class>
  <widget class="QWidget" name="DeckPreviewWindow">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -36,7 +39,7 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_card_2">
        <item>
-        <widget class="QLabel" name="label_card_2">
+        <widget class="QLabel" name="label_card_preview">
          <property name="text">
           <string>Pitanje</string>
          </property>
@@ -46,14 +49,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="textEdit_card_2">
+        <widget class="QTextEdit" name="textEdit_card_preview">
          <property name="readOnly">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_flip_2">
+        <widget class="QPushButton" name="pushButton_flip_preview">
          <property name="text">
           <string>Okreni karticu</string>
          </property>
@@ -79,14 +82,14 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_grade_2">
      <item>
-      <widget class="QPushButton" name="pushButton_mid_2">
+      <widget class="QPushButton" name="pushButton_cancel">
        <property name="text">
         <string>Otkaži</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_good_2">
+      <widget class="QPushButton" name="pushButton_add">
        <property name="text">
         <string>Sačuvaj u moje špilove</string>
        </property>
@@ -106,7 +109,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_skip_2">
+      <widget class="QPushButton" name="pushButton_next">
        <property name="text">
         <string>Sledeća kartica</string>
        </property>
