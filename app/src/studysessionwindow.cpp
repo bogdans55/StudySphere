@@ -21,8 +21,6 @@ StudySessionWindow::StudySessionWindow(StudySession *session, QWidget *parent)
 	ui->setupUi(this);
 	m_session->startSession();
 	ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
-
-	ui->label_cardImage->setVisible(false);
 }
 
 StudySessionWindow::~StudySessionWindow()

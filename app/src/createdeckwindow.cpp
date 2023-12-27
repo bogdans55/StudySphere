@@ -20,9 +20,6 @@ CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, User &user, QW
 {
 	ui->setupUi(this);
 
-	ui->label_questionImage->setVisible(false);
-	ui->label_answerImage->setVisible(false);
-
 	m_questionDifficulty = new QButtonGroup(this);
 	m_questionDifficulty->addButton(ui->radioButton_easy, Difficulty::EASY);
 	m_questionDifficulty->addButton(ui->radioButton_medium, Difficulty::MEDIUM);
@@ -148,45 +145,5 @@ void CreateDeckWindow::on_pushButton_add_clicked()
 	m_questionDifficulty->setExclusive(false);
 	m_questionDifficulty->checkedButton()->setChecked(false);
 	m_questionDifficulty->setExclusive(true);
-
-	ui->label_questionImage->setVisible(false);
-	ui->label_answerImage->setVisible(false);
 }
 
-void CreateDeckWindow::loadPicture(QLabel *label, QPixmap &image)
-{
-	QString imagePath =
-		QFileDialog::getOpenFileName(this, "Select Image", "", "Image Files (*.png *.jpg *.bmp *.gif);;All Files (*)");
-
-	if (!imagePath.isEmpty()) {
-		image = QPixmap(imagePath);
-		label->setPixmap(image.scaledToWidth(ui->textEdit_question->width()));
-		label->setVisible(true);
-	}
-	else
-		label->setVisible(false);
-}
-
-void CreateDeckWindow::on_pushButton_addQuestionImage_clicked()
-{
-	loadPicture(ui->label_questionImage, m_questionImage);
-}
-
-void CreateDeckWindow::on_pushButton_addAnswerImage_clicked()
-{
-	loadPicture(ui->label_answerImage, m_answerImage);
-}
-
-void CreateDeckWindow::resizeEvent(QResizeEvent *event)
-
-{
-	QWidget::resizeEvent(event);
-
-	ui->label_questionImage->setPixmap(m_questionImage.scaledToWidth(ui->textEdit_question->width()));
-	ui->label_answerImage->setPixmap(m_answerImage.scaledToWidth(ui->textEdit_question->width()));
-
-	//    ui->label_answerImage->setFixedWidth(ui->textEdit_question->width());
-	//    ui->label_questionImage->setFixedWidth(ui->textEdit_question->width());
-
-	qDebug() << m_questionImage;
-}

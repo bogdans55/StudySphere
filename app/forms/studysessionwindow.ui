@@ -56,13 +56,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_cardImage">
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="pushButton_flip">
          <property name="text">
           <string>Okreni karticu</string>
