@@ -25,9 +25,6 @@ QVariant Card::toVariant() const
 	map.insert("answer", m_answerText);
 	QString difficultyStr;
 	switch (m_questionDifficulty) {
-    case Difficulty::UNUSED:
-        difficultyStr = "UNUSED";
-        break;
 	case Difficulty::EASY:
 		difficultyStr = "EASY";
 		break;
@@ -38,7 +35,7 @@ QVariant Card::toVariant() const
 		difficultyStr = "HARD";
 		break;
 	default:
-        difficultyStr = "UNUSED";
+        difficultyStr = "MEDIUM";
 		break;
 	}
 	map.insert("difficulty", difficultyStr);
@@ -51,10 +48,7 @@ void Card::fromVariant(const QVariant &variant)
 	m_questionText = map.value("question").toString();
 	m_answerText = map.value("answer").toString();
 	QString questionDifficultyStr = map.value("difficulty").toString();
-    if (questionDifficultyStr == "UNUSED") {
-        m_questionDifficulty = Difficulty::UNUSED;
-    }
-    else if (questionDifficultyStr == "EASY") {
+    if (questionDifficultyStr == "EASY") {
 		m_questionDifficulty = Difficulty::EASY;
 	}
 	else if (questionDifficultyStr == "MEDIUM") {

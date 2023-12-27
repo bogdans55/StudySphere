@@ -3,7 +3,7 @@
 
 #include "card.h"
 #include "deckrating.h"
-#include "deckstats.h"
+#include "user.h"
 #include <QImage>
 #include <QString>
 #include <QVector>
@@ -21,7 +21,6 @@ class Deck : public Serializable
 	QString m_name;
 	QVector<Card *> m_cards;
 	Privacy m_privacy;
-    DeckStats* m_deckStats;
 	QImage m_thumbnail;
 	Grading m_rating;
     User m_user;
@@ -39,8 +38,6 @@ class Deck : public Serializable
 	inline QVector<Card *> cards() { return m_cards; }
 
 	inline Privacy privacy() const { return m_privacy; }
-
-    inline DeckStats* deckStats() { return m_deckStats; }
 
 	inline QImage thumbnail() const { return m_thumbnail; }
 

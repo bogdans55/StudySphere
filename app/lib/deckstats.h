@@ -3,21 +3,23 @@
 
 #include <QDate>
 #include <QMap>
-#include "lib/user.h"
-#include "lib/card.h"
+#include "user.h"
+#include "card.h"
+#include "deck.h"
 
 class DeckStats : public Serializable
 {
   private:
     User m_user;
     QVector <unsigned> m_grades;
+    Deck m_deck;
     unsigned m_timesUsed;
 	QDate m_creationDate;
 
   public:
     DeckStats();
-    DeckStats(User user, QVector <unsigned> grades, unsigned timesUsed, QDate creationDate);
-    DeckStats(User user, unsigned int numOfGrades);
+    DeckStats(User user, Deck deck, QVector <unsigned> grades, unsigned timesUsed, QDate creationDate);
+    DeckStats(User user, Deck deck);
     DeckStats(const DeckStats &deckStats);
 	~DeckStats() {}
 
@@ -29,13 +31,13 @@ class DeckStats : public Serializable
 
 	inline QDate creationDate() const { return m_creationDate; }
 
+    inline Deck deck() const { return m_deck; }
+
     void addGrade(unsigned cardIndex, unsigned grade);
+    void usedDeck();
 
     QVariant toVariant() const override;
     void fromVariant(const QVariant &variant) override;
-	//    TODO
-	//    void calculate();
-	//    void update();
 };
 
 #endif // DECKSTATS_H

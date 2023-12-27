@@ -3,21 +3,19 @@
 #include <QRandomGenerator>
 #include <QString>
 
-Deck::Deck() : m_deckId(), m_privacy(), m_deckStats(), m_thumbnail(), m_rating() {}
+Deck::Deck() : m_deckId(), m_privacy(), m_thumbnail(), m_rating() {}
 
 Deck::Deck(const QString &name, const User &user, Privacy privacy, const QImage &thumbnail)
 	: m_deckId(0),
-      // TODO Smart Id choosing
-    m_name(name), m_privacy(privacy), m_deckStats(), m_thumbnail(thumbnail), m_rating(), m_user(user)
+    m_name(name), m_privacy(privacy), m_thumbnail(thumbnail), m_rating(), m_user(user), m_cards()
 {}
 
 Deck::Deck(const QString &name, const User &user, Privacy privacy)
-    : m_deckId(0), m_name(name), m_privacy(privacy), m_deckStats(), m_thumbnail(), m_rating(), m_user(user)
+    : m_deckId(0), m_name(name), m_privacy(privacy), m_thumbnail(), m_rating(), m_user(user), m_cards()
 {}
 
 Deck::Deck(const Deck &deck)
-    : m_deckId(deck.m_deckId), m_name(deck.m_name), m_cards(deck.m_cards), m_privacy(deck.m_privacy),
-    m_deckStats(deck.m_deckStats), m_thumbnail(deck.m_thumbnail), m_rating(deck.m_rating), m_user(deck.m_user)
+    : m_deckId(deck.m_deckId), m_name(deck.m_name), m_cards(deck.m_cards), m_privacy(deck.m_privacy), m_thumbnail(deck.m_thumbnail), m_rating(deck.m_rating), m_user(deck.m_user)
 {}
 
 void Deck::addCard(Card *card)
@@ -49,8 +47,7 @@ QVariant Deck::toVariant() const
 		cardsList.append(card.toVariant());
 	}
 	map.insert("Flashcards", cardsList);
-
-    map.insert("Stats", m_deckStats->toVariant());
+    map.insert("User", m_user.toVariant());
 
 	return map;
 }
@@ -79,11 +76,7 @@ void Deck::fromVariant(const QVariant &variant)
 		m_cards.push_back(curr_card);
 	}
 
-    QVariant statsVariant = map.value("Stats");
-    DeckStats stats;
-    stats.fromVariant(statsVariant);
-
-    m_deckStats = new DeckStats(stats);
+    m_user.fromVariant(map.value("User"));
 }
 
 void Deck::setId(uint64_t id)

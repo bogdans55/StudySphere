@@ -1,7 +1,11 @@
 #include "lib/studysessionwindow.h"
 #include "ui_studysessionwindow.h"
+#include "lib/jsonserializer.h"
+#include "lib/serializer.h"
 
 #include <QMessageBox>
+#include <QTcpServer>
+#include <QTcpSocket>
 
 StudySessionWindow::StudySessionWindow(QWidget *parent)
 	: QWidget(parent), ui(new Ui::StudySessionWindow), m_session(new StudySession())
@@ -36,15 +40,54 @@ void StudySessionWindow::on_pushButton_flip_clicked()
 
 void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 {
-    m_session->deck()->deckStats()->addGrade(m_session->currentCardIndex(), grade);
+    m_session->deckStats()->addGrade(m_session->currentCardIndex(), grade);
 	if (m_session->hasNextCard()) {
 		m_session->nextCard();
 		ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
 	}
 	else {
 		QMessageBox::information(this, "Gotova sesija", "Uspešno ste prešli sva odabrana pitanja!");
-		close();
-	}
+        QTcpSocket socket;
+        socket.connectToHost("127.0.0.1", 8080);
+
+        if (socket.waitForConnected()) {
+            QJsonObject request;
+
+            JSONSerializer serializer;
+            QJsonDocument doc = serializer.createJson(*(m_session->deckStats()));
+
+            qDebug() << doc;
+
+            request["action"] = "saveDeck";
+            request["username"] = m_session->user().username();
+            request["deckStats"] = doc.toVariant().toJsonObject();
+
+            qDebug() << request;
+
+            socket.write(QJsonDocument(request).toJson());
+            socket.waitForBytesWritten();
+            socket.waitForReadyRead();
+
+            QByteArray responseData = socket.readAll();
+            QTextStream stream(responseData);
+
+            qDebug() << responseData;
+
+            qDebug() << "Recieved Data:";
+            while (!stream.atEnd()) {
+                qDebug() << stream.readLine();
+            }
+
+            socket.disconnectFromHost();
+
+            //        delete m_deck;
+        }
+        else {
+            qDebug() << "Failed to connect to the server";
+        }
+
+            close();
+    }
 }
 
 void StudySessionWindow::on_pushButton_skip_clicked()

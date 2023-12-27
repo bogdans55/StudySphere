@@ -12,8 +12,8 @@ StudySession::StudySession(const User &user, Deck *deck) : m_user(user), m_deck(
 
 StudySession::StudySession(const StudySession &session)
 	: m_user(session.m_user), m_deck(session.m_deck), m_cardSequence(session.m_cardSequence),
-	  m_currentCardIndex(session.m_currentCardIndex), m_timeStarted(session.m_timeStarted),
-	  m_timeEnded(session.m_timeEnded)
+      m_currentCardIndex(session.m_currentCardIndex), m_timeStarted(session.m_timeStarted),
+    m_timeEnded(session.m_timeEnded), m_answerShowed(session.m_answerShowed)
 {}
 
 StudySession::~StudySession() {}
@@ -21,7 +21,12 @@ StudySession::~StudySession() {}
 void StudySession::startSession()
 {
 	m_timeStarted = time(NULL);
-	this->chooseCardSequence(m_deck->cards().length()); // TODO     Treba napraviti prozor za biranje numCards atributa
+
+    // TODO     Dovlacenje DeckStatsa
+    m_deckStats = new DeckStats(m_user, *m_deck);   // TODO     Ovo izbrisati nakon sto se odradi dovlacenje
+
+    this->chooseCardSequence(m_deck->cards().length());     // TODO     Treba napraviti prozor za biranje numCards atributa
+
 }
 
 void StudySession::endSession()
@@ -33,26 +38,26 @@ void StudySession::chooseCardSequence(unsigned numCards)
 {
     QVector<unsigned> cardIndices(numCards);
     QVector<bool> visited(numCards);
-    for (int i = 0;i < numCards;i++){
+    for (unsigned i = 0;i < numCards;i++){
         std::random_device rd;
         std::mt19937 gen(rd());
         std::vector<double> probabilities = {0.4, 0.3, 0.2, 0.1};
         std::discrete_distribution<> distribution(probabilities.begin(), probabilities.end());
-        QVector<unsigned> cardDiffIndices;
-        while(cardDiffIndices.isEmpty()){
-            int difficulty = distribution(gen);
-            for (int j = 0;j < numCards;j++)
-                if(m_deck->cards()[j]->questionDifficulty() == difficulty && !visited[j])
-                    cardDiffIndices.append(j);
+        QVector<unsigned> cardPersonalDiffIndices;
+        while(cardPersonalDiffIndices.isEmpty()){
+            unsigned difficulty = distribution(gen);
+            for (unsigned j = 0;j < numCards;j++)
+                if(m_deckStats->grades()[j] == difficulty && !visited[j])
+                    cardPersonalDiffIndices.append(j);
         }
-        int selectedIndex = QRandomGenerator::global()->bounded(cardDiffIndices.size());
-        visited[selectedIndex] = true;
-        cardIndices[i] = selectedIndex;
+        qDebug() << cardPersonalDiffIndices;
+        unsigned selectedIndex = QRandomGenerator::global()->bounded(cardPersonalDiffIndices.size());
+        visited[cardPersonalDiffIndices[selectedIndex]] = true;
+        cardIndices[i] = cardPersonalDiffIndices[selectedIndex];
     }
 	m_currentCardIndex = 0;
-	m_cardSequence = cardIndices;
-	for (int i = 0; i < cardIndices.length(); i++)
-		qDebug() << m_deck->cards()[cardIndices[i]]->questionText() << " " << cardIndices[i];
+    m_cardSequence = cardIndices;
+    qDebug() << m_cardSequence;
 }
 
 void StudySession::nextCard()
@@ -78,5 +83,5 @@ void StudySession::flipCard()
 
 bool StudySession::hasNextCard()
 {
-	return m_currentCardIndex + 1 < m_cardSequence.length();
+    return m_currentCardIndex + 1 < m_cardSequence.length();
 }

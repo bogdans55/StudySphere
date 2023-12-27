@@ -14,7 +14,7 @@ void User::setUsername(const QString &newUsername)
 QVariant User::toVariant() const
 {
     QVariantMap map;
-    map.insert("Username", username());
+    map.insert("Username", m_username);
     return map;
 }
 

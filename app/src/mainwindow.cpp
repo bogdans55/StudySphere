@@ -333,10 +333,9 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 		socket.disconnectFromHost();
 		return true;
 	}
-	else {
-		return false;
-		qDebug() << "Failed to connect to the server";
-	}
+
+    qDebug() << "Failed to connect to the server";
+    return false;
 }
 
 bool MainWindow::registerUser(const QString &username, const QString &password)

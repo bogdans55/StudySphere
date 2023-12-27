@@ -35,7 +35,7 @@ void MyServer::startServer()
 		qDebug() << "Server couldn't start! -- ERROR" << '\n';
 	}
 	else {
-		// writeNumbers();
+        // writeNumbers();
 		qDebug() << "Server started on port 8080";
 	}
 }
