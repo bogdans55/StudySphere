@@ -608,17 +608,20 @@ void MyServer::getStats(QTcpSocket* socket, const QString& username, const QStri
 					statsFile.close();	
 				}
 				else {
-					response["status"] = "no stats";
+					response["status"] = "Couldn't open deck stats file";
 					qDebug() << response["status"].toString();
 				}
 			}
 		}
+		if(!response.contains("status")){
+			response["status"] = "no stats";
+		}
 	}
 	else {
-		response["status"] = "no stats";
+		response["status"] = "Error";
 		qDebug() << response["status"].toString();
 	}
-	qDebug() << response["status"];
+	qDebug() << response;
 	QTextStream stream(socket);
 	stream << QJsonDocument(response).toJson();
 }
