@@ -743,8 +743,10 @@ void MainWindow::readGeneratedID(QString deckNameID)
 
 void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table)
 {
-    QPushButton *button = new QPushButton(deckNameID);
-    connect(button, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
+	qDebug() << deckNameID;
+	QPushButton *button = new QPushButton((deckNameID + "_deck.json"));
+	qDebug() << button->text();
+	connect(button, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
     button->setStyleSheet("color: transparent; margin-left: 25%;");
 
     if (table == ui->tableWidget_library) {
