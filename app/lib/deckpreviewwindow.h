@@ -29,7 +29,10 @@ private slots:
 private:
     Ui::DeckPreviewWindow *ui;
 	bool m_answerShowed = false;
-    Deck m_deck;
+	unsigned m_currentCardIndex = 0;
+	User m_user;
+	Deck m_deck;
+
 
 	bool hasNextCard();
 

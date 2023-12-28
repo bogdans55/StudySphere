@@ -29,7 +29,7 @@ void DeckPreviewWindow::on_pushButton_flip_preview_clicked()
 
 void DeckPreviewWindow::on_pushButton_cancel_clicked()
 {
-    // TODO
+	// TODO
 }
 
 
@@ -41,11 +41,12 @@ void DeckPreviewWindow::on_pushButton_add_clicked()
 
 void DeckPreviewWindow::on_pushButton_next_clicked()
 {
-    // TODO
+	m_currentCardIndex++;
+	m_answerShowed = false;
 }
 
 bool DeckPreviewWindow::hasNextCard()
 {
-	return m_currentCardIndex + 1 < m_cardSequence.length();
+	return m_currentCardIndex + 1 < m_deck.cards().length();
 }
 

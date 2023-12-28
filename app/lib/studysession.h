@@ -19,7 +19,7 @@ class StudySession
 	time_t m_timeStarted;
 	time_t m_timeEnded;
 	QVector<unsigned> m_cardSequence;
-        unsigned m_currentCardIndex;
+	unsigned m_currentCardIndex;
 	bool m_answerShowed = false;
     DeckStats *m_deckStats;
 
