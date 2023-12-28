@@ -542,20 +542,25 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 	if (deckNames != "") {
 		QStringList deckNamesList = deckNames.split(", ");
 		for (auto &deckNameID : deckNamesList) {
-			QPushButton *button = new QPushButton(deckNameID, ui->tableWidget_library);
+//            QPushButton *button = new QPushButton(deckNameID, ui->tableWidget_library);
+            QPushButton *button = new QPushButton(deckNameID);
 			connect(button, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
 			button->setStyleSheet("color: transparent; margin-left: 25%;");
+
+            QCheckBox *checkbox = new QCheckBox(button);
+            checkbox->setStyleSheet("padding: 5%");
 
 			QLabel *label = new QLabel(deckNameID.split("_")[0], ui->tableWidget_library);
 			label->setAlignment(Qt::AlignCenter);
 			label->setStyleSheet("text-align: center; margin-left: 25%");
+
 
 			if (counter % 2 == 0) {
 				ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
 				ui->tableWidget_library->setColumnWidth(counter / 2, 220); // hardcoded
 			}
 
-			ui->tableWidget_library->setCellWidget(counter % 2 * 2, counter / 2, button);
+            ui->tableWidget_library->setCellWidget(counter % 2 * 2, counter / 2, button);
 			ui->tableWidget_library->setCellWidget(counter % 2 * 2 + 1, counter / 2, label);
 			counter++;
 		}
@@ -745,7 +750,32 @@ void MainWindow::on_pushButton_importDecks_clicked()
 
 void MainWindow::on_pushButton_exportDecks_clicked()
 {
-	// TODO
+    QString selectedDirectory = QFileDialog::getExistingDirectory(
+        nullptr,
+        "Select Directory",
+        QDir::homePath(),
+        QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks
+        );
+    qDebug() << selectedDirectory;
+
+    auto rows = ui->tableWidget_library->rowCount();
+    auto cols = ui->tableWidget_library->columnCount();
+
+    for (auto i = 0; i < rows; i += 2) {
+        for(auto j = 0; j < cols; j++) {
+            auto cell = ui->tableWidget_library->cellWidget(i, j);
+            if (QPushButton *button = dynamic_cast<QPushButton*>(cell)) {
+                if(!button->children().isEmpty()) {
+                    QCheckBox *checkbox = dynamic_cast<QCheckBox*>(ui->tableWidget_library->cellWidget(i, j)->children().front());
+                    if (checkbox->isChecked()) {
+                        // save deck
+                        qDebug() << button->text();
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 void MainWindow::on_pushButton_addToLibrary_clicked()
