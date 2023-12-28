@@ -153,7 +153,7 @@ void MyServer::readData()
 	}else if(action == "search"){
 		searchAndSendDecks(socket, jsonObject["searchQuery"].toString());
 	}else if(action == "getStats"){
-		getStats(socket, jsonObject["username"].toString(), jsonObject["DeckId"].toString());
+        getStats(socket, jsonObject["username"].toString(), jsonObject["DeckId"].toString());
 	}
 
 	socket->close();
@@ -212,10 +212,10 @@ void MyServer::removeDeck(QTcpSocket* socket, QJsonObject& jsonObject){
 	QDir deckFolder(QDir(QDir(userDecksFolder).absoluteFilePath(username)));
 	QJsonObject response;
 
-	QString filePath = deckFolder.absoluteFilePath(deckName + "_" + deckID + ".json");
+    QString filePath = deckFolder.absoluteFilePath(deckName + "_" + deckID + "_deck.json");
 
 	if (QFile::remove(filePath)) {
-		response["status"] = "Successfuly removed deck" + deckID + ".json";
+        response["status"] = "Successfuly removed deck" + deckID;
 	}
 	else {
 		response["status"] = "Failed to remove deck";
@@ -271,7 +271,7 @@ void MyServer::sendUserDecks(QTcpSocket *socket, const QString &username)
 		QStringList foundDecks;
 
 		QStringList deckFilters;
-		deckFilters << "*.json";
+        deckFilters << "*_deck.json";
 
 		for (const QString &folderName : userDeckDirectories) {
 			QDir deckFolder(userFolder.absoluteFilePath(folderName));
@@ -315,7 +315,7 @@ void MyServer::sendDeckById(QTcpSocket *socket, const QString &username, const Q
 		QStringList foundDecks;
 
 		QStringList deckFilters;
-		deckFilters << "*.json";
+        deckFilters << "*_deck.json";
 
 		for (const QString &folderName : userDeckDirectories) {
 			QDir deckFolder(folder.absoluteFilePath(folderName));
@@ -350,14 +350,14 @@ void MyServer::saveDeck(QTcpSocket *socket, QJsonObject &jsonObject)
 	QJsonObject deck = jsonObject["deck"].toObject();
 	QString deckID = QString::number(deck["DeckId"].toDouble());
 	QString deckName = deck["Subject"].toString();
-	QDir().mkdir(QDir(QDir(userDecksFolder).absoluteFilePath(username)).absoluteFilePath(deckName + "_" + deckID));
+    QDir().mkdir(QDir(QDir(userDecksFolder).absoluteFilePath(username)).absoluteFilePath(deckName + "_" + deckID));
 	QString filePath =
-		QDir(QDir(QDir(userDecksFolder).absoluteFilePath(username)).absoluteFilePath(deckName + "_" + deckID))
-			.absoluteFilePath(deckName + "_" + deckID + ".json");
+        QDir(QDir(QDir(userDecksFolder).absoluteFilePath(username)).absoluteFilePath(deckName + "_" + deckID))
+            .absoluteFilePath(deckName + "_" + deckID + "_deck.json");
 
 	if(jsonObject.contains("deckStats")){
 		QString statsPath = QDir(QDir(QDir(userDecksFolder).absoluteFilePath(username)).absoluteFilePath(deckName + "_" + deckID))
-			.absoluteFilePath("ds_" + deckID + ".json");
+            .absoluteFilePath(deckID + "_stats.json");
 
 		QJsonObject stats = jsonObject["deckStats"].toObject();
 		QFile statsFile(statsPath);
@@ -489,7 +489,7 @@ void MyServer::makePublic(QJsonObject& jsonObject){
 	QString deckName = deck["Subject"].toString();
 	QDir().mkdir(QDir(publicDecksFolder).absoluteFilePath(deckName + "_" + deckID));
 	QString filePath = QDir(QDir(publicDecksFolder).absoluteFilePath(deckName + "_" + deckID))
-			.absoluteFilePath(deckName + "_" + deckID + ".json");
+            .absoluteFilePath(deckName + "_" + deckID + "_deck.json");
 
 	QFile file(filePath);
 
@@ -585,8 +585,8 @@ void MyServer::getStats(QTcpSocket* socket, const QString& username, const QStri
 
 	folder = (QDir(userDecksFolder).absoluteFilePath(username));
 
-	QStringList userFilters;
-	userFilters << "*_" + deckId;
+    QStringList userFilters;
+    userFilters << "*_" + deckId;
 	QJsonObject response;
 
 	QStringList userDeckDirectories = folder.entryList(userFilters, QDir::Dirs | QDir::NoDotAndDotDot);
@@ -594,7 +594,7 @@ void MyServer::getStats(QTcpSocket* socket, const QString& username, const QStri
 	if (!userDeckDirectories.isEmpty()) {
 
 		QStringList deckFilters;
-		deckFilters << "ds_" + deckId + ".json";
+        deckFilters << deckId + "_stats.json";
 
 		for (const QString &folderName : userDeckDirectories) {
 			QDir statsFolder(folder.absoluteFilePath(folderName));
@@ -609,7 +609,7 @@ void MyServer::getStats(QTcpSocket* socket, const QString& username, const QStri
 				}
 				else {
 					response["status"] = "Couldn't open deck stats file";
-					qDebug() << response["status"].toString();
+                    qDebug() << "Pisa";
 				}
 			}
 		}

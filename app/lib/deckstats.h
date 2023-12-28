@@ -12,12 +12,11 @@ class DeckStats : public Serializable
   private:
     QVector <unsigned> m_grades;
     unsigned m_timesUsed;
-	// QDate m_creationDate;
+    QString m_creationDate;
 
   public:
     DeckStats();
 	DeckStats(unsigned numGrades);
-	DeckStats(QVector <unsigned> grades, unsigned timesUsed);
     DeckStats(const DeckStats &deckStats);
 	~DeckStats() {}
 
@@ -25,7 +24,7 @@ class DeckStats : public Serializable
 
 	inline unsigned int timesUsed() const { return m_timesUsed; }
 
-	// inline QDate creationDate() const { return m_creationDate; }
+    inline QString creationDate() const { return m_creationDate; }
 
     void addGrade(unsigned cardIndex, unsigned grade);
     void usedDeck();

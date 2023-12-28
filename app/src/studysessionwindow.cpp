@@ -54,6 +54,7 @@ void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 		QMessageBox::information(this, "Gotova sesija", "Uspešno ste prešli sva odabrana pitanja!");
         QTcpSocket socket;
         socket.connectToHost("127.0.0.1", 8080);
+        m_session->endSession();
 
         if (socket.waitForConnected()) {
             QJsonObject request;
@@ -87,7 +88,7 @@ void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
             qDebug() << "Failed to connect to the server";
         }
 
-            close();
+        close();
     }
 }
 

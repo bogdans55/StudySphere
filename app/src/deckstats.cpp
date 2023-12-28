@@ -5,20 +5,13 @@ DeckStats::DeckStats() : m_grades(), m_timesUsed(0u) {}
 DeckStats::DeckStats(unsigned int numGrades)
 	: m_grades(numGrades)
 	, m_timesUsed(0u)
-	// , m_creationDate(QDate::currentDate())
-{
-}
-
-DeckStats::DeckStats(QVector<unsigned int> grades, unsigned timesUsed)
-    : m_grades(grades)
-    , m_timesUsed(timesUsed)
-	// , m_creationDate(creationDate)
+    , m_creationDate(QDate::currentDate().toString())
 {}
 
 DeckStats::DeckStats(const DeckStats &deckStats)
     : m_grades(deckStats.m_grades)
     , m_timesUsed(deckStats.m_timesUsed)
-	// , m_creationDate(deckStats.m_creationDate)
+    , m_creationDate(deckStats.m_creationDate)
 {}
 
 void DeckStats::addGrade(unsigned int cardIndex, unsigned int grade)
@@ -35,7 +28,7 @@ QVariant DeckStats::toVariant() const
 {
     QVariantMap map;
     map.insert("TimesUsed", m_timesUsed);
-	// map.insert("CreationDate", m_creationDate);
+    map.insert("CreationDate", m_creationDate);
 
     QVariantList grades;
     for(unsigned value : m_grades)
@@ -51,11 +44,10 @@ void DeckStats::fromVariant(const QVariant& variant)
 	QVariantMap deckStats = map.value("deckStats").toMap();
 
 	m_timesUsed = deckStats.value("TimesUsed").toUInt();
+    m_creationDate = deckStats.value("CreationDate").toString();
 
 	m_grades.clear();
-
 	QVariant gradesVariant = deckStats.value("Grades");
-
 	auto gradesList = gradesVariant.toList();
 	for (const QVariant& grade : gradesList) {
 		m_grades.push_back(static_cast<unsigned int>(grade.toULongLong()));
