@@ -152,6 +152,8 @@ void MyServer::readData()
 		saveTodo(socket, jsonObject["username"].toString(), todo);
 	}else if(action == "search"){
 		searchAndSendDecks(socket, jsonObject["searchQuery"].toString());
+	}else if(action == "getStats"){
+		getStats(socket, jsonObject["username"].toString(), jsonObject["DeckId"].toString());
 	}
 
 	socket->close();
@@ -352,6 +354,23 @@ void MyServer::saveDeck(QTcpSocket *socket, QJsonObject &jsonObject)
 	QString filePath =
 		QDir(QDir(QDir(userDecksFolder).absoluteFilePath(username)).absoluteFilePath(deckName + "_" + deckID))
 			.absoluteFilePath(deckName + "_" + deckID + ".json");
+
+	if(jsonObject.contains("deckStats")){
+		QString statsPath = QDir(QDir(QDir(userDecksFolder).absoluteFilePath(username)).absoluteFilePath(deckName + "_" + deckID))
+			.absoluteFilePath("ds_" + deckID + ".json");
+
+		QJsonObject stats = jsonObject["deckStats"].toObject();
+		QFile statsFile(statsPath);
+		if (statsFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+			QTextStream stream(&statsFile);
+			stream << QJsonDocument(stats).toJson();
+			statsFile.close();
+			qDebug() << "Deck stats saved on path: " << filePath;
+		}
+		else {
+			qDebug() << "Error saving deck stats:" << statsFile.errorString();
+		}
+	}
 
 	QFile file(filePath);
 
@@ -559,4 +578,47 @@ void MyServer::saveTodo(QTcpSocket* socket, const QString& username, QJsonObject
 
 	QJsonObject response;
 	response["status"] = "Todo list saved successfully";
+}
+
+void MyServer::getStats(QTcpSocket* socket, const QString& username, const QString& deckId){
+	QDir folder;
+
+	folder = (QDir(userDecksFolder).absoluteFilePath(username));
+
+	QStringList userFilters;
+	userFilters << "*_" + deckId;
+	QJsonObject response;
+
+	QStringList userDeckDirectories = folder.entryList(userFilters, QDir::Dirs | QDir::NoDotAndDotDot);
+
+	if (!userDeckDirectories.isEmpty()) {
+
+		QStringList deckFilters;
+		deckFilters << "ds_" + deckId + ".json";
+
+		for (const QString &folderName : userDeckDirectories) {
+			QDir statsFolder(folder.absoluteFilePath(folderName));
+			for (const QString &statsFileName : statsFolder.entryList(deckFilters)) {
+
+				QFile statsFile(statsFolder.absoluteFilePath(statsFileName));
+				if (statsFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+					QByteArray statsData = statsFile.readAll();
+					response["status"] = "success";
+					response["deckStats"] = QJsonDocument::fromJson(statsData).object();
+					statsFile.close();	
+				}
+				else {
+					response["status"] = "no stats";
+					qDebug() << response["status"].toString();
+				}
+			}
+		}
+	}
+	else {
+		response["status"] = "no stats";
+		qDebug() << response["status"].toString();
+	}
+	qDebug() << response["status"];
+	QTextStream stream(socket);
+	stream << QJsonDocument(response).toJson();
 }

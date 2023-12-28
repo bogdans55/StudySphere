@@ -67,6 +67,7 @@ void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 
             request["action"] = "saveDeck";
             request["username"] = m_session->user().username();
+			request["deck"] = serializer.createJson(*(m_session->deck())).toVariant().toJsonObject();
             request["deckStats"] = doc.toVariant().toJsonObject();
 
             qDebug() << request;
@@ -77,13 +78,8 @@ void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 
             QByteArray responseData = socket.readAll();
             QTextStream stream(responseData);
-
+			// TODO check if successful
             qDebug() << responseData;
-
-            qDebug() << "Recieved Data:";
-            while (!stream.atEnd()) {
-                qDebug() << stream.readLine();
-            }
 
             socket.disconnectFromHost();
 

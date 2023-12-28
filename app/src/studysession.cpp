@@ -1,10 +1,14 @@
 #include "lib/studysession.h"
-
+#include "lib/jsonserializer.h"
 #include <QDebug>
 #include <QRandomGenerator>
 #include <algorithm>
 #include <numeric>
 #include <random>
+#include <QTcpSocket>
+#include <QTcpServer>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 StudySession::StudySession() : m_user(), m_deck() {}
 
@@ -22,8 +26,41 @@ void StudySession::startSession()
 {
 	m_timeStarted = time(NULL);
 
-    // TODO     Dovlacenje DeckStatsa
-    m_deckStats = new DeckStats(m_user, *m_deck);   // TODO     Ovo izbrisati nakon sto se odradi dovlacenje
+	QTcpSocket socket;
+	socket.connectToHost("127.0.0.1", 8080);
+
+	if (socket.waitForConnected()) {
+		QJsonObject request;
+
+		request["action"] = "getStats";
+		request["username"] = m_user.username();
+		request["DeckId"] = QString::number(m_deck->deckId());
+
+		socket.write(QJsonDocument(request).toJson());
+		socket.waitForBytesWritten();
+		socket.waitForReadyRead();
+		QByteArray statsResponse = socket.readAll();
+		QTextStream statsStream(statsResponse);
+
+		QString statsResponseString = statsStream.readAll();
+		QJsonDocument statsJson = QJsonDocument::fromJson(statsResponseString.toUtf8());
+		QJsonObject statsObject = statsJson.object();
+
+		qDebug() << statsJson;
+
+		socket.disconnectFromHost();
+
+		if(statsObject["status"].toString() == "no stats"){
+			m_deckStats = new DeckStats(m_user, *m_deck);
+		}
+		else{
+			JSONSerializer jsonSerializer;
+			jsonSerializer.loadJson(*m_deckStats, statsJson);
+		}
+	}
+	else {
+		qDebug() << "Failed to connect to the server";
+	}
 
     this->chooseCardSequence(m_deck->cards().length());     // TODO     Treba napraviti prozor za biranje numCards atributa
 
