@@ -113,7 +113,7 @@ void MyServer::readData()
 	QJsonObject jsonObject = doc.object();
 
 	QString action = jsonObject["action"].toString();
-	Privacy privacy = jsonObject["Privacy"].toString() == "PRIVACY" ? Privacy::PRIVATE : Privacy::PUBLIC;
+	Privacy privacy = jsonObject["Privacy"].toString() == "PRIVATE" ? Privacy::PRIVATE : Privacy::PUBLIC;
 
 	if (action == "login") {
 		loginUser(socket, jsonObject);

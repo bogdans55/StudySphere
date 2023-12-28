@@ -49,7 +49,6 @@ void StudySession::startSession()
 		socket.disconnectFromHost();
 
 		if(statsObject["status"].toString() == "no stats"){
-			qDebug() << "no stats";
 			m_deckStats = new DeckStats(m_deck->cards().length());
 		}
 		else{
@@ -61,7 +60,9 @@ void StudySession::startSession()
 	else {
 		qDebug() << "Failed to connect to the server";
 	}
-	qDebug() << "proslo ucitavanje statsova";
+	JSONSerializer jsonSerializer;
+	qDebug() << jsonSerializer.createJson(*m_deck);
+	qDebug() << m_deck->cards().length();
 
 	this->chooseCardSequence(m_deck->cards().length());
 }
@@ -73,6 +74,7 @@ void StudySession::endSession()
 
 void StudySession::chooseCardSequence(unsigned numCards)
 {
+	qDebug() << m_deckStats->grades();
 	QVector<unsigned> cardIndices(numCards);
 	QVector<bool> visited(numCards);
 	for (unsigned i = 0;i < numCards;i++){
@@ -95,7 +97,6 @@ void StudySession::chooseCardSequence(unsigned numCards)
 	m_currentCardIndex = 0;
 	m_cardSequence = cardIndices;
 	qDebug() << m_cardSequence;
-	// m_cardSequence = {0};
 }
 
 void StudySession::nextCard()

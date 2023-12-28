@@ -131,7 +131,7 @@ void MainWindow::deckButton_clicked()
 	requestObject["action"] = "sendDeck";
 	requestObject["username"] = m_user.username();
 	requestObject["DeckId"] = deckName.split('_')[1].split('.')[0];
-	requestObject["Privacy"] = deck->privacy() == Privacy::PRIVATE ? "PRIVATE" : "PUBLIC";
+	requestObject["Privacy"] = "PRIVATE";
 
 	QJsonDocument request(requestObject);
 	QJsonObject jsonObj = sendRequest(request);
@@ -145,7 +145,7 @@ void MainWindow::deckButton_clicked()
 	QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 
 	jsonSerializer.loadJson(*deck, deckDocument);
-
+	qDebug() << jsonSerializer.createJson(*deck);
 	StudySession *session = new StudySession(m_user, deck);
 	StudySessionWindow *useDeck = new StudySessionWindow(session);
 	useDeck->setAttribute(Qt::WA_DeleteOnClose);

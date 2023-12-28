@@ -47,18 +47,17 @@ QVariant DeckStats::toVariant() const
 
 void DeckStats::fromVariant(const QVariant& variant)
 {
-	qDebug() << variant;
 	QVariantMap map = variant.toMap();
-	m_timesUsed = map.value("TimesUsed").toUInt();
-	// m_creationDate = map.value("CreationDate").toDate();
+	QVariantMap deckStats = map.value("deckStats").toMap();
+
+	m_timesUsed = deckStats.value("TimesUsed").toUInt();
 
 	m_grades.clear();
-	qDebug() << map.value("Grades");
-	auto gradesList = map.value("Grades").toList();
-	qDebug() << gradesList;
-	for (const QVariant& grade : gradesList) {
-		m_grades.push_back(grade.toUInt());
-	}
 
-	qDebug() << m_grades;
+	QVariant gradesVariant = deckStats.value("Grades");
+
+	auto gradesList = gradesVariant.toList();
+	for (const QVariant& grade : gradesList) {
+		m_grades.push_back(static_cast<unsigned int>(grade.toULongLong()));
+	}
 }
