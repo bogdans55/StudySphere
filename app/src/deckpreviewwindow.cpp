@@ -29,7 +29,7 @@ void DeckPreviewWindow::on_pushButton_flip_preview_clicked()
 
 void DeckPreviewWindow::on_pushButton_cancel_clicked()
 {
-	// TODO
+	close();
 }
 
 
