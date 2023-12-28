@@ -113,6 +113,7 @@ void MainWindow::createDeck_clicked()
 		Privacy privacy = popUp.getDeckPrivacy();
 
 		CreateDeckWindow *createDeck = new CreateDeckWindow(name, privacy, m_user);
+        connect(createDeck, &CreateDeckWindow::writeGeneratedID, this, &MainWindow::readGeneratedID);
 		createDeck->setAttribute(Qt::WA_DeleteOnClose);
         createDeck->show();
     }
@@ -385,10 +386,10 @@ void MainWindow::setupTableView(QTableWidget *table)
 {
 	table->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-	table->setRowHeight(0, table->height() * 0.44);
+    table->setRowHeight(0, table->height() * 0.43);
 	table->setRowHeight(1, table->height() * 0.05);
-	table->setRowHeight(2, table->height() * 0.44);
-	table->setRowHeight(3, table->height() * 0.05);
+    table->setRowHeight(2, table->height() * 0.43);
+    table->setRowHeight(3, table->height() * 0.05);
 }
 
 void MainWindow::setEnabled(bool value)
@@ -538,42 +539,15 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 	}
 
 	QString deckNames = jsonObj.value("decks").toString();
-	unsigned counter = 0;
+    m_deckCounter = 0;
 	if (deckNames != "") {
 		QStringList deckNamesList = deckNames.split(", ");
 		for (auto &deckNameID : deckNamesList) {
-//            QPushButton *button = new QPushButton(deckNameID, ui->tableWidget_library);
-            QPushButton *button = new QPushButton(deckNameID);
-			connect(button, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
-			button->setStyleSheet("color: transparent; margin-left: 25%;");
+            addDeckToTable(deckNameID, ui->tableWidget_library);
 
-            QCheckBox *checkbox = new QCheckBox(button);
-            checkbox->setStyleSheet("padding: 5%");
-
-			QLabel *label = new QLabel(deckNameID.split("_")[0], ui->tableWidget_library);
-			label->setAlignment(Qt::AlignCenter);
-			label->setStyleSheet("text-align: center; margin-left: 25%");
-
-
-			if (counter % 2 == 0) {
-				ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
-				ui->tableWidget_library->setColumnWidth(counter / 2, 220); // hardcoded
-			}
-
-            ui->tableWidget_library->setCellWidget(counter % 2 * 2, counter / 2, button);
-			ui->tableWidget_library->setCellWidget(counter % 2 * 2 + 1, counter / 2, label);
-			counter++;
 		}
-	}
-	QPushButton *button = new QPushButton("+ (kreiraj novi spil)", ui->tableWidget_library);
-	connect(button, &QPushButton::clicked, this, &MainWindow::createDeck_clicked);
-	button->setStyleSheet("margin-left: 25%;");
-	if (counter % 2 == 0) {
-		ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
-		ui->tableWidget_library->setColumnWidth(counter / 2, 220); // hardcoded
-	}
-	//    qDebug() << counter;
-	ui->tableWidget_library->setCellWidget(counter % 2 * 2, counter / 2, button);
+    }
+    addCreateDeckButton();
 
 	return true;
 }
@@ -713,24 +687,10 @@ void MainWindow::on_pushButton_search_clicked()
 	QString deckNames = jsonObj.value("decks").toString();
 	if (deckNames != "") {
 		QStringList deckNamesList = deckNames.split(", ");
-		unsigned counter = 0;
-		for (auto &deckNameID : deckNamesList) {
-			QPushButton *button = new QPushButton(deckNameID, ui->tableWidget_browser);
-            connect(button, &QPushButton::clicked, this, &MainWindow::deckPreview_clicked);
-			button->setStyleSheet("color: transparent; margin-left: 25%;");
+        m_deckCounter = 0;
+        for (auto &deckNameID : deckNamesList) {
+            addDeckToTable(deckNameID, ui->tableWidget_browser);
 
-			QLabel *label = new QLabel(deckNameID.split("_")[0], ui->tableWidget_browser);
-			label->setAlignment(Qt::AlignCenter);
-			label->setStyleSheet("text-align: center; margin-left: 25%");
-
-			if (counter % 2 == 0) {
-				ui->tableWidget_browser->setColumnCount(ui->tableWidget_library->columnCount() + 1);
-				ui->tableWidget_browser->setColumnWidth(counter / 2, 220); // hardcoded
-			}
-
-			ui->tableWidget_browser->setCellWidget(counter % 2 * 2, counter / 2, button);
-			ui->tableWidget_browser->setCellWidget(counter % 2 * 2 + 1, counter / 2, label);
-			counter++;
         }
     }
     else {
@@ -768,7 +728,7 @@ void MainWindow::on_pushButton_exportDecks_clicked()
                 if(!button->children().isEmpty()) {
                     QCheckBox *checkbox = dynamic_cast<QCheckBox*>(ui->tableWidget_library->cellWidget(i, j)->children().front());
                     if (checkbox->isChecked()) {
-                        // save deck
+                        // TODO save deck
                         qDebug() << button->text();
                     }
                 }
@@ -778,7 +738,45 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 
 }
 
-void MainWindow::on_pushButton_addToLibrary_clicked()
+void MainWindow::readGeneratedID(QString deckNameID)
 {
-	// TODO
+    addDeckToTable(deckNameID, ui->tableWidget_library);
+    addCreateDeckButton();
+}
+
+void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table)
+{
+    QPushButton *button = new QPushButton(deckNameID);
+    connect(button, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
+    button->setStyleSheet("color: transparent; margin-left: 25%;");
+
+    if (table == ui->tableWidget_library) {
+        QCheckBox *checkbox = new QCheckBox(button);
+        checkbox->setStyleSheet("padding: 5%");
+    }
+
+    QLabel *label = new QLabel(deckNameID.split("_")[0], table);
+    label->setAlignment(Qt::AlignCenter);
+    label->setStyleSheet("text-align: center; margin-left: 25%");
+
+    if (m_deckCounter % 2 == 0) {
+        table->setColumnCount(table->columnCount() + 1);
+        table->setColumnWidth(m_deckCounter / 2, 220); // hardcoded
+    }
+
+    table->setCellWidget(m_deckCounter % 2 * 2, m_deckCounter / 2, button);
+    table->setCellWidget(m_deckCounter % 2 * 2 + 1, m_deckCounter / 2, label);
+    m_deckCounter++;
+}
+
+void MainWindow::addCreateDeckButton()
+{
+    QPushButton *button = new QPushButton("+ (kreiraj novi spil)", ui->tableWidget_library);
+    connect(button, &QPushButton::clicked, this, &MainWindow::createDeck_clicked);
+    button->setStyleSheet("margin-left: 25%;");
+    if (m_deckCounter % 2 == 0) {
+        ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
+        ui->tableWidget_library->setColumnWidth(m_deckCounter / 2, 220); // hardcoded
+    }
+    ui->tableWidget_library->setCellWidget(m_deckCounter % 2 * 2, m_deckCounter / 2, button);
 }

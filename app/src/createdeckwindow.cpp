@@ -47,7 +47,7 @@ QString CreateDeckWindow::getAnswerText() const
 
 Difficulty CreateDeckWindow::getDifficulty() const
 {
-	return (Difficulty)m_questionDifficulty->checkedId();
+    return (Difficulty)m_questionDifficulty->checkedId();
 }
 
 void CreateDeckWindow::on_pushButton_finish_clicked()
@@ -118,6 +118,9 @@ void CreateDeckWindow::generateId()
 		QJsonObject idObject = idJson.object();
 		m_deck.setId(idObject.value("DeckId").toVariant().toULongLong());
 		socket.disconnectFromHost();
+
+        emit writeGeneratedID(m_deck.name() + "_" + QString::number(m_deck.deckId()));
+        qDebug() << "send " << m_deck.name() + "_" + QString::number(m_deck.deckId());
 	}
 	else {
 		qDebug() << "Failed to connect to the server";

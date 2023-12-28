@@ -209,7 +209,7 @@
        <item>
         <widget class="QTabWidget" name="tabWidget_library">
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="tab_decks">
           <attribute name="title">
@@ -357,13 +357,6 @@
              <row/>
              <row/>
              <row/>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton_addToLibrary">
-             <property name="text">
-              <string>Dodaj u moje špilove</string>
-             </property>
             </widget>
            </item>
           </layout>

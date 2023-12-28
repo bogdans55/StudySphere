@@ -82,9 +82,9 @@ class MainWindow : public QWidget
 
 	void on_pushButton_importDecks_clicked();
 
-	void on_pushButton_exportDecks_clicked();
+    void on_pushButton_exportDecks_clicked();
 
-	void on_pushButton_addToLibrary_clicked();
+    void readGeneratedID(QString deckNameID);
 
   protected:
 	void resizeEvent(QResizeEvent *event) override;
@@ -119,5 +119,8 @@ class MainWindow : public QWidget
 	void saveOnServer();
 
 	void setupTableView(QTableWidget *table);
+    void addDeckToTable(QString deckNameID, QTableWidget *table);
+    unsigned m_deckCounter = 0;
+    void addCreateDeckButton();
 };
 #endif // MAINWINDOW_H

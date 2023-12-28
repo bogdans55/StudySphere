@@ -26,18 +26,21 @@ class CreateDeckWindow : public QWidget
 
 	QString getQuestionText() const;
 	QString getAnswerText() const;
-	Difficulty getDifficulty() const;
+    Difficulty getDifficulty() const;
 
   private slots:
 	void on_pushButton_finish_clicked();
 
 	void on_pushButton_add_clicked();
 
+signals:
+    void writeGeneratedID(QString deckNameID);
+
   private:
 	Ui::CreateDeckWindow *ui;
 	Deck m_deck;
 	QButtonGroup *m_questionDifficulty;
-	User &m_user;
+    User &m_user;
 
     void generateId();
 };
