@@ -23,7 +23,7 @@ DeckPreviewWindow::~DeckPreviewWindow()
 
 void DeckPreviewWindow::on_pushButton_flip_preview_clicked()
 {
-    // TODO
+	m_answerShowed = !m_answerShowed;
 }
 
 
@@ -42,5 +42,10 @@ void DeckPreviewWindow::on_pushButton_add_clicked()
 void DeckPreviewWindow::on_pushButton_next_clicked()
 {
     // TODO
+}
+
+bool DeckPreviewWindow::hasNextCard()
+{
+	return m_currentCardIndex + 1 < m_cardSequence.length();
 }
 

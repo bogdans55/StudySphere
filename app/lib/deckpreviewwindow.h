@@ -28,8 +28,11 @@ private slots:
 
 private:
     Ui::DeckPreviewWindow *ui;
-
+	bool m_answerShowed = false;
     Deck m_deck;
+
+	bool hasNextCard();
+
 };
 
 #endif // DECKPREVIEWWINDOW_H
