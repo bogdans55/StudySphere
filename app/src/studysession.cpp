@@ -51,7 +51,7 @@ void StudySession::startSession()
 		socket.disconnectFromHost();
 
 		if(statsObject["status"].toString() == "no stats"){
-			m_deckStats = new DeckStats(m_user, *m_deck);
+            m_deckStats = new DeckStats();
 		}
 		else{
 			JSONSerializer jsonSerializer;
@@ -62,7 +62,9 @@ void StudySession::startSession()
 		qDebug() << "Failed to connect to the server";
 	}
 
-    this->chooseCardSequence(m_deck->cards().length());     // TODO     Treba napraviti prozor za biranje numCards atributa
+    // TODO     Dovlacenje DeckStatsa
+    m_deckStats = new DeckStats();   // TODO     Ovo izbrisati nakon sto se odradi dovlacenje
+
 
 }
 
