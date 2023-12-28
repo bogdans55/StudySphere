@@ -8,12 +8,14 @@ DeckPreviewWindow::DeckPreviewWindow(QWidget *parent) :
     ui->setupUi(this);
 }
 
-DeckPreviewWindow::DeckPreviewWindow(Deck deck, QWidget *parent) :
+DeckPreviewWindow::DeckPreviewWindow(Deck deck, User& user, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::DeckPreviewWindow),
-    m_deck(deck)
+	  m_user(user),
+	  m_deck(deck)
 {
-
+	ui->setupUi(this);
+	ui->textEdit_card_preview->setText(deck.cards()[m_currentCardIndex]->questionText());
 }
 
 DeckPreviewWindow::~DeckPreviewWindow()
@@ -23,6 +25,14 @@ DeckPreviewWindow::~DeckPreviewWindow()
 
 void DeckPreviewWindow::on_pushButton_flip_preview_clicked()
 {
+	if (m_answerShowed) {
+		ui->textEdit_card_preview->setText(m_deck.cards()[m_currentCardIndex]->questionText());
+		ui->label_card_preview->setText("Pitanje");
+	}
+	else {
+		ui->textEdit_card_preview->setText(m_deck.cards()[m_currentCardIndex]->questionAnswer());
+		ui->label_card_preview->setText("Odgovor");
+	}
 	m_answerShowed = !m_answerShowed;
 }
 

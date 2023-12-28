@@ -14,7 +14,7 @@ class DeckPreviewWindow : public QWidget
 
 public:
     explicit DeckPreviewWindow(QWidget *parent = nullptr);
-    DeckPreviewWindow(Deck deck, QWidget *parent = nullptr);
+	DeckPreviewWindow(Deck deck, User& user, QWidget *parent = nullptr);
     ~DeckPreviewWindow();
 
 private slots:
