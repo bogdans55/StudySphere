@@ -33,7 +33,6 @@ private:
 	User m_user;
 	Deck m_deck;
 
-
 	bool hasNextCard();
 
 };
