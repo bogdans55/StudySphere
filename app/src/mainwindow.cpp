@@ -116,6 +116,7 @@ void MainWindow::createDeck_clicked()
         connect(createDeck, &CreateDeckWindow::writeGeneratedID, this, &MainWindow::readGeneratedID);
 		createDeck->setAttribute(Qt::WA_DeleteOnClose);
         createDeck->show();
+        setEnabled(false);
     }
 }
 
