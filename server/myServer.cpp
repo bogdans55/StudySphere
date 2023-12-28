@@ -233,7 +233,7 @@ void MyServer::searchAndSendDecks(QTcpSocket *socket, const QString &searchQuery
 	QJsonObject response;
 	QVector<QString> separatedSearchQuery = searchQuery.split(" ");
 
-	for (const QString &fileName : deckFolder.entryList(filters, QDir::Dirs)) {
+    for (const QString &fileName : deckFolder.entryList(filters, QDir::Dirs | QDir::NoDotAndDotDot)) {
 		for(auto search : separatedSearchQuery){
 			if(fileName.contains(search, Qt::CaseInsensitive)){
 				foundDecks.append(fileName);

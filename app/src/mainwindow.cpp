@@ -684,9 +684,16 @@ void MainWindow::on_pushButton_search_clicked()
 	ui->tableWidget_browser->clear();
     setupTableView(ui->tableWidget_browser);
 
+    QString query = ui->lineEdit_browser->text().trimmed();
+
+    if (query.isEmpty()) {
+        QMessageBox::warning(this, "Pogrešan unos", "Niste popunili polje za naziv špila!");
+        return;
+    }
+
 	QJsonObject requestObject;
 	requestObject["action"] = "search";
-	requestObject["searchQuery"] = ui->lineEdit_browser->text().trimmed();
+    requestObject["searchQuery"] = query;
 	qDebug() << "Recieved Data:";
 
 	QJsonDocument request(requestObject);
@@ -719,10 +726,11 @@ void MainWindow::on_pushButton_search_clicked()
 			ui->tableWidget_browser->setCellWidget(counter % 2 * 2, counter / 2, button);
 			ui->tableWidget_browser->setCellWidget(counter % 2 * 2 + 1, counter / 2, label);
 			counter++;
-		}
-	}
-	else
-		QMessageBox::warning(this, "Nema rezultata", "Nije pronadjen nijedan špil!");
+        }
+    }
+    else {
+        QMessageBox::warning(this, "Nema rezultata", "Nije pronadjen nijedan špil!");
+    }
 }
 
 void MainWindow::on_pushButton_importDecks_clicked()
