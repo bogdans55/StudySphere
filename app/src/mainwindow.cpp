@@ -543,7 +543,7 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
             qDebug() << "11111111111111111" << deckNameID;
             QStringList list = deckNameID.split("_");
             addDeckToTable(list[0] + "_" + list[1], ui->tableWidget_library);
-
+            ui->comboBox_deck->addItem(list[0]);
 		}
     }
     addCreateDeckButton();
@@ -689,7 +689,6 @@ void MainWindow::on_pushButton_search_clicked()
         m_deckCounter = 0;
         for (auto &deckNameID : deckNamesList) {
             addDeckToTable(deckNameID, ui->tableWidget_browser);
-
         }
     }
     else {
@@ -741,6 +740,7 @@ void MainWindow::readGeneratedID(QString deckNameID)
 {
     addDeckToTable(deckNameID, ui->tableWidget_library);
     addCreateDeckButton();
+    ui->comboBox_deck->addItem(deckNameID.split("_")[0]);
 }
 
 void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table)
@@ -784,3 +784,13 @@ void MainWindow::addCreateDeckButton()
     }
     ui->tableWidget_library->setCellWidget(m_deckCounter % 2 * 2, m_deckCounter / 2, button);
 }
+
+void MainWindow::on_comboBox_deck_currentIndexChanged(int index)
+{
+    Q_UNUSED(index);
+
+    qDebug() << ui->comboBox_deck->currentText();
+
+    // TODO read stats from current deck and add them to ui elements
+}
+
