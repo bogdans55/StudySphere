@@ -19,7 +19,7 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/createdeckdialog.ui" line="47"/>
+        <location filename="../../forms/createdeckdialog.ui" line="50"/>
         <source>Javan</source>
         <translation></translation>
     </message>
@@ -27,47 +27,53 @@
 <context>
     <name>CreateDeckWindow</name>
     <message>
-        <location filename="../../forms/createdeckwindow.ui" line="14"/>
+        <location filename="../../forms/createdeckwindow.ui" line="17"/>
         <source>StudySphere - add card</source>
         <translation>StudySphere - dodaj karticu</translation>
     </message>
     <message>
-        <location filename="../../forms/createdeckwindow.ui" line="26"/>
+        <location filename="../../forms/createdeckwindow.ui" line="29"/>
         <source>Pitanje:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/createdeckwindow.ui" line="36"/>
+        <location filename="../../forms/createdeckwindow.ui" line="58"/>
+        <location filename="../../forms/createdeckwindow.ui" line="96"/>
+        <source>TextLabel</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../forms/createdeckwindow.ui" line="67"/>
         <source>Odgovor:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/createdeckwindow.ui" line="64"/>
+        <location filename="../../forms/createdeckwindow.ui" line="112"/>
         <source>Lako</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/createdeckwindow.ui" line="71"/>
+        <location filename="../../forms/createdeckwindow.ui" line="125"/>
         <source>Srednje</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/createdeckwindow.ui" line="78"/>
+        <location filename="../../forms/createdeckwindow.ui" line="132"/>
         <source>Teško</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/createdeckwindow.ui" line="87"/>
+        <location filename="../../forms/createdeckwindow.ui" line="103"/>
         <source>Težina:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/createdeckwindow.ui" line="111"/>
+        <location filename="../../forms/createdeckwindow.ui" line="172"/>
         <source>Završi dodavanje</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/createdeckwindow.ui" line="134"/>
+        <location filename="../../forms/createdeckwindow.ui" line="195"/>
         <source>Dodaj karticu</source>
         <translation></translation>
     </message>
@@ -167,233 +173,238 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="222"/>
+        <location filename="../../forms/mainwindow.ui" line="257"/>
         <source>Kreiraj novi špil</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="232"/>
-        <source>Započni učenje</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../forms/mainwindow.ui" line="256"/>
+        <location filename="../../forms/mainwindow.ui" line="308"/>
         <source>Dodaj aktivnost</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="292"/>
+        <location filename="../../forms/mainwindow.ui" line="321"/>
         <source>Obriši</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="308"/>
+        <location filename="../../forms/mainwindow.ui" line="285"/>
         <source>Obriši sve</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="321"/>
+        <location filename="../../forms/mainwindow.ui" line="267"/>
+        <source>Započni učenje (deprecated)</source>
+        <translation>Započni učenje</translation>
+    </message>
+    <message>
+        <location filename="../../forms/mainwindow.ui" line="339"/>
         <source>Aktivnost:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="331"/>
+        <location filename="../../forms/mainwindow.ui" line="349"/>
         <source>Početak aktivnosti:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="338"/>
+        <location filename="../../forms/mainwindow.ui" line="356"/>
         <source>Kraj aktivnosti:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="345"/>
+        <location filename="../../forms/mainwindow.ui" line="363"/>
         <source>Dan:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="355"/>
-        <location filename="../../forms/mainwindow.ui" line="359"/>
-        <location filename="../../forms/mainwindow.ui" line="455"/>
+        <location filename="../../forms/mainwindow.ui" line="373"/>
+        <location filename="../../forms/mainwindow.ui" line="377"/>
+        <location filename="../../forms/mainwindow.ui" line="473"/>
         <source>Ponedeljak</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="364"/>
-        <location filename="../../forms/mainwindow.ui" line="435"/>
+        <location filename="../../forms/mainwindow.ui" line="382"/>
+        <location filename="../../forms/mainwindow.ui" line="453"/>
         <source>Utorak</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="369"/>
-        <location filename="../../forms/mainwindow.ui" line="485"/>
+        <location filename="../../forms/mainwindow.ui" line="387"/>
+        <location filename="../../forms/mainwindow.ui" line="503"/>
         <source>Sreda</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="374"/>
-        <location filename="../../forms/mainwindow.ui" line="475"/>
+        <location filename="../../forms/mainwindow.ui" line="392"/>
+        <location filename="../../forms/mainwindow.ui" line="493"/>
         <source>Četvrtak</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="379"/>
-        <location filename="../../forms/mainwindow.ui" line="465"/>
+        <location filename="../../forms/mainwindow.ui" line="397"/>
+        <location filename="../../forms/mainwindow.ui" line="483"/>
         <source>Petak</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="384"/>
-        <location filename="../../forms/mainwindow.ui" line="445"/>
+        <location filename="../../forms/mainwindow.ui" line="402"/>
+        <location filename="../../forms/mainwindow.ui" line="463"/>
         <source>Subota</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="389"/>
-        <location filename="../../forms/mainwindow.ui" line="495"/>
+        <location filename="../../forms/mainwindow.ui" line="407"/>
+        <location filename="../../forms/mainwindow.ui" line="513"/>
         <source>Nedelja</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="400"/>
+        <location filename="../../forms/mainwindow.ui" line="418"/>
         <source>Dodaj</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="564"/>
+        <location filename="../../forms/mainwindow.ui" line="582"/>
         <source>Događaj:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="574"/>
+        <location filename="../../forms/mainwindow.ui" line="592"/>
         <source>Datum:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="587"/>
+        <location filename="../../forms/mainwindow.ui" line="599"/>
+        <source>dd.MM.yyyy. HH:mm</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../forms/mainwindow.ui" line="612"/>
         <source>Dodaj događaj</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="684"/>
+        <location filename="../../forms/mainwindow.ui" line="709"/>
         <source>Broj korišćenja:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="691"/>
+        <location filename="../../forms/mainwindow.ui" line="716"/>
         <source>Izaberi špil:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="698"/>
+        <location filename="../../forms/mainwindow.ui" line="723"/>
         <source>Procenat pitanja označenih sa &quot;Loše&quot;:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="705"/>
+        <location filename="../../forms/mainwindow.ui" line="730"/>
         <source>Ukupan broj pitanja:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="731"/>
+        <location filename="../../forms/mainwindow.ui" line="756"/>
         <source>Procenat pitanja označenih sa &quot;Srednje&quot;:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="738"/>
+        <location filename="../../forms/mainwindow.ui" line="763"/>
         <source>Broj nepredjenih pitanja:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="745"/>
+        <location filename="../../forms/mainwindow.ui" line="770"/>
         <source>Procenat pitanja označenih sa &quot;Odlično&quot;:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="752"/>
+        <location filename="../../forms/mainwindow.ui" line="777"/>
         <source>Procenat pitanja označenih sa &quot;Ne znam&quot;:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="847"/>
+        <location filename="../../forms/mainwindow.ui" line="872"/>
         <source>Jezik</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="851"/>
+        <location filename="../../forms/mainwindow.ui" line="876"/>
         <source>Srpski</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="856"/>
+        <location filename="../../forms/mainwindow.ui" line="881"/>
         <source>Engleski</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="864"/>
+        <location filename="../../forms/mainwindow.ui" line="889"/>
         <source>Tema</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="868"/>
+        <location filename="../../forms/mainwindow.ui" line="898"/>
         <source>Svetla</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="873"/>
+        <location filename="../../forms/mainwindow.ui" line="893"/>
         <source>Tamna</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="881"/>
+        <location filename="../../forms/mainwindow.ui" line="906"/>
         <source>Zvuk</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="906"/>
+        <location filename="../../forms/mainwindow.ui" line="931"/>
         <source>pomoc</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../src/mainwindow.cpp" line="353"/>
-        <source>Odjavi se</source>
         <translation></translation>
     </message>
 </context>
 <context>
     <name>StudySessionWindow</name>
     <message>
-        <location filename="../../forms/studysessionwindow.ui" line="14"/>
+        <location filename="../../forms/studysessionwindow.ui" line="17"/>
         <source>StudySphere - StudySession</source>
         <translation>StudySphere - sesija učenja</translation>
     </message>
     <message>
-        <location filename="../../forms/studysessionwindow.ui" line="41"/>
-        <source>Kartica</source>
+        <location filename="../../forms/studysessionwindow.ui" line="44"/>
+        <source>Pitanje</source>
+        <translation>Pitanje</translation>
+    </message>
+    <message>
+        <location filename="../../forms/studysessionwindow.ui" line="61"/>
+        <source>TextLabel</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/studysessionwindow.ui" line="58"/>
+        <location filename="../../forms/studysessionwindow.ui" line="68"/>
         <source>Okreni karticu</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/studysessionwindow.ui" line="84"/>
+        <location filename="../../forms/studysessionwindow.ui" line="94"/>
         <source>Ne znam</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/studysessionwindow.ui" line="91"/>
+        <location filename="../../forms/studysessionwindow.ui" line="101"/>
         <source>Loše</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/studysessionwindow.ui" line="98"/>
+        <location filename="../../forms/studysessionwindow.ui" line="108"/>
         <source>Srednje</source>
         <translation>Dobro</translation>
     </message>
     <message>
-        <location filename="../../forms/studysessionwindow.ui" line="105"/>
+        <location filename="../../forms/studysessionwindow.ui" line="115"/>
         <source>Odlično</source>
         <translation></translation>
     </message>
