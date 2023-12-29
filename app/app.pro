@@ -40,6 +40,7 @@ SOURCES += \
     src/user.cpp \
     src/settings.cpp \
     src/mainwindow.cpp \
+    tests/test.cpp
 
 HEADERS += \
     lib/deckpreviewwindow.h \
