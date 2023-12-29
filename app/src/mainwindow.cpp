@@ -57,11 +57,10 @@ MainWindow::MainWindow(QWidget *parent)
 	ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
 	ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
 
-	QVector<ScheduleItem *> scheduleItems;
 	for (int i = 0; i < 7; ++i) {
-		scheduleItems.append(new ScheduleItem());
-		scheduleItems[i]->setWidth(ui->graphicsView_monday->width());
-		m_plannerScenes[i]->addItem(scheduleItems[i]);
+        ScheduleItem *scheduleItem = new ScheduleItem();
+        scheduleItem->setWidth(ui->graphicsView_monday->width());
+        m_plannerScenes[i]->addItem(scheduleItem);
 	}
 
 	connect(ui->listWidget_todos, &QListWidget::itemChanged, this, &MainWindow::onTodoItemChanged);
@@ -72,12 +71,25 @@ MainWindow::~MainWindow()
 	if (m_loggedIn) {
 		saveOnServer();
 	}
+
+    ui->tableWidget_library->clear();
+    ui->tableWidget_browser->clear();
+    ui->listWidget_todos->clear();
+
     delete ui;
 
     for (auto scene : m_plannerScenes) {
         scene->clear();
         delete scene;
     }
+
+
+    m_planner.deleteAll();
+    m_libraryScene.clear();
+    m_calendar.deleteAll();
+    m_toDoList.deleteAllToDos();
+
+
 }
 
 void MainWindow::saveOnServer()
@@ -467,8 +479,10 @@ void MainWindow::on_pushButton_login_clicked()
 		ui->pushButton_login->setText("Prijavi se");
 		setEnabled(false);
 		ui->tableWidget_library->clear();
-		ui->tableWidget_browser->clear();
+        ui->tableWidget_browser->clear();
+        m_plannerScenes.clear();
 		m_planner.deleteAll();
+        m_libraryScene.clear();
 		m_calendar.deleteAll();
 		m_toDoList.deleteAllToDos();
 		ui->listWidget_todos->clear();
@@ -476,6 +490,7 @@ void MainWindow::on_pushButton_login_clicked()
 		m_plannerLoaded = false;
 		m_calendarLoaded = false;
 		ui->stackedWidget->setCurrentIndex(LIBRARY);
+
 
 		ui->tableWidget_library->setColumnCount(0);
 		ui->tableWidget_browser->setColumnCount(0);
