@@ -555,7 +555,7 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 	if (deckNames != "") {
 		QStringList deckNamesList = deckNames.split(", ");
 		for (auto &deckNameID : deckNamesList) {
-            addDeckToTable(deckNameID, ui->tableWidget_library);
+            addDeckToTable(deckNameID, ui->tableWidget_library, m_deckCounter);
             auto deckNameSplit = deckNameID.split("_");
             ui->comboBox_deck->addItem(deckNameSplit[0] + "_" + deckNameSplit[1]);
 		}
@@ -700,9 +700,9 @@ void MainWindow::on_pushButton_search_clicked()
 	QString deckNames = jsonObj.value("decks").toString();
 	if (deckNames != "") {
 		QStringList deckNamesList = deckNames.split(", ");
-        m_deckCounter = 0;
+        int browserCounter = 0;
         for (auto &deckNameID : deckNamesList) {
-            addDeckToTable(deckNameID, ui->tableWidget_browser);
+            addDeckToTable(deckNameID, ui->tableWidget_browser, browserCounter);
         }
     }
     else {
@@ -752,7 +752,7 @@ void MainWindow::on_pushButton_importDecks_clicked()
 		QJsonDocument requestDocument(request);
 		QJsonObject response = sendRequest(requestDocument);
 		QStringList tempDeckName = (*it).split('/');
-		addDeckToTable(*(--tempDeckName.end()),  ui->tableWidget_library);
+        addDeckToTable(*(--tempDeckName.end()),  ui->tableWidget_library, m_deckCounter);
         addCreateDeckButton();
 	}
 	if(!filePaths.isEmpty()){
@@ -810,12 +810,12 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 
 void MainWindow::addNewDeck(QString deckNameID)
 {
-    addDeckToTable(deckNameID, ui->tableWidget_library);
+    addDeckToTable(deckNameID, ui->tableWidget_library, m_deckCounter);
     addCreateDeckButton();
     ui->comboBox_deck->addItem(deckNameID.split("_")[0]);
 }
 
-void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table)
+void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table, int &counter)
 {
     QPushButton *button = new QPushButton((deckNameID));
     button->setStyleSheet("color: transparent; margin-left: 25%;");
@@ -833,14 +833,14 @@ void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table)
     label->setAlignment(Qt::AlignCenter);
     label->setStyleSheet("text-align: center; margin-left: 25%");
 
-    if (m_deckCounter % 2 == 0) {
+    if (counter % 2 == 0) {
         table->setColumnCount(table->columnCount() + 1);
-        table->setColumnWidth(m_deckCounter / 2, 220); // hardcoded
+        table->setColumnWidth(counter / 2, 220); // hardcoded
     }
 
-    table->setCellWidget(m_deckCounter % 2 * 2, m_deckCounter / 2, button);
-    table->setCellWidget(m_deckCounter % 2 * 2 + 1, m_deckCounter / 2, label);
-    m_deckCounter++;
+    table->setCellWidget(counter % 2 * 2, counter / 2, button);
+    table->setCellWidget(counter % 2 * 2 + 1, counter / 2, label);
+    counter++;
 }
 
 void MainWindow::addCreateDeckButton()

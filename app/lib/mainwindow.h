@@ -121,8 +121,8 @@ protected:
 	void saveOnServer();
 
 	void setupTableView(QTableWidget *table);
-    void addDeckToTable(QString deckNameID, QTableWidget *table);
-    unsigned m_deckCounter = 0;
+    void addDeckToTable(QString deckNameID, QTableWidget *table, int &counter);
+    int m_deckCounter = 0;
     void addCreateDeckButton();
 };
 #endif // MAINWINDOW_H
