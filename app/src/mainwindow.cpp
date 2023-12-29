@@ -113,7 +113,7 @@ void MainWindow::createDeck_clicked()
 		Privacy privacy = popUp.getDeckPrivacy();
 
 		CreateDeckWindow *createDeck = new CreateDeckWindow(name, privacy, m_user);
-        connect(createDeck, &CreateDeckWindow::writeGeneratedID, this, &MainWindow::readGeneratedID);
+        connect(createDeck, &CreateDeckWindow::writeGeneratedID, this, &MainWindow::addNewDeck);
 		createDeck->setAttribute(Qt::WA_DeleteOnClose);
         createDeck->show();
     }
@@ -140,6 +140,7 @@ void MainWindow::deckPreview_clicked()
 	jsonSerializer.loadJson(*deck, deckDocument);
 
 	DeckPreviewWindow *preview = new DeckPreviewWindow(*deck, m_user);
+    connect(preview, &DeckPreviewWindow::sendPublicDeck, this, &MainWindow::addNewDeck);
     preview->setAttribute(Qt::WA_DeleteOnClose);
     preview->show();
 }
@@ -807,7 +808,7 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 	QMessageBox::information(this, "Izvoz špilova", "Uspešan izvoz!");
 }
 
-void MainWindow::readGeneratedID(QString deckNameID)
+void MainWindow::addNewDeck(QString deckNameID)
 {
     addDeckToTable(deckNameID, ui->tableWidget_library);
     addCreateDeckButton();
@@ -816,10 +817,8 @@ void MainWindow::readGeneratedID(QString deckNameID)
 
 void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table)
 {
-    qDebug() << deckNameID;
     QPushButton *button = new QPushButton((deckNameID));
     button->setStyleSheet("color: transparent; margin-left: 25%;");
-    qDebug() << button->text();
 
     if (table == ui->tableWidget_library) {
         connect(button, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
@@ -842,7 +841,6 @@ void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table)
     table->setCellWidget(m_deckCounter % 2 * 2, m_deckCounter / 2, button);
     table->setCellWidget(m_deckCounter % 2 * 2 + 1, m_deckCounter / 2, label);
     m_deckCounter++;
-
 }
 
 void MainWindow::addCreateDeckButton()

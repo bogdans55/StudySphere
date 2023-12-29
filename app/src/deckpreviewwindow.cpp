@@ -1,6 +1,10 @@
 #include "lib/deckpreviewwindow.h"
-#include "qmessagebox.h"
+#include "lib/jsonserializer.h"
 #include "ui_deckpreviewwindow.h"
+
+#include <QMessageBox>
+#include <QTcpServer>
+#include <QTcpSocket>
 
 DeckPreviewWindow::DeckPreviewWindow(QWidget *parent) :
     QWidget(parent),
@@ -46,7 +50,47 @@ void DeckPreviewWindow::on_pushButton_cancel_clicked()
 
 void DeckPreviewWindow::on_pushButton_add_clicked()
 {
-    // TODO
+    QTcpSocket socket;
+    socket.connectToHost("127.0.0.1", 8080);
+
+    if (socket.waitForConnected()) {
+        QJsonObject request;
+
+        JSONSerializer serializer;
+        QJsonDocument doc = serializer.createJson(m_deck);
+
+        qDebug() << doc;
+
+        request["action"] = "saveDeck";
+        request["username"] = m_user.username();
+        request["deck"] = doc.toVariant().toJsonObject();
+
+        qDebug() << request;
+
+        socket.write(QJsonDocument(request).toJson());
+        socket.waitForBytesWritten();
+        socket.waitForReadyRead();
+
+        QByteArray responseData = socket.readAll();
+        QTextStream stream(responseData);
+
+        qDebug() << responseData;
+
+        qDebug() << "Recieved Data:";
+        while (!stream.atEnd()) {
+            qDebug() << stream.readLine();
+        }
+
+        socket.disconnectFromHost();
+
+        QMessageBox::information(this, "Uspešno dodat špil", "Izabrani špil je uspešno dodat i sačuvan!");
+        emit sendPublicDeck(m_deck.name() + "_" + QString::number(m_deck.deckId()));
+    }
+    else {
+        qDebug() << "Failed to connect to the server";
+    }
+
+    close();
 }
 
 

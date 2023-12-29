@@ -84,7 +84,7 @@ class MainWindow : public QWidget
 
     void on_pushButton_exportDecks_clicked();
 
-    void readGeneratedID(QString deckNameID);
+    void addNewDeck(QString deckNameID);
 
     void on_comboBox_deck_currentIndexChanged(int index);
 
