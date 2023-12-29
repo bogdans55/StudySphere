@@ -27,6 +27,7 @@ StudySessionWindow::StudySessionWindow(StudySession *session, QWidget *parent)
 StudySessionWindow::~StudySessionWindow()
 {
 	delete ui;
+    delete m_session;
 }
 
 void StudySessionWindow::on_pushButton_flip_clicked()
@@ -55,6 +56,7 @@ void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 		QMessageBox::information(this, "Gotova sesija", "Uspešno ste prešli sva odabrana pitanja!");
         QTcpSocket socket;
         socket.connectToHost("127.0.0.1", 8080);
+        m_session->endSession();
 
         if (socket.waitForConnected()) {
             QJsonObject request;

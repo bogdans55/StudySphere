@@ -18,6 +18,12 @@ Deck::Deck(const Deck &deck)
     : m_deckId(deck.m_deckId), m_name(deck.m_name), m_cards(deck.m_cards), m_privacy(deck.m_privacy), m_thumbnail(deck.m_thumbnail), m_rating(deck.m_rating), m_user(deck.m_user)
 {}
 
+Deck::~Deck()
+{
+    for (Card* card : m_cards)
+        delete card;
+}
+
 void Deck::addCard(Card *card)
 {
 	m_cards.append(card);
@@ -70,10 +76,10 @@ void Deck::fromVariant(const QVariant &variant)
 
 	QVariantList cardsVariantList = map.value("Flashcards").toList();
 	for (QVariant card : cardsVariantList) {
-		Card *curr_card = new Card();
-		curr_card->fromVariant(card);
-		qDebug() << curr_card->questionText();
-		m_cards.push_back(curr_card);
+        Card *currCard = new Card();
+        currCard->fromVariant(card);
+        qDebug() << currCard->questionText();
+        m_cards.push_back(currCard);
 	}
 
     m_user.fromVariant(map.value("User"));

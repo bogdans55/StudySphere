@@ -2,10 +2,12 @@
 #define MAINWINDOW_H
 
 #include "lib/calendar.h"
+#include "lib/deckstats.h"
 #include "lib/planner.h"
 #include "lib/plannerscene.h"
 #include "lib/todolist.h"
 #include "libraryscene.h"
+#include "settings.h"
 #include "user.h"
 
 #include <QListWidgetItem>
@@ -17,6 +19,10 @@
 #include <QTableWidget>
 
 #include "lib/settings.h"
+
+#include <QDir>
+#include <QCoreApplication>
+#include <QStandardPaths>
 
 QT_BEGIN_NAMESPACE
 
@@ -66,6 +72,10 @@ class MainWindow : public QWidget
 
 	void on_pushButton_addActivity_clicked();
 
+    void on_comboBox_language_currentIndexChanged(int index);
+
+    void on_comboBox_theme_currentIndexChanged(int index);
+
 	void on_pushButton_login_clicked();
 
 	void on_pushButton_addEvent_clicked();
@@ -84,9 +94,11 @@ class MainWindow : public QWidget
 
     void on_pushButton_exportDecks_clicked();
 
-    void readGeneratedID(QString deckNameID);
+    void addNewDeck(QString deckNameID);
 
-  protected:
+    void on_comboBox_deck_currentIndexChanged(int index);
+
+protected:
 	void resizeEvent(QResizeEvent *event) override;
 
   private:
@@ -98,6 +110,8 @@ class MainWindow : public QWidget
 	Calendar m_calendar;
 
 	ToDoList m_toDoList;
+
+    QVector<QString> m_deckNames;
 
 	bool m_calendarLoaded = false;
 	void saveCalendar();
@@ -119,8 +133,9 @@ class MainWindow : public QWidget
 	void saveOnServer();
 
 	void setupTableView(QTableWidget *table);
-    void addDeckToTable(QString deckNameID, QTableWidget *table);
-    unsigned m_deckCounter = 0;
+    void addDeckToTable(QString deckNameID, QTableWidget *table, int &counter);
+    int m_deckCounter = 0;
     void addCreateDeckButton();
+    void loadStats(DeckStats *deckStats);
 };
 #endif // MAINWINDOW_H

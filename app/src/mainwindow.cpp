@@ -37,7 +37,7 @@ enum Page
 };
 
 MainWindow::MainWindow(QWidget *parent)
-	: QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_toDoList(), m_user(), m_libraryScene()
+    : QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_toDoList(), m_deckNames(), m_user(), m_libraryScene()
 {
 	ui->setupUi(this);
 	ui->stackedWidget->setCurrentIndex(LIBRARY);
@@ -54,15 +54,22 @@ MainWindow::MainWindow(QWidget *parent)
 	ui->graphicsView_saturday->setScene(m_plannerScenes[Day::SATURDAY]);
 	ui->graphicsView_sunday->setScene(m_plannerScenes[Day::SUNDAY]);
 
-	ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
-	ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
-
-	QVector<ScheduleItem *> scheduleItems;
 	for (int i = 0; i < 7; ++i) {
-		scheduleItems.append(new ScheduleItem());
-		scheduleItems[i]->setWidth(ui->graphicsView_monday->width());
-		m_plannerScenes[i]->addItem(scheduleItems[i]);
+        ScheduleItem *scheduleItem = new ScheduleItem();
+        scheduleItem->setWidth(ui->graphicsView_monday->width());
+        m_plannerScenes[i]->addItem(scheduleItem);
 	}
+
+    QApplication* app = qobject_cast<QApplication*>(QApplication::instance());
+    Settings& settings = Settings::instance(app);
+
+    settings.setLanguage(Language::SERBIAN);
+    settings.setTheme(Theme::DARK);
+    ui->retranslateUi(this);
+
+    ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
+    ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
+
 
 	connect(ui->listWidget_todos, &QListWidget::itemChanged, this, &MainWindow::onTodoItemChanged);
 }
@@ -72,7 +79,25 @@ MainWindow::~MainWindow()
 	if (m_loggedIn) {
 		saveOnServer();
 	}
-	delete ui;
+
+    ui->tableWidget_library->clear();
+    ui->tableWidget_browser->clear();
+    ui->listWidget_todos->clear();
+
+    delete ui;
+
+    for (auto scene : m_plannerScenes) {
+        scene->clear();
+        delete scene;
+    }
+
+
+    m_planner.deleteAll();
+    m_libraryScene.clear();
+    m_calendar.deleteAll();
+    m_toDoList.deleteAllToDos();
+
+
 }
 
 void MainWindow::saveOnServer()
@@ -113,7 +138,7 @@ void MainWindow::createDeck_clicked()
 		Privacy privacy = popUp.getDeckPrivacy();
 
 		CreateDeckWindow *createDeck = new CreateDeckWindow(name, privacy, m_user);
-        connect(createDeck, &CreateDeckWindow::writeGeneratedID, this, &MainWindow::readGeneratedID);
+        connect(createDeck, &CreateDeckWindow::writeGeneratedID, this, &MainWindow::addNewDeck);
 		createDeck->setAttribute(Qt::WA_DeleteOnClose);
         createDeck->show();
         setEnabled(false);
@@ -122,10 +147,26 @@ void MainWindow::createDeck_clicked()
 
 void MainWindow::deckPreview_clicked()
 {
-    // TODO load deck
+	QPushButton *chosenDeck = qobject_cast<QPushButton *>(sender());
+	QString deckName = chosenDeck->text();
 
-    // DeckPreviewWindow *preview = new DeckPreviewWindow(deck);
-    DeckPreviewWindow *preview = new DeckPreviewWindow();
+	Deck *deck = new Deck();
+
+	QJsonObject requestObject;
+	requestObject["action"] = "sendDeck";
+	requestObject["username"] = m_user.username();
+	requestObject["DeckId"] = deckName.split('_')[1].split('.')[0];
+	requestObject["Privacy"] = "PUBLIC";
+
+	QJsonDocument request(requestObject);
+	QJsonObject jsonObj = sendRequest(request);
+	JSONSerializer jsonSerializer;
+	QJsonObject deckObject = jsonObj[deckName + "_deck.json"].toObject();
+	QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
+	jsonSerializer.loadJson(*deck, deckDocument);
+
+	DeckPreviewWindow *preview = new DeckPreviewWindow(*deck, m_user);
+    connect(preview, &DeckPreviewWindow::sendPublicDeck, this, &MainWindow::addNewDeck);
     preview->setAttribute(Qt::WA_DeleteOnClose);
     preview->show();
 }
@@ -147,16 +188,12 @@ void MainWindow::deckButton_clicked()
 	QJsonDocument request(requestObject);
 	QJsonObject jsonObj = sendRequest(request);
 
-	qDebug() << jsonObj;
-
-	QString deckNames = jsonObj.value("decks").toString();
 	JSONSerializer jsonSerializer;
 
 	QJsonObject deckObject = jsonObj[deckName].toObject();
 	QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 
 	jsonSerializer.loadJson(*deck, deckDocument);
-	qDebug() << jsonSerializer.createJson(*deck);
 	StudySession *session = new StudySession(m_user, deck);
 	StudySessionWindow *useDeck = new StudySessionWindow(session);
 	useDeck->setAttribute(Qt::WA_DeleteOnClose);
@@ -307,10 +344,10 @@ void MainWindow::on_calendarWidget_activated(const QDate &date)
 	if (!m_calendar.events().contains(date))
 		QMessageBox::information(this, date.toString("dd.MM.yyyy."), "Na izabrani dan nemate nijedan dogadjaj!");
 	else {
-		for (auto event : m_calendar.events()[date]) {
-			message += "\t" + event.first.toString("hh:mm") + " - " + event.second + "\n";
-		}
-		QMessageBox::information(this, date.toString("dd.MM.yyyy."), message);
+        for (const auto &event : m_calendar.events()[date]) {
+            message += "\t" + event.first.toString("hh:mm") + " - " + event.second + "\n";
+        }
+        QMessageBox::information(this, date.toString("dd.MM.yyyy."), message);
 	}
 }
 
@@ -358,8 +395,8 @@ void MainWindow::on_pushButton_addActivity_clicked()
 void MainWindow::showActivities()
 {
 	for (auto day : m_planner.activities().keys()) {
-		for (auto currentActivity : m_planner.activities().value(day)) {
-			QString name = currentActivity.activityText();
+        for (const auto &currentActivity : m_planner.activities().value(day)) {
+            QString name = currentActivity.activityText();
 
 			QTime startTime = currentActivity.start();
 
@@ -379,8 +416,8 @@ void MainWindow::showActivities()
 			activityText->setPos(activityItem->pos().x(),
 								 activityItem->pos().y() + activityTime->boundingRect().height());
 			m_plannerScenes[day]->addItem(activityText);
-		}
-	}
+        }
+    }
 }
 
 void MainWindow::setupTableView(QTableWidget *table)
@@ -461,13 +498,15 @@ void MainWindow::on_pushButton_login_clicked()
 	else {
 		// logout
 		saveOnServer();
-		m_loggedIn = false; // use setter instead?
+        m_loggedIn = false;
 		ui->label_username->setText("Nema korisnika");
 		ui->pushButton_login->setText("Prijavi se");
 		setEnabled(false);
 		ui->tableWidget_library->clear();
-		ui->tableWidget_browser->clear();
+        ui->tableWidget_browser->clear();
+        m_plannerScenes.clear();
 		m_planner.deleteAll();
+        m_libraryScene.clear();
 		m_calendar.deleteAll();
 		m_toDoList.deleteAllToDos();
 		ui->listWidget_todos->clear();
@@ -476,10 +515,14 @@ void MainWindow::on_pushButton_login_clicked()
 		m_calendarLoaded = false;
 		ui->stackedWidget->setCurrentIndex(LIBRARY);
 
+
 		ui->tableWidget_library->setColumnCount(0);
 		ui->tableWidget_browser->setColumnCount(0);
 		setupTableView(ui->tableWidget_library);
 		setupTableView(ui->tableWidget_browser);
+
+        m_deckNames.clear();
+        m_deckCounter = 0;
 	}
 }
 
@@ -544,8 +587,11 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 	if (deckNames != "") {
 		QStringList deckNamesList = deckNames.split(", ");
 		for (auto &deckNameID : deckNamesList) {
-            addDeckToTable(deckNameID, ui->tableWidget_library);
+            addDeckToTable(deckNameID, ui->tableWidget_library, m_deckCounter);
+            auto deckNameSplit = deckNameID.split("_");
+            ui->comboBox_deck->addItem(deckNameSplit[0]);
 
+            m_deckNames.push_back(deckNameID);
 		}
     }
     addCreateDeckButton();
@@ -688,10 +734,9 @@ void MainWindow::on_pushButton_search_clicked()
 	QString deckNames = jsonObj.value("decks").toString();
 	if (deckNames != "") {
 		QStringList deckNamesList = deckNames.split(", ");
-        m_deckCounter = 0;
+        int browserCounter = 0;
         for (auto &deckNameID : deckNamesList) {
-            addDeckToTable(deckNameID, ui->tableWidget_browser);
-
+            addDeckToTable(deckNameID, ui->tableWidget_browser, browserCounter);
         }
     }
     else {
@@ -706,68 +751,131 @@ void MainWindow::on_pushButton_importDecks_clicked()
 
     qDebug() << filePaths;
 
-    // TODO iterate thru list and save each deck on server
+	auto rows = ui->tableWidget_library->rowCount();
+	auto cols = ui->tableWidget_library->columnCount();
+
+	for (auto i = 0; i < rows; i += 2) {
+		for(auto j = 0; j < cols; j++) {
+			auto cell = ui->tableWidget_library->cellWidget(i, j);
+			if (QPushButton *button = dynamic_cast<QPushButton*>(cell)) {
+				for(auto it = filePaths.begin(); it != filePaths.end(); it++){
+					QStringList tempDeckName = (*it).split('/');
+					if(button->text() == *(--tempDeckName.end())){
+						filePaths.removeAt((it - filePaths.begin()));
+						if(filePaths.isEmpty()){
+							QMessageBox::warning(this, "Uvoz špilova", "Unosite špil ili špilove koje već imate!");
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	for(auto it = filePaths.begin(); it != filePaths.end(); it++){
+		QJsonObject request;
+		Deck deck;
+		JSONSerializer serializer;
+		serializer.load(deck, *it);
+
+		request["action"] = "saveDeck";
+		request["username"] = m_user.username();
+		QJsonDocument deckDocument = serializer.createJson(deck);
+		request["deck"] = deckDocument.toVariant().toJsonObject();
+
+		QJsonDocument requestDocument(request);
+		QJsonObject response = sendRequest(requestDocument);
+		QStringList tempDeckName = (*it).split('/');
+        addDeckToTable(*(--tempDeckName.end()),  ui->tableWidget_library, m_deckCounter);
+        addCreateDeckButton();
+	}
+	if(!filePaths.isEmpty()){
+		QMessageBox::information(this, "Uvoz špilova", "Uspešan uvoz!");
+	}
 }
 
 void MainWindow::on_pushButton_exportDecks_clicked()
 {
-    QString selectedDirectory = QFileDialog::getExistingDirectory(
-        nullptr,
-        "Select Directory",
-        QDir::homePath(),
-        QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks
-        );
-    qDebug() << selectedDirectory;
+	QString selectedDirectory = QFileDialog::getExistingDirectory(
+		nullptr,
+		"Select Directory",
+		QDir::homePath(),
+		QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks
+		);
 
-    auto rows = ui->tableWidget_library->rowCount();
-    auto cols = ui->tableWidget_library->columnCount();
+	auto rows = ui->tableWidget_library->rowCount();
+	auto cols = ui->tableWidget_library->columnCount();
 
-    for (auto i = 0; i < rows; i += 2) {
-        for(auto j = 0; j < cols; j++) {
-            auto cell = ui->tableWidget_library->cellWidget(i, j);
-            if (QPushButton *button = dynamic_cast<QPushButton*>(cell)) {
-                if(!button->children().isEmpty()) {
-                    QCheckBox *checkbox = dynamic_cast<QCheckBox*>(ui->tableWidget_library->cellWidget(i, j)->children().front());
-                    if (checkbox->isChecked()) {
-                        // TODO save deck
-                        qDebug() << button->text();
-                    }
-                }
-            }
-        }
-    }
+	for (auto i = 0; i < rows; i += 2) {
+		for(auto j = 0; j < cols; j++) {
+			auto cell = ui->tableWidget_library->cellWidget(i, j);
+			if (QPushButton *button = dynamic_cast<QPushButton*>(cell)) {
+				if(!button->children().isEmpty()) {
+					QCheckBox *checkbox = dynamic_cast<QCheckBox*>(ui->tableWidget_library->cellWidget(i, j)->children().front());
+					if (checkbox->isChecked()) {
 
+						QString deckName = button->text();
+						Deck *deck = new Deck();
+
+						QJsonObject requestObject;
+						requestObject["action"] = "sendDeck";
+						requestObject["username"] = m_user.username();
+						requestObject["DeckId"] = deckName.split('_')[1].split('.')[0];
+						requestObject["Privacy"] = "PRIVATE";
+
+						QJsonDocument request(requestObject);
+						QJsonObject jsonObj = sendRequest(request);
+
+						JSONSerializer jsonSerializer;
+
+						QJsonObject deckObject = jsonObj[deckName].toObject();
+						QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
+						jsonSerializer.loadJson(*deck, deckDocument);
+						jsonSerializer.save(*deck, selectedDirectory+"/"+deckName);
+
+						checkbox->setCheckState(Qt::Unchecked);
+					}
+				}
+			}
+		}
+	}
+	QMessageBox::information(this, "Izvoz špilova", "Uspešan izvoz!");
 }
 
-void MainWindow::readGeneratedID(QString deckNameID)
+void MainWindow::addNewDeck(QString deckNameID)
 {
-    addDeckToTable(deckNameID, ui->tableWidget_library);
+    addDeckToTable(deckNameID, ui->tableWidget_library, m_deckCounter);
     addCreateDeckButton();
+    ui->comboBox_deck->addItem(deckNameID.split("_")[0]);
+    m_deckNames.push_back(deckNameID);
 }
 
-void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table)
+void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table, int &counter)
 {
-    QPushButton *button = new QPushButton(deckNameID);
-    connect(button, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
+    QPushButton *button = new QPushButton((deckNameID));
     button->setStyleSheet("color: transparent; margin-left: 25%;");
 
     if (table == ui->tableWidget_library) {
+        connect(button, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
         QCheckBox *checkbox = new QCheckBox(button);
         checkbox->setStyleSheet("padding: 5%");
     }
+    else
+        connect(button, &QPushButton::clicked, this, &MainWindow::deckPreview_clicked);
+
 
     QLabel *label = new QLabel(deckNameID.split("_")[0], table);
     label->setAlignment(Qt::AlignCenter);
     label->setStyleSheet("text-align: center; margin-left: 25%");
 
-    if (m_deckCounter % 2 == 0) {
+    if (counter % 2 == 0) {
         table->setColumnCount(table->columnCount() + 1);
-        table->setColumnWidth(m_deckCounter / 2, 220); // hardcoded
+        table->setColumnWidth(counter / 2, 220); // hardcoded
     }
 
-    table->setCellWidget(m_deckCounter % 2 * 2, m_deckCounter / 2, button);
-    table->setCellWidget(m_deckCounter % 2 * 2 + 1, m_deckCounter / 2, label);
-    m_deckCounter++;
+    table->setCellWidget(counter % 2 * 2, counter / 2, button);
+    table->setCellWidget(counter % 2 * 2 + 1, counter / 2, label);
+    counter++;
 }
 
 void MainWindow::addCreateDeckButton()
@@ -780,4 +888,78 @@ void MainWindow::addCreateDeckButton()
         ui->tableWidget_library->setColumnWidth(m_deckCounter / 2, 220); // hardcoded
     }
     ui->tableWidget_library->setCellWidget(m_deckCounter % 2 * 2, m_deckCounter / 2, button);
+}
+
+void MainWindow::on_comboBox_deck_currentIndexChanged(int index)
+{
+    if (index >= m_deckNames.size())
+        return;
+
+    QTcpSocket socket;
+    socket.connectToHost("127.0.0.1", 8080);
+
+    if (socket.waitForConnected()) {
+        QJsonObject request;
+
+        request["action"] = "getStats";
+        request["username"] = m_user.username();
+        request["DeckId"] = m_deckNames[index].split("_")[1];
+
+        socket.write(QJsonDocument(request).toJson());
+        socket.waitForBytesWritten();
+        socket.waitForReadyRead();
+        QByteArray statsResponse = socket.readAll();
+        QTextStream statsStream(statsResponse);
+
+        QString statsResponseString = statsStream.readAll();
+        QJsonDocument statsJson = QJsonDocument::fromJson(statsResponseString.toUtf8());
+        QJsonObject statsObject = statsJson.object();
+
+        socket.disconnectFromHost();
+
+        if(statsObject["status"].toString() != "no stats"){
+            JSONSerializer jsonSerializer;
+            auto deckStats = new DeckStats();
+            jsonSerializer.loadJson(*deckStats, statsJson);
+
+            loadStats(deckStats);
+        }
+    }
+    else {
+        qDebug() << "Failed to connect to the server";
+    }
+}
+
+void MainWindow::loadStats(DeckStats *deckStats)
+{
+    ui->number_timesUsed->display(static_cast<int>(deckStats->timesUsed()));
+    ui->number_deckSize->display(static_cast<int>(deckStats->grades().size()));
+
+    ui->progressBar_skip->setRange(0, deckStats->grades().size());
+    ui->progressBar_bad->setRange(0, deckStats->grades().size());
+    ui->progressBar_good->setRange(0, deckStats->grades().size());
+    ui->progressBar_excellent->setRange(0, deckStats->grades().size());
+
+    ui->progressBar_skip->setValue(std::count(deckStats->grades().cbegin(), deckStats->grades().cend(), 0));
+    ui->progressBar_bad->setValue(std::count(deckStats->grades().cbegin(), deckStats->grades().cend(), 1));
+    ui->progressBar_good->setValue(std::count(deckStats->grades().cbegin(), deckStats->grades().cend(), 2));
+    ui->progressBar_excellent->setValue(std::count(deckStats->grades().cbegin(), deckStats->grades().cend(), 3));
+}
+
+void MainWindow::on_comboBox_language_currentIndexChanged(int index)
+{
+    QApplication* app = qobject_cast<QApplication*>(QApplication::instance());
+    Settings& settings = Settings::instance(app);
+
+    settings.setLanguage(index);
+    ui->retranslateUi(this);
+}
+
+void MainWindow::on_comboBox_theme_currentIndexChanged(int index)
+{
+    QApplication* app = qobject_cast<QApplication*>(QApplication::instance());
+    Settings& settings = Settings::instance(app);
+
+    settings.setTheme(index);
+    ui->retranslateUi(this);
 }

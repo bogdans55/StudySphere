@@ -3,6 +3,7 @@ QT       += core gui network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
+QMAKE_CXXFLAGS += -g
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -39,7 +40,8 @@ SOURCES += \
     src/user.cpp \
     src/settings.cpp \
     src/mainwindow.cpp \
-    src/whiteboardwindow.cpp
+    src/whiteboardwindow.cpp \
+    tests/test.cpp
 
 HEADERS += \
     lib/deckpreviewwindow.h \
@@ -73,7 +75,8 @@ HEADERS += \
     lib/plannerscene.h \
     lib/scheduleitem.h \
     lib/logindialog.h \
-    lib/whiteboardwindow.h
+    lib/whiteboardwindow.h \
+    tests/catch.hpp
 
 FORMS += \
     forms/deckpreviewwindow.ui \
@@ -85,7 +88,9 @@ FORMS += \
     forms/whiteboardwindow.ui
 
 RESOURCES += \
-    res/icons.qrc
+    res/icons.qrc \
+    res/themes.qrc \
+    res/translations.qrc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

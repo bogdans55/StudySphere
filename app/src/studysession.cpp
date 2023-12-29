@@ -20,7 +20,11 @@ StudySession::StudySession(const StudySession &session)
     m_timeEnded(session.m_timeEnded), m_answerShowed(session.m_answerShowed)
 {}
 
-StudySession::~StudySession() {}
+StudySession::~StudySession()
+{
+    delete m_deck;
+    delete m_deckStats;
+}
 
 void StudySession::startSession()
 {
@@ -60,9 +64,6 @@ void StudySession::startSession()
 	else {
 		qDebug() << "Failed to connect to the server";
 	}
-	JSONSerializer jsonSerializer;
-	qDebug() << jsonSerializer.createJson(*m_deck);
-	qDebug() << m_deck->cards().length();
 
 	this->chooseCardSequence(m_deck->cards().length());
 }
@@ -70,6 +71,7 @@ void StudySession::startSession()
 void StudySession::endSession()
 {
 	m_timeEnded = time(NULL);
+    m_deckStats->usedDeck();
 }
 
 void StudySession::chooseCardSequence(unsigned numCards)
