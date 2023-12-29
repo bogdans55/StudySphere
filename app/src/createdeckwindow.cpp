@@ -78,31 +78,19 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
 
 void CreateDeckWindow::generateId()
 {
-	QTcpSocket socket;
-	socket.connectToHost("127.0.0.1", 8080);
+		QJsonObject requestObject;
 
-	if (socket.waitForConnected()) {
-		QJsonObject request;
+		requestObject["action"] = "generateId";
 
-		request["action"] = "generateId";
-		socket.write(QJsonDocument(request).toJson());
-		socket.waitForBytesWritten();
-		socket.waitForReadyRead();
-		QByteArray idResponse = socket.readAll();
-		QTextStream idStream(idResponse);
+		ServerCommunicator communicator;
+		QJsonDocument request(requestObject);
 
-		QString idResponseString = idStream.readAll();
-		QJsonDocument idJson = QJsonDocument::fromJson(idResponseString.toUtf8());
-		QJsonObject idObject = idJson.object();
+		QJsonObject idObject = communicator.sendRequest(request);
+
 		m_deck.setId(idObject.value("DeckId").toVariant().toULongLong());
-		socket.disconnectFromHost();
 
         emit writeGeneratedID(m_deck.name() + "_" + QString::number(m_deck.deckId()) + "_deck.json");
         qDebug() << "send " << m_deck.name() + "_" + QString::number(m_deck.deckId());
-	}
-	else {
-		qDebug() << "Failed to connect to the server";
-	}
 }
 
 void CreateDeckWindow::on_pushButton_add_clicked()
