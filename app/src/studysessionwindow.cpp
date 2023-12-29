@@ -21,6 +21,7 @@ StudySessionWindow::StudySessionWindow(StudySession *session, QWidget *parent)
 	ui->setupUi(this);
 	m_session->startSession();
 	ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
+    connect(this, &StudySessionWindow::destroyed, this, &StudySessionWindow::closeWhiteboard);
 }
 
 StudySessionWindow::~StudySessionWindow()
@@ -88,7 +89,11 @@ void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
         else {
             qDebug() << "Failed to connect to the server";
         }
-
+        if (m_whiteboard != nullptr) {
+            m_whiteboard->close();
+            delete m_whiteboard;
+            m_whiteboard = nullptr;
+        }
         close();
     }
 }
@@ -112,3 +117,27 @@ void StudySessionWindow::on_pushButton_good_clicked()
 {
 	evaluate(3);
 }
+
+
+void StudySessionWindow::on_pushButton_whiteboard_clicked()
+{
+    m_whiteboard = new WhiteboardWindow();
+    connect(m_whiteboard, &WhiteboardWindow::destroyed, this, &StudySessionWindow::clearWhiteboard);
+    m_whiteboard->setAttribute(Qt::WA_DeleteOnClose);
+    m_whiteboard->show();
+}
+
+void StudySessionWindow::closeWhiteboard()
+{
+    if (m_whiteboard != nullptr) {
+        m_whiteboard->close();
+    }
+}
+
+void StudySessionWindow::clearWhiteboard()
+{
+    if (m_whiteboard != nullptr) {
+        m_whiteboard = nullptr;
+    }
+}
+

@@ -4,6 +4,7 @@
 #include <QWidget>
 
 #include "lib/studysession.h"
+#include "lib/whiteboardwindow.h"
 
 namespace Ui
 {
@@ -34,9 +35,18 @@ class StudySessionWindow : public QWidget
 
 	void on_pushButton_good_clicked();
 
-  private:
+    void on_pushButton_whiteboard_clicked();
+
+public slots:
+    void closeWhiteboard();
+
+    void clearWhiteboard();
+
+private:
 	Ui::StudySessionWindow *ui;
 	StudySession *m_session;
+
+    WhiteboardWindow *m_whiteboard = nullptr;
 };
 
 #endif // STUDYSESSIONWINDOW_H
