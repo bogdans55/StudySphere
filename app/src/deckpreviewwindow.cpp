@@ -1,4 +1,5 @@
 #include "lib/deckpreviewwindow.h"
+#include "qmessagebox.h"
 #include "ui_deckpreviewwindow.h"
 
 DeckPreviewWindow::DeckPreviewWindow(QWidget *parent) :
@@ -51,8 +52,14 @@ void DeckPreviewWindow::on_pushButton_add_clicked()
 
 void DeckPreviewWindow::on_pushButton_next_clicked()
 {
-	m_currentCardIndex++;
-	m_answerShowed = false;
+	if(hasNextCard()){
+		m_currentCardIndex++;
+		ui->textEdit_card_preview->setText(m_deck.cards()[m_currentCardIndex]->questionText());
+		m_answerShowed = false;
+	}
+	else{
+		QMessageBox::information(this, "Pregled špila", "Špil nema više kartica!");
+	}
 }
 
 bool DeckPreviewWindow::hasNextCard()

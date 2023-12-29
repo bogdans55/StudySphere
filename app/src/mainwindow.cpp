@@ -121,10 +121,25 @@ void MainWindow::createDeck_clicked()
 
 void MainWindow::deckPreview_clicked()
 {
-    // TODO load deck
+	QPushButton *chosenDeck = qobject_cast<QPushButton *>(sender());
+	QString deckName = chosenDeck->text();
 
-    // DeckPreviewWindow *preview = new DeckPreviewWindow(deck);
-    DeckPreviewWindow *preview = new DeckPreviewWindow();
+	Deck *deck = new Deck();
+
+	QJsonObject requestObject;
+	requestObject["action"] = "sendDeck";
+	requestObject["username"] = m_user.username();
+	requestObject["DeckId"] = deckName.split('_')[1].split('.')[0];
+	requestObject["Privacy"] = "PUBLIC";
+
+	QJsonDocument request(requestObject);
+	QJsonObject jsonObj = sendRequest(request);
+	JSONSerializer jsonSerializer;
+	QJsonObject deckObject = jsonObj[deckName + "_deck.json"].toObject();
+	QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
+	jsonSerializer.loadJson(*deck, deckDocument);
+
+	DeckPreviewWindow *preview = new DeckPreviewWindow(*deck, m_user);
     preview->setAttribute(Qt::WA_DeleteOnClose);
     preview->show();
 }
@@ -146,7 +161,6 @@ void MainWindow::deckButton_clicked()
 	QJsonDocument request(requestObject);
 	QJsonObject jsonObj = sendRequest(request);
 
-	QString deckNames = jsonObj.value("decks").toString();
 	JSONSerializer jsonSerializer;
 
 	QJsonObject deckObject = jsonObj[deckName].toObject();
