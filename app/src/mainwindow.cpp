@@ -715,7 +715,6 @@ void MainWindow::on_pushButton_exportDecks_clicked()
         QDir::homePath(),
         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks
         );
-    qDebug() << selectedDirectory;
 
     auto rows = ui->tableWidget_library->rowCount();
     auto cols = ui->tableWidget_library->columnCount();
@@ -727,14 +726,33 @@ void MainWindow::on_pushButton_exportDecks_clicked()
                 if(!button->children().isEmpty()) {
                     QCheckBox *checkbox = dynamic_cast<QCheckBox*>(ui->tableWidget_library->cellWidget(i, j)->children().front());
                     if (checkbox->isChecked()) {
-                        // TODO save deck
-                        qDebug() << button->text();
+
+						QString deckName = button->text();
+						Deck *deck = new Deck();
+
+						QJsonObject requestObject;
+						requestObject["action"] = "sendDeck";
+						requestObject["username"] = m_user.username();
+						requestObject["DeckId"] = deckName.split('_')[1].split('.')[0];
+						requestObject["Privacy"] = "PRIVATE";
+
+						QJsonDocument request(requestObject);
+						QJsonObject jsonObj = sendRequest(request);
+
+						JSONSerializer jsonSerializer;
+
+						QJsonObject deckObject = jsonObj[deckName].toObject();
+						QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
+						jsonSerializer.loadJson(*deck, deckDocument);
+						jsonSerializer.save(*deck, selectedDirectory+"/"+deckName);
+
+						checkbox->setCheckState(Qt::Unchecked);
                     }
                 }
             }
         }
     }
-
+	QMessageBox::information(this, "Izvoz špilova", "Uspešno ste izvezli špilove!");
 }
 
 void MainWindow::readGeneratedID(QString deckNameID)
