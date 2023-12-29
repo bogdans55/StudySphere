@@ -512,7 +512,7 @@ void MainWindow::on_pushButton_login_clicked()
 		setEnabled(false);
 		ui->tableWidget_library->clear();
 		ui->tableWidget_browser->clear();
-		m_plannerScenes.clear();
+		// m_plannerScenes.clear();
 		m_planner.deleteAll();
 		m_libraryScene.clear();
 		m_calendar.deleteAll();
@@ -880,26 +880,26 @@ void MainWindow::on_comboBox_deck_currentIndexChanged(int index)
 {
 	if (index >= m_deckNames.size())
 		return;
-		QJsonObject requestObject;
 
-		requestObject["action"] = "getStats";
-		requestObject["username"] = m_user.username();
-		requestObject["DeckId"] = m_deckNames[index].split("_")[1];
+	QJsonObject requestObject;
+
+	requestObject["action"] = "getStats";
+	requestObject["username"] = m_user.username();
+	requestObject["DeckId"] = m_deckNames[index].split("_")[1];
 
 
-		QJsonDocument request(requestObject);
-		ServerCommunicator communicator;
-		QJsonObject statsObject = communicator.sendRequest(request);
-		QJsonDocument statsDocument = QJsonDocument::fromVariant(statsObject.toVariantMap());
+	QJsonDocument request(requestObject);
+	ServerCommunicator communicator;
+	QJsonObject statsObject = communicator.sendRequest(request);
+	QJsonDocument statsDocument = QJsonDocument::fromVariant(statsObject.toVariantMap());
+	JSONSerializer jsonSerializer;
+
+
+	if(statsObject["status"].toString() != "no stats"){
 		JSONSerializer jsonSerializer;
-
-
-		if(statsObject["status"].toString() != "no stats"){
-			JSONSerializer jsonSerializer;
-			auto deckStats = new DeckStats();
-			jsonSerializer.loadJson(*deckStats, statsDocument);
-			loadStats(deckStats);
-		}
+		auto deckStats = new DeckStats();
+		jsonSerializer.loadJson(*deckStats, statsDocument);
+		loadStats(deckStats);
 	}
 }
 
