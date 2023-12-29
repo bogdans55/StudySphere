@@ -51,15 +51,21 @@ MainWindow::MainWindow(QWidget *parent)
 	ui->graphicsView_saturday->setScene(m_plannerScenes[Day::SATURDAY]);
 	ui->graphicsView_sunday->setScene(m_plannerScenes[Day::SUNDAY]);
 
-	ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
-	ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
+    QVector<ScheduleItem*> scheduleItems;
+    for (int i = 0; i < 7; ++i) {
+        scheduleItems.append(new ScheduleItem());
+        scheduleItems[i]->setWidth(ui->graphicsView_monday->width());
+        m_plannerScenes[i]->addItem(scheduleItems[i]);
+    }
 
-	QVector<ScheduleItem *> scheduleItems;
-	for (int i = 0; i < 7; ++i) {
-		scheduleItems.append(new ScheduleItem());
-		scheduleItems[i]->setWidth(ui->graphicsView_monday->width());
-		m_plannerScenes[i]->addItem(scheduleItems[i]);
-	}
+    QApplication* app = qobject_cast<QApplication*>(QApplication::instance());
+    Settings& settings = Settings::instance(app);
+
+    settings.setLanguage(Language::SERBIAN);
+    settings.setTheme(Theme::DARK);
+    ui->retranslateUi(this);
+    ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
+    ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
 
     connect(ui->listWidget_todos, &QListWidget::itemChanged, this, &MainWindow::onTodoItemChanged);
 }
@@ -99,6 +105,7 @@ void MainWindow::savePlanner(){
 	QJsonObject jsonObj = sendRequest(request);
 }
 
+
 void MainWindow::on_pushButton_createDeck_clicked()
 {
 	CreateDeckDialog popUp(this);
@@ -106,10 +113,11 @@ void MainWindow::on_pushButton_createDeck_clicked()
 		QString name = popUp.getDeckName();
 		Privacy privacy = popUp.getDeckPrivacy();
 
-		CreateDeckWindow *createDeck = new CreateDeckWindow(name, privacy, m_user);
-		createDeck->setAttribute(Qt::WA_DeleteOnClose);
-		createDeck->show();
-	}
+        CreateDeckWindow *createDeck = new CreateDeckWindow(name, privacy, m_user);
+        createDeck->setAttribute(Qt::WA_DeleteOnClose);
+        createDeck->show();
+
+    }
 }
 
 // void MainWindow::on_pushButton_startStudySession_clicked()
@@ -633,4 +641,22 @@ void MainWindow::saveToDoList(){
 		QJsonObject jsonObj = sendRequest(request);
 
 		qDebug() << jsonObj;
+}
+
+void MainWindow::on_comboBox_language_currentIndexChanged(int index)
+{
+    QApplication* app = qobject_cast<QApplication*>(QApplication::instance());
+    Settings& settings = Settings::instance(app);
+
+    settings.setLanguage(index);
+    ui->retranslateUi(this);
+}
+
+void MainWindow::on_comboBox_theme_currentIndexChanged(int index)
+{
+    QApplication* app = qobject_cast<QApplication*>(QApplication::instance());
+    Settings& settings = Settings::instance(app);
+
+    settings.setTheme(index);
+    ui->retranslateUi(this);
 }

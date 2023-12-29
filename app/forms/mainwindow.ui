@@ -890,12 +890,12 @@
           </property>
           <item>
            <property name="text">
-            <string>Svetla</string>
+            <string>Tamna</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Tamna</string>
+            <string>Svetla</string>
            </property>
           </item>
          </widget>
