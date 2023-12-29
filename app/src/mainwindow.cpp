@@ -541,7 +541,8 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 		QStringList deckNamesList = deckNames.split(", ");
 		for (auto &deckNameID : deckNamesList) {
             addDeckToTable(deckNameID, ui->tableWidget_library);
-
+            auto deckNameSplit = deckNameID.split("_");
+            ui->comboBox_deck->addItem(deckNameSplit[0] + "_" + deckNameSplit[1]);
 		}
     }
     addCreateDeckButton();
@@ -687,7 +688,6 @@ void MainWindow::on_pushButton_search_clicked()
         m_deckCounter = 0;
         for (auto &deckNameID : deckNamesList) {
             addDeckToTable(deckNameID, ui->tableWidget_browser);
-
         }
     }
     else {
@@ -739,18 +739,24 @@ void MainWindow::readGeneratedID(QString deckNameID)
 {
     addDeckToTable(deckNameID, ui->tableWidget_library);
     addCreateDeckButton();
+    ui->comboBox_deck->addItem(deckNameID.split("_")[0]);
 }
 
 void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table)
 {
-    QPushButton *button = new QPushButton(deckNameID);
-    connect(button, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
+    qDebug() << deckNameID;
+    QPushButton *button = new QPushButton((deckNameID));
     button->setStyleSheet("color: transparent; margin-left: 25%;");
+    qDebug() << button->text();
 
     if (table == ui->tableWidget_library) {
+        connect(button, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
         QCheckBox *checkbox = new QCheckBox(button);
         checkbox->setStyleSheet("padding: 5%");
     }
+    else
+        connect(button, &QPushButton::clicked, this, &MainWindow::deckPreview_clicked);
+
 
     QLabel *label = new QLabel(deckNameID.split("_")[0], table);
     label->setAlignment(Qt::AlignCenter);
@@ -764,6 +770,7 @@ void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table)
     table->setCellWidget(m_deckCounter % 2 * 2, m_deckCounter / 2, button);
     table->setCellWidget(m_deckCounter % 2 * 2 + 1, m_deckCounter / 2, label);
     m_deckCounter++;
+
 }
 
 void MainWindow::addCreateDeckButton()
@@ -777,3 +784,13 @@ void MainWindow::addCreateDeckButton()
     }
     ui->tableWidget_library->setCellWidget(m_deckCounter % 2 * 2, m_deckCounter / 2, button);
 }
+
+void MainWindow::on_comboBox_deck_currentIndexChanged(int index)
+{
+    Q_UNUSED(index);
+
+    qDebug() << ui->comboBox_deck->currentText();
+
+    // TODO read stats from current deck and add them to ui elements
+}
+

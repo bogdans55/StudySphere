@@ -86,7 +86,9 @@ class MainWindow : public QWidget
 
     void readGeneratedID(QString deckNameID);
 
-  protected:
+    void on_comboBox_deck_currentIndexChanged(int index);
+
+protected:
 	void resizeEvent(QResizeEvent *event) override;
 
   private:
