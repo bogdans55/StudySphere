@@ -26,31 +26,23 @@ class CreateDeckWindow : public QWidget
 
 	QString getQuestionText() const;
 	QString getAnswerText() const;
-	Difficulty getDifficulty() const;
+    Difficulty getDifficulty() const;
 
   private slots:
 	void on_pushButton_finish_clicked();
 
 	void on_pushButton_add_clicked();
 
-	void on_pushButton_addQuestionImage_clicked();
-
-	void on_pushButton_addAnswerImage_clicked();
-
-  protected:
-	void resizeEvent(QResizeEvent *event) override;
+signals:
+    void writeGeneratedID(QString deckNameID);
 
   private:
 	Ui::CreateDeckWindow *ui;
 	Deck m_deck;
 	QButtonGroup *m_questionDifficulty;
-	User &m_user;
+    User &m_user;
 
-	QPixmap m_questionImage;
-	QPixmap m_answerImage;
-
-	void generateId();
-	void loadPicture(QLabel *label, QPixmap &image);
+    void generateId();
 };
 
 #endif // CREATEDECKWINDOW_H

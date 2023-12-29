@@ -9,12 +9,13 @@
 #include "settings.h"
 #include "user.h"
 
-#include <QWidget>
 #include <QListWidgetItem>
+#include <QWidget>
 
-#include <QDir>
 #include <QCoreApplication>
+#include <QDir>
 #include <QStandardPaths>
+#include <QTableWidget>
 
 #include "lib/settings.h"
 
@@ -42,11 +43,15 @@ class MainWindow : public QWidget
 	void setEnabled(bool value);
 
   private slots:
-	void on_pushButton_createDeck_clicked();
+	//	void on_pushButton_createDeck_clicked();
 
 	//	void on_pushButton_startStudySession_clicked();
 
 	void deckButton_clicked();
+
+	void createDeck_clicked();
+
+    void deckPreview_clicked();
 
 	void on_pushButton_library_clicked();
 
@@ -76,15 +81,24 @@ class MainWindow : public QWidget
 
 	void on_pushButton_addTodo_clicked();
 
-    void on_pushButton_deleteTodo_clicked();
+	void on_pushButton_deleteTodo_clicked();
 
-    void on_pushButton_deleteAllTodos_clicked();
+	void on_pushButton_deleteAllTodos_clicked();
 
-    void onTodoItemChanged(QListWidgetItem* item);
+	void onTodoItemChanged(QListWidgetItem *item);
 
-  protected:
-    void resizeEvent(QResizeEvent *event) override;
+	void on_pushButton_search_clicked();
 
+	void on_pushButton_importDecks_clicked();
+
+    void on_pushButton_exportDecks_clicked();
+
+    void addNewDeck(QString deckNameID);
+
+    void on_comboBox_deck_currentIndexChanged(int index);
+
+protected:
+	void resizeEvent(QResizeEvent *event) override;
 
   private:
 	Ui::MainWindow *ui;
@@ -94,27 +108,30 @@ class MainWindow : public QWidget
 
 	Calendar m_calendar;
 
-    ToDoList m_toDoList;
+	ToDoList m_toDoList;
 
 	bool m_calendarLoaded = false;
 	void saveCalendar();
 	void refreshCalendar();
 
-    bool registerUser(const QString& username, const QString& password);
-    bool loginUser(const QString& username, const QString& password);
+	bool registerUser(const QString &username, const QString &password);
+	bool loginUser(const QString &username, const QString &password);
 	QJsonObject sendRequest(QJsonDocument &request);
 
 	bool m_loggedIn = false;
-    bool m_plannerLoaded = false;
+	bool m_plannerLoaded = false;
 	bool m_todoLoaded = false;
 	User m_user;
 	LibraryScene m_libraryScene;
 
-    void savePlanner();
-    void showActivities();
-    void saveToDoList();
-    void saveOnServer();
+	void savePlanner();
+	void showActivities();
+	void saveToDoList();
+	void saveOnServer();
 
-	void setupTableView();
+	void setupTableView(QTableWidget *table);
+    void addDeckToTable(QString deckNameID, QTableWidget *table, int &counter);
+    int m_deckCounter = 0;
+    void addCreateDeckButton();
 };
 #endif // MAINWINDOW_H

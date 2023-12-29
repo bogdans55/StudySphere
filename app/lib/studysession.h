@@ -9,17 +9,19 @@
 #include "lib/card.h"
 #include "lib/deck.h"
 #include "lib/user.h"
+#include "lib/deckstats.h"
 
 class StudySession
 {
   private:
 	User m_user;
 	Deck *m_deck;
-	unsigned m_currentCardIndex;
 	time_t m_timeStarted;
 	time_t m_timeEnded;
 	QVector<unsigned> m_cardSequence;
+	unsigned m_currentCardIndex;
 	bool m_answerShowed = false;
+    DeckStats *m_deckStats;
 
   public:
 	StudySession();
@@ -41,9 +43,11 @@ class StudySession
 
 	inline bool answerShowed() { return m_answerShowed; }
 
+    inline DeckStats* deckStats() { return m_deckStats; }
+
 	void startSession();
 	void endSession();
-	void chooseCardSequence(unsigned num_cards);
+    void chooseCardSequence(unsigned numCards);
 	void nextCard();
 	Card getCurrentCard();
 	void saveStatus();

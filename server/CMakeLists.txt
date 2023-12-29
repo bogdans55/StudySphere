@@ -16,6 +16,7 @@ add_executable(server
   main.cpp
   myServer.h
   myServer.cpp
+  Privacy.h
 )
 
 find_package(Qt6 REQUIRED COMPONENTS Network)

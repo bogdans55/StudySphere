@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>StudySessionWindow</class>
- <widget class="QWidget" name="StudySessionWindow">
+ <class>DeckPreviewWindow</class>
+ <widget class="QWidget" name="DeckPreviewWindow">
   <property name="windowModality">
    <enum>Qt::ApplicationModal</enum>
   </property>
@@ -14,17 +14,17 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>StudySphere - StudySession</string>
+   <string>Form</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../res/icons.qrc">
     <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_card">
+    <layout class="QHBoxLayout" name="horizontalLayout_card_2">
      <item>
-      <spacer name="horizontalSpacer">
+      <spacer name="horizontalSpacer_3">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -37,9 +37,9 @@
       </spacer>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_card">
+      <layout class="QVBoxLayout" name="verticalLayout_card_2">
        <item>
-        <widget class="QLabel" name="label_card">
+        <widget class="QLabel" name="label_card_preview">
          <property name="text">
           <string>Pitanje</string>
          </property>
@@ -49,14 +49,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QTextEdit" name="textEdit_card">
+        <widget class="QTextEdit" name="textEdit_card_preview">
          <property name="readOnly">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_flip">
+        <widget class="QPushButton" name="pushButton_flip_preview">
          <property name="text">
           <string>Okreni karticu</string>
          </property>
@@ -65,7 +65,7 @@
       </layout>
      </item>
      <item>
-      <spacer name="horizontalSpacer_2">
+      <spacer name="horizontalSpacer_4">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -80,32 +80,38 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_grade">
+    <layout class="QHBoxLayout" name="horizontalLayout_grade_2">
      <item>
-      <widget class="QPushButton" name="pushButton_skip">
+      <widget class="QPushButton" name="pushButton_cancel">
        <property name="text">
-        <string>Ne znam</string>
+        <string>Otkaži</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_bad">
+      <widget class="QPushButton" name="pushButton_add">
        <property name="text">
-        <string>Loše</string>
+        <string>Sačuvaj u moje špilove</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_mid">
-       <property name="text">
-        <string>Srednje</string>
+      <spacer name="horizontalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
-      </widget>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_good">
+      <widget class="QPushButton" name="pushButton_next">
        <property name="text">
-        <string>Odlično</string>
+        <string>Sledeća kartica</string>
        </property>
       </widget>
      </item>

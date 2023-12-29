@@ -84,3 +84,8 @@ void Planner::fromVariant(const QVariant &variant)
 		m_activities.insert(day, activities);
 	}
 }
+
+void Planner::deleteAll()
+{
+	m_activities.clear();
+}

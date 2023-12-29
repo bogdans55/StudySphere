@@ -2,28 +2,35 @@
 #define DECKSTATS_H
 
 #include <QDate>
+#include <QMap>
+#include "user.h"
+#include "card.h"
+#include "deck.h"
 
-class DeckStats
+class DeckStats : public Serializable
 {
   private:
-	double m_profficiency;
-	unsigned m_timesUsed;
-	QDate m_creationDate;
+    QVector <unsigned> m_grades;
+    unsigned m_timesUsed;
+    QString m_creationDate;
 
   public:
-	DeckStats();
-
+    DeckStats();
+	DeckStats(unsigned numGrades);
+    DeckStats(const DeckStats &deckStats);
 	~DeckStats() {}
 
-	inline double profficiency() const { return m_profficiency; }
+    inline QVector <unsigned> grades() {return m_grades;}
 
 	inline unsigned int timesUsed() const { return m_timesUsed; }
 
-	inline QDate creationDate() const { return m_creationDate; }
+    inline QString creationDate() const { return m_creationDate; }
 
-	//    TODO
-	//    void calculate();
-	//    void update();
+    void addGrade(unsigned cardIndex, unsigned grade);
+    void usedDeck();
+
+    QVariant toVariant() const override;
+    void fromVariant(const QVariant &variant) override;
 };
 
 #endif // DECKSTATS_H

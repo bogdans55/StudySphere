@@ -2,8 +2,9 @@
 #define USER_H
 
 #include <QString>
+#include "lib/serializable.h"
 
-class User
+class User : public Serializable
 {
   private:
 	QString m_username;
@@ -16,6 +17,9 @@ class User
 	inline QString username() const { return m_username; }
 
 	void setUsername(const QString &newUsername);
+
+    QVariant toVariant() const override;
+    void fromVariant(const QVariant &variant) override;
 };
 
 #endif // USER_H

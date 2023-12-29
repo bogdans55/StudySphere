@@ -16,21 +16,18 @@ CreateDeckWindow::CreateDeckWindow(User &user, QWidget *parent)
 }
 
 CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, User &user, QWidget *parent)
-	: QWidget(parent), ui(new Ui::CreateDeckWindow), m_deck(name, privacy), m_user(user)
+    : QWidget(parent), ui(new Ui::CreateDeckWindow), m_deck(name, user, privacy), m_user(user)
 {
 	ui->setupUi(this);
 
-	ui->label_questionImage->setVisible(false);
-	ui->label_answerImage->setVisible(false);
+	m_questionDifficulty = new QButtonGroup(this);
+	m_questionDifficulty->addButton(ui->radioButton_easy, Difficulty::EASY);
+	m_questionDifficulty->addButton(ui->radioButton_medium, Difficulty::MEDIUM);
+	m_questionDifficulty->addButton(ui->radioButton_hard, Difficulty::HARD);
 
-    m_questionDifficulty = new QButtonGroup(this);
-    m_questionDifficulty->addButton(ui->radioButton_easy, Difficulty::EASY);
-    m_questionDifficulty->addButton(ui->radioButton_medium, Difficulty::MEDIUM);
-    m_questionDifficulty->addButton(ui->radioButton_hard, Difficulty::HARD);
-
-    m_questionDifficulty->setExclusive(false);
-    m_questionDifficulty->checkedButton()->setChecked(false);
-    m_questionDifficulty->setExclusive(true);
+	m_questionDifficulty->setExclusive(false);
+	m_questionDifficulty->checkedButton()->setChecked(false);
+	m_questionDifficulty->setExclusive(true);
 }
 
 CreateDeckWindow::~CreateDeckWindow()
@@ -50,7 +47,7 @@ QString CreateDeckWindow::getAnswerText() const
 
 Difficulty CreateDeckWindow::getDifficulty() const
 {
-	return (Difficulty)m_questionDifficulty->checkedId();
+    return (Difficulty)m_questionDifficulty->checkedId();
 }
 
 void CreateDeckWindow::on_pushButton_finish_clicked()
@@ -102,7 +99,7 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
 }
 
 void CreateDeckWindow::generateId()
-{	
+{
 	QTcpSocket socket;
 	socket.connectToHost("127.0.0.1", 8080);
 
@@ -121,6 +118,9 @@ void CreateDeckWindow::generateId()
 		QJsonObject idObject = idJson.object();
 		m_deck.setId(idObject.value("DeckId").toVariant().toULongLong());
 		socket.disconnectFromHost();
+
+        emit writeGeneratedID(m_deck.name() + "_" + QString::number(m_deck.deckId()) + "_deck.json");
+        qDebug() << "send " << m_deck.name() + "_" + QString::number(m_deck.deckId());
 	}
 	else {
 		qDebug() << "Failed to connect to the server";
@@ -129,64 +129,24 @@ void CreateDeckWindow::generateId()
 
 void CreateDeckWindow::on_pushButton_add_clicked()
 {
-    QString m_question = getQuestionText();
-    QString m_answer = getAnswerText();
-    Difficulty m_difficulty = getDifficulty();
+	QString m_question = getQuestionText();
+	QString m_answer = getAnswerText();
+	Difficulty m_difficulty = getDifficulty();
 
-    if (m_question.trimmed().isEmpty() or m_answer.trimmed().isEmpty() or m_questionDifficulty->checkedId() == -1) {
-        QMessageBox::warning(this, "Pogrešan unos", "Niste popunili sva neophodna polja!");
-        return;
-    }
-
-    Card *card = new Card(m_question, m_answer, m_difficulty);
-
-    m_deck.addCard(card);
-
-    ui->textEdit_question->clear();
-    ui->textEdit_answer->clear();
-
-    m_questionDifficulty->setExclusive(false);
-    m_questionDifficulty->checkedButton()->setChecked(false);
-    m_questionDifficulty->setExclusive(true);
-
-	ui->label_questionImage->setVisible(false);
-	ui->label_answerImage->setVisible(false);
-}
-
-void CreateDeckWindow::loadPicture(QLabel *label, QPixmap &image)
-{
-	QString imagePath =
-		QFileDialog::getOpenFileName(this, "Select Image", "", "Image Files (*.png *.jpg *.bmp *.gif);;All Files (*)");
-
-	if (!imagePath.isEmpty()) {
-		image = QPixmap(imagePath);
-		label->setPixmap(image.scaledToWidth(ui->textEdit_question->width()));
-		label->setVisible(true);
+	if (m_question.trimmed().isEmpty() or m_answer.trimmed().isEmpty() or m_questionDifficulty->checkedId() == -1) {
+		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili sva neophodna polja!");
+		return;
 	}
-	else
-		label->setVisible(false);
+
+	Card *card = new Card(m_question, m_answer, m_difficulty);
+
+	m_deck.addCard(card);
+
+	ui->textEdit_question->clear();
+	ui->textEdit_answer->clear();
+
+	m_questionDifficulty->setExclusive(false);
+	m_questionDifficulty->checkedButton()->setChecked(false);
+	m_questionDifficulty->setExclusive(true);
 }
 
-void CreateDeckWindow::on_pushButton_addQuestionImage_clicked()
-{
-	loadPicture(ui->label_questionImage, m_questionImage);
-}
-
-void CreateDeckWindow::on_pushButton_addAnswerImage_clicked()
-{
-	loadPicture(ui->label_answerImage, m_answerImage);
-}
-
-void CreateDeckWindow::resizeEvent(QResizeEvent *event)
-
-{
-	QWidget::resizeEvent(event);
-
-	ui->label_questionImage->setPixmap(m_questionImage.scaledToWidth(ui->textEdit_question->width()));
-	ui->label_answerImage->setPixmap(m_answerImage.scaledToWidth(ui->textEdit_question->width()));
-
-	//    ui->label_answerImage->setFixedWidth(ui->textEdit_question->width());
-	//    ui->label_questionImage->setFixedWidth(ui->textEdit_question->width());
-
-	qDebug() << m_questionImage;
-}

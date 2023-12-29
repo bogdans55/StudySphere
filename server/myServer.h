@@ -4,6 +4,7 @@
 #include <QJsonObject>
 #include <QObject>
 #include <QTcpServer>
+#include "Privacy.h"
 
 class MyServer : public QObject
 {
@@ -45,14 +46,16 @@ private:
     void loadIds();
     void writeRemainingIDsToFile();
     void writeNumbers();
-    void makePublic(QTcpSocket* socket, QJsonObject& jsonObject);
-    void sendDeckById(QTcpSocket* socket, const QString& username, const QString& deckId);
+	void makePublic(QJsonObject& jsonObject);
+	void sendDeckById(QTcpSocket* socket, const QString& username, const QString& deckId, Privacy& privacy);
     void savePlanner(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject);
 	void getPlanner(QTcpSocket* socket, const QString& username);
 	void saveCalendar(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject);
 	void getCalendar(QTcpSocket* socket, const QString& username);
 	void saveTodo(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject);
 	void getTodo(QTcpSocket* socket, const QString& username);
+    void getStats(QTcpSocket* socket, const QString& username, const QString& deckId);
+
 };
 
 #endif // MYSERVER_H
