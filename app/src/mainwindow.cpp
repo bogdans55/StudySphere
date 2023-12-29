@@ -880,39 +880,26 @@ void MainWindow::on_comboBox_deck_currentIndexChanged(int index)
 {
 	if (index >= m_deckNames.size())
 		return;
+		QJsonObject requestObject;
 
-	QTcpSocket socket;
-	socket.connectToHost("127.0.0.1", 8080);
+		requestObject["action"] = "getStats";
+		requestObject["username"] = m_user.username();
+		requestObject["DeckId"] = m_deckNames[index].split("_")[1];
 
-	if (socket.waitForConnected()) {
-		QJsonObject request;
 
-		request["action"] = "getStats";
-		request["username"] = m_user.username();
-		request["DeckId"] = m_deckNames[index].split("_")[1];
+		QJsonDocument request(requestObject);
+		ServerCommunicator communicator;
+		QJsonObject statsObject = communicator.sendRequest(request);
+		QJsonDocument statsDocument = QJsonDocument::fromVariant(statsObject.toVariantMap());
+		JSONSerializer jsonSerializer;
 
-		socket.write(QJsonDocument(request).toJson());
-		socket.waitForBytesWritten();
-		socket.waitForReadyRead();
-		QByteArray statsResponse = socket.readAll();
-		QTextStream statsStream(statsResponse);
-
-		QString statsResponseString = statsStream.readAll();
-		QJsonDocument statsJson = QJsonDocument::fromJson(statsResponseString.toUtf8());
-		QJsonObject statsObject = statsJson.object();
-
-		socket.disconnectFromHost();
 
 		if(statsObject["status"].toString() != "no stats"){
 			JSONSerializer jsonSerializer;
 			auto deckStats = new DeckStats();
-			jsonSerializer.loadJson(*deckStats, statsJson);
-
+			jsonSerializer.loadJson(*deckStats, statsDocument);
 			loadStats(deckStats);
 		}
-	}
-	else {
-		qDebug() << "Failed to connect to the server";
 	}
 }
 
