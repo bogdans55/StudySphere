@@ -9,6 +9,7 @@
 #include "lib/studysessionwindow.h"
 #include "lib/user.h"
 #include "ui_mainwindow.h"
+#include "lib/servercommunicator.h"
 
 #include <QCryptographicHash>
 #include <QDebug>
@@ -126,7 +127,9 @@ void MainWindow::savePlanner()
 	requestObject["planner"] = doc.toVariant().toJsonObject();
 
 	QJsonDocument request(requestObject);
-	QJsonObject jsonObj = sendRequest(request);
+	ServerCommunicator communicator;
+
+	QJsonObject jsonObj = communicator.sendRequest(request);
 }
 
 // void MainWindow::on_pushButton_createDeck_clicked()
@@ -158,8 +161,8 @@ void MainWindow::deckPreview_clicked()
 	requestObject["Privacy"] = "PUBLIC";
 
 	QJsonDocument request(requestObject);
-	QJsonObject jsonObj = sendRequest(request);
-	JSONSerializer jsonSerializer;
+	ServerCommunicator communicator;
+	QJsonObject jsonObj = communicator.sendRequest(request);	JSONSerializer jsonSerializer;
 	QJsonObject deckObject = jsonObj[deckName + "_deck.json"].toObject();
 	QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 	jsonSerializer.loadJson(*deck, deckDocument);
@@ -185,8 +188,8 @@ void MainWindow::deckButton_clicked()
 	requestObject["Privacy"] = "PRIVATE";
 
 	QJsonDocument request(requestObject);
-	QJsonObject jsonObj = sendRequest(request);
-
+	ServerCommunicator communicator;
+	QJsonObject jsonObj = communicator.sendRequest(request);
 	JSONSerializer jsonSerializer;
 
 	QJsonObject deckObject = jsonObj[deckName].toObject();
@@ -214,7 +217,9 @@ void MainWindow::on_pushButton_todo_clicked()
 		requestObject["username"] = m_user.username();
 
 		QJsonDocument request(requestObject);
-		QJsonObject jsonObj = sendRequest(request);
+
+		ServerCommunicator communicator;
+		QJsonObject jsonObj = communicator.sendRequest(request);
 
 		JSONSerializer jsonSerializer;
 
@@ -246,7 +251,9 @@ void MainWindow::on_pushButton_planer_clicked()
 		requestObject["username"] = m_user.username();
 
 		QJsonDocument request(requestObject);
-		QJsonObject jsonObj = sendRequest(request);
+
+		ServerCommunicator communicator;
+		QJsonObject jsonObj = communicator.sendRequest(request);
 
 		JSONSerializer jsonSerializer;
 
@@ -270,7 +277,9 @@ void MainWindow::on_pushButton_calendar_clicked()
 		requestObject["username"] = m_user.username();
 
 		QJsonDocument request(requestObject);
-		QJsonObject jsonObj = sendRequest(request);
+
+		ServerCommunicator communicator;
+		QJsonObject jsonObj = communicator.sendRequest(request);
 
 		qDebug() << jsonObj;
 
@@ -567,7 +576,9 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 
 	qDebug() << "Recieved Data:";
 	QJsonDocument request(requestObject);
-	QJsonObject jsonObj = sendRequest(request);
+
+	ServerCommunicator communicator;
+	QJsonObject jsonObj = communicator.sendRequest(request);
 
 	qDebug() << jsonObj["status"];
 	qDebug() << jsonObj;
@@ -608,7 +619,9 @@ bool MainWindow::registerUser(const QString &username, const QString &password)
 	qDebug() << "Recieved Data:";
 
 	QJsonDocument request(requestObject);
-	QJsonObject jsonObj = sendRequest(request);
+
+	ServerCommunicator communicator;
+	QJsonObject jsonObj = communicator.sendRequest(request);
 
 	if (jsonObj["status"] == "Username already exists, try again") {
 		qDebug() << "Username already exists, try again";
