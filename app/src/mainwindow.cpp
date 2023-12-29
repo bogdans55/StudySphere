@@ -104,7 +104,6 @@ void MainWindow::savePlanner()
 	QJsonObject jsonObj = sendRequest(request);
 }
 
-// void MainWindow::on_pushButton_createDeck_clicked()
 void MainWindow::createDeck_clicked()
 {
 	CreateDeckDialog popUp(this);
@@ -129,13 +128,14 @@ void MainWindow::deckPreview_clicked()
     preview->show();
 }
 
-// void MainWindow::on_pushButton_startStudySession_clicked()
 void MainWindow::deckButton_clicked()
 {
 	QPushButton *chosenDeck = qobject_cast<QPushButton *>(sender());
 
     QString deckName = chosenDeck->text();
 	Deck *deck = new Deck();
+
+    qDebug() << deckName;
 
 	QJsonObject requestObject;
 	requestObject["action"] = "sendDeck";
@@ -190,7 +190,7 @@ void MainWindow::on_pushButton_todo_clicked()
 			QListWidgetItem *item = new QListWidgetItem();
 			item->setCheckState(todo.second ? Qt::Checked : Qt::Unchecked);
 			item->setText(todo.first);
-			emit onTodoItemChanged(item);
+            onTodoItemChanged(item);
 			ui->listWidget_todos->addItem(item);
 		}
 	}
@@ -540,7 +540,10 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 	if (deckNames != "") {
 		QStringList deckNamesList = deckNames.split(", ");
 		for (auto &deckNameID : deckNamesList) {
-            addDeckToTable(deckNameID, ui->tableWidget_library);
+            qDebug() << "11111111111111111" << deckNameID;
+            QStringList list = deckNameID.split("_");
+            addDeckToTable(list[0] + "_" + list[1], ui->tableWidget_library);
+            ui->comboBox_deck->addItem(list[0]);
 		}
     }
     addCreateDeckButton();
@@ -742,14 +745,19 @@ void MainWindow::readGeneratedID(QString deckNameID)
 
 void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table)
 {
+    qDebug() << deckNameID;
 	QPushButton *button = new QPushButton((deckNameID + "_deck.json"));
-    connect(button, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
     button->setStyleSheet("color: transparent; margin-left: 25%;");
+    qDebug() << button->text();
 
     if (table == ui->tableWidget_library) {
+        connect(button, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
         QCheckBox *checkbox = new QCheckBox(button);
         checkbox->setStyleSheet("padding: 5%");
     }
+    else
+        connect(button, &QPushButton::clicked, this, &MainWindow::deckPreview_clicked);
+
 
     QLabel *label = new QLabel(deckNameID.split("_")[0], table);
     label->setAlignment(Qt::AlignCenter);
