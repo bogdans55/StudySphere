@@ -704,28 +704,89 @@ void MainWindow::on_pushButton_importDecks_clicked()
 
     qDebug() << filePaths;
 
-    // TODO iterate thru list and save each deck on server
+	auto rows = ui->tableWidget_library->rowCount();
+	auto cols = ui->tableWidget_library->columnCount();
+
+	for (auto i = 0; i < rows; i += 2) {
+		for(auto j = 0; j < cols; j++) {
+			auto cell = ui->tableWidget_library->cellWidget(i, j);
+			if (QPushButton *button = dynamic_cast<QPushButton*>(cell)) {
+				for(auto it = filePaths.begin(); it != filePaths.end(); it++){
+					QStringList tempDeckName = (*it).split('/');
+					if(button->text() == *(--tempDeckName.end())){
+						filePaths.removeAt((it - filePaths.begin()));
+						if(filePaths.isEmpty()){
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+
+// 	QTcpSocket socket;
+// 	socket.connectToHost("127.0.0.1", 8080);
+
+// 	if (socket.waitForConnected()) {
+// 		QJsonObject request;
+
+// 		generateId();
+
+// 		JSONSerializer serializer;
+// 		QJsonDocument doc = serializer.createJson(m_deck);
+
+// 		qDebug() << doc;
+
+// 		request["action"] = "saveDeck";
+// 		request["username"] = m_user.username();
+// 		request["deck"] = doc.toVariant().toJsonObject();
+
+// 		qDebug() << request;
+
+// 		socket.write(QJsonDocument(request).toJson());
+// 		socket.waitForBytesWritten();
+// 		socket.waitForReadyRead();
+
+// 		QByteArray responseData = socket.readAll();
+// 		QTextStream stream(responseData);
+
+// 		qDebug() << responseData;
+
+// 		qDebug() << "Recieved Data:";
+// 		while (!stream.atEnd()) {
+// 			qDebug() << stream.readLine();
+// 		}
+
+// 		socket.disconnectFromHost();
+
+// 		QMessageBox::information(this, "Uspešno kreiran špil", "Vaš špil je uspešno kreiran i sačuvan!");
+
+// 			   //        delete m_deck;
+// 	}
+// 	else {
+// 		qDebug() << "Failed to connect to the server";
+// 	}
 }
 
 void MainWindow::on_pushButton_exportDecks_clicked()
 {
-    QString selectedDirectory = QFileDialog::getExistingDirectory(
-        nullptr,
-        "Select Directory",
-        QDir::homePath(),
-        QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks
-        );
+	QString selectedDirectory = QFileDialog::getExistingDirectory(
+		nullptr,
+		"Select Directory",
+		QDir::homePath(),
+		QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks
+		);
 
-    auto rows = ui->tableWidget_library->rowCount();
-    auto cols = ui->tableWidget_library->columnCount();
+	auto rows = ui->tableWidget_library->rowCount();
+	auto cols = ui->tableWidget_library->columnCount();
 
-    for (auto i = 0; i < rows; i += 2) {
-        for(auto j = 0; j < cols; j++) {
-            auto cell = ui->tableWidget_library->cellWidget(i, j);
-            if (QPushButton *button = dynamic_cast<QPushButton*>(cell)) {
-                if(!button->children().isEmpty()) {
-                    QCheckBox *checkbox = dynamic_cast<QCheckBox*>(ui->tableWidget_library->cellWidget(i, j)->children().front());
-                    if (checkbox->isChecked()) {
+	for (auto i = 0; i < rows; i += 2) {
+		for(auto j = 0; j < cols; j++) {
+			auto cell = ui->tableWidget_library->cellWidget(i, j);
+			if (QPushButton *button = dynamic_cast<QPushButton*>(cell)) {
+				if(!button->children().isEmpty()) {
+					QCheckBox *checkbox = dynamic_cast<QCheckBox*>(ui->tableWidget_library->cellWidget(i, j)->children().front());
+					if (checkbox->isChecked()) {
 
 						QString deckName = button->text();
 						Deck *deck = new Deck();
@@ -747,11 +808,11 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 						jsonSerializer.save(*deck, selectedDirectory+"/"+deckName);
 
 						checkbox->setCheckState(Qt::Unchecked);
-                    }
-                }
-            }
-        }
-    }
+					}
+				}
+			}
+		}
+	}
 	QMessageBox::information(this, "Izvoz špilova", "Uspešno ste izvezli špilove!");
 }
 
