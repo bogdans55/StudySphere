@@ -756,7 +756,17 @@
          <property name="rightMargin">
           <number>100</number>
          </property>
-         <item row="2" column="2">
+         <item row="5" column="0">
+          <widget class="QLabel" name="label_bad">
+           <property name="text">
+            <string>Procenat pitanja označenih sa &quot;Loše&quot;:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" colspan="2">
+          <widget class="QComboBox" name="comboBox_deck"/>
+         </item>
+         <item row="3" column="2">
           <widget class="QLCDNumber" name="number_deckSize">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -775,27 +785,19 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="2">
-          <widget class="QLCDNumber" name="number_uses">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="smallDecimalPoint">
-            <bool>false</bool>
-           </property>
-           <property name="digitCount">
-            <number>4</number>
-           </property>
-           <property name="segmentStyle">
-            <enum>QLCDNumber::Flat</enum>
+         <item row="6" column="0">
+          <widget class="QLabel" name="label_mid">
+           <property name="text">
+            <string>Procenat pitanja označenih sa &quot;Srednje&quot;:</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1" colspan="2">
-          <widget class="QComboBox" name="comboBox_deck"/>
+         <item row="7" column="2">
+          <widget class="QProgressBar" name="progressBar_excellent">
+           <property name="value">
+            <number>0</number>
+           </property>
+          </widget>
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="label_uses">
@@ -804,75 +806,34 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_deck">
-           <property name="text">
-            <string>Izaberi špil:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0">
-          <widget class="QLabel" name="label_bad">
-           <property name="text">
-            <string>Procenat pitanja označenih sa &quot;Loše&quot;:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="label_deckSize">
-           <property name="text">
-            <string>Ukupan broj pitanja:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="2">
-          <widget class="QLCDNumber" name="number_untested">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="smallDecimalPoint">
-            <bool>false</bool>
-           </property>
-           <property name="digitCount">
-            <number>4</number>
-           </property>
-           <property name="segmentStyle">
-            <enum>QLCDNumber::Flat</enum>
-           </property>
-          </widget>
-         </item>
          <item row="7" column="0">
-          <widget class="QLabel" name="label_mid">
-           <property name="text">
-            <string>Procenat pitanja označenih sa &quot;Srednje&quot;:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="label_untested">
-           <property name="text">
-            <string>Broj nepredjenih pitanja:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="0">
           <widget class="QLabel" name="label_good">
            <property name="text">
             <string>Procenat pitanja označenih sa &quot;Odlično&quot;:</string>
            </property>
           </widget>
          </item>
-         <item row="5" column="0">
+         <item row="1" column="1">
+          <spacer name="verticalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="4" column="0">
           <widget class="QLabel" name="label_skip">
            <property name="text">
             <string>Procenat pitanja označenih sa &quot;Ne znam&quot;:</string>
            </property>
           </widget>
          </item>
-         <item row="8" column="1">
+         <item row="7" column="1">
           <spacer name="horizontalSpacer">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -888,44 +849,57 @@
            </property>
           </spacer>
          </item>
-         <item row="1" column="1">
-          <spacer name="verticalSpacer_4">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="5" column="2">
-          <widget class="QProgressBar" name="progressBar_skip">
+         <item row="6" column="2">
+          <widget class="QProgressBar" name="progressBar_good">
            <property name="value">
             <number>0</number>
            </property>
           </widget>
          </item>
-         <item row="6" column="2">
+         <item row="5" column="2">
           <widget class="QProgressBar" name="progressBar_bad">
            <property name="value">
             <number>0</number>
            </property>
           </widget>
          </item>
-         <item row="7" column="2">
-          <widget class="QProgressBar" name="progressBar_mid">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_deck">
+           <property name="text">
+            <string>Izaberi špil:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="2">
+          <widget class="QProgressBar" name="progressBar_skip">
            <property name="value">
             <number>0</number>
            </property>
           </widget>
          </item>
-         <item row="8" column="2">
-          <widget class="QProgressBar" name="progressBar_good">
-           <property name="value">
-            <number>0</number>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_deckSize">
+           <property name="text">
+            <string>Ukupan broj pitanja:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QLCDNumber" name="number_timesUsed">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="smallDecimalPoint">
+            <bool>false</bool>
+           </property>
+           <property name="digitCount">
+            <number>4</number>
+           </property>
+           <property name="segmentStyle">
+            <enum>QLCDNumber::Flat</enum>
            </property>
           </widget>
          </item>
