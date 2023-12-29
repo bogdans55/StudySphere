@@ -716,6 +716,7 @@ void MainWindow::on_pushButton_importDecks_clicked()
 					if(button->text() == *(--tempDeckName.end())){
 						filePaths.removeAt((it - filePaths.begin()));
 						if(filePaths.isEmpty()){
+							QMessageBox::warning(this, "Uvoz špilova", "Unosite špil ili špilove koje već imate!");
 							break;
 						}
 					}
@@ -724,48 +725,25 @@ void MainWindow::on_pushButton_importDecks_clicked()
 		}
 	}
 
-// 	QTcpSocket socket;
-// 	socket.connectToHost("127.0.0.1", 8080);
+	for(auto it = filePaths.begin(); it != filePaths.end(); it++){
+		QJsonObject request;
+		Deck deck;
+		JSONSerializer serializer;
+		serializer.load(deck, *it);
 
-// 	if (socket.waitForConnected()) {
-// 		QJsonObject request;
+		request["action"] = "saveDeck";
+		request["username"] = m_user.username();
+		QJsonDocument deckDocument = serializer.createJson(deck);
+		request["deck"] = deckDocument.toVariant().toJsonObject();
 
-// 		generateId();
-
-// 		JSONSerializer serializer;
-// 		QJsonDocument doc = serializer.createJson(m_deck);
-
-// 		qDebug() << doc;
-
-// 		request["action"] = "saveDeck";
-// 		request["username"] = m_user.username();
-// 		request["deck"] = doc.toVariant().toJsonObject();
-
-// 		qDebug() << request;
-
-// 		socket.write(QJsonDocument(request).toJson());
-// 		socket.waitForBytesWritten();
-// 		socket.waitForReadyRead();
-
-// 		QByteArray responseData = socket.readAll();
-// 		QTextStream stream(responseData);
-
-// 		qDebug() << responseData;
-
-// 		qDebug() << "Recieved Data:";
-// 		while (!stream.atEnd()) {
-// 			qDebug() << stream.readLine();
-// 		}
-
-// 		socket.disconnectFromHost();
-
-// 		QMessageBox::information(this, "Uspešno kreiran špil", "Vaš špil je uspešno kreiran i sačuvan!");
-
-// 			   //        delete m_deck;
-// 	}
-// 	else {
-// 		qDebug() << "Failed to connect to the server";
-// 	}
+		QJsonDocument requestDocument(request);
+		QJsonObject response = sendRequest(requestDocument);
+		QStringList tempDeckName = (*it).split('/');
+		addDeckToTable(*(--tempDeckName.end()),  ui->tableWidget_library);
+	}
+	if(!filePaths.isEmpty()){
+		QMessageBox::information(this, "Uvoz špilova", "Uspešan uvoz!");
+	}
 }
 
 void MainWindow::on_pushButton_exportDecks_clicked()
@@ -813,7 +791,7 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 			}
 		}
 	}
-	QMessageBox::information(this, "Izvoz špilova", "Uspešno ste izvezli špilove!");
+	QMessageBox::information(this, "Izvoz špilova", "Uspešan izvoz!");
 }
 
 void MainWindow::readGeneratedID(QString deckNameID)
