@@ -1,6 +1,7 @@
 #include "lib/deckpreviewwindow.h"
 #include "lib/jsonserializer.h"
 #include "ui_deckpreviewwindow.h"
+#include "lib/servercommunicator.h"
 
 #include <QMessageBox>
 #include <QTcpServer>
@@ -50,45 +51,25 @@ void DeckPreviewWindow::on_pushButton_cancel_clicked()
 
 void DeckPreviewWindow::on_pushButton_add_clicked()
 {
-    QTcpSocket socket;
-    socket.connectToHost("127.0.0.1", 8080);
+	ServerCommunicator communicator;
 
-    if (socket.waitForConnected()) {
-        QJsonObject request;
+	QJsonObject requestObject;
 
-        JSONSerializer serializer;
-        QJsonDocument doc = serializer.createJson(m_deck);
+	JSONSerializer serializer;
+	QJsonDocument doc = serializer.createJson(m_deck);
 
-        qDebug() << doc;
+	qDebug() << doc;
 
-        request["action"] = "saveDeck";
-        request["username"] = m_user.username();
-        request["deck"] = doc.toVariant().toJsonObject();
+	requestObject["action"] = "saveDeck";
+	requestObject["username"] = m_user.username();
+	requestObject["deck"] = doc.toVariant().toJsonObject();
 
-        qDebug() << request;
+	QJsonDocument request(requestObject);
 
-        socket.write(QJsonDocument(request).toJson());
-        socket.waitForBytesWritten();
-        socket.waitForReadyRead();
+	communicator.sendRequest(request);
 
-        QByteArray responseData = socket.readAll();
-        QTextStream stream(responseData);
-
-        qDebug() << responseData;
-
-        qDebug() << "Recieved Data:";
-        while (!stream.atEnd()) {
-            qDebug() << stream.readLine();
-        }
-
-        socket.disconnectFromHost();
-
-        QMessageBox::information(this, "Uspešno dodat špil", "Izabrani špil je uspešno dodat i sačuvan!");
-        emit sendPublicDeck(m_deck.name() + "_" + QString::number(m_deck.deckId()));
-    }
-    else {
-        qDebug() << "Failed to connect to the server";
-    }
+	QMessageBox::information(this, "Uspešno dodat špil", "Izabrani špil je uspešno dodat i sačuvan!");
+	emit sendPublicDeck(m_deck.name() + "_" + QString::number(m_deck.deckId()));
 
     close();
 }
