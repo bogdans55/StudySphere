@@ -54,15 +54,21 @@ MainWindow::MainWindow(QWidget *parent)
 	ui->graphicsView_saturday->setScene(m_plannerScenes[Day::SATURDAY]);
 	ui->graphicsView_sunday->setScene(m_plannerScenes[Day::SUNDAY]);
 
-	ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
-	ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
+    QVector<ScheduleItem*> scheduleItems;
+    for (int i = 0; i < 7; ++i) {
+        scheduleItems.append(new ScheduleItem());
+        scheduleItems[i]->setWidth(ui->graphicsView_monday->width());
+        m_plannerScenes[i]->addItem(scheduleItems[i]);
+    }
 
-	QVector<ScheduleItem *> scheduleItems;
-	for (int i = 0; i < 7; ++i) {
-		scheduleItems.append(new ScheduleItem());
-		scheduleItems[i]->setWidth(ui->graphicsView_monday->width());
-		m_plannerScenes[i]->addItem(scheduleItems[i]);
-	}
+    QApplication* app = qobject_cast<QApplication*>(QApplication::instance());
+    Settings& settings = Settings::instance(app);
+
+    settings.setLanguage(Language::SERBIAN);
+    settings.setTheme(Theme::DARK);
+    ui->retranslateUi(this);
+    ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
+    ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
 
 	connect(ui->listWidget_todos, &QListWidget::itemChanged, this, &MainWindow::onTodoItemChanged);
 }
@@ -864,3 +870,20 @@ void MainWindow::on_comboBox_deck_currentIndexChanged(int index)
     // TODO read stats from current deck and add them to ui elements
 }
 
+void MainWindow::on_comboBox_language_currentIndexChanged(int index)
+{
+    QApplication* app = qobject_cast<QApplication*>(QApplication::instance());
+    Settings& settings = Settings::instance(app);
+
+    settings.setLanguage(index);
+    ui->retranslateUi(this);
+}
+
+void MainWindow::on_comboBox_theme_currentIndexChanged(int index)
+{
+    QApplication* app = qobject_cast<QApplication*>(QApplication::instance());
+    Settings& settings = Settings::instance(app);
+
+    settings.setTheme(index);
+    ui->retranslateUi(this);
+}
