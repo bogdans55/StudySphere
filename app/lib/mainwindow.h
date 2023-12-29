@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "lib/calendar.h"
+#include "lib/deckstats.h"
 #include "lib/planner.h"
 #include "lib/plannerscene.h"
 #include "lib/todolist.h"
@@ -110,6 +111,8 @@ protected:
 
 	ToDoList m_toDoList;
 
+    QVector<QString> m_deckNames;
+
 	bool m_calendarLoaded = false;
 	void saveCalendar();
 	void refreshCalendar();
@@ -133,5 +136,6 @@ protected:
     void addDeckToTable(QString deckNameID, QTableWidget *table, int &counter);
     int m_deckCounter = 0;
     void addCreateDeckButton();
+    void loadStats(DeckStats *deckStats);
 };
 #endif // MAINWINDOW_H

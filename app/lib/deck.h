@@ -30,6 +30,7 @@ class Deck : public Serializable
     Deck(const QString &name, const User &user, Privacy privacy, const QImage &thumbnail);
     Deck(const QString &name, const User &user, Privacy privacy);
 	Deck(const Deck &deck);
+    ~Deck();
 
 	inline unsigned int deckId() const { return m_deckId; }
 

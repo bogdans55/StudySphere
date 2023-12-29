@@ -33,6 +33,7 @@ CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, User &user, QW
 CreateDeckWindow::~CreateDeckWindow()
 {
 	delete ui;
+    delete m_questionDifficulty;
 }
 
 QString CreateDeckWindow::getQuestionText() const

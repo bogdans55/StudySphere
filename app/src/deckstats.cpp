@@ -14,6 +14,8 @@ DeckStats::DeckStats(const DeckStats &deckStats)
     , m_creationDate(deckStats.m_creationDate)
 {}
 
+DeckStats::~DeckStats() {}
+
 void DeckStats::addGrade(unsigned int cardIndex, unsigned int grade)
 {
     m_grades[cardIndex] = grade;
