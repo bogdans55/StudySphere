@@ -702,37 +702,94 @@ void MainWindow::on_pushButton_importDecks_clicked()
 
     qDebug() << filePaths;
 
-    // TODO iterate thru list and save each deck on server
+	auto rows = ui->tableWidget_library->rowCount();
+	auto cols = ui->tableWidget_library->columnCount();
+
+	for (auto i = 0; i < rows; i += 2) {
+		for(auto j = 0; j < cols; j++) {
+			auto cell = ui->tableWidget_library->cellWidget(i, j);
+			if (QPushButton *button = dynamic_cast<QPushButton*>(cell)) {
+				for(auto it = filePaths.begin(); it != filePaths.end(); it++){
+					QStringList tempDeckName = (*it).split('/');
+					if(button->text() == *(--tempDeckName.end())){
+						filePaths.removeAt((it - filePaths.begin()));
+						if(filePaths.isEmpty()){
+							QMessageBox::warning(this, "Uvoz špilova", "Unosite špil ili špilove koje već imate!");
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	for(auto it = filePaths.begin(); it != filePaths.end(); it++){
+		QJsonObject request;
+		Deck deck;
+		JSONSerializer serializer;
+		serializer.load(deck, *it);
+
+		request["action"] = "saveDeck";
+		request["username"] = m_user.username();
+		QJsonDocument deckDocument = serializer.createJson(deck);
+		request["deck"] = deckDocument.toVariant().toJsonObject();
+
+		QJsonDocument requestDocument(request);
+		QJsonObject response = sendRequest(requestDocument);
+		QStringList tempDeckName = (*it).split('/');
+		addDeckToTable(*(--tempDeckName.end()),  ui->tableWidget_library);
+	}
+	if(!filePaths.isEmpty()){
+		QMessageBox::information(this, "Uvoz špilova", "Uspešan uvoz!");
+	}
 }
 
 void MainWindow::on_pushButton_exportDecks_clicked()
 {
-    QString selectedDirectory = QFileDialog::getExistingDirectory(
-        nullptr,
-        "Select Directory",
-        QDir::homePath(),
-        QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks
-        );
-    qDebug() << selectedDirectory;
+	QString selectedDirectory = QFileDialog::getExistingDirectory(
+		nullptr,
+		"Select Directory",
+		QDir::homePath(),
+		QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks
+		);
 
-    auto rows = ui->tableWidget_library->rowCount();
-    auto cols = ui->tableWidget_library->columnCount();
+	auto rows = ui->tableWidget_library->rowCount();
+	auto cols = ui->tableWidget_library->columnCount();
 
-    for (auto i = 0; i < rows; i += 2) {
-        for(auto j = 0; j < cols; j++) {
-            auto cell = ui->tableWidget_library->cellWidget(i, j);
-            if (QPushButton *button = dynamic_cast<QPushButton*>(cell)) {
-                if(!button->children().isEmpty()) {
-                    QCheckBox *checkbox = dynamic_cast<QCheckBox*>(ui->tableWidget_library->cellWidget(i, j)->children().front());
-                    if (checkbox->isChecked()) {
-                        // TODO save deck
-                        qDebug() << button->text();
-                    }
-                }
-            }
-        }
-    }
+	for (auto i = 0; i < rows; i += 2) {
+		for(auto j = 0; j < cols; j++) {
+			auto cell = ui->tableWidget_library->cellWidget(i, j);
+			if (QPushButton *button = dynamic_cast<QPushButton*>(cell)) {
+				if(!button->children().isEmpty()) {
+					QCheckBox *checkbox = dynamic_cast<QCheckBox*>(ui->tableWidget_library->cellWidget(i, j)->children().front());
+					if (checkbox->isChecked()) {
 
+						QString deckName = button->text();
+						Deck *deck = new Deck();
+
+						QJsonObject requestObject;
+						requestObject["action"] = "sendDeck";
+						requestObject["username"] = m_user.username();
+						requestObject["DeckId"] = deckName.split('_')[1].split('.')[0];
+						requestObject["Privacy"] = "PRIVATE";
+
+						QJsonDocument request(requestObject);
+						QJsonObject jsonObj = sendRequest(request);
+
+						JSONSerializer jsonSerializer;
+
+						QJsonObject deckObject = jsonObj[deckName].toObject();
+						QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
+						jsonSerializer.loadJson(*deck, deckDocument);
+						jsonSerializer.save(*deck, selectedDirectory+"/"+deckName);
+
+						checkbox->setCheckState(Qt::Unchecked);
+					}
+				}
+			}
+		}
+	}
+	QMessageBox::information(this, "Izvoz špilova", "Uspešan izvoz!");
 }
 
 void MainWindow::readGeneratedID(QString deckNameID)
