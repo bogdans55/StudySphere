@@ -943,6 +943,7 @@ void MainWindow::loadStats(DeckStats *deckStats)
     ui->progressBar_bad->setValue(std::count(deckStats->grades().cbegin(), deckStats->grades().cend(), 1));
     ui->progressBar_good->setValue(std::count(deckStats->grades().cbegin(), deckStats->grades().cend(), 2));
     ui->progressBar_excellent->setValue(std::count(deckStats->grades().cbegin(), deckStats->grades().cend(), 3));
+}
 
 void MainWindow::on_comboBox_language_currentIndexChanged(int index)
 {

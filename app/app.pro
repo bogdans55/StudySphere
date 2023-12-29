@@ -73,6 +73,7 @@ HEADERS += \
     lib/plannerscene.h \
     lib/scheduleitem.h \
     lib/logindialog.h \
+    tests/catch.hpp
 
 FORMS += \
     forms/deckpreviewwindow.ui \
