@@ -387,8 +387,8 @@ void MyServer::saveDeck(QTcpSocket *socket, QJsonObject &jsonObject)
 		qDebug() << "Error saving deck:" << file.errorString();
 	}
 
-//	QJsonObject response;
-//	response["status"] = "Upload Successful";
+	QJsonObject response;
+	response["status"] = "Upload Successful";
 }
 
 void MyServer::registerUser(QTcpSocket *socket, QJsonObject &jsonObject)
@@ -609,6 +609,7 @@ void MyServer::getStats(QTcpSocket* socket, const QString& username, const QStri
 				}
 				else {
 					response["status"] = "Couldn't open deck stats file";
+                    qDebug() << "Pisa";
 				}
 			}
 		}
@@ -621,4 +622,6 @@ void MyServer::getStats(QTcpSocket* socket, const QString& username, const QStri
 		qDebug() << response["status"].toString();
 	}
 	qDebug() << response;
+	QTextStream stream(socket);
+	stream << QJsonDocument(response).toJson();
 }

@@ -538,7 +538,6 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 	QString deckNames = jsonObj.value("decks").toString();
     m_deckCounter = 0;
 	if (deckNames != "") {
-        qDebug() << "LOGIN DECK NAMES: " + deckNames;
 		QStringList deckNamesList = deckNames.split(", ");
 		for (auto &deckNameID : deckNamesList) {
             addDeckToTable(deckNameID, ui->tableWidget_library);
@@ -687,7 +686,6 @@ void MainWindow::on_pushButton_search_clicked()
 		QStringList deckNamesList = deckNames.split(", ");
         m_deckCounter = 0;
         for (auto &deckNameID : deckNamesList) {
-            qDebug() << "SEARCH DECK NAMES: " + deckNames;
             addDeckToTable(deckNameID, ui->tableWidget_browser);
 
         }
@@ -745,9 +743,6 @@ void MainWindow::readGeneratedID(QString deckNameID)
 
 void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table)
 {
-
-    qDebug() << "ADD TO TABLE: " + deckNameID;
-
     QPushButton *button = new QPushButton(deckNameID);
     connect(button, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
     button->setStyleSheet("color: transparent; margin-left: 25%;");

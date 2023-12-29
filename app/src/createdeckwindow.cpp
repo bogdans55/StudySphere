@@ -69,15 +69,27 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
 		request["username"] = m_user.username();
 		request["deck"] = doc.toVariant().toJsonObject();
 
-        qDebug() << request;
+		qDebug() << request;
 
 		socket.write(QJsonDocument(request).toJson());
 		socket.waitForBytesWritten();
 		socket.waitForReadyRead();
 
+		QByteArray responseData = socket.readAll();
+		QTextStream stream(responseData);
+
+		qDebug() << responseData;
+
+		qDebug() << "Recieved Data:";
+		while (!stream.atEnd()) {
+			qDebug() << stream.readLine();
+		}
+
 		socket.disconnectFromHost();
 
 		QMessageBox::information(this, "Uspešno kreiran špil", "Vaš špil je uspešno kreiran i sačuvan!");
+
+		//        delete m_deck;
 	}
 	else {
 		qDebug() << "Failed to connect to the server";
@@ -107,7 +119,7 @@ void CreateDeckWindow::generateId()
 		m_deck.setId(idObject.value("DeckId").toVariant().toULongLong());
 		socket.disconnectFromHost();
 
-        emit writeGeneratedID(m_deck.name() + "_" + QString::number(m_deck.deckId()) + "_deck.json");
+        emit writeGeneratedID(m_deck.name() + "_" + QString::number(m_deck.deckId()));
         qDebug() << "send " << m_deck.name() + "_" + QString::number(m_deck.deckId());
 	}
 	else {
