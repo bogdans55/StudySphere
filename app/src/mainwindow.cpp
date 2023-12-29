@@ -738,6 +738,7 @@ void MainWindow::on_pushButton_importDecks_clicked()
 		QJsonObject response = sendRequest(requestDocument);
 		QStringList tempDeckName = (*it).split('/');
 		addDeckToTable(*(--tempDeckName.end()),  ui->tableWidget_library);
+        addCreateDeckButton();
 	}
 	if(!filePaths.isEmpty()){
 		QMessageBox::information(this, "Uvoz špilova", "Uspešan uvoz!");
