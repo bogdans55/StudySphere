@@ -119,7 +119,6 @@ protected:
 
 	bool registerUser(const QString &username, const QString &password);
 	bool loginUser(const QString &username, const QString &password);
-	QJsonObject sendRequest(QJsonDocument &request);
 
 	bool m_loggedIn = false;
 	bool m_plannerLoaded = false;

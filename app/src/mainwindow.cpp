@@ -534,36 +534,6 @@ void MainWindow::on_pushButton_login_clicked()
 	}
 }
 
-QJsonObject MainWindow::sendRequest(QJsonDocument &request)
-{
-	QTcpSocket *socket = new QTcpSocket(this);
-	socket->connectToHost("127.0.0.1", 8080);
-
-	if (socket->waitForConnected()) {
-
-		socket->write(request.toJson());
-
-		socket->waitForBytesWritten();
-		socket->waitForReadyRead();
-		QByteArray responseText = socket->readAll();
-		QTextStream stream(responseText);
-
-		QString response = stream.readAll();
-		QJsonDocument jsonDoc = QJsonDocument::fromJson(response.toUtf8());
-		QJsonObject jsonObj = jsonDoc.object();
-		socket->disconnectFromHost();
-		socket->deleteLater();
-		return jsonObj;
-	}
-	else {
-		socket->deleteLater();
-		QJsonObject response;
-		response["status"] = "Failed to connect to the server";
-		qDebug() << response["status"];
-		return response;
-	}
-}
-
 bool MainWindow::loginUser(const QString &username, const QString &password)
 {
     setupTableView(ui->tableWidget_library);
