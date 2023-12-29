@@ -72,7 +72,6 @@ void StudySession::endSession()
 
 void StudySession::chooseCardSequence(unsigned numCards)
 {
-	qDebug() << m_deckStats->grades();
 	QVector<unsigned> cardIndices(numCards);
 	QVector<bool> visited(numCards);
 	for (unsigned i = 0;i < numCards;i++){
@@ -94,7 +93,6 @@ void StudySession::chooseCardSequence(unsigned numCards)
 	}
 	m_currentCardIndex = 0;
 	m_cardSequence = cardIndices;
-	qDebug() << m_cardSequence;
 }
 
 void StudySession::nextCard()
