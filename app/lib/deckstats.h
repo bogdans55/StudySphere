@@ -18,7 +18,7 @@ class DeckStats : public Serializable
     DeckStats();
 	DeckStats(unsigned numGrades);
     DeckStats(const DeckStats &deckStats);
-	~DeckStats() {}
+    ~DeckStats();
 
     inline QVector <unsigned> grades() {return m_grades;}
 

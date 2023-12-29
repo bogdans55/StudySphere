@@ -26,6 +26,7 @@ StudySessionWindow::StudySessionWindow(StudySession *session, QWidget *parent)
 StudySessionWindow::~StudySessionWindow()
 {
 	delete ui;
+    delete m_session;
 }
 
 void StudySessionWindow::on_pushButton_flip_clicked()

@@ -20,7 +20,11 @@ StudySession::StudySession(const StudySession &session)
     m_timeEnded(session.m_timeEnded), m_answerShowed(session.m_answerShowed)
 {}
 
-StudySession::~StudySession() {}
+StudySession::~StudySession()
+{
+    delete m_deck;
+    delete m_deckStats;
+}
 
 void StudySession::startSession()
 {

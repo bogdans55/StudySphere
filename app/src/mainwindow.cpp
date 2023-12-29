@@ -72,7 +72,12 @@ MainWindow::~MainWindow()
 	if (m_loggedIn) {
 		saveOnServer();
 	}
-	delete ui;
+    delete ui;
+
+    for (auto scene : m_plannerScenes) {
+        scene->clear();
+        delete scene;
+    }
 }
 
 void MainWindow::saveOnServer()
@@ -457,7 +462,7 @@ void MainWindow::on_pushButton_login_clicked()
 	else {
 		// logout
 		saveOnServer();
-		m_loggedIn = false; // use setter instead?
+        m_loggedIn = false;
 		ui->label_username->setText("Nema korisnika");
 		ui->pushButton_login->setText("Prijavi se");
 		setEnabled(false);

@@ -609,7 +609,6 @@ void MyServer::getStats(QTcpSocket* socket, const QString& username, const QStri
 				}
 				else {
 					response["status"] = "Couldn't open deck stats file";
-                    qDebug() << "Pisa";
 				}
 			}
 		}
