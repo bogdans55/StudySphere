@@ -540,10 +540,9 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 	if (deckNames != "") {
 		QStringList deckNamesList = deckNames.split(", ");
 		for (auto &deckNameID : deckNamesList) {
-            qDebug() << "11111111111111111" << deckNameID;
-            QStringList list = deckNameID.split("_");
-            addDeckToTable(list[0] + "_" + list[1], ui->tableWidget_library);
-            ui->comboBox_deck->addItem(list[0]);
+            addDeckToTable(deckNameID, ui->tableWidget_library);
+            auto deckNameSplit = deckNameID.split("_");
+            ui->comboBox_deck->addItem(deckNameSplit[0] + "_" + deckNameSplit[1]);
 		}
     }
     addCreateDeckButton();
@@ -746,7 +745,7 @@ void MainWindow::readGeneratedID(QString deckNameID)
 void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table)
 {
     qDebug() << deckNameID;
-	QPushButton *button = new QPushButton((deckNameID + "_deck.json"));
+    QPushButton *button = new QPushButton((deckNameID));
     button->setStyleSheet("color: transparent; margin-left: 25%;");
     qDebug() << button->text();
 
