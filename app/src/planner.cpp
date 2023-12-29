@@ -51,19 +51,19 @@ QVariant Planner::toVariant() const
 
 Day Planner::dayFromString(QString dayString)
 {
-	if (dayString == "Ponedeljak")
+    if (dayString == "Ponedeljak" or dayString == "Monday")
 		return Day::MONDAY;
-	else if (dayString == "Utorak")
+    else if (dayString == "Utorak" or dayString == "Tuesday")
 		return Day::TUESDAY;
-	else if (dayString == "Sreda")
+    else if (dayString == "Sreda" or dayString == "Wednesday")
 		return Day::WEDNESDAY;
-	else if (dayString == "Četvrtak")
+    else if (dayString == "Četvrtak" or dayString == "Thursday")
 		return Day::THURSDAY;
-	else if (dayString == "Petak")
+    else if (dayString == "Petak" or dayString == "Friday")
 		return Day::FRIDAY;
-	else if (dayString == "Subota")
+    else if (dayString == "Subota" or dayString == "Saturday")
 		return Day::SATURDAY;
-	else if (dayString == "Nedelja")
+    else if (dayString == "Nedelja" or dayString == "Sunday")
 		return Day::SUNDAY;
 	else
 		return Day::MONDAY;

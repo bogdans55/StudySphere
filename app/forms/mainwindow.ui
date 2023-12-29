@@ -202,14 +202,14 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page_library">
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <widget class="QTabWidget" name="tabWidget_library">
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="tab_decks">
           <attribute name="title">
@@ -958,12 +958,12 @@
           </property>
           <item>
            <property name="text">
-            <string>Svetla</string>
+            <string>Tamna</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Tamna</string>
+            <string>Svetla</string>
            </property>
           </item>
          </widget>

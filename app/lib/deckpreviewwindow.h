@@ -17,6 +17,9 @@ public:
 	DeckPreviewWindow(Deck deck, User& user, QWidget *parent = nullptr);
     ~DeckPreviewWindow();
 
+signals:
+    void sendPublicDeck(QString deckNameID);
+
 private slots:
     void on_pushButton_flip_preview_clicked();
 
@@ -32,6 +35,7 @@ private:
 	unsigned m_currentCardIndex = 0;
 	User m_user;
 	Deck m_deck;
+
 
 	bool hasNextCard();
 

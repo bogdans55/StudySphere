@@ -113,8 +113,10 @@ void MyServer::readData()
 	QJsonObject jsonObject = doc.object();
 
 	QString action = jsonObject["action"].toString();
-	Privacy privacy = jsonObject["Privacy"].toString() == "PRIVATE" ? Privacy::PRIVATE : Privacy::PUBLIC;
-
+	Privacy privacy;
+	if(jsonObject.contains("Privacy")){
+		privacy = jsonObject["Privacy"].toString() == "PRIVATE" ? Privacy::PRIVATE : Privacy::PUBLIC;
+	}
 	if (action == "login") {
 		loginUser(socket, jsonObject);
 	}
@@ -312,7 +314,6 @@ void MyServer::sendDeckById(QTcpSocket *socket, const QString &username, const Q
 
 	if (!userDeckDirectories.isEmpty()) {
 		response["status"] = "success";
-		QStringList foundDecks;
 
 		QStringList deckFilters;
         deckFilters << "*_deck.json";
@@ -320,7 +321,6 @@ void MyServer::sendDeckById(QTcpSocket *socket, const QString &username, const Q
 		for (const QString &folderName : userDeckDirectories) {
 			QDir deckFolder(folder.absoluteFilePath(folderName));
 			for (const QString &deckName : deckFolder.entryList(deckFilters)) {
-				foundDecks.append(deckName);
 
 				QFile deckFile(deckFolder.absoluteFilePath(deckName));
 				if (deckFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
