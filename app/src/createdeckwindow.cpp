@@ -71,12 +71,13 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
 	ServerCommunicator communicator;
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
-    if (jsonObj["status"].toString() != "success") {
-        QMessageBox::information(this, tr("Kreiranje špila"), tr("Došlo je do greške, špil nije sačuvan, probajte ponovo!"));
+	if (jsonObj["status"].toString() != "success") {
+		QMessageBox::information(this, tr("Kreiranje špila"),
+								 tr("Došlo je do greške, špil nije sačuvan, probajte ponovo!"));
 		return;
 	}
 
-    QMessageBox::information(this, tr("Uspešno kreiran špil"), tr("Vaš špil je uspešno kreiran i sačuvan!"));
+	QMessageBox::information(this, tr("Uspešno kreiran špil"), tr("Vaš špil je uspešno kreiran i sačuvan!"));
 
 	close();
 }
@@ -104,8 +105,8 @@ void CreateDeckWindow::on_pushButton_add_clicked()
 	QString m_answer = getAnswerText();
 	Difficulty m_difficulty = getDifficulty();
 
-    if (m_question.trimmed().isEmpty() or m_answer.trimmed().isEmpty() or m_questionDifficulty->checkedId() == -1) {
-        QMessageBox::warning(this, tr("Pogrešan unos"), tr("Niste popunili sva neophodna polja!"));
+	if (m_question.trimmed().isEmpty() or m_answer.trimmed().isEmpty() or m_questionDifficulty->checkedId() == -1) {
+		QMessageBox::warning(this, tr("Pogrešan unos"), tr("Niste popunili sva neophodna polja!"));
 		return;
 	}
 

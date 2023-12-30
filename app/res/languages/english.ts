@@ -640,12 +640,12 @@
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="937"/>
+        <location filename="../../forms/mainwindow.ui" line="942"/>
         <source>Srpski</source>
         <translation>Serbian</translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="942"/>
+        <location filename="../../forms/mainwindow.ui" line="937"/>
         <source>Engleski</source>
         <translation>English</translation>
     </message>
@@ -675,6 +675,8 @@
     </message>
     <message>
         <location filename="../../src/mainwindow.cpp" line="592"/>
+        <location filename="../../src/mainwindow.cpp" line="972"/>
+        <location filename="../../src/mainwindow.cpp" line="984"/>
         <source>Odjavi se</source>
         <translation>Sign out</translation>
     </message>

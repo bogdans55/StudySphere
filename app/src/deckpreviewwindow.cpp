@@ -27,12 +27,12 @@ DeckPreviewWindow::~DeckPreviewWindow()
 void DeckPreviewWindow::on_pushButton_flip_preview_clicked()
 {
 	if (m_answerShowed) {
-        ui->textEdit_card_preview->setText(m_deck.cards().at(m_currentCardIndex)->questionText());
-        ui->label_card_preview->setText(tr("Pitanje"));
+		ui->textEdit_card_preview->setText(m_deck.cards().at(m_currentCardIndex)->questionText());
+		ui->label_card_preview->setText(tr("Pitanje"));
 	}
 	else {
-        ui->textEdit_card_preview->setText(m_deck.cards().at(m_currentCardIndex)->questionAnswer());
-        ui->label_card_preview->setText(tr("Odgovor"));
+		ui->textEdit_card_preview->setText(m_deck.cards().at(m_currentCardIndex)->questionAnswer());
+		ui->label_card_preview->setText(tr("Odgovor"));
 	}
 	m_answerShowed = !m_answerShowed;
 }
@@ -59,7 +59,7 @@ void DeckPreviewWindow::on_pushButton_add_clicked()
 
 	communicator.sendRequest(request);
 
-    QMessageBox::information(this, tr("Uspešno dodat špil"), tr("Izabrani špil je uspešno dodat i sačuvan!"));
+	QMessageBox::information(this, tr("Uspešno dodat špil"), tr("Izabrani špil je uspešno dodat i sačuvan!"));
 
 	emit sendPublicDeck(m_deck.name() + "_" + QString::number(m_deck.deckId()));
 
@@ -73,8 +73,8 @@ void DeckPreviewWindow::on_pushButton_next_clicked()
 		ui->textEdit_card_preview->setText(m_deck.cards()[m_currentCardIndex]->questionText());
 		m_answerShowed = false;
 	}
-    else {
-        QMessageBox::information(this, tr("Pregled špila"), tr("Špil nema više kartica!"));
+	else {
+		QMessageBox::information(this, tr("Pregled špila"), tr("Špil nema više kartica!"));
 	}
 }
 

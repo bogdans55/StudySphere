@@ -34,12 +34,12 @@ StudySessionWindow::~StudySessionWindow()
 void StudySessionWindow::on_pushButton_flip_clicked()
 {
 	if (m_session->answerShowed()) {
-        ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
-        ui->label_card->setText(tr("Pitanje"));
+		ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
+		ui->label_card->setText(tr("Pitanje"));
 	}
 	else {
-        ui->textEdit_card->setText(m_session->getCurrentCard().questionAnswer());
-        ui->label_card->setText(tr("Odgovor"));
+		ui->textEdit_card->setText(m_session->getCurrentCard().questionAnswer());
+		ui->label_card->setText(tr("Odgovor"));
 	}
 
 	m_session->flipCard();
@@ -50,11 +50,11 @@ void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 	m_session->deckStats()->addGrade(m_session->currentCardIndex(), grade);
 	if (m_session->hasNextCard()) {
 		m_session->nextCard();
-        ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
-        ui->label_card->setText(tr("Pitanje"));
+		ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
+		ui->label_card->setText(tr("Pitanje"));
 	}
-    else {
-        QMessageBox::information(this, tr("Gotova sesija"), tr("Uspešno ste prešli sva odabrana pitanja!"));
+	else {
+		QMessageBox::information(this, tr("Gotova sesija"), tr("Uspešno ste prešli sva odabrana pitanja!"));
 		m_session->endSession();
 
 		QJsonObject requestObject;
@@ -73,9 +73,9 @@ void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 		ServerCommunicator communicator;
 		QJsonObject jsonObj = communicator.sendRequest(request);
 
-        if (jsonObj["status"].toString() != "success") {
-            QMessageBox::information(this, tr("Greška"),
-                                     tr("Došlo je do greške, statistike za poslednje učenje nisu sačuvane!"));
+		if (jsonObj["status"].toString() != "success") {
+			QMessageBox::information(this, tr("Greška"),
+									 tr("Došlo je do greške, statistike za poslednje učenje nisu sačuvane!"));
 			return;
 		}
 		if (m_whiteboard != nullptr) {

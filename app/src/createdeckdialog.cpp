@@ -29,8 +29,8 @@ Privacy CreateDeckDialog::getDeckPrivacy() const
 
 void CreateDeckDialog::on_buttonBox_done_accepted()
 {
-    if (getDeckName().trimmed().isEmpty()) {
-        QMessageBox::critical(this, tr("Pogrešan unos"), tr("Niste popunili polje za naziv špila!"));
+	if (getDeckName().trimmed().isEmpty()) {
+		QMessageBox::critical(this, tr("Pogrešan unos"), tr("Niste popunili polje za naziv špila!"));
 		reject();
 	}
 }
