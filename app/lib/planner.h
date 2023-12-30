@@ -1,8 +1,8 @@
 #ifndef PLANNER_H
 #define PLANNER_H
 
-#include "lib/activity.h"
-#include "lib/serializable.h"
+#include "activity.h"
+#include "serializable.h"
 #include <QMap>
 #include <QVector>
 

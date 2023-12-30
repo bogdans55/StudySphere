@@ -1,4 +1,4 @@
-#include "lib/card.h"
+#include "../lib/card.h"
 
 Card::Card() : m_questionText(), m_answerText(), m_questionDifficulty(), m_stats() {}
 

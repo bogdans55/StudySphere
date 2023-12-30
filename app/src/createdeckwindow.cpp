@@ -1,7 +1,7 @@
-#include "lib/createdeckwindow.h"
-#include "lib/card.h"
-#include "lib/jsonserializer.h"
-#include "lib/serializer.h"
+#include "../lib/createdeckwindow.h"
+#include "../lib/card.h"
+#include "../lib/jsonserializer.h"
+#include "../lib/serializer.h"
 #include "ui_createdeckwindow.h"
 
 #include <QFileDialog>

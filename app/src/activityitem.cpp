@@ -1,4 +1,4 @@
-#include "lib/activityitem.h"
+#include "../lib/activityitem.h"
 #include <QPainter>
 #include <QTextDocument>
 

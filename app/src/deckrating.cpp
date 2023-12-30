@@ -1,4 +1,4 @@
-#include "lib/deckrating.h"
+#include "../lib/deckrating.h"
 
 DeckRating::DeckRating() : Grading() {}
 

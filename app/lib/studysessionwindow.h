@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-#include "lib/studysession.h"
+#include "studysession.h"
 
 namespace Ui
 {

@@ -1,7 +1,7 @@
 #ifndef LIBRARYSCENE_H
 #define LIBRARYSCENE_H
 
-#include "lib/deckitem.h"
+#include "deckitem.h"
 
 class Deck;
 class DectItem;

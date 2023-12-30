@@ -6,10 +6,10 @@
 #include <iostream>
 #include <time.h>
 
-#include "lib/card.h"
-#include "lib/deck.h"
-#include "lib/user.h"
-#include "lib/deckstats.h"
+#include "card.h"
+#include "deck.h"
+#include "user.h"
+#include "deckstats.h"
 
 class StudySession
 {

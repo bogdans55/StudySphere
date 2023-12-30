@@ -1,4 +1,4 @@
-#include "lib/cardstats.h"
+#include "../lib/cardstats.h"
 
 CardStats::CardStats() : Grading() {}
 

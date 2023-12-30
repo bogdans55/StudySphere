@@ -1,4 +1,4 @@
-#include "lib/scheduleitem.h"
+#include "../lib/scheduleitem.h"
 #include <QPainter>
 
 ScheduleItem::ScheduleItem() {}

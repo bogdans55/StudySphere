@@ -1,6 +1,6 @@
-#include "lib/libraryscene.h"
-#include "lib/deck.h"
-#include "lib/deckitem.h"
+#include "../lib/libraryscene.h"
+#include "../lib/deck.h"
+#include "../lib/deckitem.h"
 
 LibraryScene::LibraryScene(QObject *parent) : QGraphicsScene(parent) {}
 

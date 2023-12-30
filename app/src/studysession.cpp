@@ -1,5 +1,5 @@
-#include "lib/studysession.h"
-#include "lib/jsonserializer.h"
+#include "../lib/studysession.h"
+#include "../lib/jsonserializer.h"
 #include <QDebug>
 #include <QRandomGenerator>
 #include <algorithm>

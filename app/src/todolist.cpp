@@ -1,4 +1,4 @@
-#include "lib/todolist.h"
+#include "../lib/todolist.h"
 
 #include <QVariant>
 #include <QVariantList>

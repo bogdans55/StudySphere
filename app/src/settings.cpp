@@ -1,7 +1,7 @@
 #include <QApplication>
 #include <QFile>
 
-#include "lib/settings.h"
+#include "../lib/settings.h"
 
 #include<QTranslator>
 #include<QFile>

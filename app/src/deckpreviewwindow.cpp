@@ -1,5 +1,5 @@
-#include "lib/deckpreviewwindow.h"
-#include "lib/jsonserializer.h"
+#include "../lib/deckpreviewwindow.h"
+#include "../lib/jsonserializer.h"
 #include "ui_deckpreviewwindow.h"
 
 #include <QMessageBox>

@@ -1,5 +1,5 @@
-#include "lib/browser.h"
-#include "lib/deck.h"
+#include "../lib/browser.h"
+#include "../lib/deck.h"
 #include <QDebug>
 #include <QDir>
 #include <QFileInfo>

@@ -4,7 +4,7 @@
 #include <QPair>
 #include <QVector>
 
-#include "lib/serializable.h"
+#include "serializable.h"
 
 class ToDoList : public Serializable
 {

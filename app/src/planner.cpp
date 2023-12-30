@@ -1,4 +1,4 @@
-#include "lib/planner.h"
+#include "../lib/planner.h"
 
 Planner::Planner() : m_activities() {}
 

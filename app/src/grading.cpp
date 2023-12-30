@@ -1,4 +1,4 @@
-#include "lib/grading.h"
+#include "../lib/grading.h"
 
 #include <QVector>
 

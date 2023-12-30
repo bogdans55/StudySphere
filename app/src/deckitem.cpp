@@ -1,4 +1,4 @@
-#include "lib/deckitem.h"
+#include "../lib/deckitem.h"
 #include <QPainter>
 
 DeckItem::DeckItem(Deck *deck) : QGraphicsItem(), m_deck(*deck) {}

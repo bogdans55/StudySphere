@@ -1,7 +1,7 @@
 #ifndef CREATEDECKDIALOG_H
 #define CREATEDECKDIALOG_H
 
-#include "lib/deck.h"
+#include "deck.h"
 #include <QButtonGroup>
 #include <QDialog>
 

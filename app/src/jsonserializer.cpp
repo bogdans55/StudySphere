@@ -1,7 +1,6 @@
+#include "../lib/jsonserializer.h"
 #include <QFile>
 #include <QJsonDocument>
-
-#include "lib/jsonserializer.h"
 
 JSONSerializer::JSONSerializer() {}
 

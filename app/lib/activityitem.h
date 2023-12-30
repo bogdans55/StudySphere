@@ -1,7 +1,7 @@
 #ifndef ACTIVITYITEM_H
 #define ACTIVITYITEM_H
 
-#include "lib/activity.h"
+#include "activity.h"
 #include <QGraphicsItem>
 
 class ActivityItem : public QGraphicsItem

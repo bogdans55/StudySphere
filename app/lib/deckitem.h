@@ -1,7 +1,7 @@
 #ifndef DECKITEM_H
 #define DECKITEM_H
 
-#include "lib/deck.h"
+#include "deck.h"
 #include <QGraphicsItem>
 
 class Deck;

@@ -1,7 +1,7 @@
-#include "lib/studysessionwindow.h"
+#include "../lib/studysessionwindow.h"
 #include "ui_studysessionwindow.h"
-#include "lib/jsonserializer.h"
-#include "lib/serializer.h"
+#include "../lib/jsonserializer.h"
+#include "../lib/serializer.h"
 
 #include <QMessageBox>
 #include <QTcpServer>

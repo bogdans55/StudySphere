@@ -1,4 +1,4 @@
-#include "lib/library.h"
+#include "../lib/library.h"
 #include <QDebug>
 #include <QDir>
 #include <QFile>

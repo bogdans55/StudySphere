@@ -2,7 +2,7 @@
 #define USER_H
 
 #include <QString>
-#include "lib/serializable.h"
+#include "serializable.h"
 
 class User : public Serializable
 {

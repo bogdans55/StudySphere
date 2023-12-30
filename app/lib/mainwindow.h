@@ -1,13 +1,13 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "lib/calendar.h"
-#include "lib/deckstats.h"
-#include "lib/planner.h"
-#include "lib/plannerscene.h"
-#include "lib/todolist.h"
+#include "calendar.h"
+#include "deckstats.h"
+#include "planner.h"
+#include "plannerscene.h"
+#include "todolist.h"
 #include "libraryscene.h"
-#include "settings.h"
+#include "../settings.h"
 #include "user.h"
 
 #include <QListWidgetItem>
@@ -18,7 +18,7 @@
 #include <QStandardPaths>
 #include <QTableWidget>
 
-#include "lib/settings.h"
+#include "../lib/settings.h"
 
 #include <QDir>
 #include <QCoreApplication>

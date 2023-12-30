@@ -1,7 +1,7 @@
 #ifndef SERIALIZER_H
 #define SERIALIZER_H
 
-#include "lib/serializable.h"
+#include "serializable.h"
 #include <QString>
 
 class Serializer

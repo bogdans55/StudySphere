@@ -1,8 +1,8 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include "lib/grading.h"
-#include "lib/serializable.h"
+#include "grading.h"
+#include "serializable.h"
 #include <QJsonObject>
 
 // in .h .cpp ?
