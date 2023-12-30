@@ -130,6 +130,12 @@ void MainWindow::savePlanner()
 	ServerCommunicator communicator;
 
 	QJsonObject jsonObj = communicator.sendRequest(request);
+
+	if(jsonObj["status"].toString() != "success"){
+		//TODO Juca Translation
+		QMessageBox::information(this,"Čuvanje planera" ,"Došlo je do greške, planer nije sačuvan!");
+		return;
+	}
 }
 
 // void MainWindow::on_pushButton_createDeck_clicked()
@@ -153,7 +159,6 @@ void MainWindow::deckPreview_clicked()
 	QPushButton *chosenDeck = qobject_cast<QPushButton *>(sender());
 	QString deckName = chosenDeck->text();
 
-	Deck *deck = new Deck();
 
 	QJsonObject requestObject;
 	requestObject["action"] = "sendDeck";
@@ -163,7 +168,17 @@ void MainWindow::deckPreview_clicked()
 
 	QJsonDocument request(requestObject);
 	ServerCommunicator communicator;
-	QJsonObject jsonObj = communicator.sendRequest(request);	JSONSerializer jsonSerializer;
+	QJsonObject jsonObj = communicator.sendRequest(request);
+	JSONSerializer jsonSerializer;
+
+
+	if(jsonObj["status"].toString() != "success"){
+		//TODO Juca Translation
+		QMessageBox::information(this,"Pregled špila" ,"Došlo je do greške, pregled špila se nije pokrenuo, probajte ponovo!");
+		return;
+	}
+	Deck *deck = new Deck();
+
 	QJsonObject deckObject = jsonObj[deckName + "_deck.json"].toObject();
 	QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 	jsonSerializer.loadJson(*deck, deckDocument);
@@ -184,7 +199,6 @@ void MainWindow::deckButton_clicked()
 	QString deckName = chosenDeck->text();
 	QStringList deckNameEdited = deckName.split('.')[0].split('_');
 
-	Deck *deck = new Deck();
 	QJsonObject requestObject;
 
 	requestObject["action"] = "sendDeck";
@@ -195,6 +209,13 @@ void MainWindow::deckButton_clicked()
 	QJsonDocument request(requestObject);
 	ServerCommunicator communicator;
 	QJsonObject jsonObj = communicator.sendRequest(request);
+
+	if(jsonObj["status"].toString() != "success"){
+		//TODO Juca Translation
+		QMessageBox::information(this,"Učenje" ,"Došlo je do greške, špil se nije pokrenuo, probajte ponovo!");
+		return;
+	}
+	Deck *deck = new Deck();
 
 	JSONSerializer jsonSerializer;
 
@@ -227,6 +248,13 @@ void MainWindow::on_pushButton_todo_clicked()
 
 		ServerCommunicator communicator;
 		QJsonObject jsonObj = communicator.sendRequest(request);
+
+
+		if(jsonObj["status"].toString() != "success"){
+			//TODO Juca Translation
+			QMessageBox::information(this,"TODO lista" ,"Došlo je do greške, todo lista nije učitana, probajte ponovo!");
+			return;
+		}
 
 		JSONSerializer jsonSerializer;
 
@@ -262,6 +290,11 @@ void MainWindow::on_pushButton_planer_clicked()
 		ServerCommunicator communicator;
 		QJsonObject jsonObj = communicator.sendRequest(request);
 
+		if(jsonObj["status"].toString() != "success"){
+			//TODO Juca Translation
+			QMessageBox::information(this,"Planer" ,"Došlo je do greške, planer nije učitan, probajte ponovo!");
+			return;
+		}
 		JSONSerializer jsonSerializer;
 
 		QJsonObject deckObject = jsonObj["planner"].toObject();
@@ -288,7 +321,11 @@ void MainWindow::on_pushButton_calendar_clicked()
 		ServerCommunicator communicator;
 		QJsonObject jsonObj = communicator.sendRequest(request);
 
-		qDebug() << jsonObj;
+		if(jsonObj["status"].toString() != "success"){
+			//TODO Juca Translation
+			QMessageBox::information(this,"Kalendar" ,"Došlo je do greške, kalendar nije učitan, probajte ponovo!");
+			return;
+		}
 
 		JSONSerializer jsonSerializer;
 
@@ -557,9 +594,6 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 	ServerCommunicator communicator;
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
-	qDebug() << jsonObj["status"];
-	qDebug() << jsonObj;
-
 	if (jsonObj["status"] != QJsonValue::Undefined && jsonObj["status"] != "Password incorrect, try again") {
 		ui->label_username->setText(request["username"].toString());
 		ui->pushButton_login->setText("Odjavi se");
@@ -624,6 +658,12 @@ void MainWindow::saveCalendar()
 	QJsonDocument request(requestObject);
 	ServerCommunicator communicator;
 	QJsonObject jsonObj = communicator.sendRequest(request);
+
+	if(jsonObj["status"].toString() != "success"){
+		//TODO Juca Translation
+		QMessageBox::information(this,"Kalendar" ,"Došlo je do greške, kalendar nije sačuvan, probajte ponovo!");
+		return;
+	}
 }
 
 void MainWindow::on_pushButton_addTodo_clicked()
@@ -693,8 +733,11 @@ void MainWindow::saveToDoList()
 	ServerCommunicator communicator;
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
-	qDebug() << jsonObj;
-}
+	if(jsonObj["status"].toString() != "success"){
+		//TODO Juca Translation
+		QMessageBox::information(this,"TODO lista" ,"Došlo je do greške, todo lista nije sačuvana, probajte ponovo!");
+		return;
+	}}
 
 void MainWindow::on_pushButton_search_clicked()
 {
@@ -720,8 +763,6 @@ void MainWindow::on_pushButton_search_clicked()
 	if (jsonObj["status"] == "No result") {
 		return;
 	}
-
-	qDebug() << jsonObj["status"];
 
 	QString deckNames = jsonObj.value("decks").toString();
 	if (deckNames != "") {
@@ -808,7 +849,6 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 					if (checkbox->isChecked()) {
 
 						QString deckName = button->text();
-						Deck *deck = new Deck();
 
 						QJsonObject requestObject;
 						requestObject["action"] = "sendDeck";
@@ -820,6 +860,14 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 						ServerCommunicator communicator;
 						QJsonObject jsonObj = communicator.sendRequest(request);
 						JSONSerializer jsonSerializer;
+
+						if(jsonObj["status"].toString() != "success"){
+							//TODO Juca Translation
+							QMessageBox::information(this,"Uvoz špilova" ,"Došlo je do greške, nije sačuvano, probajte ponovo!");
+							return;
+						}
+
+						Deck *deck = new Deck();
 
 						QJsonObject deckObject = jsonObj[deckName].toObject();
 						QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
@@ -900,7 +948,6 @@ void MainWindow::on_comboBox_deck_currentIndexChanged(int index)
 	QJsonObject statsObject = communicator.sendRequest(request);
 	QJsonDocument statsDocument = QJsonDocument::fromVariant(statsObject.toVariantMap());
 	JSONSerializer jsonSerializer;
-
 
 	if(statsObject["status"].toString() != "no stats"){
 		JSONSerializer jsonSerializer;
