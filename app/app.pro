@@ -41,6 +41,7 @@ SOURCES += \
     src/user.cpp \
     src/settings.cpp \
     src/mainwindow.cpp \
+    src/whiteboardwindow.cpp
 
 HEADERS += \
     lib/deckpreviewwindow.h \
@@ -75,6 +76,7 @@ HEADERS += \
     lib/plannerscene.h \
     lib/scheduleitem.h \
     lib/logindialog.h \
+    lib/whiteboardwindow.h \
     tests/catch.hpp
 
 FORMS += \
@@ -83,7 +85,8 @@ FORMS += \
     forms/createdeckdialog.ui \
     forms/mainwindow.ui \
     forms/studysessionwindow.ui \
-    forms/logindialog.ui
+    forms/logindialog.ui \
+    forms/whiteboardwindow.ui
 
 RESOURCES += \
     res/icons.qrc \

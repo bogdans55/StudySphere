@@ -143,8 +143,9 @@ void MainWindow::createDeck_clicked()
 		CreateDeckWindow *createDeck = new CreateDeckWindow(name, privacy, m_user);
 		connect(createDeck, &CreateDeckWindow::writeGeneratedID, this, &MainWindow::addNewDeck);
 		createDeck->setAttribute(Qt::WA_DeleteOnClose);
-		createDeck->show();
-	}
+        createDeck->show();
+        setEnabled(false);
+    }
 }
 
 void MainWindow::deckPreview_clicked()
