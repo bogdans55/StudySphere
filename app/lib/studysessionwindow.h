@@ -47,6 +47,8 @@ class StudySessionWindow : public QWidget
 	StudySession *m_session;
 
 	WhiteboardWindow *m_whiteboard = nullptr;
+
+    void setDifficultyColor();
 };
 
 #endif // STUDYSESSIONWINDOW_H

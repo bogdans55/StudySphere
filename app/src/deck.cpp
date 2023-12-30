@@ -69,7 +69,7 @@ void Deck::fromVariant(const QVariant &variant)
 		m_cards.push_back(currCard);
     }
 
-    m_user.fromVariant(map.value("User"));
+	m_user.fromVariant(map.value("User"));
 }
 
 void Deck::setId(uint64_t id)

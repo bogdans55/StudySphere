@@ -17,6 +17,7 @@ DeckPreviewWindow::DeckPreviewWindow(Deck *deck, User &user, QWidget *parent)
 {
 	ui->setupUi(this);
 	ui->textEdit_card_preview->setText(deck->cards().at(m_currentCardIndex)->questionText());
+    setDifficultyColor();
 }
 
 DeckPreviewWindow::~DeckPreviewWindow()
@@ -74,6 +75,7 @@ void DeckPreviewWindow::on_pushButton_next_clicked()
         auto card = cards[m_currentCardIndex];
         ui->textEdit_card_preview->setText(card->questionText());
 		m_answerShowed = false;
+        setDifficultyColor();
 	}
 	else {
 		QMessageBox::information(this, tr("Pregled špila"), tr("Špil nema više kartica!"));
@@ -83,4 +85,14 @@ void DeckPreviewWindow::on_pushButton_next_clicked()
 bool DeckPreviewWindow::hasNextCard()
 {
 	return m_currentCardIndex + 1 < m_deck.cards().length();
+}
+
+void DeckPreviewWindow::setDifficultyColor()
+{
+    if (m_deck.cards().at(m_currentCardIndex)->questionDifficulty() == Difficulty::EASY)
+        ui->toolButton_difficulty_preview->setStyleSheet("background-color: green; border-radius: 10px;");
+    else if (m_deck.cards().at(m_currentCardIndex)->questionDifficulty() == Difficulty::MEDIUM)
+        ui->toolButton_difficulty_preview->setStyleSheet("background-color: yellow; border-radius: 10px;");
+    else if (m_deck.cards().at(m_currentCardIndex)->questionDifficulty() == Difficulty::HARD)
+        ui->toolButton_difficulty_preview->setStyleSheet("background-color: red; border-radius: 10px;");
 }
