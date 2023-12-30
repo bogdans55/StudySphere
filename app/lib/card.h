@@ -26,8 +26,6 @@ class Card : public Serializable
 
 	inline Difficulty questionDifficulty() const { return m_questionDifficulty; }
 
-    void setAnswerShowed(bool answerShowed);
-
 	QVariant toVariant() const override;
 	void fromVariant(const QVariant &variant) override;
 
