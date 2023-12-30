@@ -72,8 +72,13 @@ void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 
 		QJsonDocument request(requestObject);
 		ServerCommunicator communicator;
-		communicator.sendRequest(request);
+		QJsonObject jsonObj = communicator.sendRequest(request);
 
+		if(jsonObj["status"].toString() != "success"){
+			//TODO Juca Translation
+			QMessageBox::information(this,"Greška" ,"Došlo je do greške, statistike za poslednje učenje nisu sačuvane!");
+			return;
+		}
         if (m_whiteboard != nullptr) {
             m_whiteboard->close();
             delete m_whiteboard;
