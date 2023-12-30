@@ -33,7 +33,8 @@ SOURCES += \
     ../app/src/user.cpp \
     ../app/src/settings.cpp \
     test_deck.cpp \
-    main.cpp
+    main.cpp \
+    test_deckstats.cpp
 
 HEADERS += \
     ../app/lib/activity.h \
