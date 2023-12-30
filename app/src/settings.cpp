@@ -27,13 +27,17 @@ void Settings::setTheme(const int index)
     QString styleSheetName;
 
     switch (index) {
-    case DARK:
+    case BLUE:
         styleSheetName = "Blue";
-        m_theme = DARK;
+        m_theme = BLUE;
         break;
-    case LIGHT:
+    case ORANGE:
         styleSheetName = "Orange";
-        m_theme = LIGHT;
+        m_theme = ORANGE;
+        break;
+    case DARK:
+        styleSheetName = "Dark";
+        m_theme = DARK;
         break;
         // Add more cases for other themes if needed
 

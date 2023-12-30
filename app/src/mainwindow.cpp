@@ -64,7 +64,7 @@ MainWindow::MainWindow(QWidget *parent)
     Settings& settings = Settings::instance(app);
 
     settings.setLanguage(Language::SERBIAN);
-    settings.setTheme(Theme::DARK);
+    settings.setTheme(Theme::BLUE);
     ui->retranslateUi(this);
 
     ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
