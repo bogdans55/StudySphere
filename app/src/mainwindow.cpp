@@ -23,6 +23,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QStandardPaths>
+#include <QCheckBox>
 
 enum Page
 {
@@ -344,11 +345,6 @@ void MainWindow::on_pushButton_settings_clicked()
 	ui->stackedWidget->setCurrentIndex(SETTINGS);
 }
 
-void MainWindow::on_pushButton_help_clicked()
-{
-	ui->stackedWidget->setCurrentIndex(HELP);
-}
-
 void MainWindow::on_pushButton_addEvent_clicked()
 {
 	QString eventName = ui->lineEdit_event->text();
@@ -479,8 +475,7 @@ void MainWindow::setEnabled(bool value)
 	ui->pushButton_planer->setEnabled(value);
 	ui->pushButton_calendar->setEnabled(value);
 	ui->pushButton_stats->setEnabled(value);
-	ui->pushButton_settings->setEnabled(value);
-	ui->pushButton_help->setEnabled(value);
+    ui->pushButton_settings->setEnabled(value);
 	ui->pushButton_importDecks->setEnabled(value);
 	ui->pushButton_exportDecks->setEnabled(value);
 	ui->pushButton_addTodo->setEnabled(value);
@@ -893,9 +888,9 @@ void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table, int &co
 
 void MainWindow::addCreateDeckButton()
 {
-	QPushButton *button = new QPushButton("+ (kreiraj novi spil)", ui->tableWidget_library);
+    QPushButton *button = new QPushButton("+", ui->tableWidget_library);
 	connect(button, &QPushButton::clicked, this, &MainWindow::createDeck_clicked);
-	button->setStyleSheet("margin-left: 25%;");
+    button->setStyleSheet("margin-left: 25%; font-size: 150pt; border-radius: 50px;");
 	if (m_deckCounter % 2 == 0) {
 		ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
         ui->tableWidget_library->setColumnWidth(m_deckCounter / 2, 220);

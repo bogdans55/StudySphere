@@ -60,8 +60,6 @@ class MainWindow : public QWidget
 
 	void on_pushButton_settings_clicked();
 
-	void on_pushButton_help_clicked();
-
 	void on_calendarWidget_activated(const QDate &date);
 
 	void on_pushButton_addActivity_clicked();
