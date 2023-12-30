@@ -182,19 +182,20 @@ void MainWindow::deckButton_clicked()
 
 	QString deckName = chosenDeck->text();
 	Deck *deck = new Deck();
-
 	QJsonObject requestObject;
+
 	requestObject["action"] = "sendDeck";
 	requestObject["username"] = m_user.username();
-	requestObject["DeckId"] = deckName.split('_')[1].split('.')[0];
+	requestObject["DeckId"] = deckName.split('_')[1];
 	requestObject["Privacy"] = "PRIVATE";
 
 	QJsonDocument request(requestObject);
 	ServerCommunicator communicator;
 	QJsonObject jsonObj = communicator.sendRequest(request);
+
 	JSONSerializer jsonSerializer;
 
-	QJsonObject deckObject = jsonObj[deckName].toObject();
+	QJsonObject deckObject = jsonObj[deckName+"_deck.json"].toObject();
 	QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 
 	jsonSerializer.loadJson(*deck, deckDocument);
