@@ -820,11 +820,12 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 					if (checkbox->isChecked()) {
 
 						QString deckName = button->text();
+						QStringList deckNameEdited = deckName.split('.')[0].split('_');
 
 						QJsonObject requestObject;
 						requestObject["action"] = "sendDeck";
 						requestObject["username"] = m_user.username();
-						requestObject["DeckId"] = deckName.split('_')[1].split('.')[0];
+						requestObject["DeckId"] = deckName.split('_')[1];
 						requestObject["Privacy"] = "PRIVATE";
 
 						QJsonDocument request(requestObject);
@@ -840,7 +841,7 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 
 						Deck *deck = new Deck();
 
-						QJsonObject deckObject = jsonObj[deckName].toObject();
+						QJsonObject deckObject = jsonObj[deckNameEdited[0].append("_").append(deckNameEdited[1]) + "_deck.json"].toObject();
 						QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 						jsonSerializer.loadJson(*deck, deckDocument);
 						jsonSerializer.save(*deck, selectedDirectory + "/" + deckName);
