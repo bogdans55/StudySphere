@@ -1,11 +1,8 @@
 #include "lib/servercommunicator.h"
-#include <QTextStream>
 #include <QDebug>
+#include <QTextStream>
 
-ServerCommunicator::ServerCommunicator(QObject *parent)
-	: QObject(parent), socket(new QTcpSocket(this))
-{
-}
+ServerCommunicator::ServerCommunicator(QObject *parent) : QObject(parent), socket(new QTcpSocket(this)) {}
 
 QJsonObject ServerCommunicator::sendRequest(const QJsonDocument &request)
 {
@@ -25,7 +22,8 @@ QJsonObject ServerCommunicator::sendRequest(const QJsonDocument &request)
 
 		socket->disconnectFromHost();
 		return jsonObj;
-	} else {
+	}
+	else {
 		QJsonObject response;
 		response["status"] = "Failed to connect to the server";
 		qDebug() << response["status"];

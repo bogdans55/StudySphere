@@ -23,14 +23,14 @@ class Deck : public Serializable
 	Privacy m_privacy;
 	QImage m_thumbnail;
 	Grading m_rating;
-    User m_user;
+	User m_user;
 
   public:
 	Deck();
-    Deck(const QString &name, const User &user, Privacy privacy, const QImage &thumbnail);
-    Deck(const QString &name, const User &user, Privacy privacy);
+	Deck(const QString &name, const User &user, Privacy privacy, const QImage &thumbnail);
+	Deck(const QString &name, const User &user, Privacy privacy);
 	Deck(const Deck &deck);
-    ~Deck();
+	~Deck();
 
 	inline unsigned int deckId() const { return m_deckId; }
 
@@ -44,7 +44,7 @@ class Deck : public Serializable
 
 	inline Grading rating() const { return m_rating; }
 
-    inline User user() const { return m_user; }
+	inline User user() const { return m_user; }
 
 	void addCard(Card *card);
 	void updateRating(unsigned grade);

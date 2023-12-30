@@ -17,7 +17,7 @@ CreateDeckWindow::CreateDeckWindow(User &user, QWidget *parent)
 }
 
 CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, User &user, QWidget *parent)
-    : QWidget(parent), ui(new Ui::CreateDeckWindow), m_deck(name, user, privacy), m_user(user)
+	: QWidget(parent), ui(new Ui::CreateDeckWindow), m_deck(name, user, privacy), m_user(user)
 {
 	ui->setupUi(this);
 
@@ -34,7 +34,7 @@ CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, User &user, QW
 CreateDeckWindow::~CreateDeckWindow()
 {
 	delete ui;
-    delete m_questionDifficulty;
+	delete m_questionDifficulty;
 }
 
 QString CreateDeckWindow::getQuestionText() const
@@ -49,7 +49,7 @@ QString CreateDeckWindow::getAnswerText() const
 
 Difficulty CreateDeckWindow::getDifficulty() const
 {
-    return (Difficulty)m_questionDifficulty->checkedId();
+	return (Difficulty)m_questionDifficulty->checkedId();
 }
 
 void CreateDeckWindow::on_pushButton_finish_clicked()
@@ -71,9 +71,9 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
 	ServerCommunicator communicator;
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
-	if(jsonObj["status"].toString() != "success"){
-		//TODO Juca Translation
-		QMessageBox::information(this,"Kreiranje špila" ,"Došlo je do greške, špil nije sačuvan, probajte ponovo!");
+	if (jsonObj["status"].toString() != "success") {
+		// TODO Juca Translation
+		QMessageBox::information(this, "Kreiranje špila", "Došlo je do greške, špil nije sačuvan, probajte ponovo!");
 		return;
 	}
 
@@ -84,19 +84,19 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
 
 void CreateDeckWindow::generateId()
 {
-		QJsonObject requestObject;
+	QJsonObject requestObject;
 
-		requestObject["action"] = "generateId";
+	requestObject["action"] = "generateId";
 
-		ServerCommunicator communicator;
-		QJsonDocument request(requestObject);
+	ServerCommunicator communicator;
+	QJsonDocument request(requestObject);
 
-		QJsonObject idObject = communicator.sendRequest(request);
+	QJsonObject idObject = communicator.sendRequest(request);
 
-		m_deck.setId(idObject.value("DeckId").toVariant().toULongLong());
+	m_deck.setId(idObject.value("DeckId").toVariant().toULongLong());
 
-        emit writeGeneratedID(m_deck.name() + "_" + QString::number(m_deck.deckId()) + "_deck.json");
-        qDebug() << "send " << m_deck.name() + "_" + QString::number(m_deck.deckId());
+	emit writeGeneratedID(m_deck.name() + "_" + QString::number(m_deck.deckId()) + "_deck.json");
+	qDebug() << "send " << m_deck.name() + "_" + QString::number(m_deck.deckId());
 }
 
 void CreateDeckWindow::on_pushButton_add_clicked()
@@ -121,4 +121,3 @@ void CreateDeckWindow::on_pushButton_add_clicked()
 	m_questionDifficulty->checkedButton()->setChecked(false);
 	m_questionDifficulty->setExclusive(true);
 }
-

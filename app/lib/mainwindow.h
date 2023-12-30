@@ -20,8 +20,8 @@
 
 #include "lib/settings.h"
 
-#include <QDir>
 #include <QCoreApplication>
+#include <QDir>
 #include <QStandardPaths>
 
 QT_BEGIN_NAMESPACE
@@ -41,7 +41,7 @@ class MainWindow : public QWidget
 	MainWindow(QWidget *parent = nullptr);
 	~MainWindow();
 
-private slots:
+  private slots:
 	//	void on_pushButton_createDeck_clicked();
 
 	//	void on_pushButton_startStudySession_clicked();
@@ -50,7 +50,7 @@ private slots:
 
 	void createDeck_clicked();
 
-    void deckPreview_clicked();
+	void deckPreview_clicked();
 
 	void on_pushButton_library_clicked();
 
@@ -70,9 +70,9 @@ private slots:
 
 	void on_pushButton_addActivity_clicked();
 
-    void on_comboBox_language_currentIndexChanged(int index);
+	void on_comboBox_language_currentIndexChanged(int index);
 
-    void on_comboBox_theme_currentIndexChanged(int index);
+	void on_comboBox_theme_currentIndexChanged(int index);
 
 	void on_pushButton_login_clicked();
 
@@ -90,13 +90,13 @@ private slots:
 
 	void on_pushButton_importDecks_clicked();
 
-    void on_pushButton_exportDecks_clicked();
+	void on_pushButton_exportDecks_clicked();
 
-    void addNewDeck(QString deckNameID);
+	void addNewDeck(QString deckNameID);
 
-    void on_comboBox_deck_currentIndexChanged(int index);
+	void on_comboBox_deck_currentIndexChanged(int index);
 
-protected:
+  protected:
 	void resizeEvent(QResizeEvent *event) override;
 
   private:
@@ -109,7 +109,7 @@ protected:
 
 	ToDoList m_toDoList;
 
-    QVector<QString> m_deckNames;
+	QVector<QString> m_deckNames;
 
 	bool m_calendarLoaded = false;
 	void saveCalendar();
@@ -130,11 +130,11 @@ protected:
 	void saveOnServer();
 
 	void setupTableView(QTableWidget *table);
-    void addDeckToTable(QString deckNameID, QTableWidget *table, int &counter);
-    int m_deckCounter = 0;
-    void addCreateDeckButton();
-    void loadStats(DeckStats *deckStats);
-    void setEnabled(bool value);
-    void setPlannerWidth(int width);
+	void addDeckToTable(QString deckNameID, QTableWidget *table, int &counter);
+	int m_deckCounter = 0;
+	void addCreateDeckButton();
+	void loadStats(DeckStats *deckStats);
+	void setEnabled(bool value);
+	void setPlannerWidth(int width);
 };
 #endif // MAINWINDOW_H

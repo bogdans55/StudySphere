@@ -35,18 +35,18 @@ class StudySessionWindow : public QWidget
 
 	void on_pushButton_good_clicked();
 
-    void on_pushButton_whiteboard_clicked();
+	void on_pushButton_whiteboard_clicked();
 
-public slots:
-    void closeWhiteboard();
+  public slots:
+	void closeWhiteboard();
 
-    void clearWhiteboard();
+	void clearWhiteboard();
 
-private:
+  private:
 	Ui::StudySessionWindow *ui;
 	StudySession *m_session;
 
-    WhiteboardWindow *m_whiteboard = nullptr;
+	WhiteboardWindow *m_whiteboard = nullptr;
 };
 
 #endif // STUDYSESSIONWINDOW_H

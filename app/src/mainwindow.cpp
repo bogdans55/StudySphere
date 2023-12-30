@@ -6,10 +6,10 @@
 #include "lib/libraryscene.h"
 #include "lib/logindialog.h"
 #include "lib/scheduleitem.h"
+#include "lib/servercommunicator.h"
 #include "lib/studysessionwindow.h"
 #include "lib/user.h"
 #include "ui_mainwindow.h"
-#include "lib/servercommunicator.h"
 
 #include <QCryptographicHash>
 #include <QDebug>
@@ -61,16 +61,15 @@ MainWindow::MainWindow(QWidget *parent)
 		m_plannerScenes[i]->addItem(scheduleItem);
 	}
 
-	QApplication* app = qobject_cast<QApplication*>(QApplication::instance());
-	Settings& settings = Settings::instance(app);
+	QApplication *app = qobject_cast<QApplication *>(QApplication::instance());
+	Settings &settings = Settings::instance(app);
 
-    settings.setLanguage(Language::SERBIAN);
-    settings.setTheme(Theme::BLUE);
-    ui->retranslateUi(this);
+	settings.setLanguage(Language::SERBIAN);
+	settings.setTheme(Theme::BLUE);
+	ui->retranslateUi(this);
 
 	ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
 	ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
-
 
 	connect(ui->listWidget_todos, &QListWidget::itemChanged, this, &MainWindow::onTodoItemChanged);
 }
@@ -92,13 +91,10 @@ MainWindow::~MainWindow()
 		delete scene;
 	}
 
-
 	m_planner.deleteAll();
 	m_libraryScene.clear();
 	m_calendar.deleteAll();
 	m_toDoList.deleteAllToDos();
-
-
 }
 
 void MainWindow::saveOnServer()
@@ -131,9 +127,9 @@ void MainWindow::savePlanner()
 
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
-	if(jsonObj["status"].toString() != "success"){
-		//TODO Juca Translation
-		QMessageBox::information(this,"Čuvanje planera" ,"Došlo je do greške, planer nije sačuvan!");
+	if (jsonObj["status"].toString() != "success") {
+		// TODO Juca Translation
+		QMessageBox::information(this, "Čuvanje planera", "Došlo je do greške, planer nije sačuvan!");
 		return;
 	}
 }
@@ -149,16 +145,15 @@ void MainWindow::createDeck_clicked()
 		CreateDeckWindow *createDeck = new CreateDeckWindow(name, privacy, m_user);
 		connect(createDeck, &CreateDeckWindow::writeGeneratedID, this, &MainWindow::addNewDeck);
 		createDeck->setAttribute(Qt::WA_DeleteOnClose);
-        createDeck->show();
-        setEnabled(false);
-    }
+		createDeck->show();
+		setEnabled(false);
+	}
 }
 
 void MainWindow::deckPreview_clicked()
 {
 	QPushButton *chosenDeck = qobject_cast<QPushButton *>(sender());
 	QString deckName = chosenDeck->text();
-
 
 	QJsonObject requestObject;
 	requestObject["action"] = "sendDeck";
@@ -171,10 +166,10 @@ void MainWindow::deckPreview_clicked()
 	QJsonObject jsonObj = communicator.sendRequest(request);
 	JSONSerializer jsonSerializer;
 
-
-	if(jsonObj["status"].toString() != "success"){
-		//TODO Juca Translation
-		QMessageBox::information(this,"Pregled špila" ,"Došlo je do greške, pregled špila se nije pokrenuo, probajte ponovo!");
+	if (jsonObj["status"].toString() != "success") {
+		// TODO Juca Translation
+		QMessageBox::information(this, "Pregled špila",
+								 "Došlo je do greške, pregled špila se nije pokrenuo, probajte ponovo!");
 		return;
 	}
 	Deck *deck = new Deck();
@@ -210,16 +205,16 @@ void MainWindow::deckButton_clicked()
 	ServerCommunicator communicator;
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
-	if(jsonObj["status"].toString() != "success"){
-		//TODO Juca Translation
-		QMessageBox::information(this,"Učenje" ,"Došlo je do greške, špil se nije pokrenuo, probajte ponovo!");
+	if (jsonObj["status"].toString() != "success") {
+		// TODO Juca Translation
+		QMessageBox::information(this, "Učenje", "Došlo je do greške, špil se nije pokrenuo, probajte ponovo!");
 		return;
 	}
 	Deck *deck = new Deck();
 
 	JSONSerializer jsonSerializer;
 
-	QJsonObject deckObject = jsonObj[deckNameEdited[0].append("_").append(deckNameEdited[1])+"_deck.json"].toObject();
+	QJsonObject deckObject = jsonObj[deckNameEdited[0].append("_").append(deckNameEdited[1]) + "_deck.json"].toObject();
 	QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 
 	jsonSerializer.loadJson(*deck, deckDocument);
@@ -249,10 +244,10 @@ void MainWindow::on_pushButton_todo_clicked()
 		ServerCommunicator communicator;
 		QJsonObject jsonObj = communicator.sendRequest(request);
 
-
-		if(jsonObj["status"].toString() != "success"){
-			//TODO Juca Translation
-			QMessageBox::information(this,"TODO lista" ,"Došlo je do greške, todo lista nije učitana, probajte ponovo!");
+		if (jsonObj["status"].toString() != "success") {
+			// TODO Juca Translation
+			QMessageBox::information(this, "TODO lista",
+									 "Došlo je do greške, todo lista nije učitana, probajte ponovo!");
 			return;
 		}
 
@@ -278,20 +273,20 @@ void MainWindow::on_pushButton_todo_clicked()
 
 void MainWindow::setPlannerWidth(int width)
 {
-    ui->graphicsView_monday->setFixedWidth(width);
-    ui->graphicsView_tuesday->setFixedWidth(width);
-    ui->graphicsView_wednesday->setFixedWidth(width);
-    ui->graphicsView_thursday->setFixedWidth(width);
-    ui->graphicsView_friday->setFixedWidth(width);
-    ui->graphicsView_saturday->setFixedWidth(width);
-    ui->graphicsView_sunday->setFixedWidth(width);
+	ui->graphicsView_monday->setFixedWidth(width);
+	ui->graphicsView_tuesday->setFixedWidth(width);
+	ui->graphicsView_wednesday->setFixedWidth(width);
+	ui->graphicsView_thursday->setFixedWidth(width);
+	ui->graphicsView_friday->setFixedWidth(width);
+	ui->graphicsView_saturday->setFixedWidth(width);
+	ui->graphicsView_sunday->setFixedWidth(width);
 }
 
 void MainWindow::on_pushButton_planer_clicked()
 {
-//    int width = ui->graphicsView_monday->width();
-    ui->stackedWidget->setCurrentIndex(PLANER);
-//    setPlannerWidth(width);
+	//    int width = ui->graphicsView_monday->width();
+	ui->stackedWidget->setCurrentIndex(PLANER);
+	//    setPlannerWidth(width);
 
 	if (!m_plannerLoaded) {
 
@@ -304,9 +299,9 @@ void MainWindow::on_pushButton_planer_clicked()
 		ServerCommunicator communicator;
 		QJsonObject jsonObj = communicator.sendRequest(request);
 
-		if(jsonObj["status"].toString() != "success"){
-			//TODO Juca Translation
-			QMessageBox::information(this,"Planer" ,"Došlo je do greške, planer nije učitan, probajte ponovo!");
+		if (jsonObj["status"].toString() != "success") {
+			// TODO Juca Translation
+			QMessageBox::information(this, "Planer", "Došlo je do greške, planer nije učitan, probajte ponovo!");
 			return;
 		}
 		JSONSerializer jsonSerializer;
@@ -335,9 +330,9 @@ void MainWindow::on_pushButton_calendar_clicked()
 		ServerCommunicator communicator;
 		QJsonObject jsonObj = communicator.sendRequest(request);
 
-		if(jsonObj["status"].toString() != "success"){
-			//TODO Juca Translation
-			QMessageBox::information(this,"Kalendar" ,"Došlo je do greške, kalendar nije učitan, probajte ponovo!");
+		if (jsonObj["status"].toString() != "success") {
+			// TODO Juca Translation
+			QMessageBox::information(this, "Kalendar", "Došlo je do greške, kalendar nije učitan, probajte ponovo!");
 			return;
 		}
 
@@ -541,9 +536,7 @@ void MainWindow::on_pushButton_login_clicked()
 			loginSuccess = loginUser(username, password);
 			qDebug(loginSuccess ? "Logged in" : "Not Logged in");
 			if (!loginSuccess) {
-				QMessageBox::critical(
-					this, "Greška pri prijavljivanju",
-					"Neuspešno prijavljivanje. Probajte ponovo.");
+				QMessageBox::critical(this, "Greška pri prijavljivanju", "Neuspešno prijavljivanje. Probajte ponovo.");
 				return;
 			}
 			else
@@ -572,7 +565,6 @@ void MainWindow::on_pushButton_login_clicked()
 		m_calendarLoaded = false;
 		ui->stackedWidget->setCurrentIndex(LIBRARY);
 
-
 		ui->tableWidget_library->setColumnCount(0);
 		ui->tableWidget_browser->setColumnCount(0);
 		setupTableView(ui->tableWidget_library);
@@ -598,7 +590,7 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 
 	ServerCommunicator communicator;
 	QJsonObject jsonObj = communicator.sendRequest(request);
-	if(jsonObj["status"].toString() == "Failed to connect to the server"){
+	if (jsonObj["status"].toString() == "Failed to connect to the server") {
 		return false;
 	}
 	if (jsonObj["status"] != QJsonValue::Undefined && jsonObj["status"] != "Password incorrect, try again") {
@@ -666,9 +658,9 @@ void MainWindow::saveCalendar()
 	ServerCommunicator communicator;
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
-	if(jsonObj["status"].toString() != "success"){
-		//TODO Juca Translation
-		QMessageBox::information(this,"Kalendar" ,"Došlo je do greške, kalendar nije sačuvan, probajte ponovo!");
+	if (jsonObj["status"].toString() != "success") {
+		// TODO Juca Translation
+		QMessageBox::information(this, "Kalendar", "Došlo je do greške, kalendar nije sačuvan, probajte ponovo!");
 		return;
 	}
 }
@@ -740,11 +732,12 @@ void MainWindow::saveToDoList()
 	ServerCommunicator communicator;
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
-	if(jsonObj["status"].toString() != "success"){
-		//TODO Juca Translation
-		QMessageBox::information(this,"TODO lista" ,"Došlo je do greške, todo lista nije sačuvana, probajte ponovo!");
+	if (jsonObj["status"].toString() != "success") {
+		// TODO Juca Translation
+		QMessageBox::information(this, "TODO lista", "Došlo je do greške, todo lista nije sačuvana, probajte ponovo!");
 		return;
-	}}
+	}
+}
 
 void MainWindow::on_pushButton_search_clicked()
 {
@@ -795,14 +788,14 @@ void MainWindow::on_pushButton_importDecks_clicked()
 	auto cols = ui->tableWidget_library->columnCount();
 
 	for (auto i = 0; i < rows; i += 2) {
-		for(auto j = 0; j < cols; j++) {
+		for (auto j = 0; j < cols; j++) {
 			auto cell = ui->tableWidget_library->cellWidget(i, j);
-			if (QPushButton *button = dynamic_cast<QPushButton*>(cell)) {
-				for(auto it = filePaths.begin(); it != filePaths.end(); it++){
+			if (QPushButton *button = dynamic_cast<QPushButton *>(cell)) {
+				for (auto it = filePaths.begin(); it != filePaths.end(); it++) {
 					QStringList tempDeckName = (*it).split('/');
-					if(button->text() == *(--tempDeckName.end())){
-						filePaths.removeAt((it - filePaths.begin()));
-						if(filePaths.isEmpty()){
+					if (button->text() == *(--tempDeckName.end())) {
+						filePaths.removeAt(it - filePaths.begin());
+						if (filePaths.isEmpty()) {
 							QMessageBox::warning(this, "Uvoz špilova", "Unosite špil ili špilove koje već imate!");
 							break;
 						}
@@ -812,7 +805,7 @@ void MainWindow::on_pushButton_importDecks_clicked()
 		}
 	}
 
-	for(auto it = filePaths.begin(); it != filePaths.end(); it++){
+	for (auto it = filePaths.begin(); it != filePaths.end(); it++) {
 		QJsonObject request;
 		Deck deck;
 		JSONSerializer serializer;
@@ -827,10 +820,10 @@ void MainWindow::on_pushButton_importDecks_clicked()
 		ServerCommunicator communicator;
 		QJsonObject response = communicator.sendRequest(requestDocument);
 		QStringList tempDeckName = (*it).split('/');
-		addDeckToTable(*(--tempDeckName.end()),  ui->tableWidget_library, m_deckCounter);
+		addDeckToTable(*(--tempDeckName.end()), ui->tableWidget_library, m_deckCounter);
 		addCreateDeckButton();
 	}
-	if(!filePaths.isEmpty()){
+	if (!filePaths.isEmpty()) {
 		QMessageBox::information(this, "Uvoz špilova", "Uspešan uvoz!");
 	}
 }
@@ -838,21 +831,18 @@ void MainWindow::on_pushButton_importDecks_clicked()
 void MainWindow::on_pushButton_exportDecks_clicked()
 {
 	QString selectedDirectory = QFileDialog::getExistingDirectory(
-		nullptr,
-		"Select Directory",
-		QDir::homePath(),
-		QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks
-		);
+		nullptr, "Select Directory", QDir::homePath(), QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
 	auto rows = ui->tableWidget_library->rowCount();
 	auto cols = ui->tableWidget_library->columnCount();
 
 	for (auto i = 0; i < rows; i += 2) {
-		for(auto j = 0; j < cols; j++) {
+		for (auto j = 0; j < cols; j++) {
 			auto cell = ui->tableWidget_library->cellWidget(i, j);
-			if (QPushButton *button = dynamic_cast<QPushButton*>(cell)) {
-				if(!button->children().isEmpty()) {
-					QCheckBox *checkbox = dynamic_cast<QCheckBox*>(ui->tableWidget_library->cellWidget(i, j)->children().front());
+			if (QPushButton *button = dynamic_cast<QPushButton *>(cell)) {
+				if (!button->children().isEmpty()) {
+					QCheckBox *checkbox =
+						dynamic_cast<QCheckBox *>(ui->tableWidget_library->cellWidget(i, j)->children().front());
 					if (checkbox->isChecked()) {
 
 						QString deckName = button->text();
@@ -868,9 +858,10 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 						QJsonObject jsonObj = communicator.sendRequest(request);
 						JSONSerializer jsonSerializer;
 
-						if(jsonObj["status"].toString() != "success"){
-							//TODO Juca Translation
-							QMessageBox::information(this,"Uvoz špilova" ,"Došlo je do greške, nije sačuvano, probajte ponovo!");
+						if (jsonObj["status"].toString() != "success") {
+							// TODO Juca Translation
+							QMessageBox::information(this, "Uvoz špilova",
+													 "Došlo je do greške, nije sačuvano, probajte ponovo!");
 							return;
 						}
 
@@ -879,7 +870,7 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 						QJsonObject deckObject = jsonObj[deckName].toObject();
 						QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 						jsonSerializer.loadJson(*deck, deckDocument);
-						jsonSerializer.save(*deck, selectedDirectory+"/"+deckName);
+						jsonSerializer.save(*deck, selectedDirectory + "/" + deckName);
 
 						checkbox->setCheckState(Qt::Unchecked);
 					}
@@ -900,7 +891,7 @@ void MainWindow::addNewDeck(QString deckNameID)
 
 void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table, int &counter)
 {
-	QPushButton *button = new QPushButton((deckNameID));
+	QPushButton *button = new QPushButton(deckNameID);
 	button->setStyleSheet("color: transparent; margin-left: 25%;");
 
 	if (table == ui->tableWidget_library) {
@@ -910,7 +901,6 @@ void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table, int &co
 	}
 	else
 		connect(button, &QPushButton::clicked, this, &MainWindow::deckPreview_clicked);
-
 
 	QLabel *label = new QLabel(deckNameID.split("_")[0], table);
 	label->setAlignment(Qt::AlignCenter);
@@ -949,14 +939,13 @@ void MainWindow::on_comboBox_deck_currentIndexChanged(int index)
 	requestObject["username"] = m_user.username();
 	requestObject["DeckId"] = m_deckNames[index].split("_")[1];
 
-
 	QJsonDocument request(requestObject);
 	ServerCommunicator communicator;
 	QJsonObject statsObject = communicator.sendRequest(request);
 	QJsonDocument statsDocument = QJsonDocument::fromVariant(statsObject.toVariantMap());
 	JSONSerializer jsonSerializer;
 
-	if(statsObject["status"].toString() != "no stats"){
+	if (statsObject["status"].toString() != "no stats") {
 		JSONSerializer jsonSerializer;
 		auto deckStats = new DeckStats();
 		jsonSerializer.loadJson(*deckStats, statsDocument);
@@ -982,8 +971,8 @@ void MainWindow::loadStats(DeckStats *deckStats)
 
 void MainWindow::on_comboBox_language_currentIndexChanged(int index)
 {
-	QApplication* app = qobject_cast<QApplication*>(QApplication::instance());
-	Settings& settings = Settings::instance(app);
+	QApplication *app = qobject_cast<QApplication *>(QApplication::instance());
+	Settings &settings = Settings::instance(app);
 
 	settings.setLanguage(index);
 	ui->retranslateUi(this);
@@ -991,8 +980,8 @@ void MainWindow::on_comboBox_language_currentIndexChanged(int index)
 
 void MainWindow::on_comboBox_theme_currentIndexChanged(int index)
 {
-	QApplication* app = qobject_cast<QApplication*>(QApplication::instance());
-	Settings& settings = Settings::instance(app);
+	QApplication *app = qobject_cast<QApplication *>(QApplication::instance());
+	Settings &settings = Settings::instance(app);
 
 	settings.setTheme(index);
 	ui->retranslateUi(this);

@@ -8,8 +8,8 @@
 
 #include "lib/card.h"
 #include "lib/deck.h"
-#include "lib/user.h"
 #include "lib/deckstats.h"
+#include "lib/user.h"
 
 class StudySession
 {
@@ -21,7 +21,7 @@ class StudySession
 	QVector<unsigned> m_cardSequence;
 	unsigned m_currentCardIndex;
 	bool m_answerShowed = false;
-    DeckStats *m_deckStats;
+	DeckStats *m_deckStats;
 
   public:
 	StudySession();
@@ -43,11 +43,11 @@ class StudySession
 
 	inline bool answerShowed() { return m_answerShowed; }
 
-    inline DeckStats* deckStats() { return m_deckStats; }
+	inline DeckStats *deckStats() { return m_deckStats; }
 
 	void startSession();
 	void endSession();
-    void chooseCardSequence(unsigned numCards);
+	void chooseCardSequence(unsigned numCards);
 	void nextCard();
 	Card getCurrentCard();
 	void saveStatus();

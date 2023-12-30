@@ -2,14 +2,14 @@
 #include "lib/jsonserializer.h"
 #include "lib/servercommunicator.h"
 #include <QDebug>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QRandomGenerator>
+#include <QTcpServer>
+#include <QTcpSocket>
 #include <algorithm>
 #include <numeric>
 #include <random>
-#include <QTcpSocket>
-#include <QTcpServer>
-#include <QJsonDocument>
-#include <QJsonObject>
 
 StudySession::StudySession() : m_user(), m_deck() {}
 
@@ -17,14 +17,14 @@ StudySession::StudySession(const User &user, Deck *deck) : m_user(user), m_deck(
 
 StudySession::StudySession(const StudySession &session)
 	: m_user(session.m_user), m_deck(session.m_deck), m_cardSequence(session.m_cardSequence),
-      m_currentCardIndex(session.m_currentCardIndex), m_timeStarted(session.m_timeStarted),
-    m_timeEnded(session.m_timeEnded), m_answerShowed(session.m_answerShowed)
+	  m_currentCardIndex(session.m_currentCardIndex), m_timeStarted(session.m_timeStarted),
+	  m_timeEnded(session.m_timeEnded), m_answerShowed(session.m_answerShowed)
 {}
 
 StudySession::~StudySession()
 {
-    delete m_deck;
-    delete m_deckStats;
+	delete m_deck;
+	delete m_deckStats;
 }
 
 void StudySession::startSession()
@@ -44,10 +44,10 @@ void StudySession::startSession()
 	QJsonObject statsObject = communicator.sendRequest(request);
 	QJsonDocument statsDocument = QJsonDocument::fromVariant(statsObject.toVariantMap());
 
-	if(statsObject["status"].toString() == "no stats"){
+	if (statsObject["status"].toString() == "no stats") {
 		m_deckStats = new DeckStats(m_deck->cards().length());
 	}
-	else{
+	else {
 		JSONSerializer jsonSerializer;
 		m_deckStats = new DeckStats();
 		jsonSerializer.loadJson(*m_deckStats, statsDocument);
@@ -59,7 +59,7 @@ void StudySession::startSession()
 void StudySession::endSession()
 {
 	m_timeEnded = time(NULL);
-    m_deckStats->usedDeck();
+	m_deckStats->usedDeck();
 }
 
 void StudySession::chooseCardSequence(unsigned numCards)
@@ -67,16 +67,16 @@ void StudySession::chooseCardSequence(unsigned numCards)
 	qDebug() << m_deckStats->grades();
 	QVector<unsigned> cardIndices(numCards);
 	QVector<bool> visited(numCards);
-	for (unsigned i = 0;i < numCards;i++){
+	for (unsigned i = 0; i < numCards; i++) {
 		std::random_device rd;
 		std::mt19937 gen(rd());
 		std::vector<double> probabilities = {0.4, 0.3, 0.2, 0.1};
 		std::discrete_distribution<> distribution(probabilities.begin(), probabilities.end());
 		QVector<unsigned> cardPersonalDiffIndices;
-		while(cardPersonalDiffIndices.isEmpty()){
+		while (cardPersonalDiffIndices.isEmpty()) {
 			unsigned difficulty = distribution(gen);
-			for (unsigned j = 0;j < numCards;j++)
-				if(m_deckStats->grades()[j] == difficulty && !visited[j])
+			for (unsigned j = 0; j < numCards; j++)
+				if (m_deckStats->grades()[j] == difficulty && !visited[j])
 					cardPersonalDiffIndices.append(j);
 		}
 		qDebug() << cardPersonalDiffIndices;
@@ -112,5 +112,5 @@ void StudySession::flipCard()
 
 bool StudySession::hasNextCard()
 {
-    return m_currentCardIndex + 1 < m_cardSequence.length();
+	return m_currentCardIndex + 1 < m_cardSequence.length();
 }

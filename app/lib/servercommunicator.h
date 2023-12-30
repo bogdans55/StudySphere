@@ -1,12 +1,13 @@
 #ifndef SERVERCOMMUNICATOR_H
 #define SERVERCOMMUNICATOR_H
 
-#include <QObject>
-#include <QTcpSocket>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QObject>
+#include <QTcpSocket>
 
-class ServerCommunicator : public QObject {
+class ServerCommunicator : public QObject
+{
 	Q_OBJECT
 
   public:
