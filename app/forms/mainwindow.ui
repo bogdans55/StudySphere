@@ -51,7 +51,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>TODO lista</string>
+        <string>To-Do lista</string>
        </property>
       </widget>
      </item>
@@ -708,7 +708,7 @@
        <item>
         <widget class="QCalendarWidget" name="calendarWidget">
          <property name="locale">
-          <locale language="Serbian" country="Serbia"/>
+          <locale language="Serbian" country="Montenegro"/>
          </property>
         </widget>
        </item>

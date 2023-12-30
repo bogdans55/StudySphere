@@ -12,8 +12,6 @@ WhiteboardWindow::WhiteboardWindow(QWidget *parent) : QWidget(parent), ui(new Ui
 	drawing = false;
 	penColor = Qt::black;
 	penWidth = 4;
-
-	//    connect(this, &WhiteboardWindow::destroyed, this, &StudySessionWindow::clearWhiteboard);
 }
 
 WhiteboardWindow::~WhiteboardWindow()
@@ -23,6 +21,7 @@ WhiteboardWindow::~WhiteboardWindow()
 
 void WhiteboardWindow::paintEvent(QPaintEvent *event)
 {
+    Q_UNUSED(event);
 	QPainter painter(this);
 	painter.drawImage(0, 0, image);
 }

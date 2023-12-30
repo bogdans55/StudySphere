@@ -1,7 +1,6 @@
 #include "lib/studysession.h"
 #include "lib/jsonserializer.h"
 #include "lib/servercommunicator.h"
-#include <QDebug>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QRandomGenerator>
@@ -64,7 +63,6 @@ void StudySession::endSession()
 
 void StudySession::chooseCardSequence(unsigned numCards)
 {
-	qDebug() << m_deckStats->grades();
 	QVector<unsigned> cardIndices(numCards);
 	QVector<bool> visited(numCards);
 	for (unsigned i = 0; i < numCards; i++) {
@@ -75,18 +73,19 @@ void StudySession::chooseCardSequence(unsigned numCards)
 		QVector<unsigned> cardPersonalDiffIndices;
 		while (cardPersonalDiffIndices.isEmpty()) {
 			unsigned difficulty = distribution(gen);
-			for (unsigned j = 0; j < numCards; j++)
-				if (m_deckStats->grades()[j] == difficulty && !visited[j])
-					cardPersonalDiffIndices.append(j);
+            for (unsigned j = 0; j < numCards; j++)
+            {
+                auto grades = m_deckStats->grades();
+                if (grades[j] == difficulty && !visited[j])
+                    cardPersonalDiffIndices.append(j);
+            }
 		}
-		qDebug() << cardPersonalDiffIndices;
 		unsigned selectedIndex = QRandomGenerator::global()->bounded(cardPersonalDiffIndices.size());
 		visited[cardPersonalDiffIndices[selectedIndex]] = true;
 		cardIndices[i] = cardPersonalDiffIndices[selectedIndex];
 	}
 	m_currentCardIndex = 0;
 	m_cardSequence = cardIndices;
-	qDebug() << m_cardSequence;
 }
 
 void StudySession::nextCard()
@@ -97,12 +96,8 @@ void StudySession::nextCard()
 
 Card StudySession::getCurrentCard()
 {
-	return *m_deck->cards()[m_cardSequence[m_currentCardIndex]];
-}
-
-void StudySession::saveStatus()
-{
-	// TODO
+    auto cards = m_deck->cards();
+    return *cards[m_cardSequence[m_currentCardIndex]];
 }
 
 void StudySession::flipCard()

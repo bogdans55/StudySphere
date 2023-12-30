@@ -34,12 +34,14 @@ QString Planner::dayToString(Day day)
 		return "Nedelja";
 		break;
 	}
+    return "";
 }
 
 QVariant Planner::toVariant() const
 {
 	QVariantMap result;
-	for (const auto &day : m_activities.keys()) {
+    auto keys = m_activities.keys();
+    for (const auto &day : keys) {
 		QVariantList activitiesList;
 		for (const Activity &activity : m_activities.value(day)) {
 			activitiesList.append(activity.toVariant());
@@ -72,7 +74,8 @@ Day Planner::dayFromString(QString dayString)
 void Planner::fromVariant(const QVariant &variant)
 {
 	QVariantMap map = variant.toMap();
-	for (const QString &dayString : map.keys()) {
+    auto keys = map.keys();
+    for (const QString &dayString : keys) {
 		Day day = dayFromString(dayString);
 		QVector<Activity> activities;
 		const QVariantList activitiesList = map.value(dayString).toList();

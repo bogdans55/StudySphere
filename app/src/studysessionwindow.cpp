@@ -36,17 +36,17 @@ void StudySessionWindow::on_pushButton_flip_clicked()
 {
 	if (m_session->answerShowed()) {
 		ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
-		ui->label_card->setText("Pitanje");
+		ui->label_card->setText(tr("Pitanje"));
 	}
 	else {
 		ui->textEdit_card->setText(m_session->getCurrentCard().questionAnswer());
-		ui->label_card->setText("Odgovor");
+		ui->label_card->setText(tr("Odgovor"));
 	}
 
 	m_session->flipCard();
 }
 
-void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
+void StudySessionWindow::evaluate(int grade)
 {
 	m_session->deckStats()->addGrade(m_session->currentCardIndex(), grade);
 	if (m_session->hasNextCard()) {
@@ -56,15 +56,13 @@ void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
         setDifficultyColor();
 	}
 	else {
-		QMessageBox::information(this, "Gotova sesija", "Uspešno ste prešli sva odabrana pitanja!");
+		QMessageBox::information(this, tr("Gotova sesija"), tr("Uspešno ste prešli sva odabrana pitanja!"));
 		m_session->endSession();
 
 		QJsonObject requestObject;
 
 		JSONSerializer serializer;
 		QJsonDocument doc = serializer.createJson(*(m_session->deckStats()));
-
-		qDebug() << doc;
 
 		requestObject["action"] = "saveDeck";
 		requestObject["username"] = m_session->user().username();
@@ -76,9 +74,8 @@ void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 		QJsonObject jsonObj = communicator.sendRequest(request);
 
 		if (jsonObj["status"].toString() != "success") {
-			// TODO Juca Translation
-			QMessageBox::information(this, "Greška",
-									 "Došlo je do greške, statistike za poslednje učenje nisu sačuvane!");
+			QMessageBox::information(this, tr("Greška"),
+									 tr("Došlo je do greške, statistike za poslednje učenje nisu sačuvane!"));
 			return;
 		}
 		if (m_whiteboard != nullptr) {

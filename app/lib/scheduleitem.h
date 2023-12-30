@@ -11,7 +11,6 @@ class ScheduleItem : public QGraphicsItem
 	QRectF boundingRect() const override;
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
-	// hardcoded
 	inline unsigned width() const { return m_width; }
 
 	inline unsigned height() const { return 1440; }

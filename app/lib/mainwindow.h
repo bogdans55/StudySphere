@@ -6,7 +6,6 @@
 #include "lib/planner.h"
 #include "lib/plannerscene.h"
 #include "lib/todolist.h"
-#include "libraryscene.h"
 #include "settings.h"
 #include "user.h"
 
@@ -42,9 +41,6 @@ class MainWindow : public QWidget
 	~MainWindow();
 
   private slots:
-	//	void on_pushButton_createDeck_clicked();
-
-	//	void on_pushButton_startStudySession_clicked();
 
 	void deckButton_clicked();
 
@@ -120,7 +116,6 @@ class MainWindow : public QWidget
 	bool m_plannerLoaded = false;
 	bool m_todoLoaded = false;
 	User m_user;
-	LibraryScene m_libraryScene;
 
 	void savePlanner();
 	void showActivities();
