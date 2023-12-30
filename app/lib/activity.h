@@ -1,7 +1,7 @@
 #ifndef ACTIVITY_H
 #define ACTIVITY_H
 
-#include "../lib/serializable.h"
+#include "serializable.h"
 #include <QString>
 #include <QTime>
 

@@ -1,7 +1,7 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include "lib/serializable.h"
+#include "serializable.h"
 #include <QJsonObject>
 
 enum Difficulty
