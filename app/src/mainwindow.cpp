@@ -127,9 +127,8 @@ void MainWindow::savePlanner()
 
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
-	if (jsonObj["status"].toString() != "success") {
-		// TODO Juca Translation
-		QMessageBox::information(this, "Čuvanje planera", "Došlo je do greške, planer nije sačuvan!");
+    if (jsonObj["status"].toString() != "success") {
+        QMessageBox::information(this, tr("Čuvanje planera"), tr("Došlo je do greške, planer nije sačuvan!"));
 		return;
 	}
 }
@@ -166,10 +165,9 @@ void MainWindow::deckPreview_clicked()
 	QJsonObject jsonObj = communicator.sendRequest(request);
 	JSONSerializer jsonSerializer;
 
-	if (jsonObj["status"].toString() != "success") {
-		// TODO Juca Translation
-		QMessageBox::information(this, "Pregled špila",
-								 "Došlo je do greške, pregled špila se nije pokrenuo, probajte ponovo!");
+    if (jsonObj["status"].toString() != "success") {
+        QMessageBox::information(this, tr("Pregled špila"),
+                                 tr("Došlo je do greške, pregled špila se nije pokrenuo, probajte ponovo!"));
 		return;
 	}
 	Deck *deck = new Deck();
@@ -205,9 +203,8 @@ void MainWindow::deckButton_clicked()
 	ServerCommunicator communicator;
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
-	if (jsonObj["status"].toString() != "success") {
-		// TODO Juca Translation
-		QMessageBox::information(this, "Učenje", "Došlo je do greške, špil se nije pokrenuo, probajte ponovo!");
+    if (jsonObj["status"].toString() != "success") {
+        QMessageBox::information(this, tr("Učenje"), tr("Došlo je do greške, špil se nije pokrenuo, probajte ponovo!"));
 		return;
 	}
 	Deck *deck = new Deck();
@@ -244,10 +241,9 @@ void MainWindow::on_pushButton_todo_clicked()
 		ServerCommunicator communicator;
 		QJsonObject jsonObj = communicator.sendRequest(request);
 
-		if (jsonObj["status"].toString() != "success") {
-			// TODO Juca Translation
-			QMessageBox::information(this, "TODO lista",
-									 "Došlo je do greške, todo lista nije učitana, probajte ponovo!");
+        if (jsonObj["status"].toString() != "success") {
+            QMessageBox::information(this, tr("TODO lista"),
+                                     tr("Došlo je do greške, todo lista nije učitana, probajte ponovo!"));
 			return;
 		}
 
@@ -299,9 +295,8 @@ void MainWindow::on_pushButton_planer_clicked()
 		ServerCommunicator communicator;
 		QJsonObject jsonObj = communicator.sendRequest(request);
 
-		if (jsonObj["status"].toString() != "success") {
-			// TODO Juca Translation
-			QMessageBox::information(this, "Planer", "Došlo je do greške, planer nije učitan, probajte ponovo!");
+        if (jsonObj["status"].toString() != "success") {
+            QMessageBox::information(this, tr("Planer"), tr("Došlo je do greške, planer nije učitan, probajte ponovo!"));
 			return;
 		}
 		JSONSerializer jsonSerializer;
@@ -330,9 +325,8 @@ void MainWindow::on_pushButton_calendar_clicked()
 		ServerCommunicator communicator;
 		QJsonObject jsonObj = communicator.sendRequest(request);
 
-		if (jsonObj["status"].toString() != "success") {
-			// TODO Juca Translation
-			QMessageBox::information(this, "Kalendar", "Došlo je do greške, kalendar nije učitan, probajte ponovo!");
+        if (jsonObj["status"].toString() != "success") {
+            QMessageBox::information(this, tr("Kalendar"), tr("Došlo je do greške, kalendar nije učitan, probajte ponovo!"));
 			return;
 		}
 
@@ -379,7 +373,7 @@ void MainWindow::on_pushButton_addEvent_clicked()
 	ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
 	ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
 
-	QMessageBox::information(this, "Uspešan unos", "Uspešno ste dodali novi dogadjaj!");
+    QMessageBox::information(this, tr("Uspešan unos"), tr("Uspešno ste dodali novi dogadjaj!"));
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
@@ -393,8 +387,8 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 void MainWindow::on_calendarWidget_activated(const QDate &date)
 {
 	QString message = "Na izabrani dan imate sledeće dogadjaje:\n";
-	if (!m_calendar.events().contains(date))
-		QMessageBox::information(this, date.toString("dd.MM.yyyy."), "Na izabrani dan nemate nijedan dogadjaj!");
+    if (!m_calendar.events().contains(date))
+        QMessageBox::information(this, date.toString("dd.MM.yyyy."), tr("Na izabrani dan nemate nijedan dogadjaj!"));
 	else {
 		for (const auto &event : m_calendar.events()[date]) {
 			message += "\t" + event.first.toString("hh:mm") + " - " + event.second + "\n";
@@ -548,9 +542,9 @@ void MainWindow::on_pushButton_login_clicked()
 	else {
 		// logout
 		saveOnServer();
-		m_loggedIn = false;
-		ui->label_username->setText("Nema korisnika");
-		ui->pushButton_login->setText("Prijavi se");
+        m_loggedIn = false;
+        ui->label_username->setText(tr("Nema korisnika"));
+        ui->pushButton_login->setText(tr("Prijavi se"));
 		setEnabled(false);
 		ui->tableWidget_library->clear();
 		ui->tableWidget_browser->clear();
@@ -594,8 +588,8 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 		return false;
 	}
 	if (jsonObj["status"] != QJsonValue::Undefined && jsonObj["status"] != "Password incorrect, try again") {
-		ui->label_username->setText(request["username"].toString());
-		ui->pushButton_login->setText("Odjavi se");
+        ui->label_username->setText(request["username"].toString());
+        ui->pushButton_login->setText(tr("Odjavi se"));
 		m_user.setUsername(request["username"].toString());
 	}
 	else {
@@ -658,9 +652,8 @@ void MainWindow::saveCalendar()
 	ServerCommunicator communicator;
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
-	if (jsonObj["status"].toString() != "success") {
-		// TODO Juca Translation
-		QMessageBox::information(this, "Kalendar", "Došlo je do greške, kalendar nije sačuvan, probajte ponovo!");
+    if (jsonObj["status"].toString() != "success") {
+        QMessageBox::information(this, tr("Kalendar"), tr("Došlo je do greške, kalendar nije sačuvan, probajte ponovo!"));
 		return;
 	}
 }
@@ -732,9 +725,8 @@ void MainWindow::saveToDoList()
 	ServerCommunicator communicator;
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
-	if (jsonObj["status"].toString() != "success") {
-		// TODO Juca Translation
-		QMessageBox::information(this, "TODO lista", "Došlo je do greške, todo lista nije sačuvana, probajte ponovo!");
+    if (jsonObj["status"].toString() != "success") {
+        QMessageBox::information(this, tr("TODO lista"), tr("Došlo je do greške, todo lista nije sačuvana, probajte ponovo!"));
 		return;
 	}
 }
@@ -823,8 +815,8 @@ void MainWindow::on_pushButton_importDecks_clicked()
 		addDeckToTable(*(--tempDeckName.end()), ui->tableWidget_library, m_deckCounter);
 		addCreateDeckButton();
 	}
-	if (!filePaths.isEmpty()) {
-		QMessageBox::information(this, "Uvoz špilova", "Uspešan uvoz!");
+    if (!filePaths.isEmpty()) {
+        QMessageBox::information(this, tr("Uvoz špilova"), tr("Uspešan uvoz!"));
 	}
 }
 
@@ -858,10 +850,9 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 						QJsonObject jsonObj = communicator.sendRequest(request);
 						JSONSerializer jsonSerializer;
 
-						if (jsonObj["status"].toString() != "success") {
-							// TODO Juca Translation
-							QMessageBox::information(this, "Uvoz špilova",
-													 "Došlo je do greške, nije sačuvano, probajte ponovo!");
+                        if (jsonObj["status"].toString() != "success") {
+                            QMessageBox::information(this, tr("Uvoz špilova"),
+                                                     tr("Došlo je do greške, nije sačuvano, probajte ponovo!"));
 							return;
 						}
 
@@ -877,8 +868,8 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 				}
 			}
 		}
-	}
-	QMessageBox::information(this, "Izvoz špilova", "Uspešan izvoz!");
+    }
+    QMessageBox::information(this, tr("Izvoz špilova"), tr("Uspešan izvoz!"));
 }
 
 void MainWindow::addNewDeck(QString deckNameID)

@@ -71,13 +71,12 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
 	ServerCommunicator communicator;
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
-	if (jsonObj["status"].toString() != "success") {
-		// TODO Juca Translation
-		QMessageBox::information(this, "Kreiranje špila", "Došlo je do greške, špil nije sačuvan, probajte ponovo!");
+    if (jsonObj["status"].toString() != "success") {
+        QMessageBox::information(this, tr("Kreiranje špila"), tr("Došlo je do greške, špil nije sačuvan, probajte ponovo!"));
 		return;
 	}
 
-	QMessageBox::information(this, "Uspešno kreiran špil", "Vaš špil je uspešno kreiran i sačuvan!");
+    QMessageBox::information(this, tr("Uspešno kreiran špil"), tr("Vaš špil je uspešno kreiran i sačuvan!"));
 
 	close();
 }

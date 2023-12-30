@@ -14,7 +14,7 @@
    <string>StudySphere</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../res/icons.qrc">
     <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
   </property>
   <property name="inputMethodHints">
@@ -51,7 +51,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>TODO lista</string>
+        <string>To-Do lista</string>
        </property>
       </widget>
      </item>
@@ -1002,6 +1002,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../res/icons.qrc"/>
+ </resources>
  <connections/>
 </ui>
