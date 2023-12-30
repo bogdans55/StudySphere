@@ -1,24 +1,19 @@
 #include "lib/deckpreviewwindow.h"
 #include "lib/jsonserializer.h"
-#include "ui_deckpreviewwindow.h"
 #include "lib/servercommunicator.h"
+#include "ui_deckpreviewwindow.h"
 
 #include <QMessageBox>
 #include <QTcpServer>
 #include <QTcpSocket>
 
-DeckPreviewWindow::DeckPreviewWindow(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::DeckPreviewWindow)
+DeckPreviewWindow::DeckPreviewWindow(QWidget *parent) : QWidget(parent), ui(new Ui::DeckPreviewWindow)
 {
-    ui->setupUi(this);
+	ui->setupUi(this);
 }
 
-DeckPreviewWindow::DeckPreviewWindow(Deck *deck, User& user, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::DeckPreviewWindow),
-	  m_user(user),
-	  m_deck(*deck)
+DeckPreviewWindow::DeckPreviewWindow(Deck *deck, User &user, QWidget *parent)
+	: QWidget(parent), ui(new Ui::DeckPreviewWindow), m_user(user), m_deck(*deck)
 {
 	ui->setupUi(this);
 	ui->textEdit_card_preview->setText(deck->cards().at(m_currentCardIndex)->questionText());
@@ -26,7 +21,7 @@ DeckPreviewWindow::DeckPreviewWindow(Deck *deck, User& user, QWidget *parent) :
 
 DeckPreviewWindow::~DeckPreviewWindow()
 {
-    delete ui;
+	delete ui;
 }
 
 void DeckPreviewWindow::on_pushButton_flip_preview_clicked()
@@ -42,12 +37,10 @@ void DeckPreviewWindow::on_pushButton_flip_preview_clicked()
 	m_answerShowed = !m_answerShowed;
 }
 
-
 void DeckPreviewWindow::on_pushButton_cancel_clicked()
 {
 	close();
 }
-
 
 void DeckPreviewWindow::on_pushButton_add_clicked()
 {
@@ -70,18 +63,17 @@ void DeckPreviewWindow::on_pushButton_add_clicked()
 
 	emit sendPublicDeck(m_deck.name() + "_" + QString::number(m_deck.deckId()));
 
-    close();
+	close();
 }
-
 
 void DeckPreviewWindow::on_pushButton_next_clicked()
 {
-	if(hasNextCard()){
+	if (hasNextCard()) {
 		m_currentCardIndex++;
 		ui->textEdit_card_preview->setText(m_deck.cards()[m_currentCardIndex]->questionText());
 		m_answerShowed = false;
 	}
-	else{
+	else {
 		QMessageBox::information(this, "Pregled špila", "Špil nema više kartica!");
 	}
 }
@@ -90,4 +82,3 @@ bool DeckPreviewWindow::hasNextCard()
 {
 	return m_currentCardIndex + 1 < m_deck.cards().length();
 }
-

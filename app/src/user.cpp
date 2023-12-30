@@ -13,13 +13,13 @@ void User::setUsername(const QString &newUsername)
 
 QVariant User::toVariant() const
 {
-    QVariantMap map;
-    map.insert("Username", m_username);
-    return map;
+	QVariantMap map;
+	map.insert("Username", m_username);
+	return map;
 }
 
 void User::fromVariant(const QVariant &variant)
 {
-    QVariantMap map = variant.toMap();
-    m_username = map.value("Username").toString();
+	QVariantMap map = variant.toMap();
+	m_username = map.value("Username").toString();
 }

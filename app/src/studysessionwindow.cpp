@@ -1,8 +1,8 @@
 #include "lib/studysessionwindow.h"
-#include "lib/servercommunicator.h"
-#include "ui_studysessionwindow.h"
 #include "lib/jsonserializer.h"
 #include "lib/serializer.h"
+#include "lib/servercommunicator.h"
+#include "ui_studysessionwindow.h"
 
 #include <QMessageBox>
 #include <QTcpServer>
@@ -22,7 +22,7 @@ StudySessionWindow::StudySessionWindow(StudySession *session, QWidget *parent)
 	ui->setupUi(this);
 	m_session->startSession();
 	ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
-    connect(this, &StudySessionWindow::destroyed, this, &StudySessionWindow::closeWhiteboard);
+	connect(this, &StudySessionWindow::destroyed, this, &StudySessionWindow::closeWhiteboard);
 }
 
 StudySessionWindow::~StudySessionWindow()
@@ -47,7 +47,7 @@ void StudySessionWindow::on_pushButton_flip_clicked()
 
 void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 {
-    m_session->deckStats()->addGrade(m_session->currentCardIndex(), grade);
+	m_session->deckStats()->addGrade(m_session->currentCardIndex(), grade);
 	if (m_session->hasNextCard()) {
 		m_session->nextCard();
 		ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
@@ -55,7 +55,7 @@ void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 	}
 	else {
 		QMessageBox::information(this, "Gotova sesija", "Uspešno ste prešli sva odabrana pitanja!");
-        m_session->endSession();
+		m_session->endSession();
 
 		QJsonObject requestObject;
 
@@ -63,7 +63,6 @@ void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 		QJsonDocument doc = serializer.createJson(*(m_session->deckStats()));
 
 		qDebug() << doc;
-
 
 		requestObject["action"] = "saveDeck";
 		requestObject["username"] = m_session->user().username();
@@ -74,18 +73,19 @@ void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 		ServerCommunicator communicator;
 		QJsonObject jsonObj = communicator.sendRequest(request);
 
-		if(jsonObj["status"].toString() != "success"){
-			//TODO Juca Translation
-			QMessageBox::information(this,"Greška" ,"Došlo je do greške, statistike za poslednje učenje nisu sačuvane!");
+		if (jsonObj["status"].toString() != "success") {
+			// TODO Juca Translation
+			QMessageBox::information(this, "Greška",
+									 "Došlo je do greške, statistike za poslednje učenje nisu sačuvane!");
 			return;
 		}
-        if (m_whiteboard != nullptr) {
-            m_whiteboard->close();
-            delete m_whiteboard;
-            m_whiteboard = nullptr;
-        }
-        close();
-    }
+		if (m_whiteboard != nullptr) {
+			m_whiteboard->close();
+			delete m_whiteboard;
+			m_whiteboard = nullptr;
+		}
+		close();
+	}
 }
 
 void StudySessionWindow::on_pushButton_skip_clicked()
@@ -108,26 +108,24 @@ void StudySessionWindow::on_pushButton_good_clicked()
 	evaluate(3);
 }
 
-
 void StudySessionWindow::on_pushButton_whiteboard_clicked()
 {
-    m_whiteboard = new WhiteboardWindow();
-    connect(m_whiteboard, &WhiteboardWindow::destroyed, this, &StudySessionWindow::clearWhiteboard);
-    m_whiteboard->setAttribute(Qt::WA_DeleteOnClose);
-    m_whiteboard->show();
+	m_whiteboard = new WhiteboardWindow();
+	connect(m_whiteboard, &WhiteboardWindow::destroyed, this, &StudySessionWindow::clearWhiteboard);
+	m_whiteboard->setAttribute(Qt::WA_DeleteOnClose);
+	m_whiteboard->show();
 }
 
 void StudySessionWindow::closeWhiteboard()
 {
-    if (m_whiteboard != nullptr) {
-        m_whiteboard->close();
-    }
+	if (m_whiteboard != nullptr) {
+		m_whiteboard->close();
+	}
 }
 
 void StudySessionWindow::clearWhiteboard()
 {
-    if (m_whiteboard != nullptr) {
-        m_whiteboard = nullptr;
-    }
+	if (m_whiteboard != nullptr) {
+		m_whiteboard = nullptr;
+	}
 }
-

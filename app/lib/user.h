@@ -1,8 +1,8 @@
 #ifndef USER_H
 #define USER_H
 
-#include <QString>
 #include "lib/serializable.h"
+#include <QString>
 
 class User : public Serializable
 {
@@ -18,8 +18,8 @@ class User : public Serializable
 
 	void setUsername(const QString &newUsername);
 
-    QVariant toVariant() const override;
-    void fromVariant(const QVariant &variant) override;
+	QVariant toVariant() const override;
+	void fromVariant(const QVariant &variant) override;
 };
 
 #endif // USER_H

@@ -6,22 +6,22 @@
 Deck::Deck() : m_deckId(), m_privacy(), m_thumbnail(), m_rating() {}
 
 Deck::Deck(const QString &name, const User &user, Privacy privacy, const QImage &thumbnail)
-	: m_deckId(0),
-    m_name(name), m_privacy(privacy), m_thumbnail(thumbnail), m_rating(), m_user(user), m_cards()
+	: m_deckId(0), m_name(name), m_privacy(privacy), m_thumbnail(thumbnail), m_rating(), m_user(user), m_cards()
 {}
 
 Deck::Deck(const QString &name, const User &user, Privacy privacy)
-    : m_deckId(0), m_name(name), m_privacy(privacy), m_thumbnail(), m_rating(), m_user(user), m_cards()
+	: m_deckId(0), m_name(name), m_privacy(privacy), m_thumbnail(), m_rating(), m_user(user), m_cards()
 {}
 
 Deck::Deck(const Deck &deck)
-    : m_deckId(deck.m_deckId), m_name(deck.m_name), m_cards(deck.m_cards), m_privacy(deck.m_privacy), m_thumbnail(deck.m_thumbnail), m_rating(deck.m_rating), m_user(deck.m_user)
+	: m_deckId(deck.m_deckId), m_name(deck.m_name), m_cards(deck.m_cards), m_privacy(deck.m_privacy),
+	  m_thumbnail(deck.m_thumbnail), m_rating(deck.m_rating), m_user(deck.m_user)
 {}
 
 Deck::~Deck()
 {
-    for (Card* card : m_cards)
-        delete card;
+	for (Card *card : m_cards)
+		delete card;
 }
 
 void Deck::addCard(Card *card)
@@ -48,12 +48,12 @@ QVariant Deck::toVariant() const
 	map.insert("Thumbnail", "systemDefault.png"); // TODO Thumbnail image saving, and naming
 
 	QVariantList cardsList;
-    for (int i = 0; i < m_cards.length(); i++) {
+	for (int i = 0; i < m_cards.length(); i++) {
 		Card card = *(m_cards[i]);
 		cardsList.append(card.toVariant());
 	}
 	map.insert("Flashcards", cardsList);
-    map.insert("User", m_user.toVariant());
+	map.insert("User", m_user.toVariant());
 
 	return map;
 }
@@ -76,13 +76,13 @@ void Deck::fromVariant(const QVariant &variant)
 
 	QVariantList cardsVariantList = map.value("Flashcards").toList();
 	for (QVariant card : cardsVariantList) {
-        Card *currCard = new Card();
-        currCard->fromVariant(card);
-        qDebug() << currCard->questionText();
-        m_cards.push_back(currCard);
+		Card *currCard = new Card();
+		currCard->fromVariant(card);
+		qDebug() << currCard->questionText();
+		m_cards.push_back(currCard);
 	}
 
-    m_user.fromVariant(map.value("User"));
+	m_user.fromVariant(map.value("User"));
 }
 
 void Deck::setId(uint64_t id)
