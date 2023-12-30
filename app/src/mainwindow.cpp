@@ -538,7 +538,7 @@ void MainWindow::on_pushButton_login_clicked()
 			if (!loginSuccess) {
 				QMessageBox::critical(
 					this, "Greška pri prijavljivanju",
-					"Neuspešno prijavljivanje. Proverite korisničko ime i lozinku i probajte ponovo.");
+					"Neuspešno prijavljivanje. Probajte ponovo.");
 				return;
 			}
 			else
@@ -593,7 +593,9 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 
 	ServerCommunicator communicator;
 	QJsonObject jsonObj = communicator.sendRequest(request);
-
+	if(jsonObj["status"].toString() == "Failed to connect to the server"){
+		return false;
+	}
 	if (jsonObj["status"] != QJsonValue::Undefined && jsonObj["status"] != "Password incorrect, try again") {
 		ui->label_username->setText(request["username"].toString());
 		ui->pushButton_login->setText("Odjavi se");
