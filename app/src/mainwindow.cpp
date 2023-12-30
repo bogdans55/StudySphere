@@ -484,6 +484,9 @@ void MainWindow::setEnabled(bool value)
 	ui->pushButton_addEvent->setEnabled(value);
 	ui->tab_browser->setEnabled(value);
 	ui->tabWidget_library->setTabEnabled(1, value);
+    ui->tabWidget_library->setEnabled(value);
+    ui->pushButton_importDecks->setEnabled(value);
+    ui->pushButton_exportDecks->setEnabled(value);
 }
 
 void MainWindow::on_pushButton_login_clicked()

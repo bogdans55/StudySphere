@@ -186,14 +186,17 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>5</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page_library">
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <widget class="QTabWidget" name="tabWidget_library">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="tab_decks">
           <attribute name="title">
@@ -242,6 +245,9 @@
             <layout class="QHBoxLayout" name="horizontalLayout_act">
              <item>
               <widget class="QPushButton" name="pushButton_importDecks">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string>Uvezi špilove</string>
                </property>
@@ -249,6 +255,9 @@
              </item>
              <item>
               <widget class="QPushButton" name="pushButton_exportDecks">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string>Izvezi špilove</string>
                </property>
