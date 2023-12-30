@@ -104,8 +104,8 @@ void CreateDeckWindow::on_pushButton_add_clicked()
 	QString m_answer = getAnswerText();
 	Difficulty m_difficulty = getDifficulty();
 
-	if (m_question.trimmed().isEmpty() or m_answer.trimmed().isEmpty() or m_questionDifficulty->checkedId() == -1) {
-		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili sva neophodna polja!");
+    if (m_question.trimmed().isEmpty() or m_answer.trimmed().isEmpty() or m_questionDifficulty->checkedId() == -1) {
+        QMessageBox::warning(this, tr("Pogrešan unos"), tr("Niste popunili sva neophodna polja!"));
 		return;
 	}
 

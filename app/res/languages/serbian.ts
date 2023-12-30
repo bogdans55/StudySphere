@@ -23,6 +23,16 @@
         <source>Javan</source>
         <translation></translation>
     </message>
+    <message>
+        <location filename="../../src/createdeckdialog.cpp" line="33"/>
+        <source>Pogrešan unos</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../src/createdeckdialog.cpp" line="33"/>
+        <source>Niste popunili polje za naziv špila!</source>
+        <translation></translation>
+    </message>
 </context>
 <context>
     <name>CreateDeckWindow</name>
@@ -89,6 +99,16 @@
     <message>
         <location filename="../../src/createdeckwindow.cpp" line="79"/>
         <source>Vaš špil je uspešno kreiran i sačuvan!</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../src/createdeckwindow.cpp" line="108"/>
+        <source>Pogrešan unos</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../src/createdeckwindow.cpp" line="108"/>
+        <source>Niste popunili sva neophodna polja!</source>
         <translation></translation>
     </message>
 </context>
@@ -237,7 +257,6 @@
     </message>
     <message>
         <location filename="../../src/mainwindow.cpp" line="245"/>
-        <location filename="../../src/mainwindow.cpp" line="729"/>
         <source>TODO lista</source>
         <translation>To-Do lista</translation>
     </message>
@@ -268,6 +287,20 @@
         <translation></translation>
     </message>
     <message>
+        <location filename="../../src/mainwindow.cpp" line="366"/>
+        <location filename="../../src/mainwindow.cpp" line="408"/>
+        <location filename="../../src/mainwindow.cpp" line="413"/>
+        <location filename="../../src/mainwindow.cpp" line="664"/>
+        <location filename="../../src/mainwindow.cpp" line="742"/>
+        <source>Pogrešan unos</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="366"/>
+        <source>Niste popunili polje za naziv dogadjaja!</source>
+        <translation></translation>
+    </message>
+    <message>
         <location filename="../../src/mainwindow.cpp" line="376"/>
         <source>Uspešan unos</source>
         <translation></translation>
@@ -280,6 +313,27 @@
     <message>
         <location filename="../../src/mainwindow.cpp" line="391"/>
         <source>Na izabrani dan nemate nijedan dogadjaj!</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="408"/>
+        <location filename="../../src/mainwindow.cpp" line="664"/>
+        <source>Niste popunili polje za naziv aktivnosti!</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="413"/>
+        <source>Vreme početka aktivnosti mora biti pre vremena kraja!</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="533"/>
+        <source>Greška pri prijavljivanju</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="533"/>
+        <source>Neuspešno prijavljivanje. Probajte ponovo.</source>
         <translation></translation>
     </message>
     <message>
@@ -298,9 +352,30 @@
         <translation></translation>
     </message>
     <message>
+        <location filename="../../src/mainwindow.cpp" line="742"/>
+        <source>Niste popunili polje za naziv špila!</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="768"/>
+        <source>Nema rezultata</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="768"/>
+        <source>Nije pronadjen nijedan špil!</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="791"/>
         <location filename="../../src/mainwindow.cpp" line="819"/>
         <location filename="../../src/mainwindow.cpp" line="854"/>
         <source>Uvoz špilova</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="791"/>
+        <source>Unosite špil ili špilove koje već imate!</source>
         <translation></translation>
     </message>
     <message>
@@ -494,6 +569,7 @@
     </message>
     <message>
         <location filename="../../forms/mainwindow.ui" line="54"/>
+        <location filename="../../src/mainwindow.cpp" line="729"/>
         <source>To-Do lista</source>
         <translation></translation>
     </message>

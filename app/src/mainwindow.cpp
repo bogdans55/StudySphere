@@ -362,8 +362,8 @@ void MainWindow::on_pushButton_addEvent_clicked()
 	QDate date = ui->dateTimeEdit_eventTime->dateTime().date();
 	QTime time = ui->dateTimeEdit_eventTime->dateTime().time();
 
-	if (eventName.trimmed().isEmpty()) {
-		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili polje za naziv dogadjaja!");
+    if (eventName.trimmed().isEmpty()) {
+        QMessageBox::warning(this, tr("Pogrešan unos"), tr("Niste popunili polje za naziv dogadjaja!"));
 		return;
 	}
 
@@ -404,13 +404,13 @@ void MainWindow::on_pushButton_addActivity_clicked()
 	QTime startTime = ui->timeEdit_start->time();
 	QTime endTime = ui->timeEdit_end->time();
 
-	if (name.trimmed().isEmpty()) {
-		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili polje za naziv aktivnosti!");
+    if (name.trimmed().isEmpty()) {
+        QMessageBox::warning(this, tr("Pogrešan unos"), tr("Niste popunili polje za naziv aktivnosti!"));
 		return;
 	}
 
-	if (startTime >= endTime) {
-		QMessageBox::warning(this, "Pogrešan unos", "Vreme početka aktivnosti mora biti pre vremena kraja!");
+    if (startTime >= endTime) {
+        QMessageBox::warning(this, tr("Pogrešan unos"), tr("Vreme početka aktivnosti mora biti pre vremena kraja!"));
 		return;
 	}
 
@@ -529,8 +529,8 @@ void MainWindow::on_pushButton_login_clicked()
 		else {
 			loginSuccess = loginUser(username, password);
 			qDebug(loginSuccess ? "Logged in" : "Not Logged in");
-			if (!loginSuccess) {
-				QMessageBox::critical(this, "Greška pri prijavljivanju", "Neuspešno prijavljivanje. Probajte ponovo.");
+            if (!loginSuccess) {
+                QMessageBox::critical(this, tr("Greška pri prijavljivanju"), tr("Neuspešno prijavljivanje. Probajte ponovo."));
 				return;
 			}
 			else
@@ -660,8 +660,8 @@ void MainWindow::saveCalendar()
 
 void MainWindow::on_pushButton_addTodo_clicked()
 {
-	if (ui->lineEdit_todo->text().trimmed().isEmpty()) {
-		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili polje za naziv aktivnosti!");
+    if (ui->lineEdit_todo->text().trimmed().isEmpty()) {
+        QMessageBox::warning(this, tr("Pogrešan unos"), tr("Niste popunili polje za naziv aktivnosti!"));
 		return;
 	}
 
@@ -726,7 +726,7 @@ void MainWindow::saveToDoList()
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
     if (jsonObj["status"].toString() != "success") {
-        QMessageBox::information(this, tr("TODO lista"), tr("Došlo je do greške, todo lista nije sačuvana, probajte ponovo!"));
+        QMessageBox::information(this, tr("To-Do lista"), tr("Došlo je do greške, todo lista nije sačuvana, probajte ponovo!"));
 		return;
 	}
 }
@@ -738,8 +738,8 @@ void MainWindow::on_pushButton_search_clicked()
 
 	QString query = ui->lineEdit_browser->text().trimmed();
 
-	if (query.isEmpty()) {
-		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili polje za naziv špila!");
+    if (query.isEmpty()) {
+        QMessageBox::warning(this, tr("Pogrešan unos"), tr("Niste popunili polje za naziv špila!"));
 		return;
 	}
 
@@ -764,8 +764,8 @@ void MainWindow::on_pushButton_search_clicked()
 			addDeckToTable(deckNameID, ui->tableWidget_browser, browserCounter);
 		}
 	}
-	else {
-		QMessageBox::warning(this, "Nema rezultata", "Nije pronadjen nijedan špil!");
+    else {
+        QMessageBox::warning(this, tr("Nema rezultata"), tr("Nije pronadjen nijedan špil!"));
 	}
 }
 
@@ -787,8 +787,8 @@ void MainWindow::on_pushButton_importDecks_clicked()
 					QStringList tempDeckName = (*it).split('/');
 					if (button->text() == *(--tempDeckName.end())) {
 						filePaths.removeAt(it - filePaths.begin());
-						if (filePaths.isEmpty()) {
-							QMessageBox::warning(this, "Uvoz špilova", "Unosite špil ili špilove koje već imate!");
+                        if (filePaths.isEmpty()) {
+                            QMessageBox::warning(this, tr("Uvoz špilova"), tr("Unosite špil ili špilove koje već imate!"));
 							break;
 						}
 					}

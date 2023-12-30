@@ -202,7 +202,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>5</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="page_library">
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -720,7 +720,7 @@
        <item>
         <widget class="QCalendarWidget" name="calendarWidget">
          <property name="locale">
-          <locale language="Serbian" country="Serbia"/>
+          <locale language="Serbian" country="Montenegro"/>
          </property>
         </widget>
        </item>
