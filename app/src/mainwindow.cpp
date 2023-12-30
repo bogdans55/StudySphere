@@ -276,9 +276,23 @@ void MainWindow::on_pushButton_todo_clicked()
 	}
 }
 
+void MainWindow::setPlannerWidth(int width)
+{
+    ui->graphicsView_monday->setFixedWidth(width);
+    ui->graphicsView_tuesday->setFixedWidth(width);
+    ui->graphicsView_wednesday->setFixedWidth(width);
+    ui->graphicsView_thursday->setFixedWidth(width);
+    ui->graphicsView_friday->setFixedWidth(width);
+    ui->graphicsView_saturday->setFixedWidth(width);
+    ui->graphicsView_sunday->setFixedWidth(width);
+}
+
 void MainWindow::on_pushButton_planer_clicked()
 {
-	ui->stackedWidget->setCurrentIndex(PLANER);
+//    int width = ui->graphicsView_monday->width();
+    ui->stackedWidget->setCurrentIndex(PLANER);
+//    setPlannerWidth(width);
+
 	if (!m_plannerLoaded) {
 
 		QJsonObject requestObject;
@@ -379,15 +393,6 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 	setupTableView(ui->tableWidget_library);
 	setupTableView(ui->tableWidget_browser);
-
-	for (auto scene : m_plannerScenes) {
-		for (auto item : scene->items()) {
-			if (dynamic_cast<QGraphicsTextItem *>(item)) {
-				QGraphicsTextItem *textItem = static_cast<QGraphicsTextItem *>(item);
-				textItem->setTextWidth(ui->graphicsView_monday->width() - 10);
-			}
-		}
-	}
 }
 
 void MainWindow::on_calendarWidget_activated(const QDate &date)

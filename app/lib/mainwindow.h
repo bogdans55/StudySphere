@@ -41,9 +41,7 @@ class MainWindow : public QWidget
 	MainWindow(QWidget *parent = nullptr);
 	~MainWindow();
 
-	void setEnabled(bool value);
-
-  private slots:
+private slots:
 	//	void on_pushButton_createDeck_clicked();
 
 	//	void on_pushButton_startStudySession_clicked();
@@ -136,5 +134,7 @@ protected:
     int m_deckCounter = 0;
     void addCreateDeckButton();
     void loadStats(DeckStats *deckStats);
+    void setEnabled(bool value);
+    void setPlannerWidth(int width);
 };
 #endif // MAINWINDOW_H

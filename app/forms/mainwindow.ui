@@ -14,7 +14,7 @@
    <string>StudySphere</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../res/icons.qrc">
+   <iconset>
     <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
   </property>
   <property name="inputMethodHints">
@@ -202,7 +202,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="page_library">
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -548,9 +548,6 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="6">
-          <widget class="QListWidget" name="listWidget_sunday"/>
-         </item>
          <item row="0" column="1">
           <widget class="QLabel" name="label_tuesday">
            <property name="text">
@@ -601,6 +598,16 @@
            </property>
           </widget>
          </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_monday">
+           <property name="text">
+            <string>Ponedeljak</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
          <item row="1" column="0">
           <widget class="QGraphicsView" name="graphicsView_monday">
            <property name="horizontalScrollBarPolicy">
@@ -644,21 +651,7 @@
           </widget>
          </item>
          <item row="1" column="6">
-          <widget class="QGraphicsView" name="graphicsView_sunday">
-           <property name="horizontalScrollBarPolicy">
-            <enum>Qt::ScrollBarAlwaysOff</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_monday">
-           <property name="text">
-            <string>Ponedeljak</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
+          <widget class="QGraphicsView" name="graphicsView_sunday"/>
          </item>
         </layout>
        </item>
@@ -1004,8 +997,6 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../res/icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
