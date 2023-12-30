@@ -407,10 +407,11 @@ void MyServer::registerUser(QTcpSocket *socket, QJsonObject &jsonObject)
 	QString username = jsonObject["username"].toString();
 
 	QDir users(usersInfoFolder);
+
 	QJsonObject response;
 
 	for (const QString &fileName : users.entryList()) {
-		if (fileName.split(".")[0] == username) {
+		if (fileName.split(".")[0].trimmed() == username.trimmed()) {
 			// status message is used on client to check if user exists
 			response["status"] = "Username already exists, try again";
 			QTextStream stream(socket);

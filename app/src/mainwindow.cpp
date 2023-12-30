@@ -512,6 +512,9 @@ void MainWindow::on_pushButton_login_clicked()
 			if (registerUser(username, password)) {
 				loginSuccess = loginUser(username, password);
 				setEnabled(true);
+			}else{
+				QMessageBox::warning(this, tr("Greška pri registrovanju"),
+									  tr("Korisničko ime već postoji. Probajte ponovo."));
 			}
 		}
 		else {
