@@ -28,7 +28,7 @@ void Settings::setTheme(const int index)
 
     switch (index) {
     case DARK:
-        styleSheetName = "Diffnes";
+        styleSheetName = "Blue";
         m_theme = DARK;
         break;
     case LIGHT:
