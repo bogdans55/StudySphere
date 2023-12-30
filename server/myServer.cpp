@@ -437,6 +437,28 @@ void MyServer::registerUser(QTcpSocket *socket, QJsonObject &jsonObject)
 		response["status"] = "Registration not successful, try again";
 	}
 
+	try {
+		QFile plannerFile(QDir(plannerFolder).absoluteFilePath(username + ".json"));
+		plannerFile.open(QIODevice::WriteOnly);
+		plannerFile.write("{\n}");
+
+		QFile calendarFile(QDir(calendarFolder).absoluteFilePath(username + ".json"));
+		calendarFile.open(QIODevice::WriteOnly);
+		calendarFile.write("{\n}");
+
+		QFile todoFile(QDir(todoFolder).absoluteFilePath(username + ".json"));
+		todoFile.open(QIODevice::WriteOnly);
+		todoFile.write("{\n}");
+
+		todoFile.close();
+		plannerFile.close();
+		calendarFile.close();
+
+	} catch (const QFile::FileError &error) {
+		qDebug() << "file error: " << username;
+		response["status"] = "Registration not successful, try again";
+	}
+
 	QTextStream stream(socket);
 	stream << QJsonDocument(response).toJson();
 }
