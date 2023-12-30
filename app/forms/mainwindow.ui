@@ -202,7 +202,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="page_library">
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -958,12 +958,17 @@
           </property>
           <item>
            <property name="text">
-            <string>Tamna</string>
+            <string>Plava</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Svetla</string>
+            <string>Narandžasta</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Tamna</string>
            </property>
           </item>
          </widget>

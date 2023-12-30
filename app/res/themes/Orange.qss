@@ -2,7 +2,7 @@
 QWidget {
     background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 hsla(34, 78%, 71%, 1), stop:1 hsla(58, 100%, 68%, 1));
     color: #1E1E1E;
-    selection-background-color: #FFCCB6;
+    selection-background-color: #efbe7d;
     selection-color: #1E1E1E;
 }
 
@@ -192,7 +192,7 @@ QComboBox:on {
 QComboBox QAbstractItemView {
     background-color: #e79c39;
     color: #1E1E1E;
-    selection-background-color: #eaa750;
+    selection-background-color: #efbe7d;
     selection-color: #1E1E1E;
     outline: 0;
 }
@@ -365,7 +365,7 @@ QCalendarWidget QWidget {
 QCalendarWidget QAbstractItemView:enabled {
     color: #1E1E1E;
     background-color: #F9E6D8;
-    selection-background-color: #eaa750;
+    selection-background-color: #efbe7d;
     selection-color: #1E1E1E;
 }
 
