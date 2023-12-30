@@ -171,7 +171,7 @@ void MainWindow::deckPreview_clicked()
 
 	DeckPreviewWindow *preview = new DeckPreviewWindow(deck, m_user);
 	connect(preview, &DeckPreviewWindow::sendPublicDeck, this, &MainWindow::addNewDeck);
-	// preview->setAttribute(Qt::WA_DeleteOnClose);
+	preview->setAttribute(Qt::WA_DeleteOnClose);
 	preview->show();
 }
 
