@@ -63,14 +63,13 @@ void Deck::fromVariant(const QVariant &variant)
 	m_cards.clear();
 
 	QVariantList cardsVariantList = map.value("Flashcards").toList();
-	for (QVariant card : cardsVariantList) {
-		Card *currCard = new Card();
+    for (const QVariant &card : cardsVariantList) {
+        Card *currCard = new Card();
 		currCard->fromVariant(card);
-		qDebug() << currCard->questionText();
 		m_cards.push_back(currCard);
-	}
+    }
 
-	m_user.fromVariant(map.value("User"));
+    m_user.fromVariant(map.value("User"));
 }
 
 void Deck::setId(uint64_t id)

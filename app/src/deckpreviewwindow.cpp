@@ -70,7 +70,9 @@ void DeckPreviewWindow::on_pushButton_next_clicked()
 {
 	if (hasNextCard()) {
 		m_currentCardIndex++;
-		ui->textEdit_card_preview->setText(m_deck.cards()[m_currentCardIndex]->questionText());
+        auto cards = m_deck.cards();
+        auto card = cards[m_currentCardIndex];
+        ui->textEdit_card_preview->setText(card->questionText());
 		m_answerShowed = false;
 	}
 	else {

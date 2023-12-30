@@ -257,7 +257,7 @@ void MainWindow::on_pushButton_todo_clicked()
 			QListWidgetItem *item = new QListWidgetItem();
 			item->setCheckState(todo.second ? Qt::Checked : Qt::Unchecked);
 			item->setText(todo.first);
-			emit onTodoItemChanged(item);
+            onTodoItemChanged(item);
 			ui->listWidget_todos->addItem(item);
 		}
 	}
@@ -438,7 +438,8 @@ void MainWindow::on_pushButton_addActivity_clicked()
 
 void MainWindow::showActivities()
 {
-	for (auto day : m_planner.activities().keys()) {
+    auto keys = m_planner.activities().keys();
+    for (auto day : keys) {
 		for (const auto &currentActivity : m_planner.activities().value(day)) {
 			QString name = currentActivity.activityText();
 

@@ -73,9 +73,12 @@ void StudySession::chooseCardSequence(unsigned numCards)
 		QVector<unsigned> cardPersonalDiffIndices;
 		while (cardPersonalDiffIndices.isEmpty()) {
 			unsigned difficulty = distribution(gen);
-			for (unsigned j = 0; j < numCards; j++)
-				if (m_deckStats->grades()[j] == difficulty && !visited[j])
-					cardPersonalDiffIndices.append(j);
+            for (unsigned j = 0; j < numCards; j++)
+            {
+                auto grades = m_deckStats->grades();
+                if (grades[j] == difficulty && !visited[j])
+                    cardPersonalDiffIndices.append(j);
+            }
 		}
 		unsigned selectedIndex = QRandomGenerator::global()->bounded(cardPersonalDiffIndices.size());
 		visited[cardPersonalDiffIndices[selectedIndex]] = true;
@@ -93,7 +96,8 @@ void StudySession::nextCard()
 
 Card StudySession::getCurrentCard()
 {
-	return *m_deck->cards()[m_cardSequence[m_currentCardIndex]];
+    auto cards = m_deck->cards();
+    return *cards[m_cardSequence[m_currentCardIndex]];
 }
 
 void StudySession::flipCard()
