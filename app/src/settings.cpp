@@ -32,7 +32,7 @@ void Settings::setTheme(const int index)
         m_theme = DARK;
         break;
     case LIGHT:
-        styleSheetName = "Medize";
+        styleSheetName = "Orange";
         m_theme = LIGHT;
         break;
         // Add more cases for other themes if needed
