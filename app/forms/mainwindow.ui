@@ -14,7 +14,7 @@
    <string>StudySphere</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../res/icons.qrc">
     <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
   </property>
   <property name="inputMethodHints">
@@ -51,7 +51,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>TODO lista</string>
+        <string>To-Do lista</string>
        </property>
       </widget>
      </item>
@@ -720,7 +720,7 @@
        <item>
         <widget class="QCalendarWidget" name="calendarWidget">
          <property name="locale">
-          <locale language="Serbian" country="Serbia"/>
+          <locale language="Serbian" country="Montenegro"/>
          </property>
         </widget>
        </item>
@@ -934,12 +934,12 @@
           </property>
           <item>
            <property name="text">
-            <string>Srpski</string>
+            <string>Engleski</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Engleski</string>
+            <string>Srpski</string>
            </property>
           </item>
          </widget>
@@ -1002,6 +1002,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../res/icons.qrc"/>
+ </resources>
  <connections/>
 </ui>
