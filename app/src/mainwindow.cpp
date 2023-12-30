@@ -64,9 +64,9 @@ MainWindow::MainWindow(QWidget *parent)
 	QApplication* app = qobject_cast<QApplication*>(QApplication::instance());
 	Settings& settings = Settings::instance(app);
 
-	settings.setLanguage(Language::SERBIAN);
-	settings.setTheme(Theme::DARK);
-	ui->retranslateUi(this);
+    settings.setLanguage(Language::SERBIAN);
+    settings.setTheme(Theme::BLUE);
+    ui->retranslateUi(this);
 
 	ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
 	ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));

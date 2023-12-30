@@ -1,10 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>themes/Darkeum.qss</file>
-        <file>themes/Diffnes.qss</file>
-        <file>themes/Integrid.qss</file>
-        <file>themes/Medize.qss</file>
-        <file>themes/SyNet.qss</file>
-        <file>themes/VisualScript.qss</file>
+        <file>themes/Dark.qss</file>
+        <file>themes/Orange.qss</file>
+        <file>themes/Blue.qss</file>
     </qresource>
 </RCC>
