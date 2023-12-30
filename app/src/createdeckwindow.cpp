@@ -61,8 +61,6 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
 	JSONSerializer serializer;
 	QJsonDocument doc = serializer.createJson(m_deck);
 
-	qDebug() << doc;
-
 	requestObject["action"] = "saveDeck";
 	requestObject["username"] = m_user.username();
 	requestObject["deck"] = doc.toVariant().toJsonObject();
@@ -96,7 +94,6 @@ void CreateDeckWindow::generateId()
 	m_deck.setId(idObject.value("DeckId").toVariant().toULongLong());
 
 	emit writeGeneratedID(m_deck.name() + "_" + QString::number(m_deck.deckId()) + "_deck.json");
-	qDebug() << "send " << m_deck.name() + "_" + QString::number(m_deck.deckId());
 }
 
 void CreateDeckWindow::on_pushButton_add_clicked()

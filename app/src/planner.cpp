@@ -34,6 +34,7 @@ QString Planner::dayToString(Day day)
 		return "Nedelja";
 		break;
 	}
+    return "";
 }
 
 QVariant Planner::toVariant() const

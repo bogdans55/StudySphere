@@ -45,7 +45,7 @@ void StudySessionWindow::on_pushButton_flip_clicked()
 	m_session->flipCard();
 }
 
-void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
+void StudySessionWindow::evaluate(int grade)
 {
 	m_session->deckStats()->addGrade(m_session->currentCardIndex(), grade);
 	if (m_session->hasNextCard()) {
@@ -61,8 +61,6 @@ void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 
 		JSONSerializer serializer;
 		QJsonDocument doc = serializer.createJson(*(m_session->deckStats()));
-
-		qDebug() << doc;
 
 		requestObject["action"] = "saveDeck";
 		requestObject["username"] = m_session->user().username();

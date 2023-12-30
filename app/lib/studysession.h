@@ -50,7 +50,6 @@ class StudySession
 	void chooseCardSequence(unsigned numCards);
 	void nextCard();
 	Card getCurrentCard();
-	void saveStatus();
 	void flipCard();
 	bool hasNextCard();
 };
