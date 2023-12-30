@@ -29,8 +29,8 @@ class DeckStats : public Serializable
 	void addGrade(unsigned cardIndex, unsigned grade);
 	void usedDeck();
 
-	QVariant toVariant() const override;
-	void fromVariant(const QVariant &variant) override;
+    QVariant toVariant() const;
+    void fromVariant(const QVariant &variant);
 };
 
 #endif // DECKSTATS_H

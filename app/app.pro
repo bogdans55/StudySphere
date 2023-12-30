@@ -17,21 +17,14 @@ SOURCES += \
     src/activity.cpp \
     src/activityitem.cpp \
     src/plannerscene.cpp \
-    src/deckitem.cpp \
-    src/libraryscene.cpp \
     src/logindialog.cpp \
-    src/cardstats.cpp \
     src/createdeckwindow.cpp \
     src/createdeckdialog.cpp \
-    src/browser.cpp \
     src/card.cpp \
     src/deck.cpp \
     src/deckstats.cpp \
-    src/deckrating.cpp \
-    src/grading.cpp \
     src/imagecard.cpp \
     src/jsonserializer.cpp \
-    src/library.cpp \
     src/main.cpp \
     src/plaincard.cpp \
     src/servercommunicator.cpp \
@@ -48,26 +41,19 @@ HEADERS += \
     lib/activity.h \
     lib/activityitem.h \
     lib/calendar.h \
-    lib/deckitem.h \
     lib/createdeckwindow.h \
     lib/createdeckdialog.h \
-    lib/browser.h \
     lib/card.h \
-    lib/cardstats.h \
     lib/deck.h \
     lib/deckstats.h \
-    lib/deckrating.h \
-    lib/grading.h \
     lib/imagecard.h \
     lib/jsonserializer.h \
-    lib/libraryscene.h \
     lib/plaincard.h \
     lib/planner.h \
     lib/serializable.h \
     lib/serializer.h \
     lib/servercommunicator.h \
     lib/studysession.h \
-    lib/library.h \
     lib/studysessionwindow.h \
     lib/todolist.h \
     lib/user.h \

@@ -3,7 +3,6 @@
 #include "lib/createdeckwindow.h"
 #include "lib/deckpreviewwindow.h"
 #include "lib/jsonserializer.h"
-#include "lib/libraryscene.h"
 #include "lib/logindialog.h"
 #include "lib/scheduleitem.h"
 #include "lib/servercommunicator.h"
@@ -12,7 +11,6 @@
 #include "ui_mainwindow.h"
 
 #include <QCryptographicHash>
-#include <QDebug>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QTcpServer>
@@ -38,40 +36,40 @@ enum Page
 };
 
 MainWindow::MainWindow(QWidget *parent)
-	: QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_toDoList(), m_deckNames(), m_user(), m_libraryScene()
+    : QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_toDoList(), m_deckNames(), m_user()
 {
-	ui->setupUi(this);
-	ui->stackedWidget->setCurrentIndex(LIBRARY);
-	setEnabled(false);
+    ui->setupUi(this);
+    ui->stackedWidget->setCurrentIndex(LIBRARY);
+    setEnabled(false);
 
-	for (int i = 0; i < 7; ++i) {
-		m_plannerScenes.push_back(new PlannerScene());
-	}
-	ui->graphicsView_monday->setScene(m_plannerScenes[Day::MONDAY]);
-	ui->graphicsView_tuesday->setScene(m_plannerScenes[Day::TUESDAY]);
-	ui->graphicsView_wednesday->setScene(m_plannerScenes[Day::WEDNESDAY]);
-	ui->graphicsView_thursday->setScene(m_plannerScenes[Day::THURSDAY]);
-	ui->graphicsView_friday->setScene(m_plannerScenes[Day::FRIDAY]);
-	ui->graphicsView_saturday->setScene(m_plannerScenes[Day::SATURDAY]);
-	ui->graphicsView_sunday->setScene(m_plannerScenes[Day::SUNDAY]);
+    for (int i = 0; i < 7; ++i) {
+        m_plannerScenes.push_back(new PlannerScene());
+    }
+    ui->graphicsView_monday->setScene(m_plannerScenes[Day::MONDAY]);
+    ui->graphicsView_tuesday->setScene(m_plannerScenes[Day::TUESDAY]);
+    ui->graphicsView_wednesday->setScene(m_plannerScenes[Day::WEDNESDAY]);
+    ui->graphicsView_thursday->setScene(m_plannerScenes[Day::THURSDAY]);
+    ui->graphicsView_friday->setScene(m_plannerScenes[Day::FRIDAY]);
+    ui->graphicsView_saturday->setScene(m_plannerScenes[Day::SATURDAY]);
+    ui->graphicsView_sunday->setScene(m_plannerScenes[Day::SUNDAY]);
 
-	for (int i = 0; i < 7; ++i) {
-		ScheduleItem *scheduleItem = new ScheduleItem();
-		scheduleItem->setWidth(ui->graphicsView_monday->width());
-		m_plannerScenes[i]->addItem(scheduleItem);
-	}
+    for (int i = 0; i < 7; ++i) {
+        ScheduleItem *scheduleItem = new ScheduleItem();
+        scheduleItem->setWidth(ui->graphicsView_monday->width());
+        m_plannerScenes[i]->addItem(scheduleItem);
+    }
 
-	QApplication *app = qobject_cast<QApplication *>(QApplication::instance());
-	Settings &settings = Settings::instance(app);
+    QApplication *app = qobject_cast<QApplication *>(QApplication::instance());
+    Settings &settings = Settings::instance(app);
 
-	settings.setLanguage(Language::SERBIAN);
-	settings.setTheme(Theme::BLUE);
-	ui->retranslateUi(this);
+    settings.setLanguage(Language::SERBIAN);
+    settings.setTheme(Theme::BLUE);
+    ui->retranslateUi(this);
 
-	ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
-	ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
+    ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
+    ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
 
-	connect(ui->listWidget_todos, &QListWidget::itemChanged, this, &MainWindow::onTodoItemChanged);
+    connect(ui->listWidget_todos, &QListWidget::itemChanged, this, &MainWindow::onTodoItemChanged);
 }
 
 MainWindow::~MainWindow()
@@ -92,7 +90,6 @@ MainWindow::~MainWindow()
 	}
 
 	m_planner.deleteAll();
-	m_libraryScene.clear();
 	m_calendar.deleteAll();
 	m_toDoList.deleteAllToDos();
 }
@@ -134,7 +131,6 @@ void MainWindow::savePlanner()
 	}
 }
 
-// void MainWindow::on_pushButton_createDeck_clicked()
 void MainWindow::createDeck_clicked()
 {
 	CreateDeckDialog popUp(this);
@@ -178,15 +174,12 @@ void MainWindow::deckPreview_clicked()
 	QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 	jsonSerializer.loadJson(*deck, deckDocument);
 
-	qDebug() << deck->cards().at(deck->cards().length() - 1)->questionText();
-
 	DeckPreviewWindow *preview = new DeckPreviewWindow(deck, m_user);
 	connect(preview, &DeckPreviewWindow::sendPublicDeck, this, &MainWindow::addNewDeck);
 	preview->setAttribute(Qt::WA_DeleteOnClose);
 	preview->show();
 }
 
-// void MainWindow::on_pushButton_startStudySession_clicked()
 void MainWindow::deckButton_clicked()
 {
 	QPushButton *chosenDeck = qobject_cast<QPushButton *>(sender());
@@ -221,7 +214,6 @@ void MainWindow::deckButton_clicked()
 
 	StudySession *session = new StudySession(m_user, deck);
 	StudySessionWindow *useDeck = new StudySessionWindow(session);
-	// useDeck->setAttribute(Qt::WA_DeleteOnClose);
 	useDeck->show();
 }
 
@@ -284,9 +276,7 @@ void MainWindow::setPlannerWidth(int width)
 
 void MainWindow::on_pushButton_planer_clicked()
 {
-	//    int width = ui->graphicsView_monday->width();
 	ui->stackedWidget->setCurrentIndex(PLANER);
-	//    setPlannerWidth(width);
 
 	if (!m_plannerLoaded) {
 
@@ -395,8 +385,10 @@ void MainWindow::on_calendarWidget_activated(const QDate &date)
 	QString message = "Na izabrani dan imate sledeće dogadjaje:\n";
 	if (!m_calendar.events().contains(date))
 		QMessageBox::information(this, date.toString("dd.MM.yyyy."), "Na izabrani dan nemate nijedan dogadjaj!");
-	else {
-		for (const auto &event : m_calendar.events()[date]) {
+    else {
+        auto calendar = m_calendar.events();
+        auto todaysEvents = calendar[date];
+        for (const auto &event : todaysEvents) {
 			message += "\t" + event.first.toString("hh:mm") + " - " + event.second + "\n";
 		}
 		QMessageBox::information(this, date.toString("dd.MM.yyyy."), message);
@@ -438,7 +430,7 @@ void MainWindow::on_pushButton_addActivity_clicked()
 
 	QGraphicsTextItem *activityText = new QGraphicsTextItem();
 	activityText->setPlainText(name);
-	qreal textWidth = ui->graphicsView_monday->width() - 10; // hardcoded reduction for scroll bar
+    qreal textWidth = ui->graphicsView_monday->width() - 10;
 	activityText->setTextWidth(textWidth);
 	activityText->setPos(activityItem->pos().x(), activityItem->pos().y() + activityTime->boundingRect().height());
 	m_plannerScenes[day]->addItem(activityText);
@@ -463,7 +455,7 @@ void MainWindow::showActivities()
 
 			QGraphicsTextItem *activityText = new QGraphicsTextItem();
 			activityText->setPlainText(name);
-			qreal textWidth = ui->graphicsView_monday->width() - 10; // hardcoded reduction for scroll bar
+            qreal textWidth = ui->graphicsView_monday->width() - 10;
 			activityText->setTextWidth(textWidth);
 			activityText->setPos(activityItem->pos().x(),
 								 activityItem->pos().y() + activityTime->boundingRect().height());
@@ -505,12 +497,12 @@ void MainWindow::setEnabled(bool value)
 void MainWindow::on_pushButton_login_clicked()
 {
 	for (auto scene : m_plannerScenes) {
-		scene->clear(); // clear calls delete on all items on scene
+        scene->clear();
 		scene->addItem(new ScheduleItem());
 		scene->clearActivities();
 	}
 
-	if (!m_loggedIn) // use getter instead?
+    if (!m_loggedIn)
 	{
 		QString username;
 		QString password;
@@ -528,13 +520,9 @@ void MainWindow::on_pushButton_login_clicked()
 				loginSuccess = loginUser(username, password);
 				setEnabled(true);
 			}
-			else {
-				qDebug() << "Register failed.";
-			}
 		}
 		else {
 			loginSuccess = loginUser(username, password);
-			qDebug(loginSuccess ? "Logged in" : "Not Logged in");
 			if (!loginSuccess) {
 				QMessageBox::critical(this, "Greška pri prijavljivanju", "Neuspešno prijavljivanje. Probajte ponovo.");
 				return;
@@ -554,9 +542,7 @@ void MainWindow::on_pushButton_login_clicked()
 		setEnabled(false);
 		ui->tableWidget_library->clear();
 		ui->tableWidget_browser->clear();
-		// m_plannerScenes.clear();
 		m_planner.deleteAll();
-		m_libraryScene.clear();
 		m_calendar.deleteAll();
 		m_toDoList.deleteAllToDos();
 		ui->listWidget_todos->clear();
@@ -585,7 +571,6 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 	requestObject["username"] = username;
 	requestObject["password"] = password;
 
-	qDebug() << "Recieved Data:";
 	QJsonDocument request(requestObject);
 
 	ServerCommunicator communicator;
@@ -626,19 +611,15 @@ bool MainWindow::registerUser(const QString &username, const QString &password)
 	requestObject["username"] = username;
 	requestObject["password"] = password;
 
-	qDebug() << "Recieved Data:";
-
 	QJsonDocument request(requestObject);
 
 	ServerCommunicator communicator;
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
 	if (jsonObj["status"] == "Username already exists, try again") {
-		qDebug() << "Username already exists, try again";
 		return false;
 	}
 
-	qDebug() << jsonObj["status"];
 	return true;
 }
 
@@ -722,8 +703,6 @@ void MainWindow::saveToDoList()
 	JSONSerializer serializer;
 	QJsonDocument doc = serializer.createJson(m_toDoList);
 
-	qDebug() << doc;
-
 	requestObject["action"] = "saveTodo";
 	requestObject["username"] = m_user.username();
 	requestObject["todo"] = doc.toVariant().toJsonObject();
@@ -754,7 +733,6 @@ void MainWindow::on_pushButton_search_clicked()
 	QJsonObject requestObject;
 	requestObject["action"] = "search";
 	requestObject["searchQuery"] = query;
-	qDebug() << "Recieved Data:";
 
 	QJsonDocument request(requestObject);
 	ServerCommunicator communicator;
@@ -781,8 +759,6 @@ void MainWindow::on_pushButton_importDecks_clicked()
 {
 	QStringList filePaths =
 		QFileDialog::getOpenFileNames(nullptr, "Choose JSON Files", "", "JSON Files (*.json);;All Files (*)");
-
-	qDebug() << filePaths;
 
 	auto rows = ui->tableWidget_library->rowCount();
 	auto cols = ui->tableWidget_library->columnCount();
@@ -908,7 +884,7 @@ void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table, int &co
 
 	if (counter % 2 == 0) {
 		table->setColumnCount(table->columnCount() + 1);
-		table->setColumnWidth(counter / 2, 220); // hardcoded
+        table->setColumnWidth(counter / 2, 220);
 	}
 
 	table->setCellWidget(counter % 2 * 2, counter / 2, button);
@@ -923,7 +899,7 @@ void MainWindow::addCreateDeckButton()
 	button->setStyleSheet("margin-left: 25%;");
 	if (m_deckCounter % 2 == 0) {
 		ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
-		ui->tableWidget_library->setColumnWidth(m_deckCounter / 2, 220); // hardcoded
+        ui->tableWidget_library->setColumnWidth(m_deckCounter / 2, 220);
 	}
 	ui->tableWidget_library->setCellWidget(m_deckCounter % 2 * 2, m_deckCounter / 2, button);
 }
@@ -950,6 +926,7 @@ void MainWindow::on_comboBox_deck_currentIndexChanged(int index)
 		auto deckStats = new DeckStats();
 		jsonSerializer.loadJson(*deckStats, statsDocument);
 		loadStats(deckStats);
+        delete deckStats;
 	}
 }
 

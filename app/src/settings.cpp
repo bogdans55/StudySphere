@@ -39,10 +39,8 @@ void Settings::setTheme(const int index)
 		styleSheetName = "Dark";
 		m_theme = DARK;
 		break;
-		// Add more cases for other themes if needed
 
 	default:
-		qDebug() << "Unsupported theme index!";
 		return;
 	}
 
@@ -52,7 +50,6 @@ void Settings::setTheme(const int index)
 		styleSheetFile.open(QFile::ReadOnly);
 		QString styleSheet = QLatin1String(styleSheetFile.readAll());
 		qApp->setStyleSheet(styleSheet);
-		qDebug() << "Theme changed!" << m_theme;
 	}
 }
 
@@ -79,10 +76,8 @@ void Settings::setLanguage(const int index)
 		languageFileName = "serbian";
 		m_language = SERBIAN;
 		break;
-		// Add more cases for other languages
 
 	default:
-		qDebug() << "Unsupported language index!";
 		return;
 	}
 
@@ -90,10 +85,6 @@ void Settings::setLanguage(const int index)
 		QString filePath = QString("../app/res/languages/%1.qm").arg(languageFileName);
 		if (m_translator->load(filePath)) {
 			m_app->installTranslator(m_translator);
-			qDebug() << "Translation done!" << m_language;
-		}
-		else {
-			qDebug() << "Failed to load translation file:" << filePath;
 		}
 	}
 }
