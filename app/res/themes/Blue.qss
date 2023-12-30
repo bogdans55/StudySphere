@@ -738,12 +738,14 @@ QTextEdit {
 /* Initial style for QTextEdit */
 QTextEdit#textEdit_card {
     background-color: #0f578c;  /* Set your default background color */
+    color: #F9E6D8;
     border-radius: 15px;
     padding: 5px;
 }
 
 QTextEdit#textEdit_card_preview {
     background-color: #0f578c;  /* Set your default background color */
+    color: #F9E6D8;
     border-radius: 15px;
     padding: 5px;
 }
