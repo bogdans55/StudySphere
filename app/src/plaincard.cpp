@@ -8,13 +8,3 @@ PlainCard::PlainCard(QString questionText, QString answerText, Difficulty questi
 {}
 
 PlainCard::~PlainCard() {}
-
-// void PlainCard::flipCard()
-//{
-//     Card::flipCard(); // base
-// }
-
-// void PlainCard::evaluateAnswer(unsigned evaluation)
-//{
-//     Card::evaluateAnswer(evaluation); // base
-// }

@@ -1,7 +1,8 @@
-#include "../lib/createdeckwindow.h"
-#include "../lib/card.h"
-#include "../lib/jsonserializer.h"
-#include "../lib/serializer.h"
+#include "lib/createdeckwindow.h"
+#include "lib/card.h"
+#include "lib/jsonserializer.h"
+#include "lib/serializer.h"
+#include "lib/servercommunicator.h"
 #include "ui_createdeckwindow.h"
 
 #include <QFileDialog>
@@ -16,7 +17,7 @@ CreateDeckWindow::CreateDeckWindow(User &user, QWidget *parent)
 }
 
 CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, User &user, QWidget *parent)
-    : QWidget(parent), ui(new Ui::CreateDeckWindow), m_deck(name, user, privacy), m_user(user)
+	: QWidget(parent), ui(new Ui::CreateDeckWindow), m_deck(name, user, privacy), m_user(user)
 {
 	ui->setupUi(this);
 
@@ -33,7 +34,7 @@ CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, User &user, QW
 CreateDeckWindow::~CreateDeckWindow()
 {
 	delete ui;
-    delete m_questionDifficulty;
+	delete m_questionDifficulty;
 }
 
 QString CreateDeckWindow::getQuestionText() const
@@ -48,84 +49,51 @@ QString CreateDeckWindow::getAnswerText() const
 
 Difficulty CreateDeckWindow::getDifficulty() const
 {
-    return (Difficulty)m_questionDifficulty->checkedId();
+	return (Difficulty)m_questionDifficulty->checkedId();
 }
 
 void CreateDeckWindow::on_pushButton_finish_clicked()
 {
-	QTcpSocket socket;
-	socket.connectToHost("127.0.0.1", 8080);
+	QJsonObject requestObject;
 
-	if (socket.waitForConnected()) {
-		QJsonObject request;
+	generateId();
 
-		generateId();
+	JSONSerializer serializer;
+	QJsonDocument doc = serializer.createJson(m_deck);
 
-		JSONSerializer serializer;
-		QJsonDocument doc = serializer.createJson(m_deck);
+	requestObject["action"] = "saveDeck";
+	requestObject["username"] = m_user.username();
+	requestObject["deck"] = doc.toVariant().toJsonObject();
 
-		qDebug() << doc;
+	QJsonDocument request(requestObject);
+	ServerCommunicator communicator;
+	QJsonObject jsonObj = communicator.sendRequest(request);
 
-		request["action"] = "saveDeck";
-		request["username"] = m_user.username();
-		request["deck"] = doc.toVariant().toJsonObject();
-
-		qDebug() << request;
-
-		socket.write(QJsonDocument(request).toJson());
-		socket.waitForBytesWritten();
-		socket.waitForReadyRead();
-
-		QByteArray responseData = socket.readAll();
-		QTextStream stream(responseData);
-
-		qDebug() << responseData;
-
-		qDebug() << "Recieved Data:";
-		while (!stream.atEnd()) {
-			qDebug() << stream.readLine();
-		}
-
-		socket.disconnectFromHost();
-
-		QMessageBox::information(this, "Uspešno kreiran špil", "Vaš špil je uspešno kreiran i sačuvan!");
-
-		//        delete m_deck;
+	if (jsonObj["status"].toString() != "success") {
+		QMessageBox::information(this, tr("Kreiranje špila"),
+								 tr("Došlo je do greške, špil nije sačuvan, probajte ponovo!"));
+		return;
 	}
-	else {
-		qDebug() << "Failed to connect to the server";
-	}
+
+	QMessageBox::information(this, tr("Uspešno kreiran špil"), tr("Vaš špil je uspešno kreiran i sačuvan!"));
 
 	close();
 }
 
 void CreateDeckWindow::generateId()
 {
-	QTcpSocket socket;
-	socket.connectToHost("127.0.0.1", 8080);
+	QJsonObject requestObject;
 
-	if (socket.waitForConnected()) {
-		QJsonObject request;
+	requestObject["action"] = "generateId";
 
-		request["action"] = "generateId";
-		socket.write(QJsonDocument(request).toJson());
-		socket.waitForBytesWritten();
-		socket.waitForReadyRead();
-		QByteArray idResponse = socket.readAll();
-		QTextStream idStream(idResponse);
+	ServerCommunicator communicator;
+	QJsonDocument request(requestObject);
 
-		QString idResponseString = idStream.readAll();
-		QJsonDocument idJson = QJsonDocument::fromJson(idResponseString.toUtf8());
-		QJsonObject idObject = idJson.object();
-		m_deck.setId(idObject.value("DeckId").toVariant().toULongLong());
-		socket.disconnectFromHost();
+	QJsonObject idObject = communicator.sendRequest(request);
 
-        emit writeGeneratedID(m_deck.name() + "_" + QString::number(m_deck.deckId()) + "_deck.json");
-        qDebug() << "send " << m_deck.name() + "_" + QString::number(m_deck.deckId());
-	}
-	else {
-		qDebug() << "Failed to connect to the server";
-	}
+	m_deck.setId(idObject.value("DeckId").toVariant().toULongLong());
+
+	emit writeGeneratedID(m_deck.name() + "_" + QString::number(m_deck.deckId()) + "_deck.json");
 }
 
 void CreateDeckWindow::on_pushButton_add_clicked()
@@ -135,7 +103,7 @@ void CreateDeckWindow::on_pushButton_add_clicked()
 	Difficulty m_difficulty = getDifficulty();
 
 	if (m_question.trimmed().isEmpty() or m_answer.trimmed().isEmpty() or m_questionDifficulty->checkedId() == -1) {
-		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili sva neophodna polja!");
+		QMessageBox::warning(this, tr("Pogrešan unos"), tr("Niste popunili sva neophodna polja!"));
 		return;
 	}
 
@@ -150,4 +118,3 @@ void CreateDeckWindow::on_pushButton_add_clicked()
 	m_questionDifficulty->checkedButton()->setChecked(false);
 	m_questionDifficulty->setExclusive(true);
 }
-

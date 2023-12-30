@@ -1,22 +1,17 @@
 #include "../lib/card.h"
 
-Card::Card() : m_questionText(), m_answerText(), m_questionDifficulty(), m_stats() {}
+Card::Card() : m_questionText(), m_answerText(), m_questionDifficulty() {}
 
 Card::Card(QString questionText, QString answerText, Difficulty questionDifficulty)
-	: m_questionText(questionText), m_answerText(answerText), m_questionDifficulty(questionDifficulty), m_stats()
+    : m_questionText(questionText), m_answerText(answerText), m_questionDifficulty(questionDifficulty)
 {}
 
 Card::Card(const Card &card)
 	: m_questionText(card.m_questionText), m_answerText(card.m_answerText),
-	  m_questionDifficulty(card.m_questionDifficulty), m_stats()
+      m_questionDifficulty(card.m_questionDifficulty)
 {}
 
 Card::~Card() {}
-
-void Card::evaluateAnswer(unsigned evaluation)
-{
-	m_stats.addNewGrade(evaluation);
-}
 
 QVariant Card::toVariant() const
 {
@@ -35,7 +30,7 @@ QVariant Card::toVariant() const
 		difficultyStr = "HARD";
 		break;
 	default:
-        difficultyStr = "MEDIUM";
+		difficultyStr = "MEDIUM";
 		break;
 	}
 	map.insert("difficulty", difficultyStr);
@@ -48,7 +43,7 @@ void Card::fromVariant(const QVariant &variant)
 	m_questionText = map.value("question").toString();
 	m_answerText = map.value("answer").toString();
 	QString questionDifficultyStr = map.value("difficulty").toString();
-    if (questionDifficultyStr == "EASY") {
+	if (questionDifficultyStr == "EASY") {
 		m_questionDifficulty = Difficulty::EASY;
 	}
 	else if (questionDifficultyStr == "MEDIUM") {

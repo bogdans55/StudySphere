@@ -1,14 +1,14 @@
-#include "../lib/studysession.h"
-#include "../lib/jsonserializer.h"
-#include <QDebug>
+#include "lib/studysession.h"
+#include "lib/jsonserializer.h"
+#include "lib/servercommunicator.h"
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QRandomGenerator>
+#include <QTcpServer>
+#include <QTcpSocket>
 #include <algorithm>
 #include <numeric>
 #include <random>
-#include <QTcpSocket>
-#include <QTcpServer>
-#include <QJsonDocument>
-#include <QJsonObject>
 
 StudySession::StudySession() : m_user(), m_deck() {}
 
@@ -16,53 +16,40 @@ StudySession::StudySession(const User &user, Deck *deck) : m_user(user), m_deck(
 
 StudySession::StudySession(const StudySession &session)
 	: m_user(session.m_user), m_deck(session.m_deck), m_cardSequence(session.m_cardSequence),
-      m_currentCardIndex(session.m_currentCardIndex), m_timeStarted(session.m_timeStarted),
-    m_timeEnded(session.m_timeEnded), m_answerShowed(session.m_answerShowed)
+	  m_currentCardIndex(session.m_currentCardIndex), m_timeStarted(session.m_timeStarted),
+	  m_timeEnded(session.m_timeEnded), m_answerShowed(session.m_answerShowed)
 {}
 
 StudySession::~StudySession()
 {
-    delete m_deck;
-    delete m_deckStats;
+	delete m_deck;
+	delete m_deckStats;
 }
 
 void StudySession::startSession()
 {
 	m_timeStarted = time(NULL);
 
-	QTcpSocket socket;
-	socket.connectToHost("127.0.0.1", 8080);
+	QJsonObject requestObject;
 
-	if (socket.waitForConnected()) {
-		QJsonObject request;
+	requestObject["action"] = "getStats";
+	requestObject["username"] = m_user.username();
+	requestObject["DeckId"] = QString::number(m_deck->deckId());
 
-		request["action"] = "getStats";
-		request["username"] = m_user.username();
-		request["DeckId"] = QString::number(m_deck->deckId());
+	ServerCommunicator communicator;
 
-		socket.write(QJsonDocument(request).toJson());
-		socket.waitForBytesWritten();
-		socket.waitForReadyRead();
-		QByteArray statsResponse = socket.readAll();
-		QTextStream statsStream(statsResponse);
+	QJsonDocument request(requestObject);
 
-		QString statsResponseString = statsStream.readAll();
-		QJsonDocument statsJson = QJsonDocument::fromJson(statsResponseString.toUtf8());
-		QJsonObject statsObject = statsJson.object();
+	QJsonObject statsObject = communicator.sendRequest(request);
+	QJsonDocument statsDocument = QJsonDocument::fromVariant(statsObject.toVariantMap());
 
-		socket.disconnectFromHost();
-
-		if(statsObject["status"].toString() == "no stats"){
-			m_deckStats = new DeckStats(m_deck->cards().length());
-		}
-		else{
-			JSONSerializer jsonSerializer;
-			m_deckStats = new DeckStats();
-			jsonSerializer.loadJson(*m_deckStats, statsJson);
-		}
+	if (statsObject["status"].toString() == "no stats") {
+		m_deckStats = new DeckStats(m_deck->cards().length());
 	}
 	else {
-		qDebug() << "Failed to connect to the server";
+		JSONSerializer jsonSerializer;
+		m_deckStats = new DeckStats();
+		jsonSerializer.loadJson(*m_deckStats, statsDocument);
 	}
 
 	this->chooseCardSequence(m_deck->cards().length());
@@ -71,34 +58,34 @@ void StudySession::startSession()
 void StudySession::endSession()
 {
 	m_timeEnded = time(NULL);
-    m_deckStats->usedDeck();
+	m_deckStats->usedDeck();
 }
 
 void StudySession::chooseCardSequence(unsigned numCards)
 {
-	qDebug() << m_deckStats->grades();
 	QVector<unsigned> cardIndices(numCards);
 	QVector<bool> visited(numCards);
-	for (unsigned i = 0;i < numCards;i++){
+	for (unsigned i = 0; i < numCards; i++) {
 		std::random_device rd;
 		std::mt19937 gen(rd());
 		std::vector<double> probabilities = {0.4, 0.3, 0.2, 0.1};
 		std::discrete_distribution<> distribution(probabilities.begin(), probabilities.end());
 		QVector<unsigned> cardPersonalDiffIndices;
-		while(cardPersonalDiffIndices.isEmpty()){
+		while (cardPersonalDiffIndices.isEmpty()) {
 			unsigned difficulty = distribution(gen);
-			for (unsigned j = 0;j < numCards;j++)
-				if(m_deckStats->grades()[j] == difficulty && !visited[j])
-					cardPersonalDiffIndices.append(j);
+            for (unsigned j = 0; j < numCards; j++)
+            {
+                auto grades = m_deckStats->grades();
+                if (grades[j] == difficulty && !visited[j])
+                    cardPersonalDiffIndices.append(j);
+            }
 		}
-		qDebug() << cardPersonalDiffIndices;
 		unsigned selectedIndex = QRandomGenerator::global()->bounded(cardPersonalDiffIndices.size());
 		visited[cardPersonalDiffIndices[selectedIndex]] = true;
 		cardIndices[i] = cardPersonalDiffIndices[selectedIndex];
 	}
 	m_currentCardIndex = 0;
 	m_cardSequence = cardIndices;
-	qDebug() << m_cardSequence;
 }
 
 void StudySession::nextCard()
@@ -109,12 +96,8 @@ void StudySession::nextCard()
 
 Card StudySession::getCurrentCard()
 {
-	return *m_deck->cards()[m_cardSequence[m_currentCardIndex]];
-}
-
-void StudySession::saveStatus()
-{
-	// TODO
+    auto cards = m_deck->cards();
+    return *cards[m_cardSequence[m_currentCardIndex]];
 }
 
 void StudySession::flipCard()
@@ -124,5 +107,5 @@ void StudySession::flipCard()
 
 bool StudySession::hasNextCard()
 {
-    return m_currentCardIndex + 1 < m_cardSequence.length();
+	return m_currentCardIndex + 1 < m_cardSequence.length();
 }

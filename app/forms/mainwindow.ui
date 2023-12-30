@@ -51,7 +51,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>TODO lista</string>
+        <string>To-Do lista</string>
        </property>
       </widget>
      </item>
@@ -165,22 +165,6 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_help">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Pomoć</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
    <item>
@@ -202,7 +186,7 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="page_library">
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -548,9 +532,6 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="6">
-          <widget class="QListWidget" name="listWidget_sunday"/>
-         </item>
          <item row="0" column="1">
           <widget class="QLabel" name="label_tuesday">
            <property name="text">
@@ -595,6 +576,16 @@
           <widget class="QLabel" name="label_sunday">
            <property name="text">
             <string>Nedelja</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_monday">
+           <property name="text">
+            <string>Ponedeljak</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -647,16 +638,6 @@
           <widget class="QGraphicsView" name="graphicsView_sunday">
            <property name="horizontalScrollBarPolicy">
             <enum>Qt::ScrollBarAlwaysOff</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_monday">
-           <property name="text">
-            <string>Ponedeljak</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
            </property>
           </widget>
          </item>
@@ -727,7 +708,7 @@
        <item>
         <widget class="QCalendarWidget" name="calendarWidget">
          <property name="locale">
-          <locale language="Serbian" country="Serbia"/>
+          <locale language="Serbian" country="Montenegro"/>
          </property>
         </widget>
        </item>
@@ -924,65 +905,56 @@
       </layout>
      </widget>
      <widget class="QWidget" name="page_settings">
-      <widget class="QWidget" name="verticalLayoutWidget">
+      <widget class="QComboBox" name="comboBox_theme">
        <property name="geometry">
         <rect>
-         <x>260</x>
-         <y>50</y>
-         <width>160</width>
-         <height>261</height>
+         <x>250</x>
+         <y>140</y>
+         <width>221</width>
+         <height>31</height>
         </rect>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_settings">
-        <item>
-         <widget class="QComboBox" name="comboBox_language">
-          <property name="placeholderText">
-           <string>Jezik</string>
-          </property>
-          <item>
-           <property name="text">
-            <string>Srpski</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Engleski</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBox_theme">
-          <property name="placeholderText">
-           <string>Tema</string>
-          </property>
-          <item>
-           <property name="text">
-            <string>Tamna</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Svetla</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBox_sound">
-          <property name="text">
-           <string>Zvuk</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSlider" name="horizontalSlider_volume">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <property name="placeholderText">
+        <string>Tema</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Plava</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Narandžasta</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Tamna</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QComboBox" name="comboBox_language">
+       <property name="geometry">
+        <rect>
+         <x>250</x>
+         <y>80</y>
+         <width>221</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>Jezik</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Srpski</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Engleski</string>
+        </property>
+       </item>
       </widget>
      </widget>
      <widget class="QWidget" name="page_help">

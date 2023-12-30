@@ -1,13 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "calendar.h"
-#include "deckstats.h"
-#include "planner.h"
-#include "plannerscene.h"
-#include "todolist.h"
-#include "libraryscene.h"
-#include "../settings.h"
+#include "lib/calendar.h"
+#include "lib/deckstats.h"
+#include "lib/planner.h"
+#include "lib/plannerscene.h"
+#include "lib/todolist.h"
+#include "settings.h"
 #include "user.h"
 
 #include <QListWidgetItem>
@@ -20,8 +19,8 @@
 
 #include "../lib/settings.h"
 
-#include <QDir>
 #include <QCoreApplication>
+#include <QDir>
 #include <QStandardPaths>
 
 QT_BEGIN_NAMESPACE
@@ -41,18 +40,13 @@ class MainWindow : public QWidget
 	MainWindow(QWidget *parent = nullptr);
 	~MainWindow();
 
-	void setEnabled(bool value);
-
   private slots:
-	//	void on_pushButton_createDeck_clicked();
-
-	//	void on_pushButton_startStudySession_clicked();
 
 	void deckButton_clicked();
 
 	void createDeck_clicked();
 
-    void deckPreview_clicked();
+	void deckPreview_clicked();
 
 	void on_pushButton_library_clicked();
 
@@ -66,15 +60,13 @@ class MainWindow : public QWidget
 
 	void on_pushButton_settings_clicked();
 
-	void on_pushButton_help_clicked();
-
 	void on_calendarWidget_activated(const QDate &date);
 
 	void on_pushButton_addActivity_clicked();
 
-    void on_comboBox_language_currentIndexChanged(int index);
+	void on_comboBox_language_currentIndexChanged(int index);
 
-    void on_comboBox_theme_currentIndexChanged(int index);
+	void on_comboBox_theme_currentIndexChanged(int index);
 
 	void on_pushButton_login_clicked();
 
@@ -92,13 +84,13 @@ class MainWindow : public QWidget
 
 	void on_pushButton_importDecks_clicked();
 
-    void on_pushButton_exportDecks_clicked();
+	void on_pushButton_exportDecks_clicked();
 
-    void addNewDeck(QString deckNameID);
+	void addNewDeck(QString deckNameID);
 
-    void on_comboBox_deck_currentIndexChanged(int index);
+	void on_comboBox_deck_currentIndexChanged(int index);
 
-protected:
+  protected:
 	void resizeEvent(QResizeEvent *event) override;
 
   private:
@@ -111,7 +103,7 @@ protected:
 
 	ToDoList m_toDoList;
 
-    QVector<QString> m_deckNames;
+	QVector<QString> m_deckNames;
 
 	bool m_calendarLoaded = false;
 	void saveCalendar();
@@ -119,13 +111,11 @@ protected:
 
 	bool registerUser(const QString &username, const QString &password);
 	bool loginUser(const QString &username, const QString &password);
-	QJsonObject sendRequest(QJsonDocument &request);
 
 	bool m_loggedIn = false;
 	bool m_plannerLoaded = false;
 	bool m_todoLoaded = false;
 	User m_user;
-	LibraryScene m_libraryScene;
 
 	void savePlanner();
 	void showActivities();
@@ -133,9 +123,11 @@ protected:
 	void saveOnServer();
 
 	void setupTableView(QTableWidget *table);
-    void addDeckToTable(QString deckNameID, QTableWidget *table, int &counter);
-    int m_deckCounter = 0;
-    void addCreateDeckButton();
-    void loadStats(DeckStats *deckStats);
+	void addDeckToTable(QString deckNameID, QTableWidget *table, int &counter);
+	int m_deckCounter = 0;
+	void addCreateDeckButton();
+	void loadStats(DeckStats *deckStats);
+	void setEnabled(bool value);
+	void setPlannerWidth(int width);
 };
 #endif // MAINWINDOW_H

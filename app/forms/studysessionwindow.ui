@@ -3,7 +3,7 @@
  <class>StudySessionWindow</class>
  <widget class="QWidget" name="StudySessionWindow">
   <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
+   <enum>Qt::WindowModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -20,50 +20,50 @@
    <iconset resource="../res/icons.qrc">
     <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_card">
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>153</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="1" rowspan="3">
+    <layout class="QVBoxLayout" name="verticalLayout_card">
      <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+      <widget class="QLabel" name="label_card">
+       <property name="text">
+        <string>Pitanje</string>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
-      </spacer>
+      </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_card">
-       <item>
-        <widget class="QLabel" name="label_card">
-         <property name="text">
-          <string>Pitanje</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTextEdit" name="textEdit_card">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_flip">
-         <property name="text">
-          <string>Okreni karticu</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QTextEdit" name="textEdit_card">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_flip">
+       <property name="text">
+        <string>Okreni karticu</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <spacer name="horizontalSpacer_2">
        <property name="orientation">
@@ -77,9 +77,43 @@
        </property>
       </spacer>
      </item>
+     <item>
+      <widget class="QToolButton" name="toolButton_difficulty">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: green;
+border-radius: 10px;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
-   <item>
+   <item row="1" column="2">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>338</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="2">
+    <widget class="QPushButton" name="pushButton_whiteboard">
+     <property name="text">
+      <string>Tabla za crtanje</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="3">
     <layout class="QHBoxLayout" name="horizontalLayout_grade">
      <item>
       <widget class="QPushButton" name="pushButton_skip">

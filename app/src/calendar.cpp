@@ -18,8 +18,8 @@ void Calendar::deleteAll()
 QVariant Calendar::toVariant() const
 {
 	QVariantMap result;
-
-	for (const auto &date : m_events.keys()) {
+    auto keys = m_events.keys();
+    for (const auto &date : keys) {
 		QVariantList eventsList;
 
 		for (const auto &event : m_events[date]) {
@@ -41,7 +41,8 @@ void Calendar::fromVariant(const QVariant &variant)
 {
 	QVariantMap map = variant.toMap();
 
-	for (const auto &dateKey : map.keys()) {
+    auto keys = map.keys();
+    for (const auto &dateKey : keys) {
 		QDate date = QDate::fromString(dateKey, "ddd MMM dd yyyy");
 		QVariantList eventsList = map.value(dateKey).toList();
 

@@ -171,18 +171,21 @@ void MyServer::savePlanner(QTcpSocket* socket, const QString& username, QJsonObj
 
     QString filePath = QDir(plannerFolder).absoluteFilePath(username + ".json");
     QFile file(filePath);
+	QJsonObject response;
 
     if(file.open(QIODevice::WriteOnly | QIODevice::Text)){
         QTextStream stream(&file);
         stream << QJsonDocument(jsonObject).toJson();
         file.close();
         qDebug() << "Planner saved on path: " << filePath;
+		response["status"] = "success";
     }else{
-        qDebug() << "Error saving deck:" << file.errorString();
+		response["status"] = "Error saving planner";
+		qDebug() << "Error saving planner:" << file.errorString();
     }
 
-    QJsonObject response;
-    response["status"] = "Planner saved successfully";
+	QTextStream stream(socket);
+	stream << QJsonDocument(response).toJson();
 }
 
 void MyServer::getPlanner(QTcpSocket* socket, const QString& username){
@@ -194,7 +197,7 @@ void MyServer::getPlanner(QTcpSocket* socket, const QString& username){
     if(file.open(QIODevice::ReadOnly | QIODevice::Text)){
         QByteArray plannerData = file.readAll();
         response["planner"] = QJsonDocument::fromJson(plannerData).object();
-        response["status"] = "Successful!";
+		response["status"] = "success";
         file.close();
     }else{
         response["status"] = "Error getting planner!";
@@ -217,7 +220,7 @@ void MyServer::removeDeck(QTcpSocket* socket, QJsonObject& jsonObject){
     QString filePath = deckFolder.absoluteFilePath(deckName + "_" + deckID + "_deck.json");
 
 	if (QFile::remove(filePath)) {
-        response["status"] = "Successfuly removed deck" + deckID;
+		response["status"] = "success" + deckID;
 	}
 	else {
 		response["status"] = "Failed to remove deck";
@@ -313,7 +316,6 @@ void MyServer::sendDeckById(QTcpSocket *socket, const QString &username, const Q
 	QStringList userDeckDirectories = folder.entryList(userFilters, QDir::Dirs | QDir::NoDotAndDotDot);
 
 	if (!userDeckDirectories.isEmpty()) {
-		response["status"] = "success";
 
 		QStringList deckFilters;
         deckFilters << "*_deck.json";
@@ -327,6 +329,7 @@ void MyServer::sendDeckById(QTcpSocket *socket, const QString &username, const Q
 					QByteArray deckData = deckFile.readAll();
 					response[deckName] = QJsonDocument::fromJson(deckData).object();
 					deckFile.close();
+					response["status"] = "success";
 				}
 				else {
 					response["status"] = "Couldn't open deck!";
@@ -345,6 +348,8 @@ void MyServer::sendDeckById(QTcpSocket *socket, const QString &username, const Q
 
 void MyServer::saveDeck(QTcpSocket *socket, QJsonObject &jsonObject)
 {
+
+	QJsonObject response;
 	QString username = jsonObject["username"].toString();
 
 	QJsonObject deck = jsonObject["deck"].toObject();
@@ -366,9 +371,11 @@ void MyServer::saveDeck(QTcpSocket *socket, QJsonObject &jsonObject)
 			stream << QJsonDocument(stats).toJson();
 			statsFile.close();
 			qDebug() << "Deck stats saved on path: " << filePath;
+			response["status"] = "success";
 		}
 		else {
 			qDebug() << "Error saving deck stats:" << statsFile.errorString();
+			response["status"] = "Error saving deck stats:";
 		}
 	}
 
@@ -379,16 +386,20 @@ void MyServer::saveDeck(QTcpSocket *socket, QJsonObject &jsonObject)
 		stream << QJsonDocument(deck).toJson();
 		file.close();
 		qDebug() << "Deck saved on path: " << filePath;
+		response["status"] = "success";
 		if(deck["Privacy"] == "Public"){
-			makePublic(jsonObject);
+			if(!makePublic(jsonObject)){
+				response["status"] = "Failed to make deck public";
+			}
 		}
 	}
 	else {
+		response["status"] = "Error saving deck";
 		qDebug() << "Error saving deck:" << file.errorString();
 	}
 
-	QJsonObject response;
-	response["status"] = "Upload Successful";
+	QTextStream stream(socket);
+	stream << QJsonDocument(response).toJson();
 }
 
 void MyServer::registerUser(QTcpSocket *socket, QJsonObject &jsonObject)
@@ -400,6 +411,7 @@ void MyServer::registerUser(QTcpSocket *socket, QJsonObject &jsonObject)
 
 	for (const QString &fileName : users.entryList()) {
 		if (fileName.split(".")[0] == username) {
+			// status message is used on client to check if user exists
 			response["status"] = "Username already exists, try again";
 			QTextStream stream(socket);
 			stream << QJsonDocument(response).toJson();
@@ -418,7 +430,7 @@ void MyServer::registerUser(QTcpSocket *socket, QJsonObject &jsonObject)
 
 		QDir().mkdir(QDir(userDecksFolder).absoluteFilePath(username));
 
-		response["status"] = "Register successful!";
+		response["status"] = "success";
 	}
 	catch (const QFile::FileError &error) {
 		qDebug() << "file error: " << username;
@@ -439,7 +451,8 @@ uint64_t MyServer::generateUniqueId()
 void MyServer::sendId(QTcpSocket *socket)
 {
 	QJsonObject response;
-	response["status"] = "Id generated";
+
+	response["status"] = "success";
 	uint64_t id = generateUniqueId();
 	response["DeckId"] = qint64(id);
 
@@ -481,7 +494,7 @@ void MyServer::writeRemainingIDsToFile()
 //     }
 // }
 
-void MyServer::makePublic(QJsonObject& jsonObject){
+bool MyServer::makePublic(QJsonObject& jsonObject){
 	QString username = jsonObject["username"].toString();
 
 	QJsonObject deck = jsonObject["deck"].toObject();
@@ -498,14 +511,18 @@ void MyServer::makePublic(QJsonObject& jsonObject){
 		stream << QJsonDocument(deck).toJson();
 		file.close();
 		qDebug() << "Public deck saved on path: " << filePath;
+		return true;
 	}
 	else {
 		qDebug() << "Error saving public deck:" << file.errorString();
+		return false;
 	}
+	return false;
 }
 
 void MyServer::saveCalendar(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject){
 
+	QJsonObject response;
 	QString filePath = QDir(calendarFolder).absoluteFilePath(username + ".json");
 	QFile file(filePath);
 
@@ -514,12 +531,13 @@ void MyServer::saveCalendar(QTcpSocket* socket, const QString& username, QJsonOb
 		stream << QJsonDocument(jsonObject).toJson();
 		file.close();
 		qDebug() << "Calendar saved on path: " << filePath;
+		response["status"] = "success";
 	}else{
 		qDebug() << "Error saving calendar:" << file.errorString();
+		response["status"] = "Error saving calendar";
 	}
-
-	QJsonObject response;
-	response["status"] = "Calendar saved successfully";
+	QTextStream stream(socket);
+	stream << QJsonDocument(response).toJson();
 }
 
 void MyServer::getCalendar(QTcpSocket* socket, const QString& username){
@@ -531,7 +549,7 @@ void MyServer::getCalendar(QTcpSocket* socket, const QString& username){
 	if(file.open(QIODevice::ReadOnly | QIODevice::Text)){
 		QByteArray calendarData = file.readAll();
 		response["calendar"] = QJsonDocument::fromJson(calendarData).object();
-		response["status"] = "Successful!";
+		response["status"] = "success";
 		file.close();
 	}else{
 		response["status"] = "Error getting calendar!";
@@ -551,7 +569,7 @@ void MyServer::getTodo(QTcpSocket* socket, const QString& username){
 	if(file.open(QIODevice::ReadOnly | QIODevice::Text)){
 		QByteArray todoData = file.readAll();
 		response["todo"] = QJsonDocument::fromJson(todoData).object();
-		response["status"] = "Successful!";
+		response["status"] = "success";
 		file.close();
 	}else{
 		response["status"] = "Error getting todoList!";
@@ -564,6 +582,7 @@ void MyServer::getTodo(QTcpSocket* socket, const QString& username){
 
 void MyServer::saveTodo(QTcpSocket* socket, const QString& username, QJsonObject& jsonObject){
 
+	QJsonObject response;
 	QString filePath = QDir(todoFolder).absoluteFilePath(username + ".json");
 	QFile file(filePath);
 
@@ -572,12 +591,14 @@ void MyServer::saveTodo(QTcpSocket* socket, const QString& username, QJsonObject
 		stream << QJsonDocument(jsonObject).toJson();
 		file.close();
 		qDebug() << "Todo list saved on path: " << filePath;
+		response["status"] = "success";
 	}else{
 		qDebug() << "Error saving todo list:" << file.errorString();
+		response["status"] = "Error saving todo list";
 	}
 
-	QJsonObject response;
-	response["status"] = "Todo list saved successfully";
+	QTextStream stream(socket);
+	stream << QJsonDocument(response).toJson();
 }
 
 void MyServer::getStats(QTcpSocket* socket, const QString& username, const QString& deckId){
@@ -618,8 +639,8 @@ void MyServer::getStats(QTcpSocket* socket, const QString& username, const QStri
 	}
 	else {
 		response["status"] = "Error";
-		qDebug() << response["status"].toString();
 	}
+
 	qDebug() << response;
 	QTextStream stream(socket);
 	stream << QJsonDocument(response).toJson();
