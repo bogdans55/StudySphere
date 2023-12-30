@@ -167,9 +167,11 @@ void MainWindow::deckPreview_clicked()
 	QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 	jsonSerializer.loadJson(*deck, deckDocument);
 
-	DeckPreviewWindow *preview = new DeckPreviewWindow(*deck, m_user);
+	qDebug() << deck->cards().at(deck->cards().length() - 1)->questionText();
+
+	DeckPreviewWindow *preview = new DeckPreviewWindow(deck, m_user);
 	connect(preview, &DeckPreviewWindow::sendPublicDeck, this, &MainWindow::addNewDeck);
-	preview->setAttribute(Qt::WA_DeleteOnClose);
+	// preview->setAttribute(Qt::WA_DeleteOnClose);
 	preview->show();
 }
 
@@ -196,6 +198,7 @@ void MainWindow::deckButton_clicked()
 	QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 
 	jsonSerializer.loadJson(*deck, deckDocument);
+
 	StudySession *session = new StudySession(m_user, deck);
 	StudySessionWindow *useDeck = new StudySessionWindow(session);
 	useDeck->setAttribute(Qt::WA_DeleteOnClose);
