@@ -2,6 +2,7 @@
 #include "lib/card.h"
 #include "lib/jsonserializer.h"
 #include "lib/serializer.h"
+#include "lib/servercommunicator.h"
 #include "ui_createdeckwindow.h"
 
 #include <QFileDialog>
@@ -53,79 +54,49 @@ Difficulty CreateDeckWindow::getDifficulty() const
 
 void CreateDeckWindow::on_pushButton_finish_clicked()
 {
-	QTcpSocket socket;
-	socket.connectToHost("127.0.0.1", 8080);
+	QJsonObject requestObject;
 
-	if (socket.waitForConnected()) {
-		QJsonObject request;
+	generateId();
 
-		generateId();
+	JSONSerializer serializer;
+	QJsonDocument doc = serializer.createJson(m_deck);
 
-		JSONSerializer serializer;
-		QJsonDocument doc = serializer.createJson(m_deck);
+	qDebug() << doc;
 
-		qDebug() << doc;
+	requestObject["action"] = "saveDeck";
+	requestObject["username"] = m_user.username();
+	requestObject["deck"] = doc.toVariant().toJsonObject();
 
-		request["action"] = "saveDeck";
-		request["username"] = m_user.username();
-		request["deck"] = doc.toVariant().toJsonObject();
+	QJsonDocument request(requestObject);
+	ServerCommunicator communicator;
+	QJsonObject jsonObj = communicator.sendRequest(request);
 
-		qDebug() << request;
-
-		socket.write(QJsonDocument(request).toJson());
-		socket.waitForBytesWritten();
-		socket.waitForReadyRead();
-
-		QByteArray responseData = socket.readAll();
-		QTextStream stream(responseData);
-
-		qDebug() << responseData;
-
-		qDebug() << "Recieved Data:";
-		while (!stream.atEnd()) {
-			qDebug() << stream.readLine();
-		}
-
-		socket.disconnectFromHost();
-
-		QMessageBox::information(this, "Uspešno kreiran špil", "Vaš špil je uspešno kreiran i sačuvan!");
-
-		//        delete m_deck;
+	if(jsonObj["status"].toString() != "success"){
+		//TODO Juca Translation
+		QMessageBox::information(this,"Kreiranje špila" ,"Došlo je do greške, špil nije sačuvan, probajte ponovo!");
+		return;
 	}
-	else {
-		qDebug() << "Failed to connect to the server";
-	}
+
+	QMessageBox::information(this, "Uspešno kreiran špil", "Vaš špil je uspešno kreiran i sačuvan!");
 
 	close();
 }
 
 void CreateDeckWindow::generateId()
 {
-	QTcpSocket socket;
-	socket.connectToHost("127.0.0.1", 8080);
+		QJsonObject requestObject;
 
-	if (socket.waitForConnected()) {
-		QJsonObject request;
+		requestObject["action"] = "generateId";
 
-		request["action"] = "generateId";
-		socket.write(QJsonDocument(request).toJson());
-		socket.waitForBytesWritten();
-		socket.waitForReadyRead();
-		QByteArray idResponse = socket.readAll();
-		QTextStream idStream(idResponse);
+		ServerCommunicator communicator;
+		QJsonDocument request(requestObject);
 
-		QString idResponseString = idStream.readAll();
-		QJsonDocument idJson = QJsonDocument::fromJson(idResponseString.toUtf8());
-		QJsonObject idObject = idJson.object();
+		QJsonObject idObject = communicator.sendRequest(request);
+
 		m_deck.setId(idObject.value("DeckId").toVariant().toULongLong());
-		socket.disconnectFromHost();
 
         emit writeGeneratedID(m_deck.name() + "_" + QString::number(m_deck.deckId()) + "_deck.json");
         qDebug() << "send " << m_deck.name() + "_" + QString::number(m_deck.deckId());
-	}
-	else {
-		qDebug() << "Failed to connect to the server";
-	}
 }
 
 void CreateDeckWindow::on_pushButton_add_clicked()

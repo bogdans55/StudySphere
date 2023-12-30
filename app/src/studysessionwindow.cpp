@@ -1,4 +1,5 @@
 #include "lib/studysessionwindow.h"
+#include "lib/servercommunicator.h"
 #include "ui_studysessionwindow.h"
 #include "lib/jsonserializer.h"
 #include "lib/serializer.h"
@@ -27,7 +28,7 @@ StudySessionWindow::StudySessionWindow(StudySession *session, QWidget *parent)
 StudySessionWindow::~StudySessionWindow()
 {
 	delete ui;
-    delete m_session;
+	delete m_session;
 }
 
 void StudySessionWindow::on_pushButton_flip_clicked()
@@ -54,41 +55,30 @@ void StudySessionWindow::evaluate(int grade) // TODO should be enum grade
 	}
 	else {
 		QMessageBox::information(this, "Gotova sesija", "Uspešno ste prešli sva odabrana pitanja!");
-        QTcpSocket socket;
-        socket.connectToHost("127.0.0.1", 8080);
         m_session->endSession();
 
-        if (socket.waitForConnected()) {
-            QJsonObject request;
+		QJsonObject requestObject;
 
-            JSONSerializer serializer;
-            QJsonDocument doc = serializer.createJson(*(m_session->deckStats()));
+		JSONSerializer serializer;
+		QJsonDocument doc = serializer.createJson(*(m_session->deckStats()));
 
-            qDebug() << doc;
+		qDebug() << doc;
 
-            request["action"] = "saveDeck";
-            request["username"] = m_session->user().username();
-			request["deck"] = serializer.createJson(*(m_session->deck())).toVariant().toJsonObject();
-            request["deckStats"] = doc.toVariant().toJsonObject();
 
-            qDebug() << request;
+		requestObject["action"] = "saveDeck";
+		requestObject["username"] = m_session->user().username();
+		requestObject["deck"] = serializer.createJson(*(m_session->deck())).toVariant().toJsonObject();
+		requestObject["deckStats"] = doc.toVariant().toJsonObject();
 
-            socket.write(QJsonDocument(request).toJson());
-            socket.waitForBytesWritten();
-            socket.waitForReadyRead();
+		QJsonDocument request(requestObject);
+		ServerCommunicator communicator;
+		QJsonObject jsonObj = communicator.sendRequest(request);
 
-            QByteArray responseData = socket.readAll();
-            QTextStream stream(responseData);
-			// TODO check if successful
-            qDebug() << responseData;
-
-            socket.disconnectFromHost();
-
-            //        delete m_deck;
-        }
-        else {
-            qDebug() << "Failed to connect to the server";
-        }
+		if(jsonObj["status"].toString() != "success"){
+			//TODO Juca Translation
+			QMessageBox::information(this,"Greška" ,"Došlo je do greške, statistike za poslednje učenje nisu sačuvane!");
+			return;
+		}
         if (m_whiteboard != nullptr) {
             m_whiteboard->close();
             delete m_whiteboard;
