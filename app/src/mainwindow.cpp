@@ -63,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent)
     Settings &settings = Settings::instance(app);
 
 
-	settings.setLanguage(Language::ENGLISH);
+    settings.setLanguage(Language::SERBIAN);
 	settings.setTheme(Theme::BLUE);
 	ui->retranslateUi(this);
 
