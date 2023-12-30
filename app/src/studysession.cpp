@@ -1,5 +1,6 @@
 #include "lib/studysession.h"
 #include "lib/jsonserializer.h"
+#include "lib/servercommunicator.h"
 #include <QDebug>
 #include <QRandomGenerator>
 #include <algorithm>
@@ -30,39 +31,26 @@ void StudySession::startSession()
 {
 	m_timeStarted = time(NULL);
 
-	QTcpSocket socket;
-	socket.connectToHost("127.0.0.1", 8080);
+	QJsonObject requestObject;
 
-	if (socket.waitForConnected()) {
-		QJsonObject request;
+	requestObject["action"] = "getStats";
+	requestObject["username"] = m_user.username();
+	requestObject["DeckId"] = QString::number(m_deck->deckId());
 
-		request["action"] = "getStats";
-		request["username"] = m_user.username();
-		request["DeckId"] = QString::number(m_deck->deckId());
+	ServerCommunicator communicator;
 
-		socket.write(QJsonDocument(request).toJson());
-		socket.waitForBytesWritten();
-		socket.waitForReadyRead();
-		QByteArray statsResponse = socket.readAll();
-		QTextStream statsStream(statsResponse);
+	QJsonDocument request(requestObject);
 
-		QString statsResponseString = statsStream.readAll();
-		QJsonDocument statsJson = QJsonDocument::fromJson(statsResponseString.toUtf8());
-		QJsonObject statsObject = statsJson.object();
+	QJsonObject statsObject = communicator.sendRequest(request);
+	QJsonDocument statsDocument = QJsonDocument::fromVariant(statsObject.toVariantMap());
 
-		socket.disconnectFromHost();
-
-		if(statsObject["status"].toString() == "no stats"){
-			m_deckStats = new DeckStats(m_deck->cards().length());
-		}
-		else{
-			JSONSerializer jsonSerializer;
-			m_deckStats = new DeckStats();
-			jsonSerializer.loadJson(*m_deckStats, statsJson);
-		}
+	if(statsObject["status"].toString() == "no stats"){
+		m_deckStats = new DeckStats(m_deck->cards().length());
 	}
-	else {
-		qDebug() << "Failed to connect to the server";
+	else{
+		JSONSerializer jsonSerializer;
+		m_deckStats = new DeckStats();
+		jsonSerializer.loadJson(*m_deckStats, statsDocument);
 	}
 
 	this->chooseCardSequence(m_deck->cards().length());

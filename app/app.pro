@@ -34,6 +34,7 @@ SOURCES += \
     src/library.cpp \
     src/main.cpp \
     src/plaincard.cpp \
+    src/servercommunicator.cpp \
     src/studysession.cpp \
     src/studysessionwindow.cpp \
     src/todolist.cpp \
@@ -64,6 +65,7 @@ HEADERS += \
     lib/planner.h \
     lib/serializable.h \
     lib/serializer.h \
+    lib/servercommunicator.h \
     lib/studysession.h \
     lib/library.h \
     lib/studysessionwindow.h \
