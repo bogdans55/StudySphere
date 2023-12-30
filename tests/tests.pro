@@ -5,6 +5,20 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++20
 
+QMAKE_CXXFLAGS += -g --coverage
+QMAKE_LFLAGS += --coverage
+
+isEmpty(CATCH_INCLUDE_DIR): CATCH_INCLUDE_DIR=$$(CATCH_INCLUDE_DIR)
+# set by Qt Creator wizard
+isEmpty(CATCH_INCLUDE_DIR): CATCH_INCLUDE_DIR="./catch2"
+!isEmpty(CATCH_INCLUDE_DIR): INCLUDEPATH *= $${CATCH_INCLUDE_DIR}
+
+isEmpty(CATCH_INCLUDE_DIR): {
+    message("CATCH_INCLUDE_DIR is not set, assuming Catch2 can be found automatically in your system")
+}
+
+
+
 SOURCES += \
     ../app/src/calendar.cpp \
     ../app/src/planner.cpp \
@@ -35,6 +49,7 @@ SOURCES += \
     ../app/src/user.cpp \
     ../app/src/settings.cpp \
     # ../app/src/mainwindow.cpp \
+    test.cpp \
     main.cpp
 
 HEADERS += \
