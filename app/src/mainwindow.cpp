@@ -182,6 +182,8 @@ void MainWindow::deckButton_clicked()
 	QPushButton *chosenDeck = qobject_cast<QPushButton *>(sender());
 
 	QString deckName = chosenDeck->text();
+	QStringList deckNameEdited = deckName.split('.')[0].split('_');
+
 	Deck *deck = new Deck();
 	QJsonObject requestObject;
 
@@ -196,14 +198,14 @@ void MainWindow::deckButton_clicked()
 
 	JSONSerializer jsonSerializer;
 
-	QJsonObject deckObject = jsonObj[deckName+"_deck.json"].toObject();
+	QJsonObject deckObject = jsonObj[deckNameEdited[0].append("_").append(deckNameEdited[1])+"_deck.json"].toObject();
 	QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 
 	jsonSerializer.loadJson(*deck, deckDocument);
 
 	StudySession *session = new StudySession(m_user, deck);
 	StudySessionWindow *useDeck = new StudySessionWindow(session);
-	useDeck->setAttribute(Qt::WA_DeleteOnClose);
+	// useDeck->setAttribute(Qt::WA_DeleteOnClose);
 	useDeck->show();
 }
 
