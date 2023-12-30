@@ -32,8 +32,7 @@ SOURCES += \
     ../app/src/todolist.cpp \
     ../app/src/user.cpp \
     ../app/src/settings.cpp \
-    test_firstone.cpp \
-    test_secondone.cpp \
+    test_deck.cpp \
     main.cpp
 
 HEADERS += \
