@@ -14,7 +14,7 @@
    <string>StudySphere</string>
   </property>
   <property name="windowIcon">
-   <iconset>
+   <iconset resource="../res/icons.qrc">
     <normaloff>:/icons/logo.png</normaloff>:/icons/logo.png</iconset>
   </property>
   <property name="inputMethodHints">
@@ -162,22 +162,6 @@
        </property>
        <property name="text">
         <string>Podešavanja</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_help">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Pomoć</string>
        </property>
       </widget>
      </item>
@@ -651,7 +635,11 @@
           </widget>
          </item>
          <item row="1" column="6">
-          <widget class="QGraphicsView" name="graphicsView_sunday"/>
+          <widget class="QGraphicsView" name="graphicsView_sunday">
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -917,70 +905,56 @@
       </layout>
      </widget>
      <widget class="QWidget" name="page_settings">
-      <widget class="QWidget" name="verticalLayoutWidget">
+      <widget class="QComboBox" name="comboBox_theme">
        <property name="geometry">
         <rect>
-         <x>260</x>
-         <y>50</y>
-         <width>160</width>
-         <height>261</height>
+         <x>250</x>
+         <y>140</y>
+         <width>221</width>
+         <height>31</height>
         </rect>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_settings">
-        <item>
-         <widget class="QComboBox" name="comboBox_language">
-          <property name="placeholderText">
-           <string>Jezik</string>
-          </property>
-          <item>
-           <property name="text">
-            <string>Srpski</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Engleski</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBox_theme">
-          <property name="placeholderText">
-           <string>Tema</string>
-          </property>
-          <item>
-           <property name="text">
-            <string>Plava</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Narandžasta</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Tamna</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBox_sound">
-          <property name="text">
-           <string>Zvuk</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSlider" name="horizontalSlider_volume">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <property name="placeholderText">
+        <string>Tema</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Plava</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Narandžasta</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Tamna</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QComboBox" name="comboBox_language">
+       <property name="geometry">
+        <rect>
+         <x>250</x>
+         <y>80</y>
+         <width>221</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>Jezik</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Srpski</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Engleski</string>
+        </property>
+       </item>
       </widget>
      </widget>
      <widget class="QWidget" name="page_help">
@@ -1002,6 +976,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../res/icons.qrc"/>
+ </resources>
  <connections/>
 </ui>
