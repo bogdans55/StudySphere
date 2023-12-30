@@ -70,12 +70,12 @@ void CreateDeckWindow::on_pushButton_finish_clicked()
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
 	if (jsonObj["status"].toString() != "success") {
-		// TODO Juca Translation
-		QMessageBox::information(this, "Kreiranje špila", "Došlo je do greške, špil nije sačuvan, probajte ponovo!");
+		QMessageBox::information(this, tr("Kreiranje špila"),
+								 tr("Došlo je do greške, špil nije sačuvan, probajte ponovo!"));
 		return;
 	}
 
-	QMessageBox::information(this, "Uspešno kreiran špil", "Vaš špil je uspešno kreiran i sačuvan!");
+	QMessageBox::information(this, tr("Uspešno kreiran špil"), tr("Vaš špil je uspešno kreiran i sačuvan!"));
 
 	close();
 }
@@ -103,7 +103,7 @@ void CreateDeckWindow::on_pushButton_add_clicked()
 	Difficulty m_difficulty = getDifficulty();
 
 	if (m_question.trimmed().isEmpty() or m_answer.trimmed().isEmpty() or m_questionDifficulty->checkedId() == -1) {
-		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili sva neophodna polja!");
+		QMessageBox::warning(this, tr("Pogrešan unos"), tr("Niste popunili sva neophodna polja!"));
 		return;
 	}
 

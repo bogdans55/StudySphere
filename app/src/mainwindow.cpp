@@ -62,9 +62,10 @@ MainWindow::MainWindow(QWidget *parent)
     QApplication *app = qobject_cast<QApplication *>(QApplication::instance());
     Settings &settings = Settings::instance(app);
 
-    settings.setLanguage(Language::SERBIAN);
-    settings.setTheme(Theme::BLUE);
-    ui->retranslateUi(this);
+
+	settings.setLanguage(Language::ENGLISH);
+	settings.setTheme(Theme::BLUE);
+	ui->retranslateUi(this);
 
     ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
     ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
@@ -125,8 +126,7 @@ void MainWindow::savePlanner()
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
 	if (jsonObj["status"].toString() != "success") {
-		// TODO Juca Translation
-		QMessageBox::information(this, "Čuvanje planera", "Došlo je do greške, planer nije sačuvan!");
+		QMessageBox::information(this, tr("Čuvanje planera"), tr("Došlo je do greške, planer nije sačuvan!"));
 		return;
 	}
 }
@@ -163,9 +163,8 @@ void MainWindow::deckPreview_clicked()
 	JSONSerializer jsonSerializer;
 
 	if (jsonObj["status"].toString() != "success") {
-		// TODO Juca Translation
-		QMessageBox::information(this, "Pregled špila",
-								 "Došlo je do greške, pregled špila se nije pokrenuo, probajte ponovo!");
+		QMessageBox::information(this, tr("Pregled špila"),
+								 tr("Došlo je do greške, pregled špila se nije pokrenuo, probajte ponovo!"));
 		return;
 	}
 	Deck *deck = new Deck();
@@ -199,8 +198,7 @@ void MainWindow::deckButton_clicked()
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
 	if (jsonObj["status"].toString() != "success") {
-		// TODO Juca Translation
-		QMessageBox::information(this, "Učenje", "Došlo je do greške, špil se nije pokrenuo, probajte ponovo!");
+		QMessageBox::information(this, tr("Učenje"), tr("Došlo je do greške, špil se nije pokrenuo, probajte ponovo!"));
 		return;
 	}
 	Deck *deck = new Deck();
@@ -237,9 +235,8 @@ void MainWindow::on_pushButton_todo_clicked()
 		QJsonObject jsonObj = communicator.sendRequest(request);
 
 		if (jsonObj["status"].toString() != "success") {
-			// TODO Juca Translation
-			QMessageBox::information(this, "TODO lista",
-									 "Došlo je do greške, todo lista nije učitana, probajte ponovo!");
+			QMessageBox::information(this, tr("TODO lista"),
+									 tr("Došlo je do greške, todo lista nije učitana, probajte ponovo!"));
 			return;
 		}
 
@@ -290,8 +287,8 @@ void MainWindow::on_pushButton_planer_clicked()
 		QJsonObject jsonObj = communicator.sendRequest(request);
 
 		if (jsonObj["status"].toString() != "success") {
-			// TODO Juca Translation
-			QMessageBox::information(this, "Planer", "Došlo je do greške, planer nije učitan, probajte ponovo!");
+			QMessageBox::information(this, tr("Planer"),
+									 tr("Došlo je do greške, planer nije učitan, probajte ponovo!"));
 			return;
 		}
 		JSONSerializer jsonSerializer;
@@ -321,8 +318,8 @@ void MainWindow::on_pushButton_calendar_clicked()
 		QJsonObject jsonObj = communicator.sendRequest(request);
 
 		if (jsonObj["status"].toString() != "success") {
-			// TODO Juca Translation
-			QMessageBox::information(this, "Kalendar", "Došlo je do greške, kalendar nije učitan, probajte ponovo!");
+			QMessageBox::information(this, tr("Kalendar"),
+									 tr("Došlo je do greške, kalendar nije učitan, probajte ponovo!"));
 			return;
 		}
 
@@ -359,7 +356,7 @@ void MainWindow::on_pushButton_addEvent_clicked()
 	QTime time = ui->dateTimeEdit_eventTime->dateTime().time();
 
 	if (eventName.trimmed().isEmpty()) {
-		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili polje za naziv dogadjaja!");
+		QMessageBox::warning(this, tr("Pogrešan unos"), tr("Niste popunili polje za naziv dogadjaja!"));
 		return;
 	}
 
@@ -369,7 +366,7 @@ void MainWindow::on_pushButton_addEvent_clicked()
 	ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
 	ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
 
-	QMessageBox::information(this, "Uspešan unos", "Uspešno ste dodali novi dogadjaj!");
+	QMessageBox::information(this, tr("Uspešan unos"), tr("Uspešno ste dodali novi dogadjaj!"));
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
@@ -384,7 +381,7 @@ void MainWindow::on_calendarWidget_activated(const QDate &date)
 {
 	QString message = "Na izabrani dan imate sledeće dogadjaje:\n";
 	if (!m_calendar.events().contains(date))
-		QMessageBox::information(this, date.toString("dd.MM.yyyy."), "Na izabrani dan nemate nijedan dogadjaj!");
+		QMessageBox::information(this, date.toString("dd.MM.yyyy."), tr("Na izabrani dan nemate nijedan dogadjaj!"));
     else {
         auto calendar = m_calendar.events();
         auto todaysEvents = calendar[date];
@@ -403,12 +400,12 @@ void MainWindow::on_pushButton_addActivity_clicked()
 	QTime endTime = ui->timeEdit_end->time();
 
 	if (name.trimmed().isEmpty()) {
-		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili polje za naziv aktivnosti!");
+		QMessageBox::warning(this, tr("Pogrešan unos"), tr("Niste popunili polje za naziv aktivnosti!"));
 		return;
 	}
 
 	if (startTime >= endTime) {
-		QMessageBox::warning(this, "Pogrešan unos", "Vreme početka aktivnosti mora biti pre vremena kraja!");
+		QMessageBox::warning(this, tr("Pogrešan unos"), tr("Vreme početka aktivnosti mora biti pre vremena kraja!"));
 		return;
 	}
 
@@ -525,7 +522,8 @@ void MainWindow::on_pushButton_login_clicked()
 		else {
 			loginSuccess = loginUser(username, password);
 			if (!loginSuccess) {
-				QMessageBox::critical(this, "Greška pri prijavljivanju", "Neuspešno prijavljivanje. Probajte ponovo.");
+				QMessageBox::critical(this, tr("Greška pri prijavljivanju"),
+									  tr("Neuspešno prijavljivanje. Probajte ponovo."));
 				return;
 			}
 			else
@@ -538,8 +536,8 @@ void MainWindow::on_pushButton_login_clicked()
 		// logout
 		saveOnServer();
 		m_loggedIn = false;
-		ui->label_username->setText("Nema korisnika");
-		ui->pushButton_login->setText("Prijavi se");
+		ui->label_username->setText(tr("Nema korisnika"));
+		ui->pushButton_login->setText(tr("Prijavi se"));
 		setEnabled(false);
 		ui->tableWidget_library->clear();
 		ui->tableWidget_browser->clear();
@@ -581,7 +579,7 @@ bool MainWindow::loginUser(const QString &username, const QString &password)
 	}
 	if (jsonObj["status"] != QJsonValue::Undefined && jsonObj["status"] != "Password incorrect, try again") {
 		ui->label_username->setText(request["username"].toString());
-		ui->pushButton_login->setText("Odjavi se");
+		ui->pushButton_login->setText(tr("Odjavi se"));
 		m_user.setUsername(request["username"].toString());
 	}
 	else {
@@ -641,8 +639,8 @@ void MainWindow::saveCalendar()
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
 	if (jsonObj["status"].toString() != "success") {
-		// TODO Juca Translation
-		QMessageBox::information(this, "Kalendar", "Došlo je do greške, kalendar nije sačuvan, probajte ponovo!");
+		QMessageBox::information(this, tr("Kalendar"),
+								 tr("Došlo je do greške, kalendar nije sačuvan, probajte ponovo!"));
 		return;
 	}
 }
@@ -650,7 +648,7 @@ void MainWindow::saveCalendar()
 void MainWindow::on_pushButton_addTodo_clicked()
 {
 	if (ui->lineEdit_todo->text().trimmed().isEmpty()) {
-		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili polje za naziv aktivnosti!");
+		QMessageBox::warning(this, tr("Pogrešan unos"), tr("Niste popunili polje za naziv aktivnosti!"));
 		return;
 	}
 
@@ -713,8 +711,8 @@ void MainWindow::saveToDoList()
 	QJsonObject jsonObj = communicator.sendRequest(request);
 
 	if (jsonObj["status"].toString() != "success") {
-		// TODO Juca Translation
-		QMessageBox::information(this, "TODO lista", "Došlo je do greške, todo lista nije sačuvana, probajte ponovo!");
+		QMessageBox::information(this, tr("To-Do lista"),
+								 tr("Došlo je do greške, todo lista nije sačuvana, probajte ponovo!"));
 		return;
 	}
 }
@@ -727,7 +725,7 @@ void MainWindow::on_pushButton_search_clicked()
 	QString query = ui->lineEdit_browser->text().trimmed();
 
 	if (query.isEmpty()) {
-		QMessageBox::warning(this, "Pogrešan unos", "Niste popunili polje za naziv špila!");
+		QMessageBox::warning(this, tr("Pogrešan unos"), tr("Niste popunili polje za naziv špila!"));
 		return;
 	}
 
@@ -752,7 +750,7 @@ void MainWindow::on_pushButton_search_clicked()
 		}
 	}
 	else {
-		QMessageBox::warning(this, "Nema rezultata", "Nije pronadjen nijedan špil!");
+		QMessageBox::warning(this, tr("Nema rezultata"), tr("Nije pronadjen nijedan špil!"));
 	}
 }
 
@@ -773,7 +771,8 @@ void MainWindow::on_pushButton_importDecks_clicked()
 					if (button->text() == *(--tempDeckName.end())) {
 						filePaths.removeAt(it - filePaths.begin());
 						if (filePaths.isEmpty()) {
-							QMessageBox::warning(this, "Uvoz špilova", "Unosite špil ili špilove koje već imate!");
+							QMessageBox::warning(this, tr("Uvoz špilova"),
+												 tr("Unosite špil ili špilove koje već imate!"));
 							break;
 						}
 					}
@@ -801,7 +800,7 @@ void MainWindow::on_pushButton_importDecks_clicked()
 		addCreateDeckButton();
 	}
 	if (!filePaths.isEmpty()) {
-		QMessageBox::information(this, "Uvoz špilova", "Uspešan uvoz!");
+		QMessageBox::information(this, tr("Uvoz špilova"), tr("Uspešan uvoz!"));
 	}
 }
 
@@ -836,9 +835,8 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 						JSONSerializer jsonSerializer;
 
 						if (jsonObj["status"].toString() != "success") {
-							// TODO Juca Translation
-							QMessageBox::information(this, "Uvoz špilova",
-													 "Došlo je do greške, nije sačuvano, probajte ponovo!");
+							QMessageBox::information(this, tr("Uvoz špilova"),
+													 tr("Došlo je do greške, nije sačuvano, probajte ponovo!"));
 							return;
 						}
 
@@ -855,7 +853,7 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 			}
 		}
 	}
-	QMessageBox::information(this, "Izvoz špilova", "Uspešan izvoz!");
+	QMessageBox::information(this, tr("Izvoz špilova"), tr("Uspešan izvoz!"));
 }
 
 void MainWindow::addNewDeck(QString deckNameID)
@@ -953,7 +951,10 @@ void MainWindow::on_comboBox_language_currentIndexChanged(int index)
 	Settings &settings = Settings::instance(app);
 
 	settings.setLanguage(index);
+	QString name = ui->label_username->text();
 	ui->retranslateUi(this);
+	ui->label_username->setText(name);
+	ui->pushButton_login->setText(tr("Odjavi se"));
 }
 
 void MainWindow::on_comboBox_theme_currentIndexChanged(int index)
@@ -962,5 +963,8 @@ void MainWindow::on_comboBox_theme_currentIndexChanged(int index)
 	Settings &settings = Settings::instance(app);
 
 	settings.setTheme(index);
+	QString name = ui->label_username->text();
 	ui->retranslateUi(this);
+	ui->label_username->setText(name);
+	ui->pushButton_login->setText(tr("Odjavi se"));
 }
