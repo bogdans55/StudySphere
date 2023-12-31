@@ -141,8 +141,7 @@ void MainWindow::createDeck_clicked()
 		CreateDeckWindow *createDeck = new CreateDeckWindow(name, privacy, m_user);
 		connect(createDeck, &CreateDeckWindow::writeGeneratedID, this, &MainWindow::addNewDeck);
 		createDeck->setAttribute(Qt::WA_DeleteOnClose);
-		createDeck->show();
-		setEnabled(false);
+        createDeck->show();
 	}
 }
 
@@ -337,6 +336,12 @@ void MainWindow::on_pushButton_calendar_clicked()
 void MainWindow::on_pushButton_stats_clicked()
 {
 	ui->stackedWidget->setCurrentIndex(STATS);
+    ui->number_timesUsed->display(0);
+    ui->number_deckSize->display(0);
+    ui->progressBar_skip->setValue(0);
+    ui->progressBar_bad->setValue(0);
+    ui->progressBar_good->setValue(0);
+    ui->progressBar_excellent->setValue(0);
 }
 
 void MainWindow::on_pushButton_settings_clicked()
@@ -426,6 +431,10 @@ void MainWindow::on_pushButton_addActivity_clicked()
 	activityText->setTextWidth(textWidth);
 	activityText->setPos(activityItem->pos().x(), activityItem->pos().y() + activityTime->boundingRect().height());
 	m_plannerScenes[day]->addItem(activityText);
+
+    ui->lineEdit_activityName->setText("");
+    ui->timeEdit_start->setTime(QTime(0, 0));
+    ui->timeEdit_end->setTime(QTime(0, 0));
 }
 
 void MainWindow::showActivities()
@@ -491,12 +500,11 @@ void MainWindow::setEnabled(bool value)
 
 void MainWindow::on_pushButton_login_clicked()
 {
-	for (auto scene : m_plannerScenes) {
+    for (auto scene : m_plannerScenes) {
         scene->clear();
-		scene->addItem(new ScheduleItem());
-		scene->clearActivities();
-	}
-
+        scene->addItem(new ScheduleItem());
+        scene->clearActivities();
+    }
     if (!m_loggedIn)
 	{
 		QString username;
@@ -540,11 +548,11 @@ void MainWindow::on_pushButton_login_clicked()
 		ui->pushButton_login->setText(tr("Prijavi se"));
 		setEnabled(false);
 		ui->tableWidget_library->clear();
-		ui->tableWidget_browser->clear();
-		m_planner.deleteAll();
-		m_calendar.deleteAll();
-		m_toDoList.deleteAllToDos();
-		ui->listWidget_todos->clear();
+        ui->tableWidget_browser->clear();
+        m_planner.deleteAll();
+        m_calendar.deleteAll();
+        m_toDoList.deleteAllToDos();
+        ui->listWidget_todos->clear();
 		m_todoLoaded = false;
 		m_plannerLoaded = false;
 		m_calendarLoaded = false;
@@ -557,6 +565,9 @@ void MainWindow::on_pushButton_login_clicked()
 
 		m_deckNames.clear();
 		m_deckCounter = 0;
+
+        if(ui->comboBox_deck->count() != 0)
+            ui->comboBox_deck->clear();
 	}
 }
 
@@ -798,6 +809,7 @@ void MainWindow::on_pushButton_importDecks_clicked()
 		QStringList tempDeckName = (*it).split('/');
 		addDeckToTable(*(--tempDeckName.end()), ui->tableWidget_library, m_deckCounter);
 		addCreateDeckButton();
+        ui->comboBox_deck->addItem(deck.name());
 	}
 	if (!filePaths.isEmpty()) {
 		QMessageBox::information(this, tr("Uvoz špilova"), tr("Uspešan uvoz!"));
@@ -906,28 +918,7 @@ void MainWindow::addCreateDeckButton()
 
 void MainWindow::on_comboBox_deck_currentIndexChanged(int index)
 {
-	if (index >= m_deckNames.size())
-		return;
 
-	QJsonObject requestObject;
-
-	requestObject["action"] = "getStats";
-	requestObject["username"] = m_user.username();
-	requestObject["DeckId"] = m_deckNames[index].split("_")[1];
-
-	QJsonDocument request(requestObject);
-	ServerCommunicator communicator;
-	QJsonObject statsObject = communicator.sendRequest(request);
-	QJsonDocument statsDocument = QJsonDocument::fromVariant(statsObject.toVariantMap());
-	JSONSerializer jsonSerializer;
-
-	if (statsObject["status"].toString() != "no stats") {
-		JSONSerializer jsonSerializer;
-		auto deckStats = new DeckStats();
-		jsonSerializer.loadJson(*deckStats, statsDocument);
-		loadStats(deckStats);
-        delete deckStats;
-	}
 }
 
 void MainWindow::loadStats(DeckStats *deckStats)
@@ -969,3 +960,30 @@ void MainWindow::on_comboBox_theme_currentIndexChanged(int index)
 	ui->label_username->setText(name);
 	ui->pushButton_login->setText(tr("Odjavi se"));
 }
+
+void MainWindow::on_comboBox_deck_activated(int index)
+{
+    if (index >= m_deckNames.size())
+        return;
+
+    QJsonObject requestObject;
+
+    requestObject["action"] = "getStats";
+    requestObject["username"] = m_user.username();
+    requestObject["DeckId"] = m_deckNames[index].split("_")[1];
+
+    QJsonDocument request(requestObject);
+    ServerCommunicator communicator;
+    QJsonObject statsObject = communicator.sendRequest(request);
+    QJsonDocument statsDocument = QJsonDocument::fromVariant(statsObject.toVariantMap());
+    JSONSerializer jsonSerializer;
+
+    if (statsObject["status"].toString() != "no stats") {
+        JSONSerializer jsonSerializer;
+        auto deckStats = new DeckStats();
+        jsonSerializer.loadJson(*deckStats, statsDocument);
+        loadStats(deckStats);
+        delete deckStats;
+    }
+}
+

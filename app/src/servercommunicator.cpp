@@ -5,7 +5,7 @@ ServerCommunicator::ServerCommunicator(QObject *parent) : QObject(parent), socke
 
 QJsonObject ServerCommunicator::sendRequest(const QJsonDocument &request)
 {
-	socket->connectToHost("127.0.0.1", 8080);
+    socket->connectToHost("127.0.0.1", 8080);
 
 	if (socket->waitForConnected()) {
 		socket->write(request.toJson());
