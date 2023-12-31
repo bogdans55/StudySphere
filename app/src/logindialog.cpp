@@ -1,4 +1,4 @@
-#include "lib/logindialog.h"
+#include "../lib/logindialog.h"
 #include "ui_logindialog.h"
 
 #define LOGIN (0)

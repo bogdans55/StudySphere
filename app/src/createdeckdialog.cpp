@@ -1,4 +1,4 @@
-#include "lib/createdeckdialog.h"
+#include "../lib/createdeckdialog.h"
 #include "ui_createdeckdialog.h"
 
 #include <QMessageBox>

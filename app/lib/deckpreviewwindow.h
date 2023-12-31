@@ -1,7 +1,7 @@
 #ifndef DECKPREVIEWWINDOW_H
 #define DECKPREVIEWWINDOW_H
 
-#include "lib/deck.h"
+#include "deck.h"
 #include <QWidget>
 
 namespace Ui

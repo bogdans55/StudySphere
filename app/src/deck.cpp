@@ -1,4 +1,4 @@
-#include "lib/deck.h"
+#include "../lib/deck.h"
 #include <QJsonArray>
 #include <QRandomGenerator>
 #include <QString>

@@ -1,7 +1,7 @@
 #ifndef CALENDAR_H
 #define CALENDAR_H
 
-#include "lib/serializable.h"
+#include "serializable.h"
 #include <QDate>
 #include <QMap>
 #include <QPair>

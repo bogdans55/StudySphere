@@ -1,5 +1,5 @@
-#include "lib/plaincard.h"
-#include "lib/card.h"
+#include "../lib/plaincard.h"
+#include "../lib/card.h"
 
 PlainCard::PlainCard() : Card() {}
 

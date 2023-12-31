@@ -1,4 +1,4 @@
-#include "lib/calendar.h"
+#include "../lib/calendar.h"
 
 Calendar::Calendar() : m_events() {}
 

@@ -1,7 +1,7 @@
 #ifndef PLANNERSCENE_H
 #define PLANNERSCENE_H
 
-#include "lib/activityitem.h"
+#include "activityitem.h"
 #include <QGraphicsScene>
 #include <QMap>
 

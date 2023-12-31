@@ -1,4 +1,4 @@
-#include "lib/imagecard.h"
+#include "../lib/imagecard.h"
 
 ImageCard::ImageCard() : Card() {}
 

@@ -1,7 +1,7 @@
 #ifndef PLAINCARD_H
 #define PLAINCARD_H
 
-#include "lib/card.h"
+#include "card.h"
 
 class PlainCard : public Card
 {

@@ -1,6 +1,6 @@
-#include "lib/studysession.h"
-#include "lib/jsonserializer.h"
-#include "lib/servercommunicator.h"
+#include "../lib/studysession.h"
+#include "../lib/jsonserializer.h"
+#include "../lib/servercommunicator.h"
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QRandomGenerator>

@@ -17,7 +17,7 @@
 #include <QStandardPaths>
 #include <QTableWidget>
 
-#include "lib/settings.h"
+#include "../lib/settings.h"
 
 #include <QCoreApplication>
 #include <QDir>

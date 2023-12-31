@@ -1,4 +1,4 @@
-#include "lib/servercommunicator.h"
+#include "../lib/servercommunicator.h"
 #include <QTextStream>
 
 ServerCommunicator::ServerCommunicator(QObject *parent) : QObject(parent), socket(new QTcpSocket(this)) {}

@@ -1,4 +1,4 @@
-#include "lib/deckstats.h"
+#include "../lib/deckstats.h"
 
 DeckStats::DeckStats() : m_grades(), m_timesUsed(0u) {}
 

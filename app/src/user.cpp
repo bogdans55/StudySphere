@@ -1,4 +1,4 @@
-#include "lib/user.h"
+#include "../lib/user.h"
 
 User::User(const QString &newUsername) : m_username(newUsername) {}
 

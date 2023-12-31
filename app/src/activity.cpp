@@ -1,4 +1,4 @@
-#include "lib/activity.h"
+#include "../lib/activity.h"
 #include <QVariantMap>
 
 Activity::Activity() : m_activityText(), m_start(), m_end() {}
