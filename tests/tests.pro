@@ -32,6 +32,7 @@ SOURCES += \
     ../app/src/todolist.cpp \
     ../app/src/user.cpp \
     ../app/src/settings.cpp \
+    test_activity.cpp \
     test_card.cpp \
     test_deck.cpp \
     main.cpp \
