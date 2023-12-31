@@ -18,15 +18,15 @@ StudySphere je projekat zasnovan na ideji kartica koje se koriste kao sredstvo z
 
 ### Članovi tima 🤝
 
-- Bogdan Stojadinović 73/2020 [GitLab Profil](https://gitlab.com/bogdans55)
-- Sofija Višnjić 57/2020 [GitLab Profil](https://gitlab.com/sofijavisnjic001)
-- Stefan Kerkoč 28/2020 [GitLab Profil](https://gitlab.com/kerkoc01)
-- Julijana Jevtić 25/2020 [GitLab Profil](https://gitlab.com/jjulijana)
-- Marko Petrović 131/2020 [GitLab Profil](https://gitlab.com/marko1684)
+- [Bogdan Stojadinović 73/2020](https://gitlab.com/bogdans55)
+- [Sofija Višnjić 57/2020](https://gitlab.com/sofijavisnjic001)
+- [Stefan Kerkoč 28/2020](https://gitlab.com/kerkoc01)
+- [Julijana Jevtić 25/2020](https://gitlab.com/jjulijana)
+- [Marko Petrović 131/2020](https://gitlab.com/marko1684)
 
 ## Demo snimak projekta 🎬
 
-[Link to Demo](#)
+[Demo snimak](https://www.youtube.com/watch?v=h94giWA9upw)
 
 ## Okruženje 🛠️
 
