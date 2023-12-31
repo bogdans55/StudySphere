@@ -226,187 +226,193 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="130"/>
+        <location filename="../../src/mainwindow.cpp" line="129"/>
         <source>Čuvanje planera</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="130"/>
+        <location filename="../../src/mainwindow.cpp" line="129"/>
         <source>Došlo je do greške, planer nije sačuvan!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="167"/>
+        <location filename="../../src/mainwindow.cpp" line="165"/>
         <source>Pregled špila</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="168"/>
+        <location filename="../../src/mainwindow.cpp" line="166"/>
         <source>Došlo je do greške, pregled špila se nije pokrenuo, probajte ponovo!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="202"/>
+        <location filename="../../src/mainwindow.cpp" line="200"/>
         <source>Učenje</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="202"/>
+        <location filename="../../src/mainwindow.cpp" line="200"/>
         <source>Došlo je do greške, špil se nije pokrenuo, probajte ponovo!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="239"/>
+        <location filename="../../src/mainwindow.cpp" line="237"/>
         <source>TODO lista</source>
         <translation>To-Do lista</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="240"/>
+        <location filename="../../src/mainwindow.cpp" line="238"/>
         <source>Došlo je do greške, todo lista nije učitana, probajte ponovo!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="291"/>
+        <location filename="../../src/mainwindow.cpp" line="289"/>
         <source>Planer</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="292"/>
+        <location filename="../../src/mainwindow.cpp" line="290"/>
         <source>Došlo je do greške, planer nije učitan, probajte ponovo!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="322"/>
-        <location filename="../../src/mainwindow.cpp" line="640"/>
+        <location filename="../../src/mainwindow.cpp" line="320"/>
+        <location filename="../../src/mainwindow.cpp" line="653"/>
         <source>Kalendar</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="323"/>
+        <location filename="../../src/mainwindow.cpp" line="321"/>
         <source>Došlo je do greške, kalendar nije učitan, probajte ponovo!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="355"/>
-        <location filename="../../src/mainwindow.cpp" line="399"/>
-        <location filename="../../src/mainwindow.cpp" line="404"/>
-        <location filename="../../src/mainwindow.cpp" line="649"/>
-        <location filename="../../src/mainwindow.cpp" line="726"/>
+        <location filename="../../src/mainwindow.cpp" line="359"/>
+        <location filename="../../src/mainwindow.cpp" line="403"/>
+        <location filename="../../src/mainwindow.cpp" line="408"/>
+        <location filename="../../src/mainwindow.cpp" line="662"/>
+        <location filename="../../src/mainwindow.cpp" line="739"/>
         <source>Pogrešan unos</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="355"/>
+        <location filename="../../src/mainwindow.cpp" line="359"/>
         <source>Niste popunili polje za naziv dogadjaja!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="365"/>
+        <location filename="../../src/mainwindow.cpp" line="369"/>
         <source>Uspešan unos</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="365"/>
+        <location filename="../../src/mainwindow.cpp" line="369"/>
         <source>Uspešno ste dodali novi dogadjaj!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="380"/>
+        <location filename="../../src/mainwindow.cpp" line="382"/>
+        <source>Na izabrani dan imate sledeće dogadjaje:
+</source>
+        <translation>Na izabrani dan imate sledeće dogadjaje: </translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="384"/>
         <source>Na izabrani dan nemate nijedan dogadjaj!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="399"/>
-        <location filename="../../src/mainwindow.cpp" line="649"/>
+        <location filename="../../src/mainwindow.cpp" line="403"/>
+        <location filename="../../src/mainwindow.cpp" line="662"/>
         <source>Niste popunili polje za naziv aktivnosti!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="404"/>
+        <location filename="../../src/mainwindow.cpp" line="408"/>
         <source>Vreme početka aktivnosti mora biti pre vremena kraja!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="516"/>
+        <location filename="../../src/mainwindow.cpp" line="526"/>
         <source>Greška pri registrovanju</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="517"/>
+        <location filename="../../src/mainwindow.cpp" line="527"/>
         <source>Korisničko ime već postoji. Probajte ponovo.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="523"/>
+        <location filename="../../src/mainwindow.cpp" line="533"/>
         <source>Greška pri prijavljivanju</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="524"/>
+        <location filename="../../src/mainwindow.cpp" line="534"/>
         <source>Neuspešno prijavljivanje. Probajte ponovo.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="580"/>
-        <location filename="../../src/mainwindow.cpp" line="955"/>
-        <location filename="../../src/mainwindow.cpp" line="967"/>
+        <location filename="../../src/mainwindow.cpp" line="593"/>
+        <location filename="../../src/mainwindow.cpp" line="949"/>
+        <location filename="../../src/mainwindow.cpp" line="961"/>
         <source>Odjavi se</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="641"/>
+        <location filename="../../src/mainwindow.cpp" line="654"/>
         <source>Došlo je do greške, kalendar nije sačuvan, probajte ponovo!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="713"/>
+        <location filename="../../src/mainwindow.cpp" line="726"/>
         <source>Došlo je do greške, todo lista nije sačuvana, probajte ponovo!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="726"/>
+        <location filename="../../src/mainwindow.cpp" line="739"/>
         <source>Niste popunili polje za naziv špila!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="751"/>
+        <location filename="../../src/mainwindow.cpp" line="764"/>
         <source>Nema rezultata</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="751"/>
+        <location filename="../../src/mainwindow.cpp" line="764"/>
         <source>Nije pronadjen nijedan špil!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="772"/>
-        <location filename="../../src/mainwindow.cpp" line="801"/>
-        <location filename="../../src/mainwindow.cpp" line="836"/>
+        <location filename="../../src/mainwindow.cpp" line="785"/>
+        <location filename="../../src/mainwindow.cpp" line="815"/>
+        <location filename="../../src/mainwindow.cpp" line="851"/>
         <source>Uvoz špilova</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="773"/>
+        <location filename="../../src/mainwindow.cpp" line="786"/>
         <source>Unosite špil ili špilove koje već imate!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="801"/>
+        <location filename="../../src/mainwindow.cpp" line="815"/>
         <source>Uspešan uvoz!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="837"/>
+        <location filename="../../src/mainwindow.cpp" line="852"/>
         <source>Došlo je do greške, nije sačuvano, probajte ponovo!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="854"/>
+        <location filename="../../src/mainwindow.cpp" line="869"/>
         <source>Izvoz špilova</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="854"/>
+        <location filename="../../src/mainwindow.cpp" line="869"/>
         <source>Uspešan izvoz!</source>
         <translation></translation>
     </message>
@@ -427,13 +433,13 @@
     </message>
     <message>
         <location filename="../../forms/mainwindow.ui" line="125"/>
-        <location filename="../../src/mainwindow.cpp" line="537"/>
+        <location filename="../../src/mainwindow.cpp" line="547"/>
         <source>Nema korisnika</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../forms/mainwindow.ui" line="135"/>
-        <location filename="../../src/mainwindow.cpp" line="538"/>
+        <location filename="../../src/mainwindow.cpp" line="548"/>
         <source>Prijavi se</source>
         <translation></translation>
     </message>
@@ -443,17 +449,17 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="383"/>
+        <location filename="../../forms/mainwindow.ui" line="376"/>
         <source>Dodaj aktivnost</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="396"/>
+        <location filename="../../forms/mainwindow.ui" line="389"/>
         <source>Obriši</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="360"/>
+        <location filename="../../forms/mainwindow.ui" line="353"/>
         <source>Obriši sve</source>
         <translation></translation>
     </message>
@@ -462,201 +468,201 @@
         <translation type="vanished">Započni učenje</translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="414"/>
+        <location filename="../../forms/mainwindow.ui" line="407"/>
         <source>Aktivnost:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="424"/>
+        <location filename="../../forms/mainwindow.ui" line="417"/>
         <source>Početak aktivnosti:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="431"/>
+        <location filename="../../forms/mainwindow.ui" line="424"/>
         <source>Kraj aktivnosti:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="438"/>
+        <location filename="../../forms/mainwindow.ui" line="431"/>
         <source>Dan:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="448"/>
-        <location filename="../../forms/mainwindow.ui" line="452"/>
-        <location filename="../../forms/mainwindow.ui" line="588"/>
+        <location filename="../../forms/mainwindow.ui" line="441"/>
+        <location filename="../../forms/mainwindow.ui" line="445"/>
+        <location filename="../../forms/mainwindow.ui" line="581"/>
         <source>Ponedeljak</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="457"/>
-        <location filename="../../forms/mainwindow.ui" line="538"/>
+        <location filename="../../forms/mainwindow.ui" line="450"/>
+        <location filename="../../forms/mainwindow.ui" line="531"/>
         <source>Utorak</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="462"/>
-        <location filename="../../forms/mainwindow.ui" line="548"/>
+        <location filename="../../forms/mainwindow.ui" line="455"/>
+        <location filename="../../forms/mainwindow.ui" line="541"/>
         <source>Sreda</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="467"/>
-        <location filename="../../forms/mainwindow.ui" line="568"/>
+        <location filename="../../forms/mainwindow.ui" line="460"/>
+        <location filename="../../forms/mainwindow.ui" line="561"/>
         <source>Četvrtak</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="472"/>
-        <location filename="../../forms/mainwindow.ui" line="558"/>
+        <location filename="../../forms/mainwindow.ui" line="465"/>
+        <location filename="../../forms/mainwindow.ui" line="551"/>
         <source>Petak</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="477"/>
-        <location filename="../../forms/mainwindow.ui" line="528"/>
+        <location filename="../../forms/mainwindow.ui" line="470"/>
+        <location filename="../../forms/mainwindow.ui" line="521"/>
         <source>Subota</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="482"/>
-        <location filename="../../forms/mainwindow.ui" line="578"/>
+        <location filename="../../forms/mainwindow.ui" line="475"/>
+        <location filename="../../forms/mainwindow.ui" line="571"/>
         <source>Nedelja</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="493"/>
+        <location filename="../../forms/mainwindow.ui" line="486"/>
         <source>Dodaj</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="657"/>
+        <location filename="../../forms/mainwindow.ui" line="650"/>
         <source>Događaj:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="667"/>
+        <location filename="../../forms/mainwindow.ui" line="660"/>
         <source>Datum:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="674"/>
+        <location filename="../../forms/mainwindow.ui" line="667"/>
         <source>dd.MM.yyyy. HH:mm</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="687"/>
+        <location filename="../../forms/mainwindow.ui" line="680"/>
         <source>Dodaj događaj</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="786"/>
+        <location filename="../../forms/mainwindow.ui" line="779"/>
         <source>Broj korišćenja:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="850"/>
+        <location filename="../../forms/mainwindow.ui" line="843"/>
         <source>Izaberi špil:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="922"/>
+        <location filename="../../forms/mainwindow.ui" line="915"/>
         <source>Plava</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="927"/>
+        <location filename="../../forms/mainwindow.ui" line="920"/>
         <source>Narandžasta</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="743"/>
+        <location filename="../../forms/mainwindow.ui" line="736"/>
         <source>Procenat pitanja označenih sa &quot;Loše&quot;:</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../../forms/mainwindow.ui" line="54"/>
-        <location filename="../../src/mainwindow.cpp" line="712"/>
+        <location filename="../../src/mainwindow.cpp" line="725"/>
         <source>To-Do lista</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="200"/>
+        <location filename="../../forms/mainwindow.ui" line="187"/>
         <source>Moji špilovi</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="246"/>
+        <location filename="../../forms/mainwindow.ui" line="236"/>
         <source>Uvezi špilove</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="253"/>
+        <location filename="../../forms/mainwindow.ui" line="246"/>
         <source>Izvezi špilove</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="263"/>
+        <location filename="../../forms/mainwindow.ui" line="256"/>
         <source>Pretraži špilove</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="283"/>
+        <location filename="../../forms/mainwindow.ui" line="276"/>
         <source>Pretraži...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="308"/>
+        <location filename="../../forms/mainwindow.ui" line="301"/>
         <source>Pretraži</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="864"/>
+        <location filename="../../forms/mainwindow.ui" line="857"/>
         <source>Ukupan broj pitanja:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="772"/>
+        <location filename="../../forms/mainwindow.ui" line="765"/>
         <source>Procenat pitanja označenih sa &quot;Srednje&quot;:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="793"/>
+        <location filename="../../forms/mainwindow.ui" line="786"/>
         <source>Procenat pitanja označenih sa &quot;Odlično&quot;:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="813"/>
+        <location filename="../../forms/mainwindow.ui" line="806"/>
         <source>Procenat pitanja označenih sa &quot;Ne znam&quot;:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="946"/>
+        <location filename="../../forms/mainwindow.ui" line="939"/>
         <source>Jezik</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="950"/>
+        <location filename="../../forms/mainwindow.ui" line="943"/>
         <source>Srpski</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="955"/>
+        <location filename="../../forms/mainwindow.ui" line="948"/>
         <source>Engleski</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="918"/>
+        <location filename="../../forms/mainwindow.ui" line="911"/>
         <source>Tema</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="932"/>
+        <location filename="../../forms/mainwindow.ui" line="925"/>
         <source>Tamna</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../forms/mainwindow.ui" line="971"/>
+        <location filename="../../forms/mainwindow.ui" line="964"/>
         <source>pomoc</source>
         <translation></translation>
     </message>

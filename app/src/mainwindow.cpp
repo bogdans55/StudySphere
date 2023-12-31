@@ -379,7 +379,7 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 void MainWindow::on_calendarWidget_activated(const QDate &date)
 {
-	QString message = "Na izabrani dan imate sledeće dogadjaje:\n";
+    QString message = tr("Na izabrani dan imate sledeće dogadjaje:\n");
 	if (!m_calendar.events().contains(date))
 		QMessageBox::information(this, date.toString("dd.MM.yyyy."), tr("Na izabrani dan nemate nijedan dogadjaj!"));
     else {
