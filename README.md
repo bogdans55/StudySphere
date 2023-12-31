@@ -1,21 +1,53 @@
-# StudySphere
+# StudySphere 📚🌐
 
-Projekat je zasnovan na ideji flash kartica koje se koriste kao pomoć pri učenju studentima. Pored toga naš projekat bi podržao i neke druge korisne opcije koje bi poslužile korisnicima da bolje organizuju svoje vreme i lakše učenje. Neke od bitnijih funkcionalnosti su:
-- kreiranje i korišćenje flash kartica i špilova
-- samostalno ocenjivanje kvaliteta odgovora na data pitanja
-- tekstualni i multimedijalni sadržaj na karticama
-- import/export špilova
-- public/private špilovi i mogućnost ocenjivanja špila
-- pametni algoritam za odabir pitanja
-- whiteboard kao pomagalo korisniku pri odgovaranju na pitanja 
-- statistike koje prate korisnikov napredak kroz vreme
-- nedeljni planer za organizaciju učenja
-- TODO liste
-- kalendar aktivnosti
+## Opis projekta 
 
-Članovi:
- - <a href="https://gitlab.com/bogdans55">Bogdan Stojadinović 73/2020</a>
- - <a href="https://gitlab.com/sofijavisnjic001">Sofija Višnjić 57/2020</a>
- - <a href="https://gitlab.com/kerkoc01">Stefan Kerkoč 28/2020</a>
- - <a href="https://gitlab.com/jjulijana">Julijana Jevtić 25/2020</a>
- - <a href="https://gitlab.com/marko1684">Marko Petrović 131/2020</a>
+StudySphere je projekat zasnovan na ideji kartica koje se koriste kao sredstvo za učenje studenata. Pored toga, naš projekat podržava i druge korisne funkcionalnosti koje pomažu korisnicima da bolje organizuju svoje vreme i olakšaju učenje. Neke od ključnih funkcionalnosti uključuju:
+
+- Kreiranje i korišćenje kartica i špilova
+- Samoprocena kvaliteta odgovora
+- Tekstualni i multimedijalni sadržaj na karticama
+- Uvoz i izvoz špilova
+- Javni i privatni špilovi sa mogućnošću ocenjivanja
+- Pametni algoritam za izbor pitanja
+- Tabla kao alat za odgovaranje na pitanja
+- Statistika praćenja napretka korisnika tokom vremena
+- Nedeljni planer za organizaciju učenja
+- Liste TODO obaveza
+- Kalendar aktivnosti
+
+### Članovi tima 🤝
+
+- [Bogdan Stojadinović 73/2020](https://gitlab.com/bogdans55)
+- [Sofija Višnjić 57/2020](https://gitlab.com/sofijavisnjic001)
+- [Stefan Kerkoč 28/2020](https://gitlab.com/kerkoc01)
+- [Julijana Jevtić 25/2020](https://gitlab.com/jjulijana)
+- [Marko Petrović 131/2020](https://gitlab.com/marko1684)
+
+## Demo snimak projekta 🎬
+
+[Demo snimak](https://www.youtube.com/watch?v=h94giWA9upw)
+
+## Okruženje 🛠️
+
+- **Programski jezik:** C++17
+- **Qt:** Qt6.6.0
+- **Korišćene biblioteke:** Qt >= 4, Catch2
+
+## Instalacija ⚙️
+
+1. Preuzeti i instalirati Qt i Qt Creator.
+2. Nadograditi verziju C++ na C++17.
+
+## Preuzimanje i pokretanje ▶️
+
+1. U terminalu se pozicionirati u željeni direktorijum.
+2. Klonirati repozitorijum: `$ git clone git@gitlab.com:matf-bg-ac-rs/course-rs/projects-2023-2024/studysphere.git`.
+3. Otvoriti okruženje Qt Creator i otvoriti `app.pro` fajl.
+4. Pritisnuti dugme Run u donjem levom uglu ekrana ili koristiti kombinaciju tastatura CTRL+R.
+
+## Pokretanje servera 🖥️
+
+1. Pored `app.pro` fajla, otvoriti i `CMakeLists` fajl na server direktorijumu.
+2. Pokrenuti server klikom na dugme Run.
+
