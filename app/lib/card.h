@@ -15,10 +15,10 @@ class Card : public Serializable
 {
   public:
 	Card();
-	Card(QString m_questionText, QString m_answerText, Difficulty m_questionDifficulty);
+	Card(QString mQuestionText, QString mAnswerText, Difficulty mQuestionDifficulty);
 	Card(const Card &card);
 
-	~Card();
+	~Card() override;
 
 	inline QString questionText() const { return m_questionText; }
 

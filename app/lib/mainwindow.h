@@ -38,7 +38,7 @@ class MainWindow : public QWidget
 
   public:
 	MainWindow(QWidget *parent = nullptr);
-	~MainWindow();
+	~MainWindow() override;
 
   private slots:
 

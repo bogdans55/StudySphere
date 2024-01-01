@@ -1,8 +1,11 @@
 #include "../lib/logindialog.h"
 #include "ui_logindialog.h"
 
-#define LOGIN (0)
-#define REGISTER (1)
+enum
+{
+	LOGIN = (0),
+	REGISTER = (1)
+};
 
 LoginDialog::LoginDialog(QWidget *parent) : QDialog(parent), ui(new Ui::LoginDialog)
 {

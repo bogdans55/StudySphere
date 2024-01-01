@@ -1,11 +1,11 @@
 #include "../lib/scheduleitem.h"
 #include <QPainter>
 
-ScheduleItem::ScheduleItem() {}
+ScheduleItem::ScheduleItem() = default;
 
 QRectF ScheduleItem::boundingRect() const
 {
-	return QRectF(0, 0, m_width, height());
+	return {0, 0, m_width, height()};
 }
 
 void ScheduleItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

@@ -2,7 +2,7 @@
 
 Planner::Planner() : m_activities() {}
 
-Planner::~Planner() {}
+Planner::~Planner() = default;
 
 void Planner::addActivity(Day day, Activity activity)
 {

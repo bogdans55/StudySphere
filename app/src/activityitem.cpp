@@ -6,7 +6,7 @@ ActivityItem::ActivityItem(Activity activity) : QGraphicsItem(), m_activity(acti
 
 QRectF ActivityItem::boundingRect() const
 {
-	return QRectF(0, 0, m_width, height());
+	return {0, 0, m_width, height()};
 }
 
 void ActivityItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

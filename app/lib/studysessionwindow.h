@@ -18,7 +18,7 @@ class StudySessionWindow : public QWidget
   public:
 	explicit StudySessionWindow(QWidget *parent = nullptr);
 	StudySessionWindow(StudySession *session, QWidget *parent = nullptr);
-	~StudySessionWindow();
+	~StudySessionWindow() override;
 
 	inline StudySession *session() const { return m_session; }
 

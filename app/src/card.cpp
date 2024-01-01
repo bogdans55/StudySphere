@@ -1,9 +1,12 @@
+#include <utility>
+
 #include "../lib/card.h"
 
 Card::Card() : m_questionText(), m_answerText(), m_questionDifficulty() {}
 
 Card::Card(QString questionText, QString answerText, Difficulty questionDifficulty)
-    : m_questionText(questionText), m_answerText(answerText), m_questionDifficulty(questionDifficulty)
+	: m_questionText(std::move(questionText)), m_answerText(std::move(answerText)),
+	  m_questionDifficulty(questionDifficulty)
 {}
 
 Card::Card(const Card &card)
@@ -11,7 +14,7 @@ Card::Card(const Card &card)
       m_questionDifficulty(card.m_questionDifficulty)
 {}
 
-Card::~Card() {}
+Card::~Card() = default;
 
 QVariant Card::toVariant() const
 {

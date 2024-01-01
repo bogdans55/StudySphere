@@ -24,7 +24,7 @@ class Planner : public Serializable
 
   public:
 	Planner();
-	~Planner();
+	~Planner() override;
 
 	QVariant toVariant() const override;
 	void fromVariant(const QVariant &variant) override;

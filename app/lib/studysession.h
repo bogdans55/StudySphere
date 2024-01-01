@@ -3,8 +3,8 @@
 
 #include <QString>
 #include <QVector>
+#include <ctime>
 #include <iostream>
-#include <time.h>
 
 #include "card.h"
 #include "deck.h"

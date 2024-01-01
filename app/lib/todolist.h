@@ -11,7 +11,7 @@ class ToDoList : public Serializable
 
   public:
 	ToDoList();
-	~ToDoList();
+	~ToDoList() override;
 
 	QVariant toVariant() const override;
 	void fromVariant(const QVariant &variant) override;

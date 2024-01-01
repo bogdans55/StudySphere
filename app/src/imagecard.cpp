@@ -1,3 +1,5 @@
+#include <utility>
+
 #include "../lib/imagecard.h"
 
 ImageCard::ImageCard() : Card() {}
@@ -8,10 +10,11 @@ ImageCard::ImageCard(QString questionText, QString answerText, Difficulty questi
 
 ImageCard::ImageCard(QString questionText, QString answerText, Difficulty questionDifficulty, QImage questionImage,
 					 QImage answerImage)
-	: Card(questionText, answerText, questionDifficulty), m_questionImage(questionImage), m_answerImage(answerImage)
+	: Card(questionText, answerText, questionDifficulty), m_questionImage(std::move(questionImage)),
+	  m_answerImage(std::move(answerImage))
 {}
 
-ImageCard::~ImageCard() {}
+ImageCard::~ImageCard() = default;
 
 void ImageCard::setQuestionImage(const QImage &questionImage)
 {
