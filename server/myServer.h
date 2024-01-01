@@ -55,6 +55,7 @@ class MyServer : public QObject
 	void saveTodo(QTcpSocket *socket, const QString &username, QJsonObject &jsonObject);
 	void getTodo(QTcpSocket *socket, const QString &username);
 	void getStats(QTcpSocket *socket, const QString &username, const QString &deckId);
+	void createUniqueIdsFile();
 };
 
 #endif // MYSERVER_H
