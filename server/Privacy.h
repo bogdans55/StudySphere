@@ -1,7 +1,8 @@
 #ifndef PRIVACY_H
 #define PRIVACY_H
 
-enum class Privacy{
+enum class Privacy
+{
 	PRIVATE,
 	PUBLIC
 };

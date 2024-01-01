@@ -90,9 +90,9 @@ class MainWindow : public QWidget
 
 	void on_comboBox_deck_currentIndexChanged(int index);
 
-    void on_comboBox_deck_activated(int index);
+	void on_comboBox_deck_activated(int index);
 
-protected:
+  protected:
 	void resizeEvent(QResizeEvent *event) override;
 
   private:

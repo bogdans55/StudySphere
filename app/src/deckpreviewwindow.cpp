@@ -17,7 +17,7 @@ DeckPreviewWindow::DeckPreviewWindow(Deck *deck, User &user, QWidget *parent)
 {
 	ui->setupUi(this);
 	ui->textEdit_card_preview->setText(deck->cards().at(m_currentCardIndex)->questionText());
-    setDifficultyColor();
+	setDifficultyColor();
 }
 
 DeckPreviewWindow::~DeckPreviewWindow()
@@ -71,11 +71,11 @@ void DeckPreviewWindow::on_pushButton_next_clicked()
 {
 	if (hasNextCard()) {
 		m_currentCardIndex++;
-        auto cards = m_deck.cards();
-        auto card = cards[m_currentCardIndex];
-        ui->textEdit_card_preview->setText(card->questionText());
+		auto cards = m_deck.cards();
+		auto card = cards[m_currentCardIndex];
+		ui->textEdit_card_preview->setText(card->questionText());
 		m_answerShowed = false;
-        setDifficultyColor();
+		setDifficultyColor();
 	}
 	else {
 		QMessageBox::information(this, tr("Pregled špila"), tr("Špil nema više kartica!"));
@@ -89,10 +89,10 @@ bool DeckPreviewWindow::hasNextCard()
 
 void DeckPreviewWindow::setDifficultyColor()
 {
-    if (m_deck.cards().at(m_currentCardIndex)->questionDifficulty() == Difficulty::EASY)
-        ui->toolButton_difficulty_preview->setStyleSheet("background-color: green; border-radius: 10px;");
-    else if (m_deck.cards().at(m_currentCardIndex)->questionDifficulty() == Difficulty::MEDIUM)
-        ui->toolButton_difficulty_preview->setStyleSheet("background-color: yellow; border-radius: 10px;");
-    else if (m_deck.cards().at(m_currentCardIndex)->questionDifficulty() == Difficulty::HARD)
-        ui->toolButton_difficulty_preview->setStyleSheet("background-color: red; border-radius: 10px;");
+	if (m_deck.cards().at(m_currentCardIndex)->questionDifficulty() == Difficulty::EASY)
+		ui->toolButton_difficulty_preview->setStyleSheet("background-color: green; border-radius: 10px;");
+	else if (m_deck.cards().at(m_currentCardIndex)->questionDifficulty() == Difficulty::MEDIUM)
+		ui->toolButton_difficulty_preview->setStyleSheet("background-color: yellow; border-radius: 10px;");
+	else if (m_deck.cards().at(m_currentCardIndex)->questionDifficulty() == Difficulty::HARD)
+		ui->toolButton_difficulty_preview->setStyleSheet("background-color: red; border-radius: 10px;");
 }

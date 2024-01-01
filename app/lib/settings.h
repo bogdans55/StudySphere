@@ -7,8 +7,8 @@
 
 enum Language
 {
-    SERBIAN = 0,
-    ENGLISH
+	SERBIAN = 0,
+	ENGLISH
 };
 
 enum Theme

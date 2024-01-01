@@ -11,7 +11,7 @@ Card::Card(QString questionText, QString answerText, Difficulty questionDifficul
 
 Card::Card(const Card &card)
 	: m_questionText(card.m_questionText), m_answerText(card.m_answerText),
-      m_questionDifficulty(card.m_questionDifficulty)
+	  m_questionDifficulty(card.m_questionDifficulty)
 {}
 
 Card::~Card() = default;

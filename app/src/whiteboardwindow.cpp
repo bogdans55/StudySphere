@@ -21,7 +21,7 @@ WhiteboardWindow::~WhiteboardWindow()
 
 void WhiteboardWindow::paintEvent(QPaintEvent *event)
 {
-    Q_UNUSED(event);
+	Q_UNUSED(event);
 	QPainter painter(this);
 	painter.drawImage(0, 0, image);
 }

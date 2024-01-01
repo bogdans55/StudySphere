@@ -8,7 +8,7 @@ class Serializer
 {
   public:
 	virtual ~Serializer() = default;
-    virtual void save(const Serializable &serializable, const QString &filepath, const QString &rootname = "") = 0;
+	virtual void save(const Serializable &serializable, const QString &filepath, const QString &rootname = "") = 0;
 	virtual void load(Serializable &serializable, const QString &filepath) = 0;
 };
 

@@ -37,8 +37,8 @@ class DeckPreviewWindow : public QWidget
 	User m_user;
 	Deck m_deck;
 
-    bool hasNextCard();
-    void setDifficultyColor();
+	bool hasNextCard();
+	void setDifficultyColor();
 };
 
 #endif // DECKPREVIEWWINDOW_H

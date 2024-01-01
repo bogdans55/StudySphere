@@ -11,9 +11,9 @@
 StudySessionWindow::StudySessionWindow(QWidget *parent)
 	: QWidget(parent), ui(new Ui::StudySessionWindow), m_session(new StudySession())
 {
-    ui->setupUi(this);
-    m_session->startSession();
-    ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
+	ui->setupUi(this);
+	m_session->startSession();
+	ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
 }
 
 StudySessionWindow::StudySessionWindow(StudySession *session, QWidget *parent)
@@ -23,7 +23,7 @@ StudySessionWindow::StudySessionWindow(StudySession *session, QWidget *parent)
 	m_session->startSession();
 	ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
 	connect(this, &StudySessionWindow::destroyed, this, &StudySessionWindow::closeWhiteboard);
-    setDifficultyColor();
+	setDifficultyColor();
 }
 
 StudySessionWindow::~StudySessionWindow()
@@ -53,7 +53,7 @@ void StudySessionWindow::evaluate(int grade)
 		m_session->nextCard();
 		ui->textEdit_card->setText(m_session->getCurrentCard().questionText());
 		ui->label_card->setText("Pitanje");
-        setDifficultyColor();
+		setDifficultyColor();
 	}
 	else {
 		QMessageBox::information(this, tr("Gotova sesija"), tr("Uspešno ste prešli sva odabrana pitanja!"));
@@ -125,16 +125,16 @@ void StudySessionWindow::closeWhiteboard()
 void StudySessionWindow::clearWhiteboard()
 {
 	if (m_whiteboard != nullptr) {
-        m_whiteboard = nullptr;
-    }
+		m_whiteboard = nullptr;
+	}
 }
 
 void StudySessionWindow::setDifficultyColor()
 {
-    if (m_session->getCurrentCard().questionDifficulty() == Difficulty::EASY)
-        ui->toolButton_difficulty->setStyleSheet("background-color: green; border-radius: 10px;");
-    else if (m_session->getCurrentCard().questionDifficulty() == Difficulty::MEDIUM)
-        ui->toolButton_difficulty->setStyleSheet("background-color: yellow; border-radius: 10px;");
-    else if (m_session->getCurrentCard().questionDifficulty() == Difficulty::HARD)
-        ui->toolButton_difficulty->setStyleSheet("background-color: red; border-radius: 10px;");
+	if (m_session->getCurrentCard().questionDifficulty() == Difficulty::EASY)
+		ui->toolButton_difficulty->setStyleSheet("background-color: green; border-radius: 10px;");
+	else if (m_session->getCurrentCard().questionDifficulty() == Difficulty::MEDIUM)
+		ui->toolButton_difficulty->setStyleSheet("background-color: yellow; border-radius: 10px;");
+	else if (m_session->getCurrentCard().questionDifficulty() == Difficulty::HARD)
+		ui->toolButton_difficulty->setStyleSheet("background-color: red; border-radius: 10px;");
 }

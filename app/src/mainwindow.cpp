@@ -18,12 +18,12 @@
 #include <QTextStream>
 
 #include <QApplication>
+#include <QCheckBox>
 #include <QDirIterator>
 #include <QFile>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QStandardPaths>
-#include <QCheckBox>
 
 enum Page
 {
@@ -37,40 +37,39 @@ enum Page
 };
 
 MainWindow::MainWindow(QWidget *parent)
-    : QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_toDoList(), m_deckNames(), m_user()
+	: QWidget(parent), ui(new Ui::MainWindow), m_planner(), m_toDoList(), m_deckNames(), m_user()
 {
-    ui->setupUi(this);
-    ui->stackedWidget->setCurrentIndex(LIBRARY);
+	ui->setupUi(this);
+	ui->stackedWidget->setCurrentIndex(LIBRARY);
 
-    for (int i = 0; i < 7; ++i) {
-        m_plannerScenes.push_back(new PlannerScene());
-    }
-    ui->graphicsView_monday->setScene(m_plannerScenes[Day::MONDAY]);
-    ui->graphicsView_tuesday->setScene(m_plannerScenes[Day::TUESDAY]);
-    ui->graphicsView_wednesday->setScene(m_plannerScenes[Day::WEDNESDAY]);
-    ui->graphicsView_thursday->setScene(m_plannerScenes[Day::THURSDAY]);
-    ui->graphicsView_friday->setScene(m_plannerScenes[Day::FRIDAY]);
-    ui->graphicsView_saturday->setScene(m_plannerScenes[Day::SATURDAY]);
-    ui->graphicsView_sunday->setScene(m_plannerScenes[Day::SUNDAY]);
+	for (int i = 0; i < 7; ++i) {
+		m_plannerScenes.push_back(new PlannerScene());
+	}
+	ui->graphicsView_monday->setScene(m_plannerScenes[Day::MONDAY]);
+	ui->graphicsView_tuesday->setScene(m_plannerScenes[Day::TUESDAY]);
+	ui->graphicsView_wednesday->setScene(m_plannerScenes[Day::WEDNESDAY]);
+	ui->graphicsView_thursday->setScene(m_plannerScenes[Day::THURSDAY]);
+	ui->graphicsView_friday->setScene(m_plannerScenes[Day::FRIDAY]);
+	ui->graphicsView_saturday->setScene(m_plannerScenes[Day::SATURDAY]);
+	ui->graphicsView_sunday->setScene(m_plannerScenes[Day::SUNDAY]);
 
-    for (int i = 0; i < 7; ++i) {
+	for (int i = 0; i < 7; ++i) {
 		auto *scheduleItem = new ScheduleItem();
 		scheduleItem->setWidth(ui->graphicsView_monday->width());
-        m_plannerScenes[i]->addItem(scheduleItem);
-    }
+		m_plannerScenes[i]->addItem(scheduleItem);
+	}
 
 	auto *app = qobject_cast<QApplication *>(QApplication::instance());
 	Settings &settings = Settings::instance(app);
 
-
-    settings.setLanguage(Language::SERBIAN);
+	settings.setLanguage(Language::SERBIAN);
 	settings.setTheme(Theme::BLUE);
 	ui->retranslateUi(this);
 
-    ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
-    ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
+	ui->dateTimeEdit_eventTime->setDate(QDate::currentDate());
+	ui->dateTimeEdit_eventTime->setTime(QTime(12, 0));
 
-    connect(ui->listWidget_todos, &QListWidget::itemChanged, this, &MainWindow::onTodoItemChanged);
+	connect(ui->listWidget_todos, &QListWidget::itemChanged, this, &MainWindow::onTodoItemChanged);
 }
 
 MainWindow::~MainWindow()
@@ -141,7 +140,7 @@ void MainWindow::createDeck_clicked()
 		auto *createDeck = new CreateDeckWindow(name, privacy, m_user);
 		connect(createDeck, &CreateDeckWindow::writeGeneratedID, this, &MainWindow::addNewDeck);
 		createDeck->setAttribute(Qt::WA_DeleteOnClose);
-        createDeck->show();
+		createDeck->show();
 	}
 }
 
@@ -253,7 +252,7 @@ void MainWindow::on_pushButton_todo_clicked()
 			auto *item = new QListWidgetItem();
 			item->setCheckState(todo.second ? Qt::Checked : Qt::Unchecked);
 			item->setText(todo.first);
-            onTodoItemChanged(item);
+			onTodoItemChanged(item);
 			ui->listWidget_todos->addItem(item);
 		}
 	}
@@ -336,12 +335,12 @@ void MainWindow::on_pushButton_calendar_clicked()
 void MainWindow::on_pushButton_stats_clicked()
 {
 	ui->stackedWidget->setCurrentIndex(STATS);
-    ui->number_timesUsed->display(0);
-    ui->number_deckSize->display(0);
-    ui->progressBar_skip->setValue(0);
-    ui->progressBar_bad->setValue(0);
-    ui->progressBar_good->setValue(0);
-    ui->progressBar_excellent->setValue(0);
+	ui->number_timesUsed->display(0);
+	ui->number_deckSize->display(0);
+	ui->progressBar_skip->setValue(0);
+	ui->progressBar_bad->setValue(0);
+	ui->progressBar_good->setValue(0);
+	ui->progressBar_excellent->setValue(0);
 }
 
 void MainWindow::on_pushButton_settings_clicked()
@@ -379,13 +378,13 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 void MainWindow::on_calendarWidget_activated(const QDate &date)
 {
-    QString message = tr("Na izabrani dan imate sledeće dogadjaje:\n");
+	QString message = tr("Na izabrani dan imate sledeće dogadjaje:\n");
 	if (!m_calendar.events().contains(date))
 		QMessageBox::information(this, date.toString("dd.MM.yyyy."), tr("Na izabrani dan nemate nijedan dogadjaj!"));
-    else {
-        auto calendar = m_calendar.events();
-        auto todaysEvents = calendar[date];
-        for (const auto &event : todaysEvents) {
+	else {
+		auto calendar = m_calendar.events();
+		auto todaysEvents = calendar[date];
+		for (const auto &event : todaysEvents) {
 			message += "\t" + event.first.toString("hh:mm") + " - " + event.second + "\n";
 		}
 		QMessageBox::information(this, date.toString("dd.MM.yyyy."), message);
@@ -427,20 +426,20 @@ void MainWindow::on_pushButton_addActivity_clicked()
 
 	auto *activityText = new QGraphicsTextItem();
 	activityText->setPlainText(name);
-    qreal textWidth = ui->graphicsView_monday->width() - 10;
+	qreal textWidth = ui->graphicsView_monday->width() - 10;
 	activityText->setTextWidth(textWidth);
 	activityText->setPos(activityItem->pos().x(), activityItem->pos().y() + activityTime->boundingRect().height());
 	m_plannerScenes[day]->addItem(activityText);
 
-    ui->lineEdit_activityName->setText("");
-    ui->timeEdit_start->setTime(QTime(0, 0));
-    ui->timeEdit_end->setTime(QTime(0, 0));
+	ui->lineEdit_activityName->setText("");
+	ui->timeEdit_start->setTime(QTime(0, 0));
+	ui->timeEdit_end->setTime(QTime(0, 0));
 }
 
 void MainWindow::showActivities()
 {
-    auto keys = m_planner.activities().keys();
-    for (auto day : keys) {
+	auto keys = m_planner.activities().keys();
+	for (auto day : keys) {
 		for (const auto &currentActivity : m_planner.activities().value(day)) {
 			QString name = currentActivity.activityText();
 
@@ -457,7 +456,7 @@ void MainWindow::showActivities()
 
 			auto *activityText = new QGraphicsTextItem();
 			activityText->setPlainText(name);
-            qreal textWidth = ui->graphicsView_monday->width() - 10;
+			qreal textWidth = ui->graphicsView_monday->width() - 10;
 			activityText->setTextWidth(textWidth);
 			activityText->setPos(activityItem->pos().x(),
 								 activityItem->pos().y() + activityTime->boundingRect().height());
@@ -483,7 +482,7 @@ void MainWindow::setEnabled(bool value)
 	ui->pushButton_planer->setEnabled(value);
 	ui->pushButton_calendar->setEnabled(value);
 	ui->pushButton_stats->setEnabled(value);
-    ui->pushButton_settings->setEnabled(value);
+	ui->pushButton_settings->setEnabled(value);
 	ui->pushButton_importDecks->setEnabled(value);
 	ui->pushButton_exportDecks->setEnabled(value);
 	ui->pushButton_addTodo->setEnabled(value);
@@ -493,20 +492,19 @@ void MainWindow::setEnabled(bool value)
 	ui->pushButton_addEvent->setEnabled(value);
 	ui->tab_browser->setEnabled(value);
 	ui->tabWidget_library->setTabEnabled(1, value);
-    ui->tabWidget_library->setEnabled(value);
-    ui->pushButton_importDecks->setEnabled(value);
-    ui->pushButton_exportDecks->setEnabled(value);
+	ui->tabWidget_library->setEnabled(value);
+	ui->pushButton_importDecks->setEnabled(value);
+	ui->pushButton_exportDecks->setEnabled(value);
 }
 
 void MainWindow::on_pushButton_login_clicked()
 {
-    for (auto scene : m_plannerScenes) {
-        scene->clear();
-        scene->addItem(new ScheduleItem());
-        scene->clearActivities();
-    }
-    if (!m_loggedIn)
-	{
+	for (auto scene : m_plannerScenes) {
+		scene->clear();
+		scene->addItem(new ScheduleItem());
+		scene->clearActivities();
+	}
+	if (!m_loggedIn) {
 		QString username;
 		QString password;
 		LoginDialog login(this);
@@ -522,9 +520,10 @@ void MainWindow::on_pushButton_login_clicked()
 			if (registerUser(username, password)) {
 				loginSuccess = loginUser(username, password);
 				setEnabled(true);
-			}else{
+			}
+			else {
 				QMessageBox::warning(this, tr("Greška pri registrovanju"),
-									  tr("Korisničko ime već postoji. Probajte ponovo."));
+									 tr("Korisničko ime već postoji. Probajte ponovo."));
 			}
 		}
 		else {
@@ -548,11 +547,11 @@ void MainWindow::on_pushButton_login_clicked()
 		ui->pushButton_login->setText(tr("Prijavi se"));
 		setEnabled(false);
 		ui->tableWidget_library->clear();
-        ui->tableWidget_browser->clear();
-        m_planner.deleteAll();
-        m_calendar.deleteAll();
-        m_toDoList.deleteAllToDos();
-        ui->listWidget_todos->clear();
+		ui->tableWidget_browser->clear();
+		m_planner.deleteAll();
+		m_calendar.deleteAll();
+		m_toDoList.deleteAllToDos();
+		ui->listWidget_todos->clear();
 		m_todoLoaded = false;
 		m_plannerLoaded = false;
 		m_calendarLoaded = false;
@@ -566,8 +565,8 @@ void MainWindow::on_pushButton_login_clicked()
 		m_deckNames.clear();
 		m_deckCounter = 0;
 
-        if(ui->comboBox_deck->count() != 0)
-            ui->comboBox_deck->clear();
+		if (ui->comboBox_deck->count() != 0)
+			ui->comboBox_deck->clear();
 	}
 }
 
@@ -809,7 +808,7 @@ void MainWindow::on_pushButton_importDecks_clicked()
 		QStringList tempDeckName = filePath.split('/');
 		addDeckToTable(*(--tempDeckName.end()), ui->tableWidget_library, m_deckCounter);
 		addCreateDeckButton();
-        ui->comboBox_deck->addItem(deck.name());
+		ui->comboBox_deck->addItem(deck.name());
 	}
 	if (!filePaths.isEmpty()) {
 		QMessageBox::information(this, tr("Uvoz špilova"), tr("Uspešan uvoz!"));
@@ -855,7 +854,8 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 
 						Deck *deck = new Deck();
 
-						QJsonObject deckObject = jsonObj[deckNameEdited[0].append("_").append(deckNameEdited[1]) + "_deck.json"].toObject();
+						QJsonObject deckObject =
+							jsonObj[deckNameEdited[0].append("_").append(deckNameEdited[1]) + "_deck.json"].toObject();
 						QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 						jsonSerializer.loadJson(*deck, deckDocument);
 						jsonSerializer.save(*deck, selectedDirectory + "/" + deckName);
@@ -896,7 +896,7 @@ void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table, int &co
 
 	if (counter % 2 == 0) {
 		table->setColumnCount(table->columnCount() + 1);
-        table->setColumnWidth(counter / 2, 220);
+		table->setColumnWidth(counter / 2, 220);
 	}
 
 	table->setCellWidget(counter % 2 * 2, counter / 2, button);
@@ -908,18 +908,15 @@ void MainWindow::addCreateDeckButton()
 {
 	auto *button = new QPushButton("+", ui->tableWidget_library);
 	connect(button, &QPushButton::clicked, this, &MainWindow::createDeck_clicked);
-    button->setStyleSheet("margin-left: 25%; font-size: 150pt; border-radius: 50px;");
+	button->setStyleSheet("margin-left: 25%; font-size: 150pt; border-radius: 50px;");
 	if (m_deckCounter % 2 == 0) {
 		ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
-        ui->tableWidget_library->setColumnWidth(m_deckCounter / 2, 220);
+		ui->tableWidget_library->setColumnWidth(m_deckCounter / 2, 220);
 	}
 	ui->tableWidget_library->setCellWidget(m_deckCounter % 2 * 2, m_deckCounter / 2, button);
 }
 
-void MainWindow::on_comboBox_deck_currentIndexChanged(int index)
-{
-
-}
+void MainWindow::on_comboBox_deck_currentIndexChanged(int index) {}
 
 void MainWindow::loadStats(DeckStats *deckStats)
 {
@@ -963,27 +960,26 @@ void MainWindow::on_comboBox_theme_currentIndexChanged(int index)
 
 void MainWindow::on_comboBox_deck_activated(int index)
 {
-    if (index >= m_deckNames.size())
-        return;
+	if (index >= m_deckNames.size())
+		return;
 
-    QJsonObject requestObject;
+	QJsonObject requestObject;
 
-    requestObject["action"] = "getStats";
-    requestObject["username"] = m_user.username();
-    requestObject["DeckId"] = m_deckNames[index].split("_")[1];
+	requestObject["action"] = "getStats";
+	requestObject["username"] = m_user.username();
+	requestObject["DeckId"] = m_deckNames[index].split("_")[1];
 
-    QJsonDocument request(requestObject);
-    ServerCommunicator communicator;
-    QJsonObject statsObject = communicator.sendRequest(request);
-    QJsonDocument statsDocument = QJsonDocument::fromVariant(statsObject.toVariantMap());
-    JSONSerializer jsonSerializer;
+	QJsonDocument request(requestObject);
+	ServerCommunicator communicator;
+	QJsonObject statsObject = communicator.sendRequest(request);
+	QJsonDocument statsDocument = QJsonDocument::fromVariant(statsObject.toVariantMap());
+	JSONSerializer jsonSerializer;
 
-    if (statsObject["status"].toString() != "no stats") {
-        JSONSerializer jsonSerializer;
-        auto deckStats = new DeckStats();
-        jsonSerializer.loadJson(*deckStats, statsDocument);
-        loadStats(deckStats);
-        delete deckStats;
-    }
+	if (statsObject["status"].toString() != "no stats") {
+		JSONSerializer jsonSerializer;
+		auto deckStats = new DeckStats();
+		jsonSerializer.loadJson(*deckStats, statsDocument);
+		loadStats(deckStats);
+		delete deckStats;
+	}
 }
-

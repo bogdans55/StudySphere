@@ -12,7 +12,7 @@ Deck::Deck(QString name, const User &user, Privacy privacy)
 
 Deck::Deck(const Deck &deck)
 	: m_deckId(deck.m_deckId), m_name(deck.m_name), m_cards(deck.m_cards), m_privacy(deck.m_privacy),
-      m_user(deck.m_user)
+	  m_user(deck.m_user)
 {}
 
 Deck::~Deck()
@@ -36,7 +36,7 @@ QVariant Deck::toVariant() const
 	QVariantMap map;
 	map.insert("DeckId", static_cast<int>(deckId()));
 	map.insert("Subject", name());
-    map.insert("Privacy", (privacy() == Privacy::PRIVATE) ? "Private" : "Public");
+	map.insert("Privacy", (privacy() == Privacy::PRIVATE) ? "Private" : "Public");
 
 	QVariantList cardsList;
 	for (auto m_card : m_cards) {
@@ -64,11 +64,11 @@ void Deck::fromVariant(const QVariant &variant)
 	m_cards.clear();
 
 	QVariantList cardsVariantList = map.value("Flashcards").toList();
-    for (const QVariant &card : cardsVariantList) {
-        Card *currCard = new Card();
+	for (const QVariant &card : cardsVariantList) {
+		Card *currCard = new Card();
 		currCard->fromVariant(card);
 		m_cards.push_back(currCard);
-    }
+	}
 
 	m_user.fromVariant(map.value("User"));
 }

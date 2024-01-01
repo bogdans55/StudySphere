@@ -18,10 +18,10 @@ void ToDoList::addToDo(const QString &text, bool done)
 
 void ToDoList::deleteToDo(const QString &text)
 {
-    auto it = std::remove_if(m_listToDos.begin(), m_listToDos.end(),
+	auto it = std::remove_if(m_listToDos.begin(), m_listToDos.end(),
 							 [&text](const QPair<QString, bool> &toDo) { return toDo.first == text; });
 
-    m_listToDos.erase(it, m_listToDos.end());
+	m_listToDos.erase(it, m_listToDos.end());
 }
 
 void ToDoList::deleteAllToDos()

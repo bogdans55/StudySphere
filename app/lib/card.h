@@ -30,8 +30,8 @@ class Card : public Serializable
 	void fromVariant(const QVariant &variant) override;
 
   protected:
-    QString m_questionText;
-    QString m_answerText;
+	QString m_questionText;
+	QString m_answerText;
 	Difficulty m_questionDifficulty;
 };
 

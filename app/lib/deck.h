@@ -41,7 +41,7 @@ class Deck : public Serializable
 	void addCard(Card *card);
 	void setId(uint64_t id);
 
-    bool operator==(const Deck &deck);
+	bool operator==(const Deck &deck);
 
 	QVariant toVariant() const override;
 	void fromVariant(const QVariant &variant) override;
