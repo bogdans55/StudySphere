@@ -36,7 +36,8 @@ SOURCES += \
     test_card.cpp \
     test_deck.cpp \
     main.cpp \
-    test_deckstats.cpp
+    test_deckstats.cpp \
+    test_user.cpp
 
 HEADERS += \
     ../app/lib/activity.h \
