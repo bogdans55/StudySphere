@@ -1,0 +1,12 @@
+<map id="app/lib/whiteboardwindow.h" name="app/lib/whiteboardwindow.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="323,5,502,32"/>
+<area shape="rect" id="Node000002" href="$studysessionwindow_8h.html" title=" " alt="" coords="249,80,442,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="392,45,359,81,355,78,389,42"/>
+<area shape="rect" id="Node000005" href="$whiteboardwindow_8cpp.html" title=" " alt="" coords="430,155,627,181"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="434,42,521,153,516,156,429,46"/>
+<area shape="rect" id="Node000003" href="$mainwindow_8cpp.html" title=" " alt="" coords="5,155,169,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="287,114,133,157,132,151,285,109"/>
+<area shape="rect" id="Node000004" href="$studysessionwindow_8cpp.html" title=" " alt="" coords="193,155,405,181"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="332,121,309,156,305,153,327,118"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="393,110,497,152,495,157,391,115"/>
+</map>

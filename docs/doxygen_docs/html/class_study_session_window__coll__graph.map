@@ -1,0 +1,21 @@
+<map id="StudySessionWindow" name="StudySessionWindow">
+<area shape="rect" id="Node000001" title=" " alt="" coords="13,1644,208,2055"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,908,69,977"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="33,993,21,1099,11,1245,10,1412,15,1497,25,1580,39,1644,34,1645,20,1580,10,1497,5,1412,6,1245,16,1098,28,992"/>
+<area shape="rect" id="Node000008" href="$class_whiteboard_window.html" title=" " alt="" coords="35,1223,187,1569"/>
+<area shape="poly" id="edge11_Node000008_Node000002" title=" " alt="" coords="48,992,85,1222,80,1223,43,993"/>
+<area shape="rect" id="Node000003" href="$class_study_session.html" title=" " alt="" coords="211,1212,351,1580"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="221,1581,207,1621,203,1629,199,1627,202,1619,216,1579"/>
+<area shape="rect" id="Node000004" href="$class_user.html" title=" " alt="" coords="141,167,249,364"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="179,364,158,517,142,713,140,820,143,931,153,1041,172,1147,184,1180,201,1211,207,1224,202,1226,196,1213,179,1182,167,1149,148,1041,138,931,135,821,137,713,153,516,174,364"/>
+<area shape="rect" id="Node000006" href="$class_deck.html" title=" " alt="" coords="233,737,330,1148"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="196,364,201,528,208,621,220,713,231,770,226,771,215,714,203,621,195,528,191,364"/>
+<area shape="rect" id="Node000005" href="$class_serializable.html" title=" " alt="" coords="233,5,340,117"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="258,132,242,168,237,166,253,130"/>
+<area shape="poly" id="edge6_Node000006_Node000005" title=" " alt="" coords="289,132,285,738,280,738,284,132"/>
+<area shape="rect" id="Node000007" href="$class_deck_stats.html" title=" " alt="" coords="316,388,431,713"/>
+<area shape="poly" id="edge9_Node000007_Node000005" title=" " alt="" coords="306,131,308,141,352,388,347,388,303,142,301,133"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="284,1148,284,1195,279,1195,279,1148"/>
+<area shape="poly" id="edge8_Node000003_Node000007" title=" " alt="" coords="378,713,371,939,361,1065,344,1188,343,1196,338,1195,339,1188,355,1064,366,939,373,713"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="113,1569,113,1627,108,1627,108,1569"/>
+</map>

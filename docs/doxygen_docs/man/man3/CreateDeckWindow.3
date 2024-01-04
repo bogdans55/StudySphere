@@ -1,0 +1,112 @@
+.TH "CreateDeckWindow" 3StudySphere" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+CreateDeckWindow
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <createdeckwindow\&.h>\fP
+.PP
+Inherits QWidget\&.
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBwriteGeneratedID\fP (QString deckNameID)"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCreateDeckWindow\fP (\fBUser\fP &user, QWidget *parent=nullptr)"
+.br
+.ti -1c
+.RI "\fBCreateDeckWindow\fP (QString name, \fBPrivacy\fP privacy, \fBUser\fP &user, QWidget *parent=nullptr)"
+.br
+.ti -1c
+.RI "\fB~CreateDeckWindow\fP () override"
+.br
+.ti -1c
+.RI "QString \fBgetQuestionText\fP () const"
+.br
+.ti -1c
+.RI "QString \fBgetAnswerText\fP () const"
+.br
+.ti -1c
+.RI "\fBDifficulty\fP \fBgetDifficulty\fP () const"
+.br
+.in -1c
+.SS "Private Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBon_pushButton_finish_clicked\fP ()"
+.br
+.ti -1c
+.RI "void \fBon_pushButton_add_clicked\fP ()"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBgenerateId\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "Ui::CreateDeckWindow * \fBui\fP"
+.br
+.ti -1c
+.RI "\fBDeck\fP \fBm_deck\fP"
+.br
+.ti -1c
+.RI "QButtonGroup * \fBm_questionDifficulty\fP"
+.br
+.ti -1c
+.RI "\fBUser\fP & \fBm_user\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "CreateDeckWindow::CreateDeckWindow (\fBUser\fP & user, QWidget * parent = \fCnullptr\fP)\fC [explicit]\fP"
+
+.SS "CreateDeckWindow::CreateDeckWindow (QString name, \fBPrivacy\fP privacy, \fBUser\fP & user, QWidget * parent = \fCnullptr\fP)"
+
+.SS "CreateDeckWindow::~CreateDeckWindow ()\fC [override]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void CreateDeckWindow::generateId ()\fC [private]\fP"
+
+.SS "QString CreateDeckWindow::getAnswerText () const"
+
+.SS "\fBDifficulty\fP CreateDeckWindow::getDifficulty () const"
+
+.SS "QString CreateDeckWindow::getQuestionText () const"
+
+.SS "void CreateDeckWindow::on_pushButton_add_clicked ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void CreateDeckWindow::on_pushButton_finish_clicked ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void CreateDeckWindow::writeGeneratedID (QString deckNameID)\fC [signal]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBDeck\fP CreateDeckWindow::m_deck\fC [private]\fP"
+
+.SS "QButtonGroup* CreateDeckWindow::m_questionDifficulty\fC [private]\fP"
+
+.SS "\fBUser\fP& CreateDeckWindow::m_user\fC [private]\fP"
+
+.SS "Ui::CreateDeckWindow* CreateDeckWindow::ui\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for StudySphere from the source code\&.

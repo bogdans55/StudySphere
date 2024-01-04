@@ -1,0 +1,98 @@
+\doxysection{JSONSerializer Class Reference}
+\hypertarget{class_j_s_o_n_serializer}{}\label{class_j_s_o_n_serializer}\index{JSONSerializer@{JSONSerializer}}
+
+
+{\ttfamily \#include $<$jsonserializer.\+h$>$}
+
+
+
+Inheritance diagram for JSONSerializer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{class_j_s_o_n_serializer__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for JSONSerializer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{class_j_s_o_n_serializer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_j_s_o_n_serializer_af2154b474dc26cd306f1e7cacc804187}{JSONSerializer}} ()
+\item 
+void \mbox{\hyperlink{class_j_s_o_n_serializer_acff40fdafdc059bc6adf4ded96bb89ee}{save}} (const \mbox{\hyperlink{class_serializable}{Serializable}} \&serializable, const QString \&filepath, const QString \&rootname=\"{}\"{}) override
+\item 
+void \mbox{\hyperlink{class_j_s_o_n_serializer_a4f87e9b39db436ce9a24929f3e4fcba0}{load}} (\mbox{\hyperlink{class_serializable}{Serializable}} \&serializable, const QString \&filepath) override
+\item 
+QJson\+Document \mbox{\hyperlink{class_j_s_o_n_serializer_ada85c677eed1729f8b07aabbe615bf69}{create\+Json}} (const \mbox{\hyperlink{class_serializable}{Serializable}} \&serializable)
+\item 
+void \mbox{\hyperlink{class_j_s_o_n_serializer_abc776621086db2c5ab54c34b11c504f7}{load\+Json}} (\mbox{\hyperlink{class_serializable}{Serializable}} \&serializable, QJson\+Document \&json\+Deck)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_serializer}{Serializer}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_serializer_abda2213522292d02c265182c44e7aa51}{\texorpdfstring{$\sim$}{\string~}\+Serializer}} ()=default
+\item 
+virtual void \mbox{\hyperlink{class_serializer_a06261709ceb3c490189d9deeecb84905}{save}} (const \mbox{\hyperlink{class_serializable}{Serializable}} \&serializable, const QString \&filepath, const QString \&rootname=\"{}\"{})=0
+\item 
+virtual void \mbox{\hyperlink{class_serializer_ab522893076354436973f30ce71ac3e91}{load}} (\mbox{\hyperlink{class_serializable}{Serializable}} \&serializable, const QString \&filepath)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_j_s_o_n_serializer_af2154b474dc26cd306f1e7cacc804187}\label{class_j_s_o_n_serializer_af2154b474dc26cd306f1e7cacc804187} 
+\index{JSONSerializer@{JSONSerializer}!JSONSerializer@{JSONSerializer}}
+\index{JSONSerializer@{JSONSerializer}!JSONSerializer@{JSONSerializer}}
+\doxysubsubsection{\texorpdfstring{JSONSerializer()}{JSONSerializer()}}
+{\footnotesize\ttfamily JSONSerializer\+::\+JSONSerializer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_j_s_o_n_serializer_ada85c677eed1729f8b07aabbe615bf69}\label{class_j_s_o_n_serializer_ada85c677eed1729f8b07aabbe615bf69} 
+\index{JSONSerializer@{JSONSerializer}!createJson@{createJson}}
+\index{createJson@{createJson}!JSONSerializer@{JSONSerializer}}
+\doxysubsubsection{\texorpdfstring{createJson()}{createJson()}}
+{\footnotesize\ttfamily QJson\+Document JSONSerializer\+::create\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_serializable}{Serializable}} \&}]{serializable }\end{DoxyParamCaption})}
+
+\Hypertarget{class_j_s_o_n_serializer_a4f87e9b39db436ce9a24929f3e4fcba0}\label{class_j_s_o_n_serializer_a4f87e9b39db436ce9a24929f3e4fcba0} 
+\index{JSONSerializer@{JSONSerializer}!load@{load}}
+\index{load@{load}!JSONSerializer@{JSONSerializer}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void JSONSerializer\+::load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serializable}{Serializable}} \&}]{serializable,  }\item[{const QString \&}]{filepath }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_serializer_ab522893076354436973f30ce71ac3e91}{Serializer}}.
+
+\Hypertarget{class_j_s_o_n_serializer_abc776621086db2c5ab54c34b11c504f7}\label{class_j_s_o_n_serializer_abc776621086db2c5ab54c34b11c504f7} 
+\index{JSONSerializer@{JSONSerializer}!loadJson@{loadJson}}
+\index{loadJson@{loadJson}!JSONSerializer@{JSONSerializer}}
+\doxysubsubsection{\texorpdfstring{loadJson()}{loadJson()}}
+{\footnotesize\ttfamily void JSONSerializer\+::load\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_serializable}{Serializable}} \&}]{serializable,  }\item[{QJson\+Document \&}]{json\+Deck }\end{DoxyParamCaption})}
+
+\Hypertarget{class_j_s_o_n_serializer_acff40fdafdc059bc6adf4ded96bb89ee}\label{class_j_s_o_n_serializer_acff40fdafdc059bc6adf4ded96bb89ee} 
+\index{JSONSerializer@{JSONSerializer}!save@{save}}
+\index{save@{save}!JSONSerializer@{JSONSerializer}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily void JSONSerializer\+::save (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_serializable}{Serializable}} \&}]{serializable,  }\item[{const QString \&}]{filepath,  }\item[{const QString \&}]{rootname = {\ttfamily \"{}\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_serializer_a06261709ceb3c490189d9deeecb84905}{Serializer}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+app/lib/\mbox{\hyperlink{jsonserializer_8h}{jsonserializer.\+h}}\item 
+app/src/\mbox{\hyperlink{jsonserializer_8cpp}{jsonserializer.\+cpp}}\end{DoxyCompactItemize}

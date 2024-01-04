@@ -1,0 +1,5 @@
+<map id="Planner" name="Planner">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,165,121,405"/>
+<area shape="rect" id="Node000002" href="$class_serializable.html" title=" " alt="" coords="10,5,117,117"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,132,66,166,61,166,61,132"/>
+</map>

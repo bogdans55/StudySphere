@@ -1,0 +1,39 @@
+# Project information
+PROJECT_NAME           = "StudySphere"
+PROJECT_VERSION        = 1.0
+OUTPUT_DIRECTORY       = ./docs/doxygen_docs
+
+# Input sources
+INPUT                  = ./app
+FILE_PATTERNS          = *.h *.cpp
+
+# Recursively include all subdirectories
+RECURSIVE              = YES
+
+# Exclude some directories if needed
+EXCLUDE                = 
+
+# Automatically generate collaboration diagrams
+HAVE_DOT               = YES
+CLASS_GRAPH            = YES
+COLLABORATION_GRAPH    = YES
+UML_LOOK               = YES
+
+# Include Qt-specific features
+AUTOLINK_SUPPORT       = YES
+QT_AUTOBRIEF           = YES
+MULTILINE_CPP_IS_BRIEF = YES
+
+# Handle Qt's signals and slots
+QT_SUPPORTED_VERSION   = 6
+
+# Configuration options
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+
+# Output format options
+GENERATE_HTML          = YES
+GENERATE_LATEX         = YES
+GENERATE_MAN           = YES
+

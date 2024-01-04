@@ -1,0 +1,34 @@
+\doxysection{imagecard.\+h}
+\hypertarget{imagecard_8h_source}{}\label{imagecard_8h_source}\index{app/lib/imagecard.h@{app/lib/imagecard.h}}
+\mbox{\hyperlink{imagecard_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IMAGECARD\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IMAGECARD\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{card_8h}{card.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QImage>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_image_card}{ImageCard}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_card}{Card}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{class_image_card_a4f98b7d1bb07100d2cfadfa9e6e3c878}{ImageCard}}();}
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{class_image_card_a4f98b7d1bb07100d2cfadfa9e6e3c878}{ImageCard}}(QString\ \mbox{\hyperlink{class_card_a48fa119bc1419cad2a9c8d5fef9f131e}{questionText}},\ QString\ answerText,\ \mbox{\hyperlink{card_8h_a43efb0a2e61815a66134dfa5ccea0a83}{Difficulty}}\ \mbox{\hyperlink{class_card_a9f55de086650d22ecc54efff96f6c990}{questionDifficulty}});}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{class_image_card_a4f98b7d1bb07100d2cfadfa9e6e3c878}{ImageCard}}(QString\ \mbox{\hyperlink{class_card_a48fa119bc1419cad2a9c8d5fef9f131e}{questionText}},\ QString\ answerText,\ \mbox{\hyperlink{card_8h_a43efb0a2e61815a66134dfa5ccea0a83}{Difficulty}}\ \mbox{\hyperlink{class_card_a9f55de086650d22ecc54efff96f6c990}{questionDifficulty}},\ QImage\ \mbox{\hyperlink{class_image_card_a78aed1ed34436397f3ad1972b390d21a}{questionImage}},}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QImage\ \mbox{\hyperlink{class_image_card_a901bee164456ff19d11498733dec819b}{answerImage}});}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_image_card_a9a8e3842c3d1425028f625284b9de79e}{\string~ImageCard}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{inline}\ QImage\ \mbox{\hyperlink{class_image_card_a78aed1ed34436397f3ad1972b390d21a}{questionImage}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_image_card_a585415c4927c92915584181413a2e614}{m\_questionImage}};\ \}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{inline}\ QImage\ \mbox{\hyperlink{class_image_card_a901bee164456ff19d11498733dec819b}{answerImage}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_image_card_ae1211ef119ae6b49812b587db0a7a231}{m\_answerImage}};\ \}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_image_card_a1aa6da51d0d744a32a4a1b7b0a75641a}{setQuestionImage}}(\textcolor{keyword}{const}\ QImage\ \&\mbox{\hyperlink{class_image_card_a78aed1ed34436397f3ad1972b390d21a}{questionImage}});}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_image_card_aa340b26609b148e198663d1eba42f667}{setAnswerImage}}(\textcolor{keyword}{const}\ QImage\ \&\mbox{\hyperlink{class_image_card_a901bee164456ff19d11498733dec819b}{answerImage}});}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00024\ \ \ \ \ QImage\ \mbox{\hyperlink{class_image_card_a585415c4927c92915584181413a2e614}{m\_questionImage}};}
+\DoxyCodeLine{00025\ \ \ \ \ QImage\ \mbox{\hyperlink{class_image_card_ae1211ef119ae6b49812b587db0a7a231}{m\_answerImage}};}
+\DoxyCodeLine{00026\ \};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ IMAGECARD\_H}}
+
+\end{DoxyCode}

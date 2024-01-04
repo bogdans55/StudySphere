@@ -1,0 +1,87 @@
+.TH "User" 3StudySphere" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+User
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <user\&.h>\fP
+.PP
+Inherits \fBSerializable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBUser\fP (QString mUsername)"
+.br
+.ti -1c
+.RI "\fBUser\fP ()"
+.br
+.ti -1c
+.RI "\fB~User\fP () override"
+.br
+.ti -1c
+.RI "QString \fBusername\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetUsername\fP (const QString &newUsername)"
+.br
+.ti -1c
+.RI "QVariant \fBtoVariant\fP () const override"
+.br
+.ti -1c
+.RI "void \fBfromVariant\fP (const QVariant &variant) override"
+.br
+.in -1c
+
+Public Member Functions inherited from \fBSerializable\fP
+.in +1c
+.ti -1c
+.RI "virtual \fB~Serializable\fP ()=default"
+.br
+.ti -1c
+.RI "virtual QVariant \fBtoVariant\fP () const =0"
+.br
+.ti -1c
+.RI "virtual void \fBfromVariant\fP (const QVariant &variant)=0"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "QString \fBm_username\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "User::User (QString mUsername)"
+
+.SS "User::User ()\fC [default]\fP"
+
+.SS "User::~User ()\fC [override]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void User::fromVariant (const QVariant & variant)\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Implements \fBSerializable\fP\&.
+.SS "void User::setUsername (const QString & newUsername)"
+
+.SS "QVariant User::toVariant () const\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Implements \fBSerializable\fP\&.
+.SS "QString User::username () const\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "QString User::m_username\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for StudySphere from the source code\&.

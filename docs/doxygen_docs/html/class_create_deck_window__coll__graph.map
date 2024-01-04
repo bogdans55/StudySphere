@@ -1,0 +1,13 @@
+<map id="CreateDeckWindow" name="CreateDeckWindow">
+<area shape="rect" id="Node000001" title=" " alt="" coords="45,903,240,1180"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,599,69,668"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="50,682,85,838,103,902,98,904,80,839,44,683"/>
+<area shape="rect" id="Node000003" href="$class_deck.html" title=" " alt="" coords="94,428,191,839"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="145,839,145,886,140,886,140,839"/>
+<area shape="rect" id="Node000004" href="$class_serializable.html" title=" " alt="" coords="88,5,195,117"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="144,132,145,428,140,428,139,132"/>
+<area shape="rect" id="Node000005" href="$class_user.html" title=" " alt="" coords="163,167,271,364"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="170,130,183,166,178,168,165,132"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="228,364,233,470,233,600,225,740,205,879,204,887,198,886,200,878,220,740,228,600,227,470,223,364"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="180,365,173,389,168,412,162,411,168,387,175,363"/>
+</map>

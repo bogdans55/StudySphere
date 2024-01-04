@@ -1,0 +1,96 @@
+.TH "PlainCard" 3StudySphere" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+PlainCard
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <plaincard\&.h>\fP
+.PP
+Inherits \fBCard\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBPlainCard\fP ()"
+.br
+.ti -1c
+.RI "\fBPlainCard\fP (QString \fBquestionText\fP, QString answerText, \fBDifficulty\fP \fBquestionDifficulty\fP)"
+.br
+.ti -1c
+.RI "\fB~PlainCard\fP () override"
+.br
+.in -1c
+
+Public Member Functions inherited from \fBCard\fP
+.in +1c
+.ti -1c
+.RI "\fBCard\fP ()"
+.br
+.ti -1c
+.RI "\fBCard\fP (QString mQuestionText, QString mAnswerText, \fBDifficulty\fP mQuestionDifficulty)"
+.br
+.ti -1c
+.RI "\fBCard\fP (const \fBCard\fP &card)"
+.br
+.ti -1c
+.RI "\fB~Card\fP () override"
+.br
+.ti -1c
+.RI "QString \fBquestionText\fP () const"
+.br
+.ti -1c
+.RI "QString \fBquestionAnswer\fP () const"
+.br
+.ti -1c
+.RI "\fBDifficulty\fP \fBquestionDifficulty\fP () const"
+.br
+.ti -1c
+.RI "QVariant \fBtoVariant\fP () const override"
+.br
+.ti -1c
+.RI "void \fBfromVariant\fP (const QVariant &variant) override"
+.br
+.in -1c
+
+Public Member Functions inherited from \fBSerializable\fP
+.in +1c
+.ti -1c
+.RI "virtual \fB~Serializable\fP ()=default"
+.br
+.ti -1c
+.RI "virtual QVariant \fBtoVariant\fP () const =0"
+.br
+.ti -1c
+.RI "virtual void \fBfromVariant\fP (const QVariant &variant)=0"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+
+
+Protected Attributes inherited from \fBCard\fP
+.in +1c
+.ti -1c
+.RI "QString \fBm_questionText\fP"
+.br
+.ti -1c
+.RI "QString \fBm_answerText\fP"
+.br
+.ti -1c
+.RI "\fBDifficulty\fP \fBm_questionDifficulty\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "PlainCard::PlainCard ()"
+
+.SS "PlainCard::PlainCard (QString questionText, QString answerText, \fBDifficulty\fP questionDifficulty)"
+
+.SS "PlainCard::~PlainCard ()\fC [override]\fP, \fC [default]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for StudySphere from the source code\&.

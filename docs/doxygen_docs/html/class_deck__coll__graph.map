@@ -1,0 +1,8 @@
+<map id="Deck" name="Deck">
+<area shape="rect" id="Node000001" title=" " alt="" coords="15,428,113,839"/>
+<area shape="rect" id="Node000002" href="$class_serializable.html" title=" " alt="" coords="5,5,112,117"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="62,132,65,428,59,428,57,132"/>
+<area shape="rect" id="Node000003" href="$class_user.html" title=" " alt="" coords="81,167,189,364"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="87,130,100,166,95,168,82,132"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="119,364,109,412,104,411,113,363"/>
+</map>

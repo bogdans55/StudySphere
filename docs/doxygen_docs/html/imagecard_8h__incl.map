@@ -1,0 +1,13 @@
+<map id="app/lib/imagecard.h" name="app/lib/imagecard.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="90,5,224,32"/>
+<area shape="rect" id="Node000002" href="$card_8h.html" title=" " alt="" coords="85,80,143,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="152,34,131,68,127,65,147,31"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="166,80,233,107"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="166,31,187,65,182,68,162,34"/>
+<area shape="rect" id="Node000003" href="$serializable_8h.html" title=" " alt="" coords="5,155,103,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="106,109,76,145,72,141,102,106"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="127,155,224,181"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="127,105,157,141,153,145,123,109"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="18,229,90,256"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="57,182,57,214,51,214,51,182"/>
+</map>

@@ -1,0 +1,37 @@
+\doxysection{todolist.\+h}
+\hypertarget{todolist_8h_source}{}\label{todolist_8h_source}\index{app/lib/todolist.h@{app/lib/todolist.h}}
+\mbox{\hyperlink{todolist_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TODOLIST\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TODOLIST\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QPair>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QVector>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{serializable_8h}{serializable.h}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_to_do_list}{ToDoList}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_serializable}{Serializable}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_to_do_list_ad0f28a7f8f89fd51d472ceb21c6e83ae}{ToDoList}}();}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_to_do_list_adffa6afe56b060d707f5628b44499a1b}{\string~ToDoList}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ QVariant\ \mbox{\hyperlink{class_to_do_list_a7cd2a53e9acfb7f9cb915932890dcb79}{toVariant}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_to_do_list_ab09b937219c179c74f3fa69d0827d8c2}{fromVariant}}(\textcolor{keyword}{const}\ QVariant\ \&variant)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_to_do_list_ab91607eee68ee44f95a4223b7ddbee97}{addToDo}}(\textcolor{keyword}{const}\ QString\ \&text,\ \textcolor{keywordtype}{bool}\ isDone);}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_to_do_list_a36d23c0217704a9692ff25ab377a6fc7}{deleteToDo}}(\textcolor{keyword}{const}\ QString\ \&text);}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_to_do_list_a90df4f9b9a7e410ed6d597224d9faa4b}{deleteAllToDos}}();}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_to_do_list_a66ac33d817f355aa030a5888362c276c}{checkToDo}}(\textcolor{keyword}{const}\ QString\ \&text,\ \textcolor{keywordtype}{bool}\ isDone);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{inline}\ QVector<QPair<QString,\ bool>>\ \mbox{\hyperlink{class_to_do_list_aadce5cf53bda16df5031eae955d52b05}{toDos}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_to_do_list_a3eb05e3068e63f689f2f81ffa0b0c7e7}{m\_listToDos}};\ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00028\ \ \ \ \ QVector<QPair<QString,\ bool>>\ \mbox{\hyperlink{class_to_do_list_a3eb05e3068e63f689f2f81ffa0b0c7e7}{m\_listToDos}};}
+\DoxyCodeLine{00029\ \};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TODOLIST\_H}}
+
+\end{DoxyCode}

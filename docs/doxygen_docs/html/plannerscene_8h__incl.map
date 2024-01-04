@@ -1,0 +1,21 @@
+<map id="app/lib/plannerscene.h" name="app/lib/plannerscene.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="274,5,426,32"/>
+<area shape="rect" id="Node000002" href="$activityitem_8h.html" title=" " alt="" coords="168,80,265,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="328,35,254,75,252,70,326,30"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="290,80,410,107"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="353,33,353,64,347,64,347,33"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="434,80,490,107"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="371,30,431,69,428,74,368,35"/>
+<area shape="rect" id="Node000003" href="$activity_8h.html" title=" " alt="" coords="123,155,196,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="209,109,181,144,177,141,205,106"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="220,155,328,181"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="229,106,257,141,253,144,225,109"/>
+<area shape="rect" id="Node000004" href="$serializable_8h.html" title=" " alt="" coords="5,229,103,256"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="142,184,86,222,83,218,139,180"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="127,229,192,256"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="162,182,162,214,157,214,157,182"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="216,229,276,256"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="176,180,221,217,218,221,173,184"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="18,304,90,331"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="57,257,57,288,51,288,51,257"/>
+</map>

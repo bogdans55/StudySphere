@@ -1,0 +1,15 @@
+<map id="app/lib/activityitem.h" name="app/lib/activityitem.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="259,5,398,32"/>
+<area shape="rect" id="Node000002" href="$plannerscene_8h.html" title=" " alt="" coords="164,80,315,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="303,44,256,82,253,78,300,40"/>
+<area shape="rect" id="Node000007" href="$activityitem_8cpp.html" title=" " alt="" coords="339,80,497,107"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="358,40,404,78,401,82,354,44"/>
+<area shape="rect" id="Node000003" href="$mainwindow_8h.html" title=" " alt="" coords="77,155,221,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="214,119,166,156,163,152,210,114"/>
+<area shape="rect" id="Node000006" href="$plannerscene_8cpp.html" title=" " alt="" coords="245,155,415,181"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="268,114,316,152,313,156,265,119"/>
+<area shape="rect" id="Node000004" href="$main_8cpp.html" title=" " alt="" coords="5,229,127,256"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="125,194,82,231,78,227,121,190"/>
+<area shape="rect" id="Node000005" href="$mainwindow_8cpp.html" title=" " alt="" coords="151,229,314,256"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="177,190,220,227,216,231,173,194"/>
+</map>

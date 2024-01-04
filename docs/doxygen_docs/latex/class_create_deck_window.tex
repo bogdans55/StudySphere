@@ -1,0 +1,168 @@
+\doxysection{Create\+Deck\+Window Class Reference}
+\hypertarget{class_create_deck_window}{}\label{class_create_deck_window}\index{CreateDeckWindow@{CreateDeckWindow}}
+
+
+{\ttfamily \#include $<$createdeckwindow.\+h$>$}
+
+
+
+Inheritance diagram for Create\+Deck\+Window\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{class_create_deck_window__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Create\+Deck\+Window\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_create_deck_window__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_create_deck_window_a59ebd0db6d5b8b797703fd9643cd93dd}{write\+Generated\+ID}} (QString deck\+Name\+ID)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_create_deck_window_a0435bef077cb73be020eba228f1323a5}{Create\+Deck\+Window}} (\mbox{\hyperlink{class_user}{User}} \&user, QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\item 
+\mbox{\hyperlink{class_create_deck_window_aa1788bc27a41db7a20fd0571dcc4b492}{Create\+Deck\+Window}} (QString name, \mbox{\hyperlink{deck_8h_a9d516a7457325bcd0ae95a5a36d92d6f}{Privacy}} privacy, \mbox{\hyperlink{class_user}{User}} \&user, QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\item 
+\mbox{\hyperlink{class_create_deck_window_a435150f98eee38bae8cc60997adfee3b}{\texorpdfstring{$\sim$}{\string~}\+Create\+Deck\+Window}} () override
+\item 
+QString \mbox{\hyperlink{class_create_deck_window_ac0155cc927a883c14bb044f28a4ce1d8}{get\+Question\+Text}} () const
+\item 
+QString \mbox{\hyperlink{class_create_deck_window_a9951acd966e38cd57ddc192f1b0c29ca}{get\+Answer\+Text}} () const
+\item 
+\mbox{\hyperlink{card_8h_a43efb0a2e61815a66134dfa5ccea0a83}{Difficulty}} \mbox{\hyperlink{class_create_deck_window_a309448649cbea277a9e2166635971264}{get\+Difficulty}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_create_deck_window_a674eeda0ff6c2e700af3951ae632abec}{on\+\_\+push\+Button\+\_\+finish\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{class_create_deck_window_a2cfc88c6475cb6e37841fb0d6b59d746}{on\+\_\+push\+Button\+\_\+add\+\_\+clicked}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_create_deck_window_ad8534cf415ed69b6f6f968f56957d55e}{generate\+Id}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Create\+Deck\+Window \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_create_deck_window_a37215c69fc936ff9af5db976a88e4e71}{ui}}
+\item 
+\mbox{\hyperlink{class_deck}{Deck}} \mbox{\hyperlink{class_create_deck_window_acb73614f4830e9efd9aeb0e3fc0d8399}{m\+\_\+deck}}
+\item 
+QButton\+Group \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_create_deck_window_aea16cf008a59388cc4f10c9e4dba7377}{m\+\_\+question\+Difficulty}}
+\item 
+\mbox{\hyperlink{class_user}{User}} \& \mbox{\hyperlink{class_create_deck_window_a00b206b7bebdd99842576d747afbefdd}{m\+\_\+user}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_create_deck_window_a0435bef077cb73be020eba228f1323a5}\label{class_create_deck_window_a0435bef077cb73be020eba228f1323a5} 
+\index{CreateDeckWindow@{CreateDeckWindow}!CreateDeckWindow@{CreateDeckWindow}}
+\index{CreateDeckWindow@{CreateDeckWindow}!CreateDeckWindow@{CreateDeckWindow}}
+\doxysubsubsection{\texorpdfstring{CreateDeckWindow()}{CreateDeckWindow()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Create\+Deck\+Window\+::\+Create\+Deck\+Window (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_user}{User}} \&}]{user,  }\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\Hypertarget{class_create_deck_window_aa1788bc27a41db7a20fd0571dcc4b492}\label{class_create_deck_window_aa1788bc27a41db7a20fd0571dcc4b492} 
+\index{CreateDeckWindow@{CreateDeckWindow}!CreateDeckWindow@{CreateDeckWindow}}
+\index{CreateDeckWindow@{CreateDeckWindow}!CreateDeckWindow@{CreateDeckWindow}}
+\doxysubsubsection{\texorpdfstring{CreateDeckWindow()}{CreateDeckWindow()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Create\+Deck\+Window\+::\+Create\+Deck\+Window (\begin{DoxyParamCaption}\item[{QString}]{name,  }\item[{\mbox{\hyperlink{deck_8h_a9d516a7457325bcd0ae95a5a36d92d6f}{Privacy}}}]{privacy,  }\item[{\mbox{\hyperlink{class_user}{User}} \&}]{user,  }\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+\Hypertarget{class_create_deck_window_a435150f98eee38bae8cc60997adfee3b}\label{class_create_deck_window_a435150f98eee38bae8cc60997adfee3b} 
+\index{CreateDeckWindow@{CreateDeckWindow}!````~CreateDeckWindow@{\texorpdfstring{$\sim$}{\string~}CreateDeckWindow}}
+\index{````~CreateDeckWindow@{\texorpdfstring{$\sim$}{\string~}CreateDeckWindow}!CreateDeckWindow@{CreateDeckWindow}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}CreateDeckWindow()}{\string~CreateDeckWindow()}}
+{\footnotesize\ttfamily Create\+Deck\+Window\+::\texorpdfstring{$\sim$}{\string~}\+Create\+Deck\+Window (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_create_deck_window_ad8534cf415ed69b6f6f968f56957d55e}\label{class_create_deck_window_ad8534cf415ed69b6f6f968f56957d55e} 
+\index{CreateDeckWindow@{CreateDeckWindow}!generateId@{generateId}}
+\index{generateId@{generateId}!CreateDeckWindow@{CreateDeckWindow}}
+\doxysubsubsection{\texorpdfstring{generateId()}{generateId()}}
+{\footnotesize\ttfamily void Create\+Deck\+Window\+::generate\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_create_deck_window_a9951acd966e38cd57ddc192f1b0c29ca}\label{class_create_deck_window_a9951acd966e38cd57ddc192f1b0c29ca} 
+\index{CreateDeckWindow@{CreateDeckWindow}!getAnswerText@{getAnswerText}}
+\index{getAnswerText@{getAnswerText}!CreateDeckWindow@{CreateDeckWindow}}
+\doxysubsubsection{\texorpdfstring{getAnswerText()}{getAnswerText()}}
+{\footnotesize\ttfamily QString Create\+Deck\+Window\+::get\+Answer\+Text (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_create_deck_window_a309448649cbea277a9e2166635971264}\label{class_create_deck_window_a309448649cbea277a9e2166635971264} 
+\index{CreateDeckWindow@{CreateDeckWindow}!getDifficulty@{getDifficulty}}
+\index{getDifficulty@{getDifficulty}!CreateDeckWindow@{CreateDeckWindow}}
+\doxysubsubsection{\texorpdfstring{getDifficulty()}{getDifficulty()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{card_8h_a43efb0a2e61815a66134dfa5ccea0a83}{Difficulty}} Create\+Deck\+Window\+::get\+Difficulty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_create_deck_window_ac0155cc927a883c14bb044f28a4ce1d8}\label{class_create_deck_window_ac0155cc927a883c14bb044f28a4ce1d8} 
+\index{CreateDeckWindow@{CreateDeckWindow}!getQuestionText@{getQuestionText}}
+\index{getQuestionText@{getQuestionText}!CreateDeckWindow@{CreateDeckWindow}}
+\doxysubsubsection{\texorpdfstring{getQuestionText()}{getQuestionText()}}
+{\footnotesize\ttfamily QString Create\+Deck\+Window\+::get\+Question\+Text (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_create_deck_window_a2cfc88c6475cb6e37841fb0d6b59d746}\label{class_create_deck_window_a2cfc88c6475cb6e37841fb0d6b59d746} 
+\index{CreateDeckWindow@{CreateDeckWindow}!on\_pushButton\_add\_clicked@{on\_pushButton\_add\_clicked}}
+\index{on\_pushButton\_add\_clicked@{on\_pushButton\_add\_clicked}!CreateDeckWindow@{CreateDeckWindow}}
+\doxysubsubsection{\texorpdfstring{on\_pushButton\_add\_clicked}{on\_pushButton\_add\_clicked}}
+{\footnotesize\ttfamily void Create\+Deck\+Window\+::on\+\_\+push\+Button\+\_\+add\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\Hypertarget{class_create_deck_window_a674eeda0ff6c2e700af3951ae632abec}\label{class_create_deck_window_a674eeda0ff6c2e700af3951ae632abec} 
+\index{CreateDeckWindow@{CreateDeckWindow}!on\_pushButton\_finish\_clicked@{on\_pushButton\_finish\_clicked}}
+\index{on\_pushButton\_finish\_clicked@{on\_pushButton\_finish\_clicked}!CreateDeckWindow@{CreateDeckWindow}}
+\doxysubsubsection{\texorpdfstring{on\_pushButton\_finish\_clicked}{on\_pushButton\_finish\_clicked}}
+{\footnotesize\ttfamily void Create\+Deck\+Window\+::on\+\_\+push\+Button\+\_\+finish\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\Hypertarget{class_create_deck_window_a59ebd0db6d5b8b797703fd9643cd93dd}\label{class_create_deck_window_a59ebd0db6d5b8b797703fd9643cd93dd} 
+\index{CreateDeckWindow@{CreateDeckWindow}!writeGeneratedID@{writeGeneratedID}}
+\index{writeGeneratedID@{writeGeneratedID}!CreateDeckWindow@{CreateDeckWindow}}
+\doxysubsubsection{\texorpdfstring{writeGeneratedID}{writeGeneratedID}}
+{\footnotesize\ttfamily void Create\+Deck\+Window\+::write\+Generated\+ID (\begin{DoxyParamCaption}\item[{QString}]{deck\+Name\+ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_create_deck_window_acb73614f4830e9efd9aeb0e3fc0d8399}\label{class_create_deck_window_acb73614f4830e9efd9aeb0e3fc0d8399} 
+\index{CreateDeckWindow@{CreateDeckWindow}!m\_deck@{m\_deck}}
+\index{m\_deck@{m\_deck}!CreateDeckWindow@{CreateDeckWindow}}
+\doxysubsubsection{\texorpdfstring{m\_deck}{m\_deck}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_deck}{Deck}} Create\+Deck\+Window\+::m\+\_\+deck\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_create_deck_window_aea16cf008a59388cc4f10c9e4dba7377}\label{class_create_deck_window_aea16cf008a59388cc4f10c9e4dba7377} 
+\index{CreateDeckWindow@{CreateDeckWindow}!m\_questionDifficulty@{m\_questionDifficulty}}
+\index{m\_questionDifficulty@{m\_questionDifficulty}!CreateDeckWindow@{CreateDeckWindow}}
+\doxysubsubsection{\texorpdfstring{m\_questionDifficulty}{m\_questionDifficulty}}
+{\footnotesize\ttfamily QButton\+Group\texorpdfstring{$\ast$}{*} Create\+Deck\+Window\+::m\+\_\+question\+Difficulty\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_create_deck_window_a00b206b7bebdd99842576d747afbefdd}\label{class_create_deck_window_a00b206b7bebdd99842576d747afbefdd} 
+\index{CreateDeckWindow@{CreateDeckWindow}!m\_user@{m\_user}}
+\index{m\_user@{m\_user}!CreateDeckWindow@{CreateDeckWindow}}
+\doxysubsubsection{\texorpdfstring{m\_user}{m\_user}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_user}{User}}\& Create\+Deck\+Window\+::m\+\_\+user\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_create_deck_window_a37215c69fc936ff9af5db976a88e4e71}\label{class_create_deck_window_a37215c69fc936ff9af5db976a88e4e71} 
+\index{CreateDeckWindow@{CreateDeckWindow}!ui@{ui}}
+\index{ui@{ui}!CreateDeckWindow@{CreateDeckWindow}}
+\doxysubsubsection{\texorpdfstring{ui}{ui}}
+{\footnotesize\ttfamily Ui\+::\+Create\+Deck\+Window\texorpdfstring{$\ast$}{*} Create\+Deck\+Window\+::ui\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+app/lib/\mbox{\hyperlink{createdeckwindow_8h}{createdeckwindow.\+h}}\item 
+app/src/\mbox{\hyperlink{createdeckwindow_8cpp}{createdeckwindow.\+cpp}}\end{DoxyCompactItemize}

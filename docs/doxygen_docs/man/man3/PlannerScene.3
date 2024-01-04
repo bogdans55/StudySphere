@@ -1,0 +1,65 @@
+.TH "PlannerScene" 3StudySphere" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+PlannerScene
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <plannerscene\&.h>\fP
+.PP
+Inherits QGraphicsScene\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBPlannerScene\fP (QObject *parent=nullptr)"
+.br
+.ti -1c
+.RI "auto \fBactivities\fP () const"
+.br
+.ti -1c
+.RI "void \fBaddActivity\fP (\fBActivityItem\fP *activityItem)"
+.br
+.ti -1c
+.RI "void \fBclearActivities\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "QVector< \fBActivity\fP > \fBm_activities\fP"
+.br
+.ti -1c
+.RI "QVector< QColor > \fBm_activityColors\fP"
+.br
+.ti -1c
+.RI "unsigned \fBm_colorPicker\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "PlannerScene::PlannerScene (QObject * parent = \fCnullptr\fP)\fC [explicit]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "auto PlannerScene::activities () const\fC [inline]\fP"
+
+.SS "void PlannerScene::addActivity (\fBActivityItem\fP * activityItem)"
+
+.SS "void PlannerScene::clearActivities ()"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "QVector<\fBActivity\fP> PlannerScene::m_activities\fC [private]\fP"
+
+.SS "QVector<QColor> PlannerScene::m_activityColors\fC [private]\fP"
+
+.SS "unsigned PlannerScene::m_colorPicker\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for StudySphere from the source code\&.
