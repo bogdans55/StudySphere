@@ -52,24 +52,27 @@ void MyServer::startServer()
 	}
 }
 
-void MyServer::createUniqueIdsFile(){
-    QFile file(uniqueIdsFile);
-    if (!file.exists()) {
-        if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-            QTextStream stream(&file);
+void MyServer::createUniqueIdsFile()
+{
+	QFile file(uniqueIdsFile);
+	if (!file.exists()) {
+		if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+			QTextStream stream(&file);
 
-            for (int i = 1; i <= 100; ++i) {
-                stream << i << "\n";
-            }
+			for (int i = 1; i <= 100; ++i) {
+				stream << i << "\n";
+			}
 
-            file.close();
-            qDebug() << "File created and numbers written successfully.";
-        } else {
-            qDebug() << "Error: Unable to open the file for writing.";
-        }
-    } else {
-        qDebug() << "File 'uniqueIds.txt' already exists.";
-    }
+			file.close();
+			qDebug() << "File created and numbers written successfully.";
+		}
+		else {
+			qDebug() << "Error: Unable to open the file for writing.";
+		}
+	}
+	else {
+		qDebug() << "File 'uniqueIds.txt' already exists.";
+	}
 }
 
 void MyServer::loadIds()
