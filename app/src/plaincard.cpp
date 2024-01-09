@@ -7,4 +7,4 @@ PlainCard::PlainCard(QString questionText, QString answerText, Difficulty questi
 	: Card(questionText, answerText, questionDifficulty)
 {}
 
-PlainCard::~PlainCard() {}
+PlainCard::~PlainCard() = default;

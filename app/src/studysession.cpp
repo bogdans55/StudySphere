@@ -28,7 +28,7 @@ StudySession::~StudySession()
 
 void StudySession::startSession()
 {
-	m_timeStarted = time(NULL);
+	m_timeStarted = time(nullptr);
 
 	QJsonObject requestObject;
 
@@ -57,7 +57,7 @@ void StudySession::startSession()
 
 void StudySession::endSession()
 {
-	m_timeEnded = time(NULL);
+	m_timeEnded = time(nullptr);
 	m_deckStats->usedDeck();
 }
 

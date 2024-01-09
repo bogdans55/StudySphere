@@ -22,7 +22,7 @@ class CreateDeckWindow : public QWidget
 
 	CreateDeckWindow(QString name, Privacy privacy, User &user, QWidget *parent = nullptr);
 
-	~CreateDeckWindow();
+	~CreateDeckWindow() override;
 
 	QString getQuestionText() const;
 	QString getAnswerText() const;

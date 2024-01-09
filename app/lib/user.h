@@ -10,9 +10,9 @@ class User : public Serializable
 	QString m_username;
 
   public:
-	User(const QString &m_username);
+	User(QString mUsername);
 	User();
-	~User();
+	~User() override;
 
 	inline QString username() const { return m_username; }
 

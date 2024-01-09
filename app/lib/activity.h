@@ -9,8 +9,8 @@ class Activity : Serializable
 {
   public:
 	Activity();
-	Activity(QString m_activityText, QTime m_start, QTime m_end);
-	~Activity();
+	Activity(QString mActivityText, QTime mStart, QTime mEnd);
+	~Activity() override;
 
 	inline QString activityText() const { return m_activityText; }
 

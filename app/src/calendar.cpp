@@ -2,7 +2,7 @@
 
 Calendar::Calendar() : m_events() {}
 
-Calendar::~Calendar() {}
+Calendar::~Calendar() = default;
 
 void Calendar::addEvent(QDate date, QTime time, QString text)
 {

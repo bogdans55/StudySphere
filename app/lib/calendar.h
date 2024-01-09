@@ -14,7 +14,7 @@ class Calendar : public Serializable
 
   public:
 	Calendar();
-	~Calendar();
+	~Calendar() override;
 
 	QVariant toVariant() const override;
 	void fromVariant(const QVariant &variant) override;
