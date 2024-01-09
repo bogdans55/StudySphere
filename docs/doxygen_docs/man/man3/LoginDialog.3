@@ -1,0 +1,89 @@
+.TH "LoginDialog" 3 "Tue Jan 9 2024" "StudySphere" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+LoginDialog
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <logindialog\&.h>\fP
+.PP
+Inherits QDialog\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBLoginDialog\fP (QWidget *parent=nullptr)"
+.br
+.ti -1c
+.RI "\fB~LoginDialog\fP () override"
+.br
+.ti -1c
+.RI "QString \fBgetUsername\fP () const"
+.br
+.ti -1c
+.RI "QString \fBgetPassword\fP () const"
+.br
+.ti -1c
+.RI "bool \fBisRegister\fP () const"
+.br
+.in -1c
+.SS "Private Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBon_pushButton_login_clicked\fP ()"
+.br
+.ti -1c
+.RI "void \fBon_pushButton_openRegister_clicked\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "Ui::LoginDialog * \fBui\fP"
+.br
+.ti -1c
+.RI "QString \fBm_username\fP"
+.br
+.ti -1c
+.RI "QString \fBm_password\fP"
+.br
+.ti -1c
+.RI "bool \fBm_isRegister\fP = false"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "LoginDialog::LoginDialog (QWidget * parent = \fCnullptr\fP)\fC [explicit]\fP"
+
+.SS "LoginDialog::~LoginDialog ()\fC [override]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "QString LoginDialog::getPassword () const\fC [inline]\fP"
+
+.SS "QString LoginDialog::getUsername () const\fC [inline]\fP"
+
+.SS "bool LoginDialog::isRegister () const\fC [inline]\fP"
+
+.SS "void LoginDialog::on_pushButton_login_clicked ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void LoginDialog::on_pushButton_openRegister_clicked ()\fC [private]\fP, \fC [slot]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "bool LoginDialog::m_isRegister = false\fC [private]\fP"
+
+.SS "QString LoginDialog::m_password\fC [private]\fP"
+
+.SS "QString LoginDialog::m_username\fC [private]\fP"
+
+.SS "Ui::LoginDialog* LoginDialog::ui\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for StudySphere from the source code\&.

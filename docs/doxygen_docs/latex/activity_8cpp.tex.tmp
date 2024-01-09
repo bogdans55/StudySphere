@@ -1,0 +1,7 @@
+\hypertarget{activity_8cpp}{}\doxysection{app/src/activity.cpp File Reference}
+\label{activity_8cpp}\index{app/src/activity.cpp@{app/src/activity.cpp}}
+{\ttfamily \#include \char`\"{}../lib/activity.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$QVariant\+Map$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+Include dependency graph for activity.\+cpp\+:
+% FIG 0

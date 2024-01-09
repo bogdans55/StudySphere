@@ -1,0 +1,65 @@
+.TH "ScheduleItem" 3 "Tue Jan 9 2024" "StudySphere" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ScheduleItem
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <scheduleitem\&.h>\fP
+.PP
+Inherits QGraphicsItem\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBScheduleItem\fP ()"
+.br
+.ti -1c
+.RI "QRectF \fBboundingRect\fP () const override"
+.br
+.ti -1c
+.RI "void \fBpaint\fP (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override"
+.br
+.ti -1c
+.RI "unsigned \fBwidth\fP () const"
+.br
+.ti -1c
+.RI "unsigned \fBheight\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetWidth\fP (unsigned \fBwidth\fP)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "unsigned \fBm_width\fP = 180"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "ScheduleItem::ScheduleItem ()\fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "QRectF ScheduleItem::boundingRect () const\fC [override]\fP"
+
+.SS "unsigned ScheduleItem::height () const\fC [inline]\fP"
+
+.SS "void ScheduleItem::paint (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)\fC [override]\fP"
+
+.SS "void ScheduleItem::setWidth (unsigned width)"
+
+.SS "unsigned ScheduleItem::width () const\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "unsigned ScheduleItem::m_width = 180\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for StudySphere from the source code\&.

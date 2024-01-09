@@ -1,0 +1,43 @@
+.TH "Serializable" 3 "Tue Jan 9 2024" "StudySphere" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Serializable
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <serializable\&.h>\fP
+.PP
+Inherited by \fBActivity\fP\fC [private]\fP, \fBCalendar\fP, \fBCard\fP, \fBDeck\fP, \fBDeckStats\fP, \fBPlanner\fP, \fBToDoList\fP, and \fBUser\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual \fB~Serializable\fP ()=default"
+.br
+.ti -1c
+.RI "virtual QVariant \fBtoVariant\fP () const =0"
+.br
+.ti -1c
+.RI "virtual void \fBfromVariant\fP (const QVariant &variant)=0"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "virtual Serializable::~Serializable ()\fC [virtual]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "virtual void Serializable::fromVariant (const QVariant & variant)\fC [pure virtual]\fP"
+
+.PP
+Implemented in \fBUser\fP, \fBToDoList\fP, \fBPlanner\fP, \fBDeckStats\fP, \fBDeck\fP, \fBCard\fP, \fBCalendar\fP, and \fBActivity\fP\&.
+.SS "virtual QVariant Serializable::toVariant () const\fC [pure virtual]\fP"
+
+.PP
+Implemented in \fBUser\fP, \fBToDoList\fP, \fBPlanner\fP, \fBDeckStats\fP, \fBDeck\fP, \fBCard\fP, \fBCalendar\fP, and \fBActivity\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for StudySphere from the source code\&.

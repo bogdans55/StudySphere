@@ -1,0 +1,157 @@
+\hypertarget{classSettings}{}\doxysection{Settings Class Reference}
+\label{classSettings}\index{Settings@{Settings}}
+
+
+{\ttfamily \#include $<$settings.\+h$>$}
+
+
+
+Collaboration diagram for Settings\+:
+% FIG 0
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classSettings_ae37700cef480d7771dd619a78ffd1956}{set\+Language}} (const int index)
+\item 
+void \mbox{\hyperlink{classSettings_a28004fd2c12404aa945fbd2a7672e339}{set\+Theme}} (const int index)
+\item 
+void \mbox{\hyperlink{classSettings_a8484a40d478ec1bab4789ff2c927cdc3}{set\+Volume}} (const double \&new\+Volume)
+\item 
+void \mbox{\hyperlink{classSettings_a72811a3f40950d3d4667a5c16af585a0}{set\+Sound}} (const bool \&new\+Sound)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classSettings}{Settings}} \& \mbox{\hyperlink{classSettings_a18dd74eaf97ac35fb5123eabaed4518c}{instance}} (QApplication $\ast$app)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSettings_ada79ccb3b627ff33725bce1f1151629d}{Settings}} (QApplication $\ast$app)
+\item 
+\mbox{\hyperlink{classSettings_a4a65be5921dfc9fddc476e5320541d89}{$\sim$\+Settings}} ()
+\item 
+\mbox{\hyperlink{classSettings_a7c0c5e4bee3d986cc6662843ab07c772}{Settings}} (const \mbox{\hyperlink{classSettings}{Settings}} \&)=delete
+\item 
+\mbox{\hyperlink{classSettings}{Settings}} \& \mbox{\hyperlink{classSettings_acafeb07a3e12fdd593d59cc70fb6ce67}{operator=}} (const \mbox{\hyperlink{classSettings}{Settings}} \&)=delete
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{settings_8h_a315ca917ad583797f709ea477dd28705}{Language}} \mbox{\hyperlink{classSettings_a05e4294a384afe9a103cfd907c348b91}{m\+\_\+language}}
+\item 
+\mbox{\hyperlink{settings_8h_a8edd6ed73b15a0ad6b139b947e79278b}{Theme}} \mbox{\hyperlink{classSettings_ab911bcc3e7dc0cdebd4026a867c8c041}{m\+\_\+theme}}
+\item 
+double \mbox{\hyperlink{classSettings_a6510d11a8adf79422c5fd7628c09c7f2}{m\+\_\+volume}}
+\item 
+bool \mbox{\hyperlink{classSettings_aa180ba304c3fbff9d8644280e42653fe}{m\+\_\+sound}}
+\item 
+QApplication $\ast$ \mbox{\hyperlink{classSettings_acd8fbb4bafd138a531099b0dc49e1dd9}{m\+\_\+app}}
+\item 
+QTranslator $\ast$ \mbox{\hyperlink{classSettings_a5a37448e21f31c2e1f31f9070e7bcdd3}{m\+\_\+translator}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSettings_ada79ccb3b627ff33725bce1f1151629d}\label{classSettings_ada79ccb3b627ff33725bce1f1151629d}} 
+\index{Settings@{Settings}!Settings@{Settings}}
+\index{Settings@{Settings}!Settings@{Settings}}
+\doxysubsubsection{\texorpdfstring{Settings()}{Settings()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Settings\+::\+Settings (\begin{DoxyParamCaption}\item[{QApplication $\ast$}]{app }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSettings_a4a65be5921dfc9fddc476e5320541d89}\label{classSettings_a4a65be5921dfc9fddc476e5320541d89}} 
+\index{Settings@{Settings}!````~Settings@{$\sim$Settings}}
+\index{````~Settings@{$\sim$Settings}!Settings@{Settings}}
+\doxysubsubsection{\texorpdfstring{$\sim$Settings()}{~Settings()}}
+{\footnotesize\ttfamily Settings\+::$\sim$\+Settings (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSettings_a7c0c5e4bee3d986cc6662843ab07c772}\label{classSettings_a7c0c5e4bee3d986cc6662843ab07c772}} 
+\index{Settings@{Settings}!Settings@{Settings}}
+\index{Settings@{Settings}!Settings@{Settings}}
+\doxysubsubsection{\texorpdfstring{Settings()}{Settings()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Settings\+::\+Settings (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classSettings}{Settings}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSettings_a18dd74eaf97ac35fb5123eabaed4518c}\label{classSettings_a18dd74eaf97ac35fb5123eabaed4518c}} 
+\index{Settings@{Settings}!instance@{instance}}
+\index{instance@{instance}!Settings@{Settings}}
+\doxysubsubsection{\texorpdfstring{instance()}{instance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSettings}{Settings}} \& Settings\+::instance (\begin{DoxyParamCaption}\item[{QApplication $\ast$}]{app }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{classSettings_acafeb07a3e12fdd593d59cc70fb6ce67}\label{classSettings_acafeb07a3e12fdd593d59cc70fb6ce67}} 
+\index{Settings@{Settings}!operator=@{operator=}}
+\index{operator=@{operator=}!Settings@{Settings}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSettings}{Settings}}\& Settings\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classSettings}{Settings}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}
+
+\mbox{\Hypertarget{classSettings_ae37700cef480d7771dd619a78ffd1956}\label{classSettings_ae37700cef480d7771dd619a78ffd1956}} 
+\index{Settings@{Settings}!setLanguage@{setLanguage}}
+\index{setLanguage@{setLanguage}!Settings@{Settings}}
+\doxysubsubsection{\texorpdfstring{setLanguage()}{setLanguage()}}
+{\footnotesize\ttfamily void Settings\+::set\+Language (\begin{DoxyParamCaption}\item[{const int}]{index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSettings_a72811a3f40950d3d4667a5c16af585a0}\label{classSettings_a72811a3f40950d3d4667a5c16af585a0}} 
+\index{Settings@{Settings}!setSound@{setSound}}
+\index{setSound@{setSound}!Settings@{Settings}}
+\doxysubsubsection{\texorpdfstring{setSound()}{setSound()}}
+{\footnotesize\ttfamily void Settings\+::set\+Sound (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Sound }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSettings_a28004fd2c12404aa945fbd2a7672e339}\label{classSettings_a28004fd2c12404aa945fbd2a7672e339}} 
+\index{Settings@{Settings}!setTheme@{setTheme}}
+\index{setTheme@{setTheme}!Settings@{Settings}}
+\doxysubsubsection{\texorpdfstring{setTheme()}{setTheme()}}
+{\footnotesize\ttfamily void Settings\+::set\+Theme (\begin{DoxyParamCaption}\item[{const int}]{index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classSettings_a8484a40d478ec1bab4789ff2c927cdc3}\label{classSettings_a8484a40d478ec1bab4789ff2c927cdc3}} 
+\index{Settings@{Settings}!setVolume@{setVolume}}
+\index{setVolume@{setVolume}!Settings@{Settings}}
+\doxysubsubsection{\texorpdfstring{setVolume()}{setVolume()}}
+{\footnotesize\ttfamily void Settings\+::set\+Volume (\begin{DoxyParamCaption}\item[{const double \&}]{new\+Volume }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classSettings_acd8fbb4bafd138a531099b0dc49e1dd9}\label{classSettings_acd8fbb4bafd138a531099b0dc49e1dd9}} 
+\index{Settings@{Settings}!m\_app@{m\_app}}
+\index{m\_app@{m\_app}!Settings@{Settings}}
+\doxysubsubsection{\texorpdfstring{m\_app}{m\_app}}
+{\footnotesize\ttfamily QApplication$\ast$ Settings\+::m\+\_\+app\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSettings_a05e4294a384afe9a103cfd907c348b91}\label{classSettings_a05e4294a384afe9a103cfd907c348b91}} 
+\index{Settings@{Settings}!m\_language@{m\_language}}
+\index{m\_language@{m\_language}!Settings@{Settings}}
+\doxysubsubsection{\texorpdfstring{m\_language}{m\_language}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a315ca917ad583797f709ea477dd28705}{Language}} Settings\+::m\+\_\+language\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSettings_aa180ba304c3fbff9d8644280e42653fe}\label{classSettings_aa180ba304c3fbff9d8644280e42653fe}} 
+\index{Settings@{Settings}!m\_sound@{m\_sound}}
+\index{m\_sound@{m\_sound}!Settings@{Settings}}
+\doxysubsubsection{\texorpdfstring{m\_sound}{m\_sound}}
+{\footnotesize\ttfamily bool Settings\+::m\+\_\+sound\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSettings_ab911bcc3e7dc0cdebd4026a867c8c041}\label{classSettings_ab911bcc3e7dc0cdebd4026a867c8c041}} 
+\index{Settings@{Settings}!m\_theme@{m\_theme}}
+\index{m\_theme@{m\_theme}!Settings@{Settings}}
+\doxysubsubsection{\texorpdfstring{m\_theme}{m\_theme}}
+{\footnotesize\ttfamily \mbox{\hyperlink{settings_8h_a8edd6ed73b15a0ad6b139b947e79278b}{Theme}} Settings\+::m\+\_\+theme\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSettings_a5a37448e21f31c2e1f31f9070e7bcdd3}\label{classSettings_a5a37448e21f31c2e1f31f9070e7bcdd3}} 
+\index{Settings@{Settings}!m\_translator@{m\_translator}}
+\index{m\_translator@{m\_translator}!Settings@{Settings}}
+\doxysubsubsection{\texorpdfstring{m\_translator}{m\_translator}}
+{\footnotesize\ttfamily QTranslator$\ast$ Settings\+::m\+\_\+translator\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classSettings_a6510d11a8adf79422c5fd7628c09c7f2}\label{classSettings_a6510d11a8adf79422c5fd7628c09c7f2}} 
+\index{Settings@{Settings}!m\_volume@{m\_volume}}
+\index{m\_volume@{m\_volume}!Settings@{Settings}}
+\doxysubsubsection{\texorpdfstring{m\_volume}{m\_volume}}
+{\footnotesize\ttfamily double Settings\+::m\+\_\+volume\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+app/lib/\mbox{\hyperlink{settings_8h}{settings.\+h}}\item 
+app/src/\mbox{\hyperlink{settings_8cpp}{settings.\+cpp}}\end{DoxyCompactItemize}

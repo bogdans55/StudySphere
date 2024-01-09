@@ -1,0 +1,113 @@
+.TH "WhiteboardWindow" 3 "Tue Jan 9 2024" "StudySphere" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+WhiteboardWindow
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <whiteboardwindow\&.h>\fP
+.PP
+Inherits QWidget\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBWhiteboardWindow\fP (QWidget *parent=nullptr)"
+.br
+.ti -1c
+.RI "\fB~WhiteboardWindow\fP () override"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBpaintEvent\fP (QPaintEvent *event) override"
+.br
+.ti -1c
+.RI "void \fBmousePressEvent\fP (QMouseEvent *event) override"
+.br
+.ti -1c
+.RI "void \fBmouseMoveEvent\fP (QMouseEvent *event) override"
+.br
+.ti -1c
+.RI "void \fBmouseReleaseEvent\fP (QMouseEvent *event) override"
+.br
+.ti -1c
+.RI "void \fBresizeEvent\fP (QResizeEvent *event) override"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBdrawLineTo\fP (const QPoint &endPoint)"
+.br
+.ti -1c
+.RI "void \fBresizeImage\fP (QImage *\fBimage\fP, const QSize &newSize)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "Ui::WhiteboardWindow * \fBui\fP"
+.br
+.ti -1c
+.RI "QImage \fBimage\fP"
+.br
+.ti -1c
+.RI "QPoint \fBlastPoint\fP"
+.br
+.ti -1c
+.RI "bool \fBdrawing\fP"
+.br
+.ti -1c
+.RI "QColor \fBpenColor\fP"
+.br
+.ti -1c
+.RI "int \fBpenWidth\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "WhiteboardWindow::WhiteboardWindow (QWidget * parent = \fCnullptr\fP)\fC [explicit]\fP"
+
+.SS "WhiteboardWindow::~WhiteboardWindow ()\fC [override]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void WhiteboardWindow::drawLineTo (const QPoint & endPoint)\fC [private]\fP"
+
+.SS "void WhiteboardWindow::mouseMoveEvent (QMouseEvent * event)\fC [override]\fP, \fC [protected]\fP"
+
+.SS "void WhiteboardWindow::mousePressEvent (QMouseEvent * event)\fC [override]\fP, \fC [protected]\fP"
+
+.SS "void WhiteboardWindow::mouseReleaseEvent (QMouseEvent * event)\fC [override]\fP, \fC [protected]\fP"
+
+.SS "void WhiteboardWindow::paintEvent (QPaintEvent * event)\fC [override]\fP, \fC [protected]\fP"
+
+.SS "void WhiteboardWindow::resizeEvent (QResizeEvent * event)\fC [override]\fP, \fC [protected]\fP"
+
+.SS "void WhiteboardWindow::resizeImage (QImage * image, const QSize & newSize)\fC [private]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "bool WhiteboardWindow::drawing\fC [private]\fP"
+
+.SS "QImage WhiteboardWindow::image\fC [private]\fP"
+
+.SS "QPoint WhiteboardWindow::lastPoint\fC [private]\fP"
+
+.SS "QColor WhiteboardWindow::penColor\fC [private]\fP"
+
+.SS "int WhiteboardWindow::penWidth\fC [private]\fP"
+
+.SS "Ui::WhiteboardWindow* WhiteboardWindow::ui\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for StudySphere from the source code\&.

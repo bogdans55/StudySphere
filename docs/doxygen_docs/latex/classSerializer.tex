@@ -1,0 +1,60 @@
+\hypertarget{classSerializer}{}\doxysection{Serializer Class Reference}
+\label{classSerializer}\index{Serializer@{Serializer}}
+
+
+{\ttfamily \#include $<$serializer.\+h$>$}
+
+
+
+Inheritance diagram for Serializer\+:
+% FIG 0
+
+
+Collaboration diagram for Serializer\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classSerializer_abda2213522292d02c265182c44e7aa51}{$\sim$\+Serializer}} ()=default
+\item 
+virtual void \mbox{\hyperlink{classSerializer_a06261709ceb3c490189d9deeecb84905}{save}} (const \mbox{\hyperlink{classSerializable}{Serializable}} \&serializable, const QString \&filepath, const QString \&rootname=\char`\"{}\char`\"{})=0
+\item 
+virtual void \mbox{\hyperlink{classSerializer_ab522893076354436973f30ce71ac3e91}{load}} (\mbox{\hyperlink{classSerializable}{Serializable}} \&serializable, const QString \&filepath)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSerializer_abda2213522292d02c265182c44e7aa51}\label{classSerializer_abda2213522292d02c265182c44e7aa51}} 
+\index{Serializer@{Serializer}!````~Serializer@{$\sim$Serializer}}
+\index{````~Serializer@{$\sim$Serializer}!Serializer@{Serializer}}
+\doxysubsubsection{\texorpdfstring{$\sim$Serializer()}{~Serializer()}}
+{\footnotesize\ttfamily virtual Serializer\+::$\sim$\+Serializer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSerializer_ab522893076354436973f30ce71ac3e91}\label{classSerializer_ab522893076354436973f30ce71ac3e91}} 
+\index{Serializer@{Serializer}!load@{load}}
+\index{load@{load}!Serializer@{Serializer}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily virtual void Serializer\+::load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSerializable}{Serializable}} \&}]{serializable,  }\item[{const QString \&}]{filepath }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classJSONSerializer_a4f87e9b39db436ce9a24929f3e4fcba0}{JSONSerializer}}.
+
+\mbox{\Hypertarget{classSerializer_a06261709ceb3c490189d9deeecb84905}\label{classSerializer_a06261709ceb3c490189d9deeecb84905}} 
+\index{Serializer@{Serializer}!save@{save}}
+\index{save@{save}!Serializer@{Serializer}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily virtual void Serializer\+::save (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classSerializable}{Serializable}} \&}]{serializable,  }\item[{const QString \&}]{filepath,  }\item[{const QString \&}]{rootname = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classJSONSerializer_acff40fdafdc059bc6adf4ded96bb89ee}{JSONSerializer}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app/lib/\mbox{\hyperlink{serializer_8h}{serializer.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,247 @@
+\hypertarget{classStudySession}{}\doxysection{Study\+Session Class Reference}
+\label{classStudySession}\index{StudySession@{StudySession}}
+
+
+{\ttfamily \#include $<$studysession.\+h$>$}
+
+
+
+Collaboration diagram for Study\+Session\+:
+% FIG 0
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classStudySession_ae3c8babe9002bc185ef9a0333bd8aa6f}{Study\+Session}} ()
+\item 
+\mbox{\hyperlink{classStudySession_ae50a78d702db21efa952ad097283d96e}{Study\+Session}} (const \mbox{\hyperlink{classUser}{User}} \&\mbox{\hyperlink{classStudySession_a07e684811433e64bdec36888df7a6e6f}{user}}, \mbox{\hyperlink{classDeck}{Deck}} $\ast$\mbox{\hyperlink{classStudySession_aaf1653af8666e1cacb536d93bad58cb0}{deck}})
+\item 
+\mbox{\hyperlink{classStudySession_a33cb7c90135523c82b51b00a4d00f7aa}{Study\+Session}} (const \mbox{\hyperlink{classStudySession}{Study\+Session}} \&session)
+\item 
+\mbox{\hyperlink{classStudySession_a6cef43afcb839af6ee49e1a7807cd842}{$\sim$\+Study\+Session}} ()
+\item 
+\mbox{\hyperlink{classUser}{User}} \mbox{\hyperlink{classStudySession_a07e684811433e64bdec36888df7a6e6f}{user}} () const
+\item 
+\mbox{\hyperlink{classDeck}{Deck}} $\ast$ \mbox{\hyperlink{classStudySession_aaf1653af8666e1cacb536d93bad58cb0}{deck}} ()
+\item 
+unsigned \mbox{\hyperlink{classStudySession_a0ff529fcb038a5c2ce00c1f08904ed89}{current\+Card\+Index}} () const
+\item 
+time\+\_\+t \mbox{\hyperlink{classStudySession_a11c82d0bbb55a4f812d58ccb1b95340c}{time\+Started}} () const
+\item 
+time\+\_\+t \mbox{\hyperlink{classStudySession_a123fd9ef389bb66f978ce41bee54b370}{time\+Ended}} () const
+\item 
+QVector$<$ unsigned $>$ \mbox{\hyperlink{classStudySession_a2c63e06f769b1c12577ec77def60fa17}{card\+Sequence}} ()
+\item 
+bool \mbox{\hyperlink{classStudySession_a816a8f4f942551c677f1a9465df57bcf}{answer\+Showed}} ()
+\item 
+\mbox{\hyperlink{classDeckStats}{Deck\+Stats}} $\ast$ \mbox{\hyperlink{classStudySession_aeb89c284689b28a3e78776e406cdfae8}{deck\+Stats}} ()
+\item 
+void \mbox{\hyperlink{classStudySession_a0916d52540e968e1a3c42c4e36a2c873}{start\+Session}} ()
+\item 
+void \mbox{\hyperlink{classStudySession_a522fdedccc9bda3300987b48683a7ce7}{end\+Session}} ()
+\item 
+void \mbox{\hyperlink{classStudySession_a30e123d3111a1a6fa901fcb4673870c5}{choose\+Card\+Sequence}} (unsigned num\+Cards)
+\item 
+void \mbox{\hyperlink{classStudySession_a8507258c5bdd7492f496996e857c84c2}{next\+Card}} ()
+\item 
+\mbox{\hyperlink{classCard}{Card}} \mbox{\hyperlink{classStudySession_a7f8197ac51b81cb19e783c37d1afa37b}{get\+Current\+Card}} ()
+\item 
+void \mbox{\hyperlink{classStudySession_a2d8bef5abc20b658ecc6a2817b2992dc}{flip\+Card}} ()
+\item 
+bool \mbox{\hyperlink{classStudySession_a166f86070e57e2f7c83721eca73d0c12}{has\+Next\+Card}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classUser}{User}} \mbox{\hyperlink{classStudySession_ab1df160b16ee15511e9ff32cf3b14f6a}{m\+\_\+user}}
+\item 
+\mbox{\hyperlink{classDeck}{Deck}} $\ast$ \mbox{\hyperlink{classStudySession_a8586347e52243537e900a53e08fba85c}{m\+\_\+deck}}
+\item 
+time\+\_\+t \mbox{\hyperlink{classStudySession_a49c1df5077348226ad8b1ae39fa2e594}{m\+\_\+time\+Started}}
+\item 
+time\+\_\+t \mbox{\hyperlink{classStudySession_a56dda46fcb145117e511319bcb989134}{m\+\_\+time\+Ended}}
+\item 
+QVector$<$ unsigned $>$ \mbox{\hyperlink{classStudySession_a977d3e196ba867367b8eb2c6fd60efb4}{m\+\_\+card\+Sequence}}
+\item 
+unsigned \mbox{\hyperlink{classStudySession_a84b19309f231f9bf8643a5f8a66adbe8}{m\+\_\+current\+Card\+Index}}
+\item 
+bool \mbox{\hyperlink{classStudySession_a90b4a990e2cc25a1402193db13d1453c}{m\+\_\+answer\+Showed}} = false
+\item 
+\mbox{\hyperlink{classDeckStats}{Deck\+Stats}} $\ast$ \mbox{\hyperlink{classStudySession_a0131c31f58b6889ae61603e68b52f227}{m\+\_\+deck\+Stats}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classStudySession_ae3c8babe9002bc185ef9a0333bd8aa6f}\label{classStudySession_ae3c8babe9002bc185ef9a0333bd8aa6f}} 
+\index{StudySession@{StudySession}!StudySession@{StudySession}}
+\index{StudySession@{StudySession}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{StudySession()}{StudySession()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Study\+Session\+::\+Study\+Session (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classStudySession_ae50a78d702db21efa952ad097283d96e}\label{classStudySession_ae50a78d702db21efa952ad097283d96e}} 
+\index{StudySession@{StudySession}!StudySession@{StudySession}}
+\index{StudySession@{StudySession}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{StudySession()}{StudySession()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Study\+Session\+::\+Study\+Session (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classUser}{User}} \&}]{user,  }\item[{\mbox{\hyperlink{classDeck}{Deck}} $\ast$}]{deck }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classStudySession_a33cb7c90135523c82b51b00a4d00f7aa}\label{classStudySession_a33cb7c90135523c82b51b00a4d00f7aa}} 
+\index{StudySession@{StudySession}!StudySession@{StudySession}}
+\index{StudySession@{StudySession}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{StudySession()}{StudySession()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Study\+Session\+::\+Study\+Session (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classStudySession}{Study\+Session}} \&}]{session }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classStudySession_a6cef43afcb839af6ee49e1a7807cd842}\label{classStudySession_a6cef43afcb839af6ee49e1a7807cd842}} 
+\index{StudySession@{StudySession}!````~StudySession@{$\sim$StudySession}}
+\index{````~StudySession@{$\sim$StudySession}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{$\sim$StudySession()}{~StudySession()}}
+{\footnotesize\ttfamily Study\+Session\+::$\sim$\+Study\+Session (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classStudySession_a816a8f4f942551c677f1a9465df57bcf}\label{classStudySession_a816a8f4f942551c677f1a9465df57bcf}} 
+\index{StudySession@{StudySession}!answerShowed@{answerShowed}}
+\index{answerShowed@{answerShowed}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{answerShowed()}{answerShowed()}}
+{\footnotesize\ttfamily bool Study\+Session\+::answer\+Showed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classStudySession_a2c63e06f769b1c12577ec77def60fa17}\label{classStudySession_a2c63e06f769b1c12577ec77def60fa17}} 
+\index{StudySession@{StudySession}!cardSequence@{cardSequence}}
+\index{cardSequence@{cardSequence}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{cardSequence()}{cardSequence()}}
+{\footnotesize\ttfamily QVector$<$unsigned$>$ Study\+Session\+::card\+Sequence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classStudySession_a30e123d3111a1a6fa901fcb4673870c5}\label{classStudySession_a30e123d3111a1a6fa901fcb4673870c5}} 
+\index{StudySession@{StudySession}!chooseCardSequence@{chooseCardSequence}}
+\index{chooseCardSequence@{chooseCardSequence}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{chooseCardSequence()}{chooseCardSequence()}}
+{\footnotesize\ttfamily void Study\+Session\+::choose\+Card\+Sequence (\begin{DoxyParamCaption}\item[{unsigned}]{num\+Cards }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classStudySession_a0ff529fcb038a5c2ce00c1f08904ed89}\label{classStudySession_a0ff529fcb038a5c2ce00c1f08904ed89}} 
+\index{StudySession@{StudySession}!currentCardIndex@{currentCardIndex}}
+\index{currentCardIndex@{currentCardIndex}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{currentCardIndex()}{currentCardIndex()}}
+{\footnotesize\ttfamily unsigned Study\+Session\+::current\+Card\+Index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classStudySession_aaf1653af8666e1cacb536d93bad58cb0}\label{classStudySession_aaf1653af8666e1cacb536d93bad58cb0}} 
+\index{StudySession@{StudySession}!deck@{deck}}
+\index{deck@{deck}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{deck()}{deck()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDeck}{Deck}}$\ast$ Study\+Session\+::deck (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classStudySession_aeb89c284689b28a3e78776e406cdfae8}\label{classStudySession_aeb89c284689b28a3e78776e406cdfae8}} 
+\index{StudySession@{StudySession}!deckStats@{deckStats}}
+\index{deckStats@{deckStats}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{deckStats()}{deckStats()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDeckStats}{Deck\+Stats}}$\ast$ Study\+Session\+::deck\+Stats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classStudySession_a522fdedccc9bda3300987b48683a7ce7}\label{classStudySession_a522fdedccc9bda3300987b48683a7ce7}} 
+\index{StudySession@{StudySession}!endSession@{endSession}}
+\index{endSession@{endSession}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{endSession()}{endSession()}}
+{\footnotesize\ttfamily void Study\+Session\+::end\+Session (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classStudySession_a2d8bef5abc20b658ecc6a2817b2992dc}\label{classStudySession_a2d8bef5abc20b658ecc6a2817b2992dc}} 
+\index{StudySession@{StudySession}!flipCard@{flipCard}}
+\index{flipCard@{flipCard}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{flipCard()}{flipCard()}}
+{\footnotesize\ttfamily void Study\+Session\+::flip\+Card (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classStudySession_a7f8197ac51b81cb19e783c37d1afa37b}\label{classStudySession_a7f8197ac51b81cb19e783c37d1afa37b}} 
+\index{StudySession@{StudySession}!getCurrentCard@{getCurrentCard}}
+\index{getCurrentCard@{getCurrentCard}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{getCurrentCard()}{getCurrentCard()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCard}{Card}} Study\+Session\+::get\+Current\+Card (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classStudySession_a166f86070e57e2f7c83721eca73d0c12}\label{classStudySession_a166f86070e57e2f7c83721eca73d0c12}} 
+\index{StudySession@{StudySession}!hasNextCard@{hasNextCard}}
+\index{hasNextCard@{hasNextCard}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{hasNextCard()}{hasNextCard()}}
+{\footnotesize\ttfamily bool Study\+Session\+::has\+Next\+Card (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classStudySession_a8507258c5bdd7492f496996e857c84c2}\label{classStudySession_a8507258c5bdd7492f496996e857c84c2}} 
+\index{StudySession@{StudySession}!nextCard@{nextCard}}
+\index{nextCard@{nextCard}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{nextCard()}{nextCard()}}
+{\footnotesize\ttfamily void Study\+Session\+::next\+Card (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classStudySession_a0916d52540e968e1a3c42c4e36a2c873}\label{classStudySession_a0916d52540e968e1a3c42c4e36a2c873}} 
+\index{StudySession@{StudySession}!startSession@{startSession}}
+\index{startSession@{startSession}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{startSession()}{startSession()}}
+{\footnotesize\ttfamily void Study\+Session\+::start\+Session (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classStudySession_a123fd9ef389bb66f978ce41bee54b370}\label{classStudySession_a123fd9ef389bb66f978ce41bee54b370}} 
+\index{StudySession@{StudySession}!timeEnded@{timeEnded}}
+\index{timeEnded@{timeEnded}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{timeEnded()}{timeEnded()}}
+{\footnotesize\ttfamily time\+\_\+t Study\+Session\+::time\+Ended (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classStudySession_a11c82d0bbb55a4f812d58ccb1b95340c}\label{classStudySession_a11c82d0bbb55a4f812d58ccb1b95340c}} 
+\index{StudySession@{StudySession}!timeStarted@{timeStarted}}
+\index{timeStarted@{timeStarted}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{timeStarted()}{timeStarted()}}
+{\footnotesize\ttfamily time\+\_\+t Study\+Session\+::time\+Started (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classStudySession_a07e684811433e64bdec36888df7a6e6f}\label{classStudySession_a07e684811433e64bdec36888df7a6e6f}} 
+\index{StudySession@{StudySession}!user@{user}}
+\index{user@{user}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{user()}{user()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classUser}{User}} Study\+Session\+::user (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classStudySession_a90b4a990e2cc25a1402193db13d1453c}\label{classStudySession_a90b4a990e2cc25a1402193db13d1453c}} 
+\index{StudySession@{StudySession}!m\_answerShowed@{m\_answerShowed}}
+\index{m\_answerShowed@{m\_answerShowed}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{m\_answerShowed}{m\_answerShowed}}
+{\footnotesize\ttfamily bool Study\+Session\+::m\+\_\+answer\+Showed = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classStudySession_a977d3e196ba867367b8eb2c6fd60efb4}\label{classStudySession_a977d3e196ba867367b8eb2c6fd60efb4}} 
+\index{StudySession@{StudySession}!m\_cardSequence@{m\_cardSequence}}
+\index{m\_cardSequence@{m\_cardSequence}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{m\_cardSequence}{m\_cardSequence}}
+{\footnotesize\ttfamily QVector$<$unsigned$>$ Study\+Session\+::m\+\_\+card\+Sequence\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classStudySession_a84b19309f231f9bf8643a5f8a66adbe8}\label{classStudySession_a84b19309f231f9bf8643a5f8a66adbe8}} 
+\index{StudySession@{StudySession}!m\_currentCardIndex@{m\_currentCardIndex}}
+\index{m\_currentCardIndex@{m\_currentCardIndex}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{m\_currentCardIndex}{m\_currentCardIndex}}
+{\footnotesize\ttfamily unsigned Study\+Session\+::m\+\_\+current\+Card\+Index\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classStudySession_a8586347e52243537e900a53e08fba85c}\label{classStudySession_a8586347e52243537e900a53e08fba85c}} 
+\index{StudySession@{StudySession}!m\_deck@{m\_deck}}
+\index{m\_deck@{m\_deck}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{m\_deck}{m\_deck}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDeck}{Deck}}$\ast$ Study\+Session\+::m\+\_\+deck\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classStudySession_a0131c31f58b6889ae61603e68b52f227}\label{classStudySession_a0131c31f58b6889ae61603e68b52f227}} 
+\index{StudySession@{StudySession}!m\_deckStats@{m\_deckStats}}
+\index{m\_deckStats@{m\_deckStats}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{m\_deckStats}{m\_deckStats}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDeckStats}{Deck\+Stats}}$\ast$ Study\+Session\+::m\+\_\+deck\+Stats\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classStudySession_a56dda46fcb145117e511319bcb989134}\label{classStudySession_a56dda46fcb145117e511319bcb989134}} 
+\index{StudySession@{StudySession}!m\_timeEnded@{m\_timeEnded}}
+\index{m\_timeEnded@{m\_timeEnded}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{m\_timeEnded}{m\_timeEnded}}
+{\footnotesize\ttfamily time\+\_\+t Study\+Session\+::m\+\_\+time\+Ended\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classStudySession_a49c1df5077348226ad8b1ae39fa2e594}\label{classStudySession_a49c1df5077348226ad8b1ae39fa2e594}} 
+\index{StudySession@{StudySession}!m\_timeStarted@{m\_timeStarted}}
+\index{m\_timeStarted@{m\_timeStarted}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{m\_timeStarted}{m\_timeStarted}}
+{\footnotesize\ttfamily time\+\_\+t Study\+Session\+::m\+\_\+time\+Started\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classStudySession_ab1df160b16ee15511e9ff32cf3b14f6a}\label{classStudySession_ab1df160b16ee15511e9ff32cf3b14f6a}} 
+\index{StudySession@{StudySession}!m\_user@{m\_user}}
+\index{m\_user@{m\_user}!StudySession@{StudySession}}
+\doxysubsubsection{\texorpdfstring{m\_user}{m\_user}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classUser}{User}} Study\+Session\+::m\+\_\+user\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+app/lib/\mbox{\hyperlink{studysession_8h}{studysession.\+h}}\item 
+app/src/\mbox{\hyperlink{studysession_8cpp}{studysession.\+cpp}}\end{DoxyCompactItemize}

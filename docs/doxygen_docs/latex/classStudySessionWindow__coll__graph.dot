@@ -1,0 +1,25 @@
+digraph "StudySessionWindow"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{StudySessionWindow\n|- ui\l|+ StudySessionWindow()\l+ StudySessionWindow()\l+ ~StudySessionWindow()\l+ session()\l+ evaluate()\l+ closeWhiteboard()\l+ clearWhiteboard()\l- setDifficultyColor()\l- on_pushButton_flip\l_clicked()\l- on_pushButton_skip\l_clicked()\l- on_pushButton_bad_clicked()\l- on_pushButton_mid_clicked()\l- on_pushButton_good\l_clicked()\l- on_pushButton_whiteboard\l_clicked()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal"];
+  Node2 [label="{QWidget\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node3 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -m_whiteboard" ,arrowhead="odiamond"];
+  Node3 [label="{WhiteboardWindow\n|- ui\l- image\l- lastPoint\l- drawing\l- penColor\l- penWidth\l|+ WhiteboardWindow()\l+ ~WhiteboardWindow()\l# paintEvent()\l# mousePressEvent()\l# mouseMoveEvent()\l# mouseReleaseEvent()\l# resizeEvent()\l- drawLineTo()\l- resizeImage()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classWhiteboardWindow.html",tooltip=" "];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal"];
+  Node4 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -m_session" ,arrowhead="odiamond"];
+  Node4 [label="{StudySession\n|- m_timeStarted\l- m_timeEnded\l- m_cardSequence\l- m_currentCardIndex\l- m_answerShowed\l|+ StudySession()\l+ StudySession()\l+ StudySession()\l+ ~StudySession()\l+ user()\l+ deck()\l+ currentCardIndex()\l+ timeStarted()\l+ timeEnded()\l+ cardSequence()\land 9 more...\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classStudySession.html",tooltip=" "];
+  Node5 -> Node4 [color="grey25",fontsize="10",style="solid",label=" -m_deck" ,arrowhead="odiamond"];
+  Node5 [label="{Deck\n|- m_deckId\l- m_name\l- m_cards\l- m_privacy\l|+ Deck()\l+ Deck()\l+ Deck()\l+ ~Deck()\l+ deckId()\l+ name()\l+ cards()\l+ privacy()\l+ user()\l+ addCard()\l+ setId()\l+ operator==()\l+ toVariant()\l+ fromVariant()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classDeck.html",tooltip=" "];
+  Node6 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal"];
+  Node6 [label="{Serializable\n||+ ~Serializable()\l+ toVariant()\l+ fromVariant()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSerializable.html",tooltip=" "];
+  Node7 -> Node5 [color="grey25",fontsize="10",style="solid",label=" -m_user" ,arrowhead="odiamond"];
+  Node7 [label="{User\n|- m_username\l|+ User()\l+ User()\l+ ~User()\l+ username()\l+ setUsername()\l+ toVariant()\l+ fromVariant()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classUser.html",tooltip=" "];
+  Node6 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal"];
+  Node7 -> Node4 [color="grey25",fontsize="10",style="solid",label=" -m_user" ,arrowhead="odiamond"];
+  Node8 -> Node4 [color="grey25",fontsize="10",style="solid",label=" -m_deckStats" ,arrowhead="odiamond"];
+  Node8 [label="{DeckStats\n|- m_grades\l- m_timesUsed\l- m_creationDate\l|+ DeckStats()\l+ DeckStats()\l+ DeckStats()\l+ ~DeckStats()\l+ grades()\l+ timesUsed()\l+ creationDate()\l+ addGrade()\l+ usedDeck()\l+ toVariant()\l+ fromVariant()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classDeckStats.html",tooltip=" "];
+  Node6 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal"];
+}

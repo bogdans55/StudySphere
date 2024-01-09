@@ -1,0 +1,180 @@
+\hypertarget{classStudySessionWindow}{}\doxysection{Study\+Session\+Window Class Reference}
+\label{classStudySessionWindow}\index{StudySessionWindow@{StudySessionWindow}}
+
+
+{\ttfamily \#include $<$studysessionwindow.\+h$>$}
+
+
+
+Inheritance diagram for Study\+Session\+Window\+:
+% FIG 0
+
+
+Collaboration diagram for Study\+Session\+Window\+:
+% FIG 1
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classStudySessionWindow_a507c5b9169af3dfc457efe24bdce32b7}{close\+Whiteboard}} ()
+\item 
+void \mbox{\hyperlink{classStudySessionWindow_a8d7d5f8b2f9416d3b2022f44c95e0a56}{clear\+Whiteboard}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classStudySessionWindow_acd061004f4854fc4afb669b6064014e5}{Study\+Session\+Window}} (QWidget $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classStudySessionWindow_a278299a08a809436cb10371135d257ad}{Study\+Session\+Window}} (\mbox{\hyperlink{classStudySession}{Study\+Session}} $\ast$\mbox{\hyperlink{classStudySessionWindow_ada8420f35d59b9cbac6b89fcd80be2d4}{session}}, QWidget $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classStudySessionWindow_a26037f7113d3d943c6d0602e33324b67}{$\sim$\+Study\+Session\+Window}} () override
+\item 
+\mbox{\hyperlink{classStudySession}{Study\+Session}} $\ast$ \mbox{\hyperlink{classStudySessionWindow_ada8420f35d59b9cbac6b89fcd80be2d4}{session}} () const
+\item 
+void \mbox{\hyperlink{classStudySessionWindow_aec57049017c5753123bbb45409373b16}{evaluate}} (int grade)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classStudySessionWindow_af178f8aa73cfb90035c20337142953f2}{on\+\_\+push\+Button\+\_\+flip\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classStudySessionWindow_a287ba0a30283503cb95f80b4ae15b135}{on\+\_\+push\+Button\+\_\+skip\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classStudySessionWindow_a7d88d4c419828ba0ec554d4a093c4725}{on\+\_\+push\+Button\+\_\+bad\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classStudySessionWindow_a620ecc45ba7ad0f790114ceda6ffbfe8}{on\+\_\+push\+Button\+\_\+mid\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classStudySessionWindow_ae5eaf076659d0b0d6cfa20804eed4862}{on\+\_\+push\+Button\+\_\+good\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classStudySessionWindow_ac8fd9432fc2e219c80afbef7aa5ce4d6}{on\+\_\+push\+Button\+\_\+whiteboard\+\_\+clicked}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classStudySessionWindow_a368e0c27fc3c53b2f1e7f3a1183d84ce}{set\+Difficulty\+Color}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Study\+Session\+Window $\ast$ \mbox{\hyperlink{classStudySessionWindow_a1e02d336c02d290c1438dbd7ee5d06c4}{ui}}
+\item 
+\mbox{\hyperlink{classStudySession}{Study\+Session}} $\ast$ \mbox{\hyperlink{classStudySessionWindow_afb1a3c023798471a2dbbbaef0845f494}{m\+\_\+session}}
+\item 
+\mbox{\hyperlink{classWhiteboardWindow}{Whiteboard\+Window}} $\ast$ \mbox{\hyperlink{classStudySessionWindow_acbbe5e71026d6b81bdc308c546294a60}{m\+\_\+whiteboard}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classStudySessionWindow_acd061004f4854fc4afb669b6064014e5}\label{classStudySessionWindow_acd061004f4854fc4afb669b6064014e5}} 
+\index{StudySessionWindow@{StudySessionWindow}!StudySessionWindow@{StudySessionWindow}}
+\index{StudySessionWindow@{StudySessionWindow}!StudySessionWindow@{StudySessionWindow}}
+\doxysubsubsection{\texorpdfstring{StudySessionWindow()}{StudySessionWindow()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Study\+Session\+Window\+::\+Study\+Session\+Window (\begin{DoxyParamCaption}\item[{QWidget $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classStudySessionWindow_a278299a08a809436cb10371135d257ad}\label{classStudySessionWindow_a278299a08a809436cb10371135d257ad}} 
+\index{StudySessionWindow@{StudySessionWindow}!StudySessionWindow@{StudySessionWindow}}
+\index{StudySessionWindow@{StudySessionWindow}!StudySessionWindow@{StudySessionWindow}}
+\doxysubsubsection{\texorpdfstring{StudySessionWindow()}{StudySessionWindow()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Study\+Session\+Window\+::\+Study\+Session\+Window (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classStudySession}{Study\+Session}} $\ast$}]{session,  }\item[{QWidget $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classStudySessionWindow_a26037f7113d3d943c6d0602e33324b67}\label{classStudySessionWindow_a26037f7113d3d943c6d0602e33324b67}} 
+\index{StudySessionWindow@{StudySessionWindow}!````~StudySessionWindow@{$\sim$StudySessionWindow}}
+\index{````~StudySessionWindow@{$\sim$StudySessionWindow}!StudySessionWindow@{StudySessionWindow}}
+\doxysubsubsection{\texorpdfstring{$\sim$StudySessionWindow()}{~StudySessionWindow()}}
+{\footnotesize\ttfamily Study\+Session\+Window\+::$\sim$\+Study\+Session\+Window (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classStudySessionWindow_a8d7d5f8b2f9416d3b2022f44c95e0a56}\label{classStudySessionWindow_a8d7d5f8b2f9416d3b2022f44c95e0a56}} 
+\index{StudySessionWindow@{StudySessionWindow}!clearWhiteboard@{clearWhiteboard}}
+\index{clearWhiteboard@{clearWhiteboard}!StudySessionWindow@{StudySessionWindow}}
+\doxysubsubsection{\texorpdfstring{clearWhiteboard}{clearWhiteboard}}
+{\footnotesize\ttfamily void Study\+Session\+Window\+::clear\+Whiteboard (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classStudySessionWindow_a507c5b9169af3dfc457efe24bdce32b7}\label{classStudySessionWindow_a507c5b9169af3dfc457efe24bdce32b7}} 
+\index{StudySessionWindow@{StudySessionWindow}!closeWhiteboard@{closeWhiteboard}}
+\index{closeWhiteboard@{closeWhiteboard}!StudySessionWindow@{StudySessionWindow}}
+\doxysubsubsection{\texorpdfstring{closeWhiteboard}{closeWhiteboard}}
+{\footnotesize\ttfamily void Study\+Session\+Window\+::close\+Whiteboard (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classStudySessionWindow_aec57049017c5753123bbb45409373b16}\label{classStudySessionWindow_aec57049017c5753123bbb45409373b16}} 
+\index{StudySessionWindow@{StudySessionWindow}!evaluate@{evaluate}}
+\index{evaluate@{evaluate}!StudySessionWindow@{StudySessionWindow}}
+\doxysubsubsection{\texorpdfstring{evaluate()}{evaluate()}}
+{\footnotesize\ttfamily void Study\+Session\+Window\+::evaluate (\begin{DoxyParamCaption}\item[{int}]{grade }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classStudySessionWindow_a7d88d4c419828ba0ec554d4a093c4725}\label{classStudySessionWindow_a7d88d4c419828ba0ec554d4a093c4725}} 
+\index{StudySessionWindow@{StudySessionWindow}!on\_pushButton\_bad\_clicked@{on\_pushButton\_bad\_clicked}}
+\index{on\_pushButton\_bad\_clicked@{on\_pushButton\_bad\_clicked}!StudySessionWindow@{StudySessionWindow}}
+\doxysubsubsection{\texorpdfstring{on\_pushButton\_bad\_clicked}{on\_pushButton\_bad\_clicked}}
+{\footnotesize\ttfamily void Study\+Session\+Window\+::on\+\_\+push\+Button\+\_\+bad\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classStudySessionWindow_af178f8aa73cfb90035c20337142953f2}\label{classStudySessionWindow_af178f8aa73cfb90035c20337142953f2}} 
+\index{StudySessionWindow@{StudySessionWindow}!on\_pushButton\_flip\_clicked@{on\_pushButton\_flip\_clicked}}
+\index{on\_pushButton\_flip\_clicked@{on\_pushButton\_flip\_clicked}!StudySessionWindow@{StudySessionWindow}}
+\doxysubsubsection{\texorpdfstring{on\_pushButton\_flip\_clicked}{on\_pushButton\_flip\_clicked}}
+{\footnotesize\ttfamily void Study\+Session\+Window\+::on\+\_\+push\+Button\+\_\+flip\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classStudySessionWindow_ae5eaf076659d0b0d6cfa20804eed4862}\label{classStudySessionWindow_ae5eaf076659d0b0d6cfa20804eed4862}} 
+\index{StudySessionWindow@{StudySessionWindow}!on\_pushButton\_good\_clicked@{on\_pushButton\_good\_clicked}}
+\index{on\_pushButton\_good\_clicked@{on\_pushButton\_good\_clicked}!StudySessionWindow@{StudySessionWindow}}
+\doxysubsubsection{\texorpdfstring{on\_pushButton\_good\_clicked}{on\_pushButton\_good\_clicked}}
+{\footnotesize\ttfamily void Study\+Session\+Window\+::on\+\_\+push\+Button\+\_\+good\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classStudySessionWindow_a620ecc45ba7ad0f790114ceda6ffbfe8}\label{classStudySessionWindow_a620ecc45ba7ad0f790114ceda6ffbfe8}} 
+\index{StudySessionWindow@{StudySessionWindow}!on\_pushButton\_mid\_clicked@{on\_pushButton\_mid\_clicked}}
+\index{on\_pushButton\_mid\_clicked@{on\_pushButton\_mid\_clicked}!StudySessionWindow@{StudySessionWindow}}
+\doxysubsubsection{\texorpdfstring{on\_pushButton\_mid\_clicked}{on\_pushButton\_mid\_clicked}}
+{\footnotesize\ttfamily void Study\+Session\+Window\+::on\+\_\+push\+Button\+\_\+mid\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classStudySessionWindow_a287ba0a30283503cb95f80b4ae15b135}\label{classStudySessionWindow_a287ba0a30283503cb95f80b4ae15b135}} 
+\index{StudySessionWindow@{StudySessionWindow}!on\_pushButton\_skip\_clicked@{on\_pushButton\_skip\_clicked}}
+\index{on\_pushButton\_skip\_clicked@{on\_pushButton\_skip\_clicked}!StudySessionWindow@{StudySessionWindow}}
+\doxysubsubsection{\texorpdfstring{on\_pushButton\_skip\_clicked}{on\_pushButton\_skip\_clicked}}
+{\footnotesize\ttfamily void Study\+Session\+Window\+::on\+\_\+push\+Button\+\_\+skip\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classStudySessionWindow_ac8fd9432fc2e219c80afbef7aa5ce4d6}\label{classStudySessionWindow_ac8fd9432fc2e219c80afbef7aa5ce4d6}} 
+\index{StudySessionWindow@{StudySessionWindow}!on\_pushButton\_whiteboard\_clicked@{on\_pushButton\_whiteboard\_clicked}}
+\index{on\_pushButton\_whiteboard\_clicked@{on\_pushButton\_whiteboard\_clicked}!StudySessionWindow@{StudySessionWindow}}
+\doxysubsubsection{\texorpdfstring{on\_pushButton\_whiteboard\_clicked}{on\_pushButton\_whiteboard\_clicked}}
+{\footnotesize\ttfamily void Study\+Session\+Window\+::on\+\_\+push\+Button\+\_\+whiteboard\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classStudySessionWindow_ada8420f35d59b9cbac6b89fcd80be2d4}\label{classStudySessionWindow_ada8420f35d59b9cbac6b89fcd80be2d4}} 
+\index{StudySessionWindow@{StudySessionWindow}!session@{session}}
+\index{session@{session}!StudySessionWindow@{StudySessionWindow}}
+\doxysubsubsection{\texorpdfstring{session()}{session()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classStudySession}{Study\+Session}}$\ast$ Study\+Session\+Window\+::session (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classStudySessionWindow_a368e0c27fc3c53b2f1e7f3a1183d84ce}\label{classStudySessionWindow_a368e0c27fc3c53b2f1e7f3a1183d84ce}} 
+\index{StudySessionWindow@{StudySessionWindow}!setDifficultyColor@{setDifficultyColor}}
+\index{setDifficultyColor@{setDifficultyColor}!StudySessionWindow@{StudySessionWindow}}
+\doxysubsubsection{\texorpdfstring{setDifficultyColor()}{setDifficultyColor()}}
+{\footnotesize\ttfamily void Study\+Session\+Window\+::set\+Difficulty\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classStudySessionWindow_afb1a3c023798471a2dbbbaef0845f494}\label{classStudySessionWindow_afb1a3c023798471a2dbbbaef0845f494}} 
+\index{StudySessionWindow@{StudySessionWindow}!m\_session@{m\_session}}
+\index{m\_session@{m\_session}!StudySessionWindow@{StudySessionWindow}}
+\doxysubsubsection{\texorpdfstring{m\_session}{m\_session}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classStudySession}{Study\+Session}}$\ast$ Study\+Session\+Window\+::m\+\_\+session\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classStudySessionWindow_acbbe5e71026d6b81bdc308c546294a60}\label{classStudySessionWindow_acbbe5e71026d6b81bdc308c546294a60}} 
+\index{StudySessionWindow@{StudySessionWindow}!m\_whiteboard@{m\_whiteboard}}
+\index{m\_whiteboard@{m\_whiteboard}!StudySessionWindow@{StudySessionWindow}}
+\doxysubsubsection{\texorpdfstring{m\_whiteboard}{m\_whiteboard}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classWhiteboardWindow}{Whiteboard\+Window}}$\ast$ Study\+Session\+Window\+::m\+\_\+whiteboard = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classStudySessionWindow_a1e02d336c02d290c1438dbd7ee5d06c4}\label{classStudySessionWindow_a1e02d336c02d290c1438dbd7ee5d06c4}} 
+\index{StudySessionWindow@{StudySessionWindow}!ui@{ui}}
+\index{ui@{ui}!StudySessionWindow@{StudySessionWindow}}
+\doxysubsubsection{\texorpdfstring{ui}{ui}}
+{\footnotesize\ttfamily Ui\+::\+Study\+Session\+Window$\ast$ Study\+Session\+Window\+::ui\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+app/lib/\mbox{\hyperlink{studysessionwindow_8h}{studysessionwindow.\+h}}\item 
+app/src/\mbox{\hyperlink{studysessionwindow_8cpp}{studysessionwindow.\+cpp}}\end{DoxyCompactItemize}

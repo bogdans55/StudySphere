@@ -1,0 +1,84 @@
+.TH "ToDoList" 3 "Tue Jan 9 2024" "StudySphere" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ToDoList
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <todolist\&.h>\fP
+.PP
+Inherits \fBSerializable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBToDoList\fP ()"
+.br
+.ti -1c
+.RI "\fB~ToDoList\fP () override"
+.br
+.ti -1c
+.RI "QVariant \fBtoVariant\fP () const override"
+.br
+.ti -1c
+.RI "void \fBfromVariant\fP (const QVariant &variant) override"
+.br
+.ti -1c
+.RI "void \fBaddToDo\fP (const QString &text, bool isDone)"
+.br
+.ti -1c
+.RI "void \fBdeleteToDo\fP (const QString &text)"
+.br
+.ti -1c
+.RI "void \fBdeleteAllToDos\fP ()"
+.br
+.ti -1c
+.RI "void \fBcheckToDo\fP (const QString &text, bool isDone)"
+.br
+.ti -1c
+.RI "QVector< QPair< QString, bool > > \fBtoDos\fP () const"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "QVector< QPair< QString, bool > > \fBm_listToDos\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "ToDoList::ToDoList ()"
+
+.SS "ToDoList::~ToDoList ()\fC [override]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void ToDoList::addToDo (const QString & text, bool isDone)"
+
+.SS "void ToDoList::checkToDo (const QString & text, bool isDone)"
+
+.SS "void ToDoList::deleteAllToDos ()"
+
+.SS "void ToDoList::deleteToDo (const QString & text)"
+
+.SS "void ToDoList::fromVariant (const QVariant & variant)\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Implements \fBSerializable\fP\&.
+.SS "QVector<QPair<QString, bool> > ToDoList::toDos () const\fC [inline]\fP"
+
+.SS "QVariant ToDoList::toVariant () const\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Implements \fBSerializable\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "QVector<QPair<QString, bool> > ToDoList::m_listToDos\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for StudySphere from the source code\&.

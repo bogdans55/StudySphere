@@ -1,0 +1,68 @@
+\hypertarget{planner_8h}{}\doxysection{app/lib/planner.h File Reference}
+\label{planner_8h}\index{app/lib/planner.h@{app/lib/planner.h}}
+{\ttfamily \#include \char`\"{}activity.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}serializable.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$QMap$>$}\newline
+{\ttfamily \#include $<$QVector$>$}\newline
+Include dependency graph for planner.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classPlanner}{Planner}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{planner_8h_ac572d2be8b3c04018816ba1a6e75adad}{Day}} \{ \newline
+\mbox{\hyperlink{planner_8h_ac572d2be8b3c04018816ba1a6e75adadac82db3248a96794aaefb922ea5fb293c}{MONDAY}} = 0
+, \mbox{\hyperlink{planner_8h_ac572d2be8b3c04018816ba1a6e75adada347c4455723bb1bc2709647607a2b282}{TUESDAY}}
+, \mbox{\hyperlink{planner_8h_ac572d2be8b3c04018816ba1a6e75adada68288a23958cd9e1705fd81f0ee729c7}{WEDNESDAY}}
+, \mbox{\hyperlink{planner_8h_ac572d2be8b3c04018816ba1a6e75adadab4bfd6f883437c6cf31486dcf03ce0ff}{THURSDAY}}
+, \newline
+\mbox{\hyperlink{planner_8h_ac572d2be8b3c04018816ba1a6e75adada8f589731fd90a9890c0df9a9c3f96131}{FRIDAY}}
+, \mbox{\hyperlink{planner_8h_ac572d2be8b3c04018816ba1a6e75adada31bbcd6fa6a28095ef8de658126aa5ec}{SATURDAY}}
+, \mbox{\hyperlink{planner_8h_ac572d2be8b3c04018816ba1a6e75adadad86a75e0b97510de54435996ae45b8d2}{SUNDAY}}
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{planner_8h_ac572d2be8b3c04018816ba1a6e75adad}\label{planner_8h_ac572d2be8b3c04018816ba1a6e75adad}} 
+\index{planner.h@{planner.h}!Day@{Day}}
+\index{Day@{Day}!planner.h@{planner.h}}
+\doxysubsubsection{\texorpdfstring{Day}{Day}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{planner_8h_ac572d2be8b3c04018816ba1a6e75adad}{Day}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MONDAY@{MONDAY}!planner.h@{planner.h}}\index{planner.h@{planner.h}!MONDAY@{MONDAY}}}\mbox{\Hypertarget{planner_8h_ac572d2be8b3c04018816ba1a6e75adadac82db3248a96794aaefb922ea5fb293c}\label{planner_8h_ac572d2be8b3c04018816ba1a6e75adadac82db3248a96794aaefb922ea5fb293c}} 
+MONDAY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TUESDAY@{TUESDAY}!planner.h@{planner.h}}\index{planner.h@{planner.h}!TUESDAY@{TUESDAY}}}\mbox{\Hypertarget{planner_8h_ac572d2be8b3c04018816ba1a6e75adada347c4455723bb1bc2709647607a2b282}\label{planner_8h_ac572d2be8b3c04018816ba1a6e75adada347c4455723bb1bc2709647607a2b282}} 
+TUESDAY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WEDNESDAY@{WEDNESDAY}!planner.h@{planner.h}}\index{planner.h@{planner.h}!WEDNESDAY@{WEDNESDAY}}}\mbox{\Hypertarget{planner_8h_ac572d2be8b3c04018816ba1a6e75adada68288a23958cd9e1705fd81f0ee729c7}\label{planner_8h_ac572d2be8b3c04018816ba1a6e75adada68288a23958cd9e1705fd81f0ee729c7}} 
+WEDNESDAY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{THURSDAY@{THURSDAY}!planner.h@{planner.h}}\index{planner.h@{planner.h}!THURSDAY@{THURSDAY}}}\mbox{\Hypertarget{planner_8h_ac572d2be8b3c04018816ba1a6e75adadab4bfd6f883437c6cf31486dcf03ce0ff}\label{planner_8h_ac572d2be8b3c04018816ba1a6e75adadab4bfd6f883437c6cf31486dcf03ce0ff}} 
+THURSDAY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FRIDAY@{FRIDAY}!planner.h@{planner.h}}\index{planner.h@{planner.h}!FRIDAY@{FRIDAY}}}\mbox{\Hypertarget{planner_8h_ac572d2be8b3c04018816ba1a6e75adada8f589731fd90a9890c0df9a9c3f96131}\label{planner_8h_ac572d2be8b3c04018816ba1a6e75adada8f589731fd90a9890c0df9a9c3f96131}} 
+FRIDAY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SATURDAY@{SATURDAY}!planner.h@{planner.h}}\index{planner.h@{planner.h}!SATURDAY@{SATURDAY}}}\mbox{\Hypertarget{planner_8h_ac572d2be8b3c04018816ba1a6e75adada31bbcd6fa6a28095ef8de658126aa5ec}\label{planner_8h_ac572d2be8b3c04018816ba1a6e75adada31bbcd6fa6a28095ef8de658126aa5ec}} 
+SATURDAY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SUNDAY@{SUNDAY}!planner.h@{planner.h}}\index{planner.h@{planner.h}!SUNDAY@{SUNDAY}}}\mbox{\Hypertarget{planner_8h_ac572d2be8b3c04018816ba1a6e75adadad86a75e0b97510de54435996ae45b8d2}\label{planner_8h_ac572d2be8b3c04018816ba1a6e75adadad86a75e0b97510de54435996ae45b8d2}} 
+SUNDAY&\\
+\hline
+
+\end{DoxyEnumFields}

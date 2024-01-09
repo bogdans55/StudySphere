@@ -1,0 +1,81 @@
+\hypertarget{mainwindow_8cpp}{}\doxysection{app/src/mainwindow.cpp File Reference}
+\label{mainwindow_8cpp}\index{app/src/mainwindow.cpp@{app/src/mainwindow.cpp}}
+{\ttfamily \#include \char`\"{}lib/mainwindow.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}lib/createdeckdialog.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}lib/createdeckwindow.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}lib/deckpreviewwindow.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}lib/jsonserializer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}lib/logindialog.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}lib/scheduleitem.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}lib/servercommunicator.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}lib/studysessionwindow.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}lib/user.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ui\+\_\+mainwindow.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$QCryptographic\+Hash$>$}\newline
+{\ttfamily \#include $<$QJson\+Document$>$}\newline
+{\ttfamily \#include $<$QJson\+Object$>$}\newline
+{\ttfamily \#include $<$QTcp\+Server$>$}\newline
+{\ttfamily \#include $<$QTcp\+Socket$>$}\newline
+{\ttfamily \#include $<$QText\+Stream$>$}\newline
+{\ttfamily \#include $<$QApplication$>$}\newline
+{\ttfamily \#include $<$QCheck\+Box$>$}\newline
+{\ttfamily \#include $<$QDir\+Iterator$>$}\newline
+{\ttfamily \#include $<$QFile$>$}\newline
+{\ttfamily \#include $<$QFile\+Dialog$>$}\newline
+{\ttfamily \#include $<$QMessage\+Box$>$}\newline
+{\ttfamily \#include $<$QStandard\+Paths$>$}\newline
+Include dependency graph for mainwindow.\+cpp\+:
+% FIG 0
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bc}{Page}} \{ \newline
+\mbox{\hyperlink{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca72285f0e2e8529642eb0a6025b12e1e0}{LIBRARY}} = 0
+, \mbox{\hyperlink{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca2ab8f91d2faf389692a0e77121fb6b3c}{TODO}}
+, \mbox{\hyperlink{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca9fee7b64d7525da8770e2ac49c71e0e5}{PLANER}}
+, \mbox{\hyperlink{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca2484ba084b3ebc76ed075ba6d4038798}{CALENDAR}}
+, \newline
+\mbox{\hyperlink{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca56417e944da7c3429008202353a7ceba}{STATS}}
+, \mbox{\hyperlink{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bcac678338caea29d77d56be2ea56325610}{SETTINGS}}
+, \mbox{\hyperlink{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca9f5cb747b2e1f0ea781d2b1f2a5b4824}{HELP}}
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bc}\label{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bc}} 
+\index{mainwindow.cpp@{mainwindow.cpp}!Page@{Page}}
+\index{Page@{Page}!mainwindow.cpp@{mainwindow.cpp}}
+\doxysubsubsection{\texorpdfstring{Page}{Page}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bc}{Page}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LIBRARY@{LIBRARY}!mainwindow.cpp@{mainwindow.cpp}}\index{mainwindow.cpp@{mainwindow.cpp}!LIBRARY@{LIBRARY}}}\mbox{\Hypertarget{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca72285f0e2e8529642eb0a6025b12e1e0}\label{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca72285f0e2e8529642eb0a6025b12e1e0}} 
+LIBRARY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TODO@{TODO}!mainwindow.cpp@{mainwindow.cpp}}\index{mainwindow.cpp@{mainwindow.cpp}!TODO@{TODO}}}\mbox{\Hypertarget{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca2ab8f91d2faf389692a0e77121fb6b3c}\label{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca2ab8f91d2faf389692a0e77121fb6b3c}} 
+TODO&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PLANER@{PLANER}!mainwindow.cpp@{mainwindow.cpp}}\index{mainwindow.cpp@{mainwindow.cpp}!PLANER@{PLANER}}}\mbox{\Hypertarget{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca9fee7b64d7525da8770e2ac49c71e0e5}\label{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca9fee7b64d7525da8770e2ac49c71e0e5}} 
+PLANER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CALENDAR@{CALENDAR}!mainwindow.cpp@{mainwindow.cpp}}\index{mainwindow.cpp@{mainwindow.cpp}!CALENDAR@{CALENDAR}}}\mbox{\Hypertarget{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca2484ba084b3ebc76ed075ba6d4038798}\label{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca2484ba084b3ebc76ed075ba6d4038798}} 
+CALENDAR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATS@{STATS}!mainwindow.cpp@{mainwindow.cpp}}\index{mainwindow.cpp@{mainwindow.cpp}!STATS@{STATS}}}\mbox{\Hypertarget{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca56417e944da7c3429008202353a7ceba}\label{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca56417e944da7c3429008202353a7ceba}} 
+STATS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SETTINGS@{SETTINGS}!mainwindow.cpp@{mainwindow.cpp}}\index{mainwindow.cpp@{mainwindow.cpp}!SETTINGS@{SETTINGS}}}\mbox{\Hypertarget{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bcac678338caea29d77d56be2ea56325610}\label{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bcac678338caea29d77d56be2ea56325610}} 
+SETTINGS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HELP@{HELP}!mainwindow.cpp@{mainwindow.cpp}}\index{mainwindow.cpp@{mainwindow.cpp}!HELP@{HELP}}}\mbox{\Hypertarget{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca9f5cb747b2e1f0ea781d2b1f2a5b4824}\label{mainwindow_8cpp_a6c30dc926b00e05c4ab97a164de2c0bca9f5cb747b2e1f0ea781d2b1f2a5b4824}} 
+HELP&\\
+\hline
+
+\end{DoxyEnumFields}

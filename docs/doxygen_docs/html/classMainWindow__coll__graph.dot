@@ -1,0 +1,22 @@
+digraph "MainWindow"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{MainWindow\n|- ui\l- m_plannerScenes\l- m_deckNames\l- m_calendarLoaded\l- m_loggedIn\l- m_plannerLoaded\l- m_todoLoaded\l- m_deckCounter\l|+ MainWindow()\l+ ~MainWindow()\l# resizeEvent()\l- saveCalendar()\l- refreshCalendar()\l- registerUser()\l- loginUser()\l- savePlanner()\l- showActivities()\l- saveToDoList()\l- saveOnServer()\l- setupTableView()\l- addDeckToTable()\l- addCreateDeckButton()\l- loadStats()\l- setEnabled()\l- setPlannerWidth()\l- deckButton_clicked()\l- createDeck_clicked()\l- deckPreview_clicked()\l- on_pushButton_library\l_clicked()\l- on_pushButton_todo\l_clicked()\l- on_pushButton_planer\l_clicked()\l- on_pushButton_calendar\l_clicked()\l- on_pushButton_stats\l_clicked()\l- on_pushButton_settings\l_clicked()\l- on_calendarWidget_activated()\land 15 more...\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node2 [label="{QWidget\n||}",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node3 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -m_toDoList" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node3 [label="{ToDoList\n|- m_listToDos\l|+ ToDoList()\l+ ~ToDoList()\l+ toVariant()\l+ fromVariant()\l+ addToDo()\l+ deleteToDo()\l+ deleteAllToDos()\l+ checkToDo()\l+ toDos()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classToDoList.html",tooltip=" "];
+  Node4 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node4 [label="{Serializable\n||+ ~Serializable()\l+ toVariant()\l+ fromVariant()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classSerializable.html",tooltip=" "];
+  Node5 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -m_planner" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node5 [label="{Planner\n|- m_activities\l|+ Planner()\l+ ~Planner()\l+ toVariant()\l+ fromVariant()\l+ addActivity()\l+ deleteAll()\l+ activities()\l+ dayFromString()\l+ dayToString()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classPlanner.html",tooltip=" "];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node6 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -m_user" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node6 [label="{User\n|- m_username\l|+ User()\l+ User()\l+ ~User()\l+ username()\l+ setUsername()\l+ toVariant()\l+ fromVariant()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classUser.html",tooltip=" "];
+  Node4 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node7 -> Node1 [color="grey25",fontsize="10",style="solid",label=" -m_calendar" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node7 [label="{Calendar\n|- m_events\l|+ Calendar()\l+ ~Calendar()\l+ toVariant()\l+ fromVariant()\l+ addEvent()\l+ deleteAll()\l+ events()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCalendar.html",tooltip=" "];
+  Node4 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+}

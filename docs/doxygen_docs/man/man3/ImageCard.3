@@ -1,0 +1,81 @@
+.TH "ImageCard" 3 "Tue Jan 9 2024" "StudySphere" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ImageCard
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <imagecard\&.h>\fP
+.PP
+Inherits \fBCard\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBImageCard\fP ()"
+.br
+.ti -1c
+.RI "\fBImageCard\fP (QString \fBquestionText\fP, QString answerText, \fBDifficulty\fP \fBquestionDifficulty\fP)"
+.br
+.ti -1c
+.RI "\fBImageCard\fP (QString \fBquestionText\fP, QString answerText, \fBDifficulty\fP \fBquestionDifficulty\fP, QImage \fBquestionImage\fP, QImage \fBanswerImage\fP)"
+.br
+.ti -1c
+.RI "\fB~ImageCard\fP () override"
+.br
+.ti -1c
+.RI "QImage \fBquestionImage\fP () const"
+.br
+.ti -1c
+.RI "QImage \fBanswerImage\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetQuestionImage\fP (const QImage &\fBquestionImage\fP)"
+.br
+.ti -1c
+.RI "void \fBsetAnswerImage\fP (const QImage &\fBanswerImage\fP)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "QImage \fBm_questionImage\fP"
+.br
+.ti -1c
+.RI "QImage \fBm_answerImage\fP"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "ImageCard::ImageCard ()"
+
+.SS "ImageCard::ImageCard (QString questionText, QString answerText, \fBDifficulty\fP questionDifficulty)"
+
+.SS "ImageCard::ImageCard (QString questionText, QString answerText, \fBDifficulty\fP questionDifficulty, QImage questionImage, QImage answerImage)"
+
+.SS "ImageCard::~ImageCard ()\fC [override]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "QImage ImageCard::answerImage () const\fC [inline]\fP"
+
+.SS "QImage ImageCard::questionImage () const\fC [inline]\fP"
+
+.SS "void ImageCard::setAnswerImage (const QImage & answerImage)"
+
+.SS "void ImageCard::setQuestionImage (const QImage & questionImage)"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "QImage ImageCard::m_answerImage\fC [private]\fP"
+
+.SS "QImage ImageCard::m_questionImage\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for StudySphere from the source code\&.

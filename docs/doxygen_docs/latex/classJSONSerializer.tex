@@ -1,0 +1,77 @@
+\hypertarget{classJSONSerializer}{}\doxysection{JSONSerializer Class Reference}
+\label{classJSONSerializer}\index{JSONSerializer@{JSONSerializer}}
+
+
+{\ttfamily \#include $<$jsonserializer.\+h$>$}
+
+
+
+Inheritance diagram for JSONSerializer\+:
+% FIG 0
+
+
+Collaboration diagram for JSONSerializer\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classJSONSerializer_af2154b474dc26cd306f1e7cacc804187}{JSONSerializer}} ()
+\item 
+void \mbox{\hyperlink{classJSONSerializer_acff40fdafdc059bc6adf4ded96bb89ee}{save}} (const \mbox{\hyperlink{classSerializable}{Serializable}} \&serializable, const QString \&filepath, const QString \&rootname=\char`\"{}\char`\"{}) override
+\item 
+void \mbox{\hyperlink{classJSONSerializer_a4f87e9b39db436ce9a24929f3e4fcba0}{load}} (\mbox{\hyperlink{classSerializable}{Serializable}} \&serializable, const QString \&filepath) override
+\item 
+QJson\+Document \mbox{\hyperlink{classJSONSerializer_ada85c677eed1729f8b07aabbe615bf69}{create\+Json}} (const \mbox{\hyperlink{classSerializable}{Serializable}} \&serializable)
+\item 
+void \mbox{\hyperlink{classJSONSerializer_abc776621086db2c5ab54c34b11c504f7}{load\+Json}} (\mbox{\hyperlink{classSerializable}{Serializable}} \&serializable, QJson\+Document \&json\+Deck)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classJSONSerializer_af2154b474dc26cd306f1e7cacc804187}\label{classJSONSerializer_af2154b474dc26cd306f1e7cacc804187}} 
+\index{JSONSerializer@{JSONSerializer}!JSONSerializer@{JSONSerializer}}
+\index{JSONSerializer@{JSONSerializer}!JSONSerializer@{JSONSerializer}}
+\doxysubsubsection{\texorpdfstring{JSONSerializer()}{JSONSerializer()}}
+{\footnotesize\ttfamily JSONSerializer\+::\+JSONSerializer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classJSONSerializer_ada85c677eed1729f8b07aabbe615bf69}\label{classJSONSerializer_ada85c677eed1729f8b07aabbe615bf69}} 
+\index{JSONSerializer@{JSONSerializer}!createJson@{createJson}}
+\index{createJson@{createJson}!JSONSerializer@{JSONSerializer}}
+\doxysubsubsection{\texorpdfstring{createJson()}{createJson()}}
+{\footnotesize\ttfamily QJson\+Document JSONSerializer\+::create\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classSerializable}{Serializable}} \&}]{serializable }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classJSONSerializer_a4f87e9b39db436ce9a24929f3e4fcba0}\label{classJSONSerializer_a4f87e9b39db436ce9a24929f3e4fcba0}} 
+\index{JSONSerializer@{JSONSerializer}!load@{load}}
+\index{load@{load}!JSONSerializer@{JSONSerializer}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void JSONSerializer\+::load (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSerializable}{Serializable}} \&}]{serializable,  }\item[{const QString \&}]{filepath }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classSerializer_ab522893076354436973f30ce71ac3e91}{Serializer}}.
+
+\mbox{\Hypertarget{classJSONSerializer_abc776621086db2c5ab54c34b11c504f7}\label{classJSONSerializer_abc776621086db2c5ab54c34b11c504f7}} 
+\index{JSONSerializer@{JSONSerializer}!loadJson@{loadJson}}
+\index{loadJson@{loadJson}!JSONSerializer@{JSONSerializer}}
+\doxysubsubsection{\texorpdfstring{loadJson()}{loadJson()}}
+{\footnotesize\ttfamily void JSONSerializer\+::load\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSerializable}{Serializable}} \&}]{serializable,  }\item[{QJson\+Document \&}]{json\+Deck }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classJSONSerializer_acff40fdafdc059bc6adf4ded96bb89ee}\label{classJSONSerializer_acff40fdafdc059bc6adf4ded96bb89ee}} 
+\index{JSONSerializer@{JSONSerializer}!save@{save}}
+\index{save@{save}!JSONSerializer@{JSONSerializer}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily void JSONSerializer\+::save (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classSerializable}{Serializable}} \&}]{serializable,  }\item[{const QString \&}]{filepath,  }\item[{const QString \&}]{rootname = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classSerializer_a06261709ceb3c490189d9deeecb84905}{Serializer}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+app/lib/\mbox{\hyperlink{jsonserializer_8h}{jsonserializer.\+h}}\item 
+app/src/\mbox{\hyperlink{jsonserializer_8cpp}{jsonserializer.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,195 @@
+\hypertarget{classDeck}{}\doxysection{Deck Class Reference}
+\label{classDeck}\index{Deck@{Deck}}
+
+
+{\ttfamily \#include $<$deck.\+h$>$}
+
+
+
+Inheritance diagram for Deck\+:
+% FIG 0
+
+
+Collaboration diagram for Deck\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDeck_a57ae1cb4ac6fd61c249cefb2db85eb99}{Deck}} ()
+\item 
+\mbox{\hyperlink{classDeck_a64b7fa5653dc406c1eb25816b2beadbd}{Deck}} (QString \mbox{\hyperlink{classDeck_aeca1d2393c4244a6a14f8a91e5ef1bbf}{name}}, const \mbox{\hyperlink{classUser}{User}} \&\mbox{\hyperlink{classDeck_ae6c38679e68b2b631f2b54785e7cce90}{user}}, \mbox{\hyperlink{deck_8h_a9d516a7457325bcd0ae95a5a36d92d6f}{Privacy}} \mbox{\hyperlink{classDeck_a45a6669058a4cc4d28acf2d80882c562}{privacy}})
+\item 
+\mbox{\hyperlink{classDeck_acdf2e8d1ffe3bb624a1d92687eabe97f}{Deck}} (const \mbox{\hyperlink{classDeck}{Deck}} \&deck)
+\item 
+\mbox{\hyperlink{classDeck_a1d09c6b4d4b2995b19eb05a612f6bd0e}{$\sim$\+Deck}} () override
+\item 
+unsigned int \mbox{\hyperlink{classDeck_aa0fa28817c247ea78c2c0a83c72a50cb}{deck\+Id}} () const
+\item 
+QString \mbox{\hyperlink{classDeck_aeca1d2393c4244a6a14f8a91e5ef1bbf}{name}} () const
+\item 
+QVector$<$ \mbox{\hyperlink{classCard}{Card}} $\ast$ $>$ \mbox{\hyperlink{classDeck_aee04cd153ec5b7f281a165e1e9353f32}{cards}} ()
+\item 
+\mbox{\hyperlink{deck_8h_a9d516a7457325bcd0ae95a5a36d92d6f}{Privacy}} \mbox{\hyperlink{classDeck_a45a6669058a4cc4d28acf2d80882c562}{privacy}} () const
+\item 
+\mbox{\hyperlink{classUser}{User}} \mbox{\hyperlink{classDeck_ae6c38679e68b2b631f2b54785e7cce90}{user}} () const
+\item 
+void \mbox{\hyperlink{classDeck_a0251bfdd3bb8fd58ee40b67429567dd9}{add\+Card}} (\mbox{\hyperlink{classCard}{Card}} $\ast$card)
+\item 
+void \mbox{\hyperlink{classDeck_ab6f8c66b603073aa8390c9d891f31339}{set\+Id}} (uint64\+\_\+t id)
+\item 
+bool \mbox{\hyperlink{classDeck_a2d5f4cd6627ccec1b7fc2d21c391518c}{operator==}} (const \mbox{\hyperlink{classDeck}{Deck}} \&deck)
+\item 
+QVariant \mbox{\hyperlink{classDeck_a457aaf42b54c7e97b2a60fa058692659}{to\+Variant}} () const override
+\item 
+void \mbox{\hyperlink{classDeck_a7461c188d98b3d27cae640eec9914684}{from\+Variant}} (const QVariant \&variant) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned \mbox{\hyperlink{classDeck_a9c0fcd099b0ab88adbd76c7b60fc902f}{m\+\_\+deck\+Id}}
+\item 
+QString \mbox{\hyperlink{classDeck_adcd9e7f19026eac0e13700c8a516a003}{m\+\_\+name}}
+\item 
+QVector$<$ \mbox{\hyperlink{classCard}{Card}} $\ast$ $>$ \mbox{\hyperlink{classDeck_a477958e08844badb1e42912cb5ff20ab}{m\+\_\+cards}}
+\item 
+\mbox{\hyperlink{deck_8h_a9d516a7457325bcd0ae95a5a36d92d6f}{Privacy}} \mbox{\hyperlink{classDeck_a14269217790b15af903ed3f47c8755e4}{m\+\_\+privacy}}
+\item 
+\mbox{\hyperlink{classUser}{User}} \mbox{\hyperlink{classDeck_a43bd4b2e80759fb64f4ff16367c1dd7a}{m\+\_\+user}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDeck_a57ae1cb4ac6fd61c249cefb2db85eb99}\label{classDeck_a57ae1cb4ac6fd61c249cefb2db85eb99}} 
+\index{Deck@{Deck}!Deck@{Deck}}
+\index{Deck@{Deck}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{Deck()}{Deck()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Deck\+::\+Deck (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDeck_a64b7fa5653dc406c1eb25816b2beadbd}\label{classDeck_a64b7fa5653dc406c1eb25816b2beadbd}} 
+\index{Deck@{Deck}!Deck@{Deck}}
+\index{Deck@{Deck}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{Deck()}{Deck()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Deck\+::\+Deck (\begin{DoxyParamCaption}\item[{QString}]{name,  }\item[{const \mbox{\hyperlink{classUser}{User}} \&}]{user,  }\item[{\mbox{\hyperlink{deck_8h_a9d516a7457325bcd0ae95a5a36d92d6f}{Privacy}}}]{privacy }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDeck_acdf2e8d1ffe3bb624a1d92687eabe97f}\label{classDeck_acdf2e8d1ffe3bb624a1d92687eabe97f}} 
+\index{Deck@{Deck}!Deck@{Deck}}
+\index{Deck@{Deck}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{Deck()}{Deck()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Deck\+::\+Deck (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classDeck}{Deck}} \&}]{deck }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDeck_a1d09c6b4d4b2995b19eb05a612f6bd0e}\label{classDeck_a1d09c6b4d4b2995b19eb05a612f6bd0e}} 
+\index{Deck@{Deck}!````~Deck@{$\sim$Deck}}
+\index{````~Deck@{$\sim$Deck}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{$\sim$Deck()}{~Deck()}}
+{\footnotesize\ttfamily Deck\+::$\sim$\+Deck (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDeck_a0251bfdd3bb8fd58ee40b67429567dd9}\label{classDeck_a0251bfdd3bb8fd58ee40b67429567dd9}} 
+\index{Deck@{Deck}!addCard@{addCard}}
+\index{addCard@{addCard}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{addCard()}{addCard()}}
+{\footnotesize\ttfamily void Deck\+::add\+Card (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classCard}{Card}} $\ast$}]{card }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDeck_aee04cd153ec5b7f281a165e1e9353f32}\label{classDeck_aee04cd153ec5b7f281a165e1e9353f32}} 
+\index{Deck@{Deck}!cards@{cards}}
+\index{cards@{cards}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{cards()}{cards()}}
+{\footnotesize\ttfamily QVector$<$\mbox{\hyperlink{classCard}{Card}} $\ast$$>$ Deck\+::cards (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDeck_aa0fa28817c247ea78c2c0a83c72a50cb}\label{classDeck_aa0fa28817c247ea78c2c0a83c72a50cb}} 
+\index{Deck@{Deck}!deckId@{deckId}}
+\index{deckId@{deckId}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{deckId()}{deckId()}}
+{\footnotesize\ttfamily unsigned int Deck\+::deck\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDeck_a7461c188d98b3d27cae640eec9914684}\label{classDeck_a7461c188d98b3d27cae640eec9914684}} 
+\index{Deck@{Deck}!fromVariant@{fromVariant}}
+\index{fromVariant@{fromVariant}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{fromVariant()}{fromVariant()}}
+{\footnotesize\ttfamily void Deck\+::from\+Variant (\begin{DoxyParamCaption}\item[{const QVariant \&}]{variant }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classSerializable_ad1e7714fe2132e1b68e68761e60ba706}{Serializable}}.
+
+\mbox{\Hypertarget{classDeck_aeca1d2393c4244a6a14f8a91e5ef1bbf}\label{classDeck_aeca1d2393c4244a6a14f8a91e5ef1bbf}} 
+\index{Deck@{Deck}!name@{name}}
+\index{name@{name}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily QString Deck\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDeck_a2d5f4cd6627ccec1b7fc2d21c391518c}\label{classDeck_a2d5f4cd6627ccec1b7fc2d21c391518c}} 
+\index{Deck@{Deck}!operator==@{operator==}}
+\index{operator==@{operator==}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Deck\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classDeck}{Deck}} \&}]{deck }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDeck_a45a6669058a4cc4d28acf2d80882c562}\label{classDeck_a45a6669058a4cc4d28acf2d80882c562}} 
+\index{Deck@{Deck}!privacy@{privacy}}
+\index{privacy@{privacy}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{privacy()}{privacy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{deck_8h_a9d516a7457325bcd0ae95a5a36d92d6f}{Privacy}} Deck\+::privacy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classDeck_ab6f8c66b603073aa8390c9d891f31339}\label{classDeck_ab6f8c66b603073aa8390c9d891f31339}} 
+\index{Deck@{Deck}!setId@{setId}}
+\index{setId@{setId}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{setId()}{setId()}}
+{\footnotesize\ttfamily void Deck\+::set\+Id (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{id }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDeck_a457aaf42b54c7e97b2a60fa058692659}\label{classDeck_a457aaf42b54c7e97b2a60fa058692659}} 
+\index{Deck@{Deck}!toVariant@{toVariant}}
+\index{toVariant@{toVariant}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{toVariant()}{toVariant()}}
+{\footnotesize\ttfamily QVariant Deck\+::to\+Variant (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classSerializable_a31ba5de4f9fc89876ecc757e4a302062}{Serializable}}.
+
+\mbox{\Hypertarget{classDeck_ae6c38679e68b2b631f2b54785e7cce90}\label{classDeck_ae6c38679e68b2b631f2b54785e7cce90}} 
+\index{Deck@{Deck}!user@{user}}
+\index{user@{user}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{user()}{user()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classUser}{User}} Deck\+::user (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classDeck_a477958e08844badb1e42912cb5ff20ab}\label{classDeck_a477958e08844badb1e42912cb5ff20ab}} 
+\index{Deck@{Deck}!m\_cards@{m\_cards}}
+\index{m\_cards@{m\_cards}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{m\_cards}{m\_cards}}
+{\footnotesize\ttfamily QVector$<$\mbox{\hyperlink{classCard}{Card}} $\ast$$>$ Deck\+::m\+\_\+cards\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classDeck_a9c0fcd099b0ab88adbd76c7b60fc902f}\label{classDeck_a9c0fcd099b0ab88adbd76c7b60fc902f}} 
+\index{Deck@{Deck}!m\_deckId@{m\_deckId}}
+\index{m\_deckId@{m\_deckId}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{m\_deckId}{m\_deckId}}
+{\footnotesize\ttfamily unsigned Deck\+::m\+\_\+deck\+Id\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classDeck_adcd9e7f19026eac0e13700c8a516a003}\label{classDeck_adcd9e7f19026eac0e13700c8a516a003}} 
+\index{Deck@{Deck}!m\_name@{m\_name}}
+\index{m\_name@{m\_name}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{m\_name}{m\_name}}
+{\footnotesize\ttfamily QString Deck\+::m\+\_\+name\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classDeck_a14269217790b15af903ed3f47c8755e4}\label{classDeck_a14269217790b15af903ed3f47c8755e4}} 
+\index{Deck@{Deck}!m\_privacy@{m\_privacy}}
+\index{m\_privacy@{m\_privacy}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{m\_privacy}{m\_privacy}}
+{\footnotesize\ttfamily \mbox{\hyperlink{deck_8h_a9d516a7457325bcd0ae95a5a36d92d6f}{Privacy}} Deck\+::m\+\_\+privacy\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classDeck_a43bd4b2e80759fb64f4ff16367c1dd7a}\label{classDeck_a43bd4b2e80759fb64f4ff16367c1dd7a}} 
+\index{Deck@{Deck}!m\_user@{m\_user}}
+\index{m\_user@{m\_user}!Deck@{Deck}}
+\doxysubsubsection{\texorpdfstring{m\_user}{m\_user}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classUser}{User}} Deck\+::m\+\_\+user\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+app/lib/\mbox{\hyperlink{deck_8h}{deck.\+h}}\item 
+app/src/\mbox{\hyperlink{deck_8cpp}{deck.\+cpp}}\end{DoxyCompactItemize}

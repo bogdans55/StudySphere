@@ -1,0 +1,69 @@
+.TH "CreateDeckDialog" 3 "Tue Jan 9 2024" "StudySphere" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+CreateDeckDialog
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <createdeckdialog\&.h>\fP
+.PP
+Inherits QDialog\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCreateDeckDialog\fP (QWidget *parent=nullptr)"
+.br
+.ti -1c
+.RI "\fB~CreateDeckDialog\fP () override"
+.br
+.ti -1c
+.RI "QString \fBgetDeckName\fP () const"
+.br
+.ti -1c
+.RI "\fBPrivacy\fP \fBgetDeckPrivacy\fP () const"
+.br
+.in -1c
+.SS "Private Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBon_buttonBox_done_accepted\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "Ui::CreateDeckDialog * \fBui\fP"
+.br
+.ti -1c
+.RI "QButtonGroup * \fBdeckPrivacy\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "CreateDeckDialog::CreateDeckDialog (QWidget * parent = \fCnullptr\fP)\fC [explicit]\fP"
+
+.SS "CreateDeckDialog::~CreateDeckDialog ()\fC [override]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "QString CreateDeckDialog::getDeckName () const"
+
+.SS "\fBPrivacy\fP CreateDeckDialog::getDeckPrivacy () const"
+
+.SS "void CreateDeckDialog::on_buttonBox_done_accepted ()\fC [private]\fP, \fC [slot]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "QButtonGroup* CreateDeckDialog::deckPrivacy\fC [private]\fP"
+
+.SS "Ui::CreateDeckDialog* CreateDeckDialog::ui\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for StudySphere from the source code\&.

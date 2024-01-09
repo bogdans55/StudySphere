@@ -1,0 +1,161 @@
+\hypertarget{classWhiteboardWindow}{}\doxysection{Whiteboard\+Window Class Reference}
+\label{classWhiteboardWindow}\index{WhiteboardWindow@{WhiteboardWindow}}
+
+
+{\ttfamily \#include $<$whiteboardwindow.\+h$>$}
+
+
+
+Inheritance diagram for Whiteboard\+Window\+:
+% FIG 0
+
+
+Collaboration diagram for Whiteboard\+Window\+:
+% FIG 1
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classWhiteboardWindow_a8f24506902ba336457952806233398a1}{Whiteboard\+Window}} (QWidget $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classWhiteboardWindow_af6469c8e98d2f50cb0ed40f7be648962}{$\sim$\+Whiteboard\+Window}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classWhiteboardWindow_afe08ac88f9588e8c4f440a2e73f36e20}{paint\+Event}} (QPaint\+Event $\ast$event) override
+\item 
+void \mbox{\hyperlink{classWhiteboardWindow_a885c476142ffccca2ff1e85668c748f8}{mouse\+Press\+Event}} (QMouse\+Event $\ast$event) override
+\item 
+void \mbox{\hyperlink{classWhiteboardWindow_a13ede702c75e5c8259f3726e1f53df8f}{mouse\+Move\+Event}} (QMouse\+Event $\ast$event) override
+\item 
+void \mbox{\hyperlink{classWhiteboardWindow_ad21dbeb25f7f7a6fe0583be2f765deac}{mouse\+Release\+Event}} (QMouse\+Event $\ast$event) override
+\item 
+void \mbox{\hyperlink{classWhiteboardWindow_a668b110dca3a6613e1abf8f2bac6d811}{resize\+Event}} (QResize\+Event $\ast$event) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classWhiteboardWindow_a7eef2b5c5dd6f74eeaac4f2e13196654}{draw\+Line\+To}} (const QPoint \&end\+Point)
+\item 
+void \mbox{\hyperlink{classWhiteboardWindow_ab34d31bfadd9039b9e59f31d620a1331}{resize\+Image}} (QImage $\ast$\mbox{\hyperlink{classWhiteboardWindow_ae246107a044208ee28fca9966983f538}{image}}, const QSize \&new\+Size)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Whiteboard\+Window $\ast$ \mbox{\hyperlink{classWhiteboardWindow_a9369d3be68b998f2357cadf558c8762d}{ui}}
+\item 
+QImage \mbox{\hyperlink{classWhiteboardWindow_ae246107a044208ee28fca9966983f538}{image}}
+\item 
+QPoint \mbox{\hyperlink{classWhiteboardWindow_a560d58a5562e24dff4d1a7380f8288b1}{last\+Point}}
+\item 
+bool \mbox{\hyperlink{classWhiteboardWindow_ad12c4a73c1cce3ae21350c694485049c}{drawing}}
+\item 
+QColor \mbox{\hyperlink{classWhiteboardWindow_a66c3f6eea528cc3b4ad28b8755d3b1fe}{pen\+Color}}
+\item 
+int \mbox{\hyperlink{classWhiteboardWindow_a627dc7502368cdbfb5908e648aeec8bd}{pen\+Width}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classWhiteboardWindow_a8f24506902ba336457952806233398a1}\label{classWhiteboardWindow_a8f24506902ba336457952806233398a1}} 
+\index{WhiteboardWindow@{WhiteboardWindow}!WhiteboardWindow@{WhiteboardWindow}}
+\index{WhiteboardWindow@{WhiteboardWindow}!WhiteboardWindow@{WhiteboardWindow}}
+\doxysubsubsection{\texorpdfstring{WhiteboardWindow()}{WhiteboardWindow()}}
+{\footnotesize\ttfamily Whiteboard\+Window\+::\+Whiteboard\+Window (\begin{DoxyParamCaption}\item[{QWidget $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classWhiteboardWindow_af6469c8e98d2f50cb0ed40f7be648962}\label{classWhiteboardWindow_af6469c8e98d2f50cb0ed40f7be648962}} 
+\index{WhiteboardWindow@{WhiteboardWindow}!````~WhiteboardWindow@{$\sim$WhiteboardWindow}}
+\index{````~WhiteboardWindow@{$\sim$WhiteboardWindow}!WhiteboardWindow@{WhiteboardWindow}}
+\doxysubsubsection{\texorpdfstring{$\sim$WhiteboardWindow()}{~WhiteboardWindow()}}
+{\footnotesize\ttfamily Whiteboard\+Window\+::$\sim$\+Whiteboard\+Window (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classWhiteboardWindow_a7eef2b5c5dd6f74eeaac4f2e13196654}\label{classWhiteboardWindow_a7eef2b5c5dd6f74eeaac4f2e13196654}} 
+\index{WhiteboardWindow@{WhiteboardWindow}!drawLineTo@{drawLineTo}}
+\index{drawLineTo@{drawLineTo}!WhiteboardWindow@{WhiteboardWindow}}
+\doxysubsubsection{\texorpdfstring{drawLineTo()}{drawLineTo()}}
+{\footnotesize\ttfamily void Whiteboard\+Window\+::draw\+Line\+To (\begin{DoxyParamCaption}\item[{const QPoint \&}]{end\+Point }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classWhiteboardWindow_a13ede702c75e5c8259f3726e1f53df8f}\label{classWhiteboardWindow_a13ede702c75e5c8259f3726e1f53df8f}} 
+\index{WhiteboardWindow@{WhiteboardWindow}!mouseMoveEvent@{mouseMoveEvent}}
+\index{mouseMoveEvent@{mouseMoveEvent}!WhiteboardWindow@{WhiteboardWindow}}
+\doxysubsubsection{\texorpdfstring{mouseMoveEvent()}{mouseMoveEvent()}}
+{\footnotesize\ttfamily void Whiteboard\+Window\+::mouse\+Move\+Event (\begin{DoxyParamCaption}\item[{QMouse\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classWhiteboardWindow_a885c476142ffccca2ff1e85668c748f8}\label{classWhiteboardWindow_a885c476142ffccca2ff1e85668c748f8}} 
+\index{WhiteboardWindow@{WhiteboardWindow}!mousePressEvent@{mousePressEvent}}
+\index{mousePressEvent@{mousePressEvent}!WhiteboardWindow@{WhiteboardWindow}}
+\doxysubsubsection{\texorpdfstring{mousePressEvent()}{mousePressEvent()}}
+{\footnotesize\ttfamily void Whiteboard\+Window\+::mouse\+Press\+Event (\begin{DoxyParamCaption}\item[{QMouse\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classWhiteboardWindow_ad21dbeb25f7f7a6fe0583be2f765deac}\label{classWhiteboardWindow_ad21dbeb25f7f7a6fe0583be2f765deac}} 
+\index{WhiteboardWindow@{WhiteboardWindow}!mouseReleaseEvent@{mouseReleaseEvent}}
+\index{mouseReleaseEvent@{mouseReleaseEvent}!WhiteboardWindow@{WhiteboardWindow}}
+\doxysubsubsection{\texorpdfstring{mouseReleaseEvent()}{mouseReleaseEvent()}}
+{\footnotesize\ttfamily void Whiteboard\+Window\+::mouse\+Release\+Event (\begin{DoxyParamCaption}\item[{QMouse\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classWhiteboardWindow_afe08ac88f9588e8c4f440a2e73f36e20}\label{classWhiteboardWindow_afe08ac88f9588e8c4f440a2e73f36e20}} 
+\index{WhiteboardWindow@{WhiteboardWindow}!paintEvent@{paintEvent}}
+\index{paintEvent@{paintEvent}!WhiteboardWindow@{WhiteboardWindow}}
+\doxysubsubsection{\texorpdfstring{paintEvent()}{paintEvent()}}
+{\footnotesize\ttfamily void Whiteboard\+Window\+::paint\+Event (\begin{DoxyParamCaption}\item[{QPaint\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classWhiteboardWindow_a668b110dca3a6613e1abf8f2bac6d811}\label{classWhiteboardWindow_a668b110dca3a6613e1abf8f2bac6d811}} 
+\index{WhiteboardWindow@{WhiteboardWindow}!resizeEvent@{resizeEvent}}
+\index{resizeEvent@{resizeEvent}!WhiteboardWindow@{WhiteboardWindow}}
+\doxysubsubsection{\texorpdfstring{resizeEvent()}{resizeEvent()}}
+{\footnotesize\ttfamily void Whiteboard\+Window\+::resize\+Event (\begin{DoxyParamCaption}\item[{QResize\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classWhiteboardWindow_ab34d31bfadd9039b9e59f31d620a1331}\label{classWhiteboardWindow_ab34d31bfadd9039b9e59f31d620a1331}} 
+\index{WhiteboardWindow@{WhiteboardWindow}!resizeImage@{resizeImage}}
+\index{resizeImage@{resizeImage}!WhiteboardWindow@{WhiteboardWindow}}
+\doxysubsubsection{\texorpdfstring{resizeImage()}{resizeImage()}}
+{\footnotesize\ttfamily void Whiteboard\+Window\+::resize\+Image (\begin{DoxyParamCaption}\item[{QImage $\ast$}]{image,  }\item[{const QSize \&}]{new\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classWhiteboardWindow_ad12c4a73c1cce3ae21350c694485049c}\label{classWhiteboardWindow_ad12c4a73c1cce3ae21350c694485049c}} 
+\index{WhiteboardWindow@{WhiteboardWindow}!drawing@{drawing}}
+\index{drawing@{drawing}!WhiteboardWindow@{WhiteboardWindow}}
+\doxysubsubsection{\texorpdfstring{drawing}{drawing}}
+{\footnotesize\ttfamily bool Whiteboard\+Window\+::drawing\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classWhiteboardWindow_ae246107a044208ee28fca9966983f538}\label{classWhiteboardWindow_ae246107a044208ee28fca9966983f538}} 
+\index{WhiteboardWindow@{WhiteboardWindow}!image@{image}}
+\index{image@{image}!WhiteboardWindow@{WhiteboardWindow}}
+\doxysubsubsection{\texorpdfstring{image}{image}}
+{\footnotesize\ttfamily QImage Whiteboard\+Window\+::image\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classWhiteboardWindow_a560d58a5562e24dff4d1a7380f8288b1}\label{classWhiteboardWindow_a560d58a5562e24dff4d1a7380f8288b1}} 
+\index{WhiteboardWindow@{WhiteboardWindow}!lastPoint@{lastPoint}}
+\index{lastPoint@{lastPoint}!WhiteboardWindow@{WhiteboardWindow}}
+\doxysubsubsection{\texorpdfstring{lastPoint}{lastPoint}}
+{\footnotesize\ttfamily QPoint Whiteboard\+Window\+::last\+Point\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classWhiteboardWindow_a66c3f6eea528cc3b4ad28b8755d3b1fe}\label{classWhiteboardWindow_a66c3f6eea528cc3b4ad28b8755d3b1fe}} 
+\index{WhiteboardWindow@{WhiteboardWindow}!penColor@{penColor}}
+\index{penColor@{penColor}!WhiteboardWindow@{WhiteboardWindow}}
+\doxysubsubsection{\texorpdfstring{penColor}{penColor}}
+{\footnotesize\ttfamily QColor Whiteboard\+Window\+::pen\+Color\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classWhiteboardWindow_a627dc7502368cdbfb5908e648aeec8bd}\label{classWhiteboardWindow_a627dc7502368cdbfb5908e648aeec8bd}} 
+\index{WhiteboardWindow@{WhiteboardWindow}!penWidth@{penWidth}}
+\index{penWidth@{penWidth}!WhiteboardWindow@{WhiteboardWindow}}
+\doxysubsubsection{\texorpdfstring{penWidth}{penWidth}}
+{\footnotesize\ttfamily int Whiteboard\+Window\+::pen\+Width\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classWhiteboardWindow_a9369d3be68b998f2357cadf558c8762d}\label{classWhiteboardWindow_a9369d3be68b998f2357cadf558c8762d}} 
+\index{WhiteboardWindow@{WhiteboardWindow}!ui@{ui}}
+\index{ui@{ui}!WhiteboardWindow@{WhiteboardWindow}}
+\doxysubsubsection{\texorpdfstring{ui}{ui}}
+{\footnotesize\ttfamily Ui\+::\+Whiteboard\+Window$\ast$ Whiteboard\+Window\+::ui\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+app/lib/\mbox{\hyperlink{whiteboardwindow_8h}{whiteboardwindow.\+h}}\item 
+app/src/\mbox{\hyperlink{whiteboardwindow_8cpp}{whiteboardwindow.\+cpp}}\end{DoxyCompactItemize}

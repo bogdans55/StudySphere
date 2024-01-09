@@ -1,0 +1,164 @@
+\hypertarget{classDeckPreviewWindow}{}\doxysection{Deck\+Preview\+Window Class Reference}
+\label{classDeckPreviewWindow}\index{DeckPreviewWindow@{DeckPreviewWindow}}
+
+
+{\ttfamily \#include $<$deckpreviewwindow.\+h$>$}
+
+
+
+Inheritance diagram for Deck\+Preview\+Window\+:
+% FIG 0
+
+
+Collaboration diagram for Deck\+Preview\+Window\+:
+% FIG 1
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classDeckPreviewWindow_a7a5b42892f4e8e334e49ff56b3b636b2}{send\+Public\+Deck}} (QString deck\+Name\+ID)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDeckPreviewWindow_a2150de9a1dda3cbad4f0bfe9cbd6cb74}{Deck\+Preview\+Window}} (QWidget $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classDeckPreviewWindow_a7e41dddc8f6a1e5b25c67840d97ae1a0}{Deck\+Preview\+Window}} (\mbox{\hyperlink{classDeck}{Deck}} $\ast$deck, \mbox{\hyperlink{classUser}{User}} \&user, QWidget $\ast$parent=nullptr)
+\item 
+\mbox{\hyperlink{classDeckPreviewWindow_a73ee2a0849a3b50186a43a740e81213b}{$\sim$\+Deck\+Preview\+Window}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classDeckPreviewWindow_a003dc731ed3235dda50c6bb0afb8d931}{on\+\_\+push\+Button\+\_\+flip\+\_\+preview\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classDeckPreviewWindow_a4ccfdf88f5ea17e9eefe141429241046}{on\+\_\+push\+Button\+\_\+cancel\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classDeckPreviewWindow_a3e5c1117fcf0303ef34a073308a9cd49}{on\+\_\+push\+Button\+\_\+add\+\_\+clicked}} ()
+\item 
+void \mbox{\hyperlink{classDeckPreviewWindow_a598b5beef2abcfddeb3c906cb7d663c3}{on\+\_\+push\+Button\+\_\+next\+\_\+clicked}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classDeckPreviewWindow_a2ad4b474ecd5760a914d2826668ad825}{has\+Next\+Card}} ()
+\item 
+void \mbox{\hyperlink{classDeckPreviewWindow_adbc0c12ff9a6e13c0d50ec90b3dd637d}{set\+Difficulty\+Color}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Deck\+Preview\+Window $\ast$ \mbox{\hyperlink{classDeckPreviewWindow_a7eb28d820efa738d8715ad9a78f37709}{ui}}
+\item 
+bool \mbox{\hyperlink{classDeckPreviewWindow_a9af8dc5b977fa0d1a7d66d7b0c9edbdc}{m\+\_\+answer\+Showed}} = false
+\item 
+unsigned \mbox{\hyperlink{classDeckPreviewWindow_a6f7c953903f0cb90be364203a4bf14b6}{m\+\_\+current\+Card\+Index}} = 0
+\item 
+\mbox{\hyperlink{classUser}{User}} \mbox{\hyperlink{classDeckPreviewWindow_ac04b760847eea5016cd3390f24c90a20}{m\+\_\+user}}
+\item 
+\mbox{\hyperlink{classDeck}{Deck}} \mbox{\hyperlink{classDeckPreviewWindow_ac66a04c401d5b4efaa2d968f13462683}{m\+\_\+deck}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDeckPreviewWindow_a2150de9a1dda3cbad4f0bfe9cbd6cb74}\label{classDeckPreviewWindow_a2150de9a1dda3cbad4f0bfe9cbd6cb74}} 
+\index{DeckPreviewWindow@{DeckPreviewWindow}!DeckPreviewWindow@{DeckPreviewWindow}}
+\index{DeckPreviewWindow@{DeckPreviewWindow}!DeckPreviewWindow@{DeckPreviewWindow}}
+\doxysubsubsection{\texorpdfstring{DeckPreviewWindow()}{DeckPreviewWindow()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Deck\+Preview\+Window\+::\+Deck\+Preview\+Window (\begin{DoxyParamCaption}\item[{QWidget $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classDeckPreviewWindow_a7e41dddc8f6a1e5b25c67840d97ae1a0}\label{classDeckPreviewWindow_a7e41dddc8f6a1e5b25c67840d97ae1a0}} 
+\index{DeckPreviewWindow@{DeckPreviewWindow}!DeckPreviewWindow@{DeckPreviewWindow}}
+\index{DeckPreviewWindow@{DeckPreviewWindow}!DeckPreviewWindow@{DeckPreviewWindow}}
+\doxysubsubsection{\texorpdfstring{DeckPreviewWindow()}{DeckPreviewWindow()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Deck\+Preview\+Window\+::\+Deck\+Preview\+Window (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classDeck}{Deck}} $\ast$}]{deck,  }\item[{\mbox{\hyperlink{classUser}{User}} \&}]{user,  }\item[{QWidget $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classDeckPreviewWindow_a73ee2a0849a3b50186a43a740e81213b}\label{classDeckPreviewWindow_a73ee2a0849a3b50186a43a740e81213b}} 
+\index{DeckPreviewWindow@{DeckPreviewWindow}!````~DeckPreviewWindow@{$\sim$DeckPreviewWindow}}
+\index{````~DeckPreviewWindow@{$\sim$DeckPreviewWindow}!DeckPreviewWindow@{DeckPreviewWindow}}
+\doxysubsubsection{\texorpdfstring{$\sim$DeckPreviewWindow()}{~DeckPreviewWindow()}}
+{\footnotesize\ttfamily Deck\+Preview\+Window\+::$\sim$\+Deck\+Preview\+Window (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDeckPreviewWindow_a2ad4b474ecd5760a914d2826668ad825}\label{classDeckPreviewWindow_a2ad4b474ecd5760a914d2826668ad825}} 
+\index{DeckPreviewWindow@{DeckPreviewWindow}!hasNextCard@{hasNextCard}}
+\index{hasNextCard@{hasNextCard}!DeckPreviewWindow@{DeckPreviewWindow}}
+\doxysubsubsection{\texorpdfstring{hasNextCard()}{hasNextCard()}}
+{\footnotesize\ttfamily bool Deck\+Preview\+Window\+::has\+Next\+Card (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classDeckPreviewWindow_a3e5c1117fcf0303ef34a073308a9cd49}\label{classDeckPreviewWindow_a3e5c1117fcf0303ef34a073308a9cd49}} 
+\index{DeckPreviewWindow@{DeckPreviewWindow}!on\_pushButton\_add\_clicked@{on\_pushButton\_add\_clicked}}
+\index{on\_pushButton\_add\_clicked@{on\_pushButton\_add\_clicked}!DeckPreviewWindow@{DeckPreviewWindow}}
+\doxysubsubsection{\texorpdfstring{on\_pushButton\_add\_clicked}{on\_pushButton\_add\_clicked}}
+{\footnotesize\ttfamily void Deck\+Preview\+Window\+::on\+\_\+push\+Button\+\_\+add\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classDeckPreviewWindow_a4ccfdf88f5ea17e9eefe141429241046}\label{classDeckPreviewWindow_a4ccfdf88f5ea17e9eefe141429241046}} 
+\index{DeckPreviewWindow@{DeckPreviewWindow}!on\_pushButton\_cancel\_clicked@{on\_pushButton\_cancel\_clicked}}
+\index{on\_pushButton\_cancel\_clicked@{on\_pushButton\_cancel\_clicked}!DeckPreviewWindow@{DeckPreviewWindow}}
+\doxysubsubsection{\texorpdfstring{on\_pushButton\_cancel\_clicked}{on\_pushButton\_cancel\_clicked}}
+{\footnotesize\ttfamily void Deck\+Preview\+Window\+::on\+\_\+push\+Button\+\_\+cancel\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classDeckPreviewWindow_a003dc731ed3235dda50c6bb0afb8d931}\label{classDeckPreviewWindow_a003dc731ed3235dda50c6bb0afb8d931}} 
+\index{DeckPreviewWindow@{DeckPreviewWindow}!on\_pushButton\_flip\_preview\_clicked@{on\_pushButton\_flip\_preview\_clicked}}
+\index{on\_pushButton\_flip\_preview\_clicked@{on\_pushButton\_flip\_preview\_clicked}!DeckPreviewWindow@{DeckPreviewWindow}}
+\doxysubsubsection{\texorpdfstring{on\_pushButton\_flip\_preview\_clicked}{on\_pushButton\_flip\_preview\_clicked}}
+{\footnotesize\ttfamily void Deck\+Preview\+Window\+::on\+\_\+push\+Button\+\_\+flip\+\_\+preview\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classDeckPreviewWindow_a598b5beef2abcfddeb3c906cb7d663c3}\label{classDeckPreviewWindow_a598b5beef2abcfddeb3c906cb7d663c3}} 
+\index{DeckPreviewWindow@{DeckPreviewWindow}!on\_pushButton\_next\_clicked@{on\_pushButton\_next\_clicked}}
+\index{on\_pushButton\_next\_clicked@{on\_pushButton\_next\_clicked}!DeckPreviewWindow@{DeckPreviewWindow}}
+\doxysubsubsection{\texorpdfstring{on\_pushButton\_next\_clicked}{on\_pushButton\_next\_clicked}}
+{\footnotesize\ttfamily void Deck\+Preview\+Window\+::on\+\_\+push\+Button\+\_\+next\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+\mbox{\Hypertarget{classDeckPreviewWindow_a7a5b42892f4e8e334e49ff56b3b636b2}\label{classDeckPreviewWindow_a7a5b42892f4e8e334e49ff56b3b636b2}} 
+\index{DeckPreviewWindow@{DeckPreviewWindow}!sendPublicDeck@{sendPublicDeck}}
+\index{sendPublicDeck@{sendPublicDeck}!DeckPreviewWindow@{DeckPreviewWindow}}
+\doxysubsubsection{\texorpdfstring{sendPublicDeck}{sendPublicDeck}}
+{\footnotesize\ttfamily void Deck\+Preview\+Window\+::send\+Public\+Deck (\begin{DoxyParamCaption}\item[{QString}]{deck\+Name\+ID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\mbox{\Hypertarget{classDeckPreviewWindow_adbc0c12ff9a6e13c0d50ec90b3dd637d}\label{classDeckPreviewWindow_adbc0c12ff9a6e13c0d50ec90b3dd637d}} 
+\index{DeckPreviewWindow@{DeckPreviewWindow}!setDifficultyColor@{setDifficultyColor}}
+\index{setDifficultyColor@{setDifficultyColor}!DeckPreviewWindow@{DeckPreviewWindow}}
+\doxysubsubsection{\texorpdfstring{setDifficultyColor()}{setDifficultyColor()}}
+{\footnotesize\ttfamily void Deck\+Preview\+Window\+::set\+Difficulty\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classDeckPreviewWindow_a9af8dc5b977fa0d1a7d66d7b0c9edbdc}\label{classDeckPreviewWindow_a9af8dc5b977fa0d1a7d66d7b0c9edbdc}} 
+\index{DeckPreviewWindow@{DeckPreviewWindow}!m\_answerShowed@{m\_answerShowed}}
+\index{m\_answerShowed@{m\_answerShowed}!DeckPreviewWindow@{DeckPreviewWindow}}
+\doxysubsubsection{\texorpdfstring{m\_answerShowed}{m\_answerShowed}}
+{\footnotesize\ttfamily bool Deck\+Preview\+Window\+::m\+\_\+answer\+Showed = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classDeckPreviewWindow_a6f7c953903f0cb90be364203a4bf14b6}\label{classDeckPreviewWindow_a6f7c953903f0cb90be364203a4bf14b6}} 
+\index{DeckPreviewWindow@{DeckPreviewWindow}!m\_currentCardIndex@{m\_currentCardIndex}}
+\index{m\_currentCardIndex@{m\_currentCardIndex}!DeckPreviewWindow@{DeckPreviewWindow}}
+\doxysubsubsection{\texorpdfstring{m\_currentCardIndex}{m\_currentCardIndex}}
+{\footnotesize\ttfamily unsigned Deck\+Preview\+Window\+::m\+\_\+current\+Card\+Index = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classDeckPreviewWindow_ac66a04c401d5b4efaa2d968f13462683}\label{classDeckPreviewWindow_ac66a04c401d5b4efaa2d968f13462683}} 
+\index{DeckPreviewWindow@{DeckPreviewWindow}!m\_deck@{m\_deck}}
+\index{m\_deck@{m\_deck}!DeckPreviewWindow@{DeckPreviewWindow}}
+\doxysubsubsection{\texorpdfstring{m\_deck}{m\_deck}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classDeck}{Deck}} Deck\+Preview\+Window\+::m\+\_\+deck\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classDeckPreviewWindow_ac04b760847eea5016cd3390f24c90a20}\label{classDeckPreviewWindow_ac04b760847eea5016cd3390f24c90a20}} 
+\index{DeckPreviewWindow@{DeckPreviewWindow}!m\_user@{m\_user}}
+\index{m\_user@{m\_user}!DeckPreviewWindow@{DeckPreviewWindow}}
+\doxysubsubsection{\texorpdfstring{m\_user}{m\_user}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classUser}{User}} Deck\+Preview\+Window\+::m\+\_\+user\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classDeckPreviewWindow_a7eb28d820efa738d8715ad9a78f37709}\label{classDeckPreviewWindow_a7eb28d820efa738d8715ad9a78f37709}} 
+\index{DeckPreviewWindow@{DeckPreviewWindow}!ui@{ui}}
+\index{ui@{ui}!DeckPreviewWindow@{DeckPreviewWindow}}
+\doxysubsubsection{\texorpdfstring{ui}{ui}}
+{\footnotesize\ttfamily Ui\+::\+Deck\+Preview\+Window$\ast$ Deck\+Preview\+Window\+::ui\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+app/lib/\mbox{\hyperlink{deckpreviewwindow_8h}{deckpreviewwindow.\+h}}\item 
+app/src/\mbox{\hyperlink{deckpreviewwindow_8cpp}{deckpreviewwindow.\+cpp}}\end{DoxyCompactItemize}

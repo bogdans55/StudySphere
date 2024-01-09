@@ -1,0 +1,104 @@
+.TH "DeckStats" 3 "Tue Jan 9 2024" "StudySphere" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+DeckStats
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <deckstats\&.h>\fP
+.PP
+Inherits \fBSerializable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDeckStats\fP ()"
+.br
+.ti -1c
+.RI "\fBDeckStats\fP (unsigned numGrades)"
+.br
+.ti -1c
+.RI "\fBDeckStats\fP (const \fBDeckStats\fP &deckStats)"
+.br
+.ti -1c
+.RI "\fB~DeckStats\fP () override"
+.br
+.ti -1c
+.RI "QVector< unsigned > \fBgrades\fP ()"
+.br
+.ti -1c
+.RI "unsigned int \fBtimesUsed\fP () const"
+.br
+.ti -1c
+.RI "QString \fBcreationDate\fP () const"
+.br
+.ti -1c
+.RI "void \fBaddGrade\fP (unsigned cardIndex, unsigned grade)"
+.br
+.ti -1c
+.RI "void \fBusedDeck\fP ()"
+.br
+.ti -1c
+.RI "QVariant \fBtoVariant\fP () const override"
+.br
+.ti -1c
+.RI "void \fBfromVariant\fP (const QVariant &variant) override"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "QVector< unsigned > \fBm_grades\fP"
+.br
+.ti -1c
+.RI "unsigned \fBm_timesUsed\fP"
+.br
+.ti -1c
+.RI "QString \fBm_creationDate\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "DeckStats::DeckStats ()"
+
+.SS "DeckStats::DeckStats (unsigned numGrades)"
+
+.SS "DeckStats::DeckStats (const \fBDeckStats\fP & deckStats)"
+
+.SS "DeckStats::~DeckStats ()\fC [override]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void DeckStats::addGrade (unsigned cardIndex, unsigned grade)"
+
+.SS "QString DeckStats::creationDate () const\fC [inline]\fP"
+
+.SS "void DeckStats::fromVariant (const QVariant & variant)\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Implements \fBSerializable\fP\&.
+.SS "QVector<unsigned> DeckStats::grades ()\fC [inline]\fP"
+
+.SS "unsigned int DeckStats::timesUsed () const\fC [inline]\fP"
+
+.SS "QVariant DeckStats::toVariant () const\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Implements \fBSerializable\fP\&.
+.SS "void DeckStats::usedDeck ()"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "QString DeckStats::m_creationDate\fC [private]\fP"
+
+.SS "QVector<unsigned> DeckStats::m_grades\fC [private]\fP"
+
+.SS "unsigned DeckStats::m_timesUsed\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for StudySphere from the source code\&.
