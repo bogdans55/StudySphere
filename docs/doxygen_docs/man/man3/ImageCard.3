@@ -1,0 +1,139 @@
+.TH "ImageCard" 3StudySphere" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ImageCard
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <imagecard\&.h>\fP
+.PP
+Inherits \fBCard\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBImageCard\fP ()"
+.br
+.ti -1c
+.RI "\fBImageCard\fP (QString \fBquestionText\fP, QString answerText, \fBDifficulty\fP \fBquestionDifficulty\fP)"
+.br
+.ti -1c
+.RI "\fBImageCard\fP (QString \fBquestionText\fP, QString answerText, \fBDifficulty\fP \fBquestionDifficulty\fP, QImage \fBquestionImage\fP, QImage \fBanswerImage\fP)"
+.br
+.ti -1c
+.RI "\fB~ImageCard\fP () override"
+.br
+.ti -1c
+.RI "QImage \fBquestionImage\fP () const"
+.br
+.ti -1c
+.RI "QImage \fBanswerImage\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetQuestionImage\fP (const QImage &\fBquestionImage\fP)"
+.br
+.ti -1c
+.RI "void \fBsetAnswerImage\fP (const QImage &\fBanswerImage\fP)"
+.br
+.in -1c
+
+Public Member Functions inherited from \fBCard\fP
+.in +1c
+.ti -1c
+.RI "\fBCard\fP ()"
+.br
+.ti -1c
+.RI "\fBCard\fP (QString mQuestionText, QString mAnswerText, \fBDifficulty\fP mQuestionDifficulty)"
+.br
+.ti -1c
+.RI "\fBCard\fP (const \fBCard\fP &card)"
+.br
+.ti -1c
+.RI "\fB~Card\fP () override"
+.br
+.ti -1c
+.RI "QString \fBquestionText\fP () const"
+.br
+.ti -1c
+.RI "QString \fBquestionAnswer\fP () const"
+.br
+.ti -1c
+.RI "\fBDifficulty\fP \fBquestionDifficulty\fP () const"
+.br
+.ti -1c
+.RI "QVariant \fBtoVariant\fP () const override"
+.br
+.ti -1c
+.RI "void \fBfromVariant\fP (const QVariant &variant) override"
+.br
+.in -1c
+
+Public Member Functions inherited from \fBSerializable\fP
+.in +1c
+.ti -1c
+.RI "virtual \fB~Serializable\fP ()=default"
+.br
+.ti -1c
+.RI "virtual QVariant \fBtoVariant\fP () const =0"
+.br
+.ti -1c
+.RI "virtual void \fBfromVariant\fP (const QVariant &variant)=0"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "QImage \fBm_questionImage\fP"
+.br
+.ti -1c
+.RI "QImage \fBm_answerImage\fP"
+.br
+.in -1c
+.SS "Additional Inherited Members"
+
+
+Protected Attributes inherited from \fBCard\fP
+.in +1c
+.ti -1c
+.RI "QString \fBm_questionText\fP"
+.br
+.ti -1c
+.RI "QString \fBm_answerText\fP"
+.br
+.ti -1c
+.RI "\fBDifficulty\fP \fBm_questionDifficulty\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "ImageCard::ImageCard ()"
+
+.SS "ImageCard::ImageCard (QString questionText, QString answerText, \fBDifficulty\fP questionDifficulty)"
+
+.SS "ImageCard::ImageCard (QString questionText, QString answerText, \fBDifficulty\fP questionDifficulty, QImage questionImage, QImage answerImage)"
+
+.SS "ImageCard::~ImageCard ()\fC [override]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "QImage ImageCard::answerImage () const\fC [inline]\fP"
+
+.SS "QImage ImageCard::questionImage () const\fC [inline]\fP"
+
+.SS "void ImageCard::setAnswerImage (const QImage & answerImage)"
+
+.SS "void ImageCard::setQuestionImage (const QImage & questionImage)"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "QImage ImageCard::m_answerImage\fC [private]\fP"
+
+.SS "QImage ImageCard::m_questionImage\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for StudySphere from the source code\&.

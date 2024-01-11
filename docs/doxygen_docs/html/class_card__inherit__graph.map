@@ -1,0 +1,9 @@
+<map id="Card" name="Card">
+<area shape="rect" id="Node000001" title=" " alt="" coords="73,165,213,448"/>
+<area shape="rect" id="Node000003" href="$class_image_card.html" title=" " alt="" coords="5,496,141,736"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="110,463,103,497,98,496,105,462"/>
+<area shape="rect" id="Node000004" href="$class_plain_card.html" title=" " alt="" coords="165,560,261,672"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="181,462,203,560,198,561,176,463"/>
+<area shape="rect" id="Node000002" href="$class_serializable.html" title=" " alt="" coords="89,5,196,117"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,132,145,165,140,165,140,132"/>
+</map>

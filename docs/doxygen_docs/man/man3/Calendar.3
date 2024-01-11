@@ -1,0 +1,87 @@
+.TH "Calendar" 3StudySphere" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Calendar
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <calendar\&.h>\fP
+.PP
+Inherits \fBSerializable\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCalendar\fP ()"
+.br
+.ti -1c
+.RI "\fB~Calendar\fP () override"
+.br
+.ti -1c
+.RI "QVariant \fBtoVariant\fP () const override"
+.br
+.ti -1c
+.RI "void \fBfromVariant\fP (const QVariant &variant) override"
+.br
+.ti -1c
+.RI "void \fBaddEvent\fP (QDate date, QTime time, QString text)"
+.br
+.ti -1c
+.RI "void \fBdeleteAll\fP ()"
+.br
+.ti -1c
+.RI "QMap< QDate, QVector< QPair< QTime, QString > > > \fBevents\fP () const"
+.br
+.in -1c
+
+Public Member Functions inherited from \fBSerializable\fP
+.in +1c
+.ti -1c
+.RI "virtual \fB~Serializable\fP ()=default"
+.br
+.ti -1c
+.RI "virtual QVariant \fBtoVariant\fP () const =0"
+.br
+.ti -1c
+.RI "virtual void \fBfromVariant\fP (const QVariant &variant)=0"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "QMap< QDate, QVector< QPair< QTime, QString > > > \fBm_events\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Calendar::Calendar ()"
+
+.SS "Calendar::~Calendar ()\fC [override]\fP, \fC [default]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void Calendar::addEvent (QDate date, QTime time, QString text)"
+
+.SS "void Calendar::deleteAll ()"
+
+.SS "QMap< QDate, QVector< QPair< QTime, QString > > > Calendar::events () const\fC [inline]\fP"
+
+.SS "void Calendar::fromVariant (const QVariant & variant)\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Implements \fBSerializable\fP\&.
+.SS "QVariant Calendar::toVariant () const\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Implements \fBSerializable\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "QMap<QDate, QVector<QPair<QTime, QString> > > Calendar::m_events\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for StudySphere from the source code\&.

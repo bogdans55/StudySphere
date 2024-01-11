@@ -1,0 +1,42 @@
+\doxysection{deckstats.\+h}
+\hypertarget{deckstats_8h_source}{}\label{deckstats_8h_source}\index{app/lib/deckstats.h@{app/lib/deckstats.h}}
+\mbox{\hyperlink{deckstats_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DECKSTATS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DECKSTATS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{card_8h}{card.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{deck_8h}{deck.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{user_8h}{user.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <QDate>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <QMap>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_deck_stats}{DeckStats}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_serializable}{Serializable}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00013\ \ \ \ \ QVector<unsigned>\ \mbox{\hyperlink{class_deck_stats_acc7806ae8fd7f30faefb7e845338a15e}{m\_grades}};}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \mbox{\hyperlink{class_deck_stats_a37f1a096e23ac0c1071ca22a254e0866}{m\_timesUsed}};}
+\DoxyCodeLine{00015\ \ \ \ \ QString\ \mbox{\hyperlink{class_deck_stats_a85e180364a780870218b75c88efcc2f3}{m\_creationDate}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_deck_stats_ae443df2dcb6f121278b4d9d4b88c5ee9}{DeckStats}}();}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_deck_stats_ac8d42b19144cce35784210be9b9668c0}{DeckStats}}(\textcolor{keywordtype}{unsigned}\ numGrades);}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{class_deck_stats_ae443df2dcb6f121278b4d9d4b88c5ee9}{DeckStats}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_deck_stats}{DeckStats}}\ \&deckStats);}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_deck_stats_a316b4a80b604748af1257a727c33b1d9}{\string~DeckStats}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{inline}\ QVector<unsigned>\ \mbox{\hyperlink{class_deck_stats_a9d5395ea0dca6c3aa839c1670abff659}{grades}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_deck_stats_acc7806ae8fd7f30faefb7e845338a15e}{m\_grades}};\ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_deck_stats_a24ea0d929ea943e6321fe1b448414525}{timesUsed}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_deck_stats_a37f1a096e23ac0c1071ca22a254e0866}{m\_timesUsed}};\ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{inline}\ QString\ \mbox{\hyperlink{class_deck_stats_a43f2f2c24c179e0a83ba841e72995738}{creationDate}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_deck_stats_a85e180364a780870218b75c88efcc2f3}{m\_creationDate}};\ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_deck_stats_a05c6084556be426b8a15b202951ed769}{addGrade}}(\textcolor{keywordtype}{unsigned}\ cardIndex,\ \textcolor{keywordtype}{unsigned}\ grade);}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_deck_stats_afe1cde311ea9e2933ae7a056dc942613}{usedDeck}}();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ QVariant\ \mbox{\hyperlink{class_deck_stats_a26c76d86ffa5d329cdb7769195d36130}{toVariant}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_deck_stats_a27ab75d3a6a4fe2c3d38c931a323ee43}{fromVariant}}(\textcolor{keyword}{const}\ QVariant\ \&variant)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00034\ \};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DECKSTATS\_H}}
+
+\end{DoxyCode}

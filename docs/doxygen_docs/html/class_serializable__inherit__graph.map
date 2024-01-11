@@ -1,0 +1,23 @@
+<map id="Serializable" name="Serializable">
+<area shape="rect" id="Node000001" title=" " alt="" coords="483,5,589,117"/>
+<area shape="rect" id="Node000002" href="$class_activity.html" title=" " alt="" coords="5,251,112,512"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="469,74,378,88,276,109,185,136,150,151,126,167,110,186,97,206,78,252,73,250,92,204,105,182,122,163,147,146,183,131,275,104,377,83,468,69"/>
+<area shape="rect" id="Node000003" href="$class_calendar.html" title=" " alt="" coords="137,283,234,480"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="468,72,414,82,355,100,298,128,272,146,249,167,229,193,214,222,196,283,191,282,209,220,225,190,245,164,268,142,295,123,353,95,413,77,467,67"/>
+<area shape="rect" id="Node000004" href="$class_card.html" title=" " alt="" coords="258,240,398,523"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="473,107,441,135,413,167,391,203,372,241,367,239,386,200,409,164,437,131,469,103"/>
+<area shape="rect" id="Node000007" href="$class_deck.html" title=" " alt="" coords="422,165,519,597"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="524,133,517,166,512,165,519,131"/>
+<area shape="rect" id="Node000008" href="$class_deck_stats.html" title=" " alt="" coords="544,219,659,544"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="553,132,571,218,566,219,548,133"/>
+<area shape="rect" id="Node000009" href="$class_planner.html" title=" " alt="" coords="683,261,799,501"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="603,99,640,128,673,164,699,211,719,260,714,262,695,213,669,167,637,132,600,103"/>
+<area shape="rect" id="Node000010" href="$class_to_do_list.html" title=" " alt="" coords="823,261,942,501"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="605,68,656,80,712,98,766,126,814,163,832,185,846,209,866,261,862,263,841,212,827,188,810,167,763,130,710,103,654,85,603,74"/>
+<area shape="rect" id="Node000011" href="$class_user.html" title=" " alt="" coords="966,283,1074,480"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="605,68,697,83,801,103,894,130,931,146,956,163,978,189,994,219,1006,250,1014,282,1009,283,1001,252,990,221,974,192,953,167,928,151,893,135,799,108,696,88,604,74"/>
+<area shape="rect" id="Node000005" href="$class_image_card.html" title=" " alt="" coords="189,645,325,885"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="302,538,282,646,277,645,297,537"/>
+<area shape="rect" id="Node000006" href="$class_plain_card.html" title=" " alt="" coords="349,709,445,821"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="359,537,390,709,385,710,354,538"/>
+</map>

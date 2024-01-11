@@ -1,0 +1,111 @@
+.TH "Settings" 3StudySphere" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Settings
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <settings\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBsetLanguage\fP (const int index)"
+.br
+.ti -1c
+.RI "void \fBsetTheme\fP (const int index)"
+.br
+.ti -1c
+.RI "void \fBsetVolume\fP (const double &newVolume)"
+.br
+.ti -1c
+.RI "void \fBsetSound\fP (const bool &newSound)"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static \fBSettings\fP & \fBinstance\fP (QApplication *app)"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBSettings\fP (QApplication *app)"
+.br
+.ti -1c
+.RI "\fB~Settings\fP ()"
+.br
+.ti -1c
+.RI "\fBSettings\fP (const \fBSettings\fP &)=delete"
+.br
+.ti -1c
+.RI "\fBSettings\fP & \fBoperator=\fP (const \fBSettings\fP &)=delete"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBLanguage\fP \fBm_language\fP"
+.br
+.ti -1c
+.RI "\fBTheme\fP \fBm_theme\fP"
+.br
+.ti -1c
+.RI "double \fBm_volume\fP"
+.br
+.ti -1c
+.RI "bool \fBm_sound\fP"
+.br
+.ti -1c
+.RI "QApplication * \fBm_app\fP"
+.br
+.ti -1c
+.RI "QTranslator * \fBm_translator\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "Settings::Settings (QApplication * app)\fC [private]\fP"
+
+.SS "Settings::~Settings ()\fC [private]\fP"
+
+.SS "Settings::Settings (const \fBSettings\fP &)\fC [private]\fP, \fC [delete]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBSettings\fP & Settings::instance (QApplication * app)\fC [static]\fP"
+
+.SS "\fBSettings\fP & Settings::operator= (const \fBSettings\fP &)\fC [private]\fP, \fC [delete]\fP"
+
+.SS "void Settings::setLanguage (const int index)"
+
+.SS "void Settings::setSound (const bool & newSound)"
+
+.SS "void Settings::setTheme (const int index)"
+
+.SS "void Settings::setVolume (const double & newVolume)"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "QApplication* Settings::m_app\fC [private]\fP"
+
+.SS "\fBLanguage\fP Settings::m_language\fC [private]\fP"
+
+.SS "bool Settings::m_sound\fC [private]\fP"
+
+.SS "\fBTheme\fP Settings::m_theme\fC [private]\fP"
+
+.SS "QTranslator* Settings::m_translator\fC [private]\fP"
+
+.SS "double Settings::m_volume\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for StudySphere from the source code\&.

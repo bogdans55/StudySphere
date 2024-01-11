@@ -1,0 +1,52 @@
+\doxysection{settings.\+h}
+\hypertarget{settings_8h_source}{}\label{settings_8h_source}\index{app/lib/settings.h@{app/lib/settings.h}}
+\mbox{\hyperlink{settings_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SETTINGS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SETTINGS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QApplication>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QTranslator>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{settings_8h_a315ca917ad583797f709ea477dd28705}{Language}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{settings_8h_a315ca917ad583797f709ea477dd28705a751068e6597cd888ae361ecc0b4f8c6f}{SERBIAN}}\ =\ 0,}
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{settings_8h_a315ca917ad583797f709ea477dd28705afb297577dad4cc723ce8e94430f3defc}{ENGLISH}}}
+\DoxyCodeLine{00012\ \};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{settings_8h_a8edd6ed73b15a0ad6b139b947e79278b}{Theme}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{settings_8h_a8edd6ed73b15a0ad6b139b947e79278ba35d6719cb4d7577c031b3d79057a1b79}{BLUE}}\ =\ 0,}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{settings_8h_a8edd6ed73b15a0ad6b139b947e79278bace9ee4c1a6b777940c7f3a766a9a88d4}{ORANGE}},}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{settings_8h_a8edd6ed73b15a0ad6b139b947e79278ba5564de0baf1f25257db17367eba68edd}{DARK}}}
+\DoxyCodeLine{00019\ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_settings}{Settings}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{settings_8h_a315ca917ad583797f709ea477dd28705}{Language}}\ \mbox{\hyperlink{class_settings_a05e4294a384afe9a103cfd907c348b91}{m\_language}};}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{settings_8h_a8edd6ed73b15a0ad6b139b947e79278b}{Theme}}\ \mbox{\hyperlink{class_settings_ab911bcc3e7dc0cdebd4026a867c8c041}{m\_theme}};}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_settings_a6510d11a8adf79422c5fd7628c09c7f2}{m\_volume}};}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_settings_aa180ba304c3fbff9d8644280e42653fe}{m\_sound}};}
+\DoxyCodeLine{00028\ \ \ \ \ QApplication\ *\mbox{\hyperlink{class_settings_acd8fbb4bafd138a531099b0dc49e1dd9}{m\_app}};}
+\DoxyCodeLine{00029\ \ \ \ \ QTranslator\ *\mbox{\hyperlink{class_settings_a5a37448e21f31c2e1f31f9070e7bcdd3}{m\_translator}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{class_settings}{Settings}}(QApplication\ *app);}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_settings_a4a65be5921dfc9fddc476e5320541d89}{\string~Settings}}();}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{class_settings_a7c0c5e4bee3d986cc6662843ab07c772}{Settings}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_settings}{Settings}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{class_settings}{Settings}}\ \&\mbox{\hyperlink{class_settings_a698613fcf1a0b2e7209371d524a1bcc4}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_settings}{Settings}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_settings}{Settings}}\ \&\mbox{\hyperlink{class_settings_a18dd74eaf97ac35fb5123eabaed4518c}{instance}}(QApplication\ *app);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_settings_ae37700cef480d7771dd619a78ffd1956}{setLanguage}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ index);}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_settings_a28004fd2c12404aa945fbd2a7672e339}{setTheme}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ index);}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_settings_a8484a40d478ec1bab4789ff2c927cdc3}{setVolume}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ \&newVolume);}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_settings_a72811a3f40950d3d4667a5c16af585a0}{setSound}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \&newSound);}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SETTINGS\_H}}
+
+\end{DoxyCode}

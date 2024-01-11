@@ -1,0 +1,20 @@
+<map id="app/src/planner.cpp" name="app/src/planner.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="128,5,263,32"/>
+<area shape="rect" id="Node000002" href="$planner_8h.html" title=" " alt="" coords="144,80,247,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="198,33,198,64,193,64,193,33"/>
+<area shape="rect" id="Node000003" href="$activity_8h.html" title=" " alt="" coords="115,155,188,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="190,109,169,143,165,140,185,106"/>
+<area shape="rect" id="Node000004" href="$serializable_8h.html" title=" " alt="" coords="5,229,103,256"/>
+<area shape="poly" id="edge7_Node000002_Node000004" title=" " alt="" coords="171,109,138,129,105,156,83,186,67,216,63,214,79,183,101,153,135,125,168,105"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="211,155,268,181"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="205,106,226,140,222,143,201,109"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="291,155,361,181"/>
+<area shape="poly" id="edge9_Node000002_Node000009" title=" " alt="" coords="219,105,291,144,288,149,217,110"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="136,184,84,222,81,218,133,180"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="127,229,192,256"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="155,182,159,213,154,214,150,182"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="216,229,276,256"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="169,180,219,218,216,222,166,184"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="18,304,90,331"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="57,257,57,288,51,288,51,257"/>
+</map>

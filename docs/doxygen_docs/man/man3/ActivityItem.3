@@ -1,0 +1,85 @@
+.TH "ActivityItem" 3StudySphere" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ActivityItem
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <activityitem\&.h>\fP
+.PP
+Inherits QGraphicsItem\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBActivityItem\fP (\fBActivity\fP \fBactivity\fP)"
+.br
+.ti -1c
+.RI "QRectF \fBboundingRect\fP () const override"
+.br
+.ti -1c
+.RI "void \fBpaint\fP (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override"
+.br
+.ti -1c
+.RI "unsigned \fBwidth\fP () const"
+.br
+.ti -1c
+.RI "unsigned \fBheight\fP () const"
+.br
+.ti -1c
+.RI "void \fBsetWidth\fP (unsigned \fBwidth\fP)"
+.br
+.ti -1c
+.RI "void \fBsetColor\fP (QColor color)"
+.br
+.ti -1c
+.RI "\fBActivity\fP \fBactivity\fP () const"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBActivity\fP \fBm_activity\fP"
+.br
+.ti -1c
+.RI "unsigned \fBm_width\fP"
+.br
+.ti -1c
+.RI "QColor \fBm_color\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "ActivityItem::ActivityItem (\fBActivity\fP activity)"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBActivity\fP ActivityItem::activity () const\fC [inline]\fP"
+
+.SS "QRectF ActivityItem::boundingRect () const\fC [override]\fP"
+
+.SS "unsigned ActivityItem::height () const\fC [inline]\fP"
+
+.SS "void ActivityItem::paint (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget)\fC [override]\fP"
+
+.SS "void ActivityItem::setColor (QColor color)"
+
+.SS "void ActivityItem::setWidth (unsigned width)"
+
+.SS "unsigned ActivityItem::width () const\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBActivity\fP ActivityItem::m_activity\fC [private]\fP"
+
+.SS "QColor ActivityItem::m_color\fC [private]\fP"
+
+.SS "unsigned ActivityItem::m_width\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for StudySphere from the source code\&.

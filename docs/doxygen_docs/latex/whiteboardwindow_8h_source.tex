@@ -1,0 +1,57 @@
+\doxysection{whiteboardwindow.\+h}
+\hypertarget{whiteboardwindow_8h_source}{}\label{whiteboardwindow_8h_source}\index{app/lib/whiteboardwindow.h@{app/lib/whiteboardwindow.h}}
+\mbox{\hyperlink{whiteboardwindow_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ WHITEBOARDWINDOW\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ WHITEBOARDWINDOW\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QApplication>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QMainWindow>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <QMouseEvent>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <QPainter>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <QPen>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <QPushButton>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <QVBoxLayout>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <QWidget>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_ui}{Ui}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_whiteboard_window}{WhiteboardWindow}};}
+\DoxyCodeLine{00016\ \}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_whiteboard_window}{WhiteboardWindow}}\ :\ \textcolor{keyword}{public}\ QWidget}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_whiteboard_window}{WhiteboardWindow}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{class_whiteboard_window_af6469c8e98d2f50cb0ed40f7be648962}{\string~WhiteboardWindow}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_whiteboard_window_afe08ac88f9588e8c4f440a2e73f36e20}{paintEvent}}(QPaintEvent\ *event)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_whiteboard_window_a885c476142ffccca2ff1e85668c748f8}{mousePressEvent}}(QMouseEvent\ *event)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_whiteboard_window_a13ede702c75e5c8259f3726e1f53df8f}{mouseMoveEvent}}(QMouseEvent\ *event)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_whiteboard_window_ad21dbeb25f7f7a6fe0583be2f765deac}{mouseReleaseEvent}}(QMouseEvent\ *event)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_whiteboard_window_a668b110dca3a6613e1abf8f2bac6d811}{resizeEvent}}(QResizeEvent\ *event)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00038\ \ \ \ \ Ui::WhiteboardWindow\ *\mbox{\hyperlink{class_whiteboard_window_a9369d3be68b998f2357cadf558c8762d}{ui}};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_whiteboard_window_a7eef2b5c5dd6f74eeaac4f2e13196654}{drawLineTo}}(\textcolor{keyword}{const}\ QPoint\ \&endPoint);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ QImage\ \mbox{\hyperlink{class_whiteboard_window_ae246107a044208ee28fca9966983f538}{image}};}
+\DoxyCodeLine{00043\ \ \ \ \ QPoint\ \mbox{\hyperlink{class_whiteboard_window_a560d58a5562e24dff4d1a7380f8288b1}{lastPoint}};}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_whiteboard_window_ad12c4a73c1cce3ae21350c694485049c}{drawing}};}
+\DoxyCodeLine{00045\ \ \ \ \ QColor\ \mbox{\hyperlink{class_whiteboard_window_a66c3f6eea528cc3b4ad28b8755d3b1fe}{penColor}};}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_whiteboard_window_a627dc7502368cdbfb5908e648aeec8bd}{penWidth}};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_whiteboard_window_ab34d31bfadd9039b9e59f31d620a1331}{resizeImage}}(QImage\ *\mbox{\hyperlink{class_whiteboard_window_ae246107a044208ee28fca9966983f538}{image}},\ \textcolor{keyword}{const}\ QSize\ \&newSize);}
+\DoxyCodeLine{00049\ \};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ WHITEBOARDWINDOW\_H}}
+
+\end{DoxyCode}

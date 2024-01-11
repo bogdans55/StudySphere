@@ -1,0 +1,21 @@
+\doxysection{serializer.\+h}
+\hypertarget{serializer_8h_source}{}\label{serializer_8h_source}\index{app/lib/serializer.h@{app/lib/serializer.h}}
+\mbox{\hyperlink{serializer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SERIALIZER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SERIALIZER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{serializable_8h}{serializable.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QString>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_serializer}{Serializer}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_serializer_abda2213522292d02c265182c44e7aa51}{\string~Serializer}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_serializer_a06261709ceb3c490189d9deeecb84905}{save}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_serializable}{Serializable}}\ \&serializable,\ \textcolor{keyword}{const}\ QString\ \&filepath,\ \textcolor{keyword}{const}\ QString\ \&rootname\ =\ \textcolor{stringliteral}{"{}"{}})\ =\ 0;}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_serializer_ab522893076354436973f30ce71ac3e91}{load}}(\mbox{\hyperlink{class_serializable}{Serializable}}\ \&serializable,\ \textcolor{keyword}{const}\ QString\ \&filepath)\ =\ 0;}
+\DoxyCodeLine{00013\ \};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SERIALIZER\_H}}
+
+\end{DoxyCode}

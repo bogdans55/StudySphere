@@ -1,0 +1,13 @@
+<map id="DeckPreviewWindow" name="DeckPreviewWindow">
+<area shape="rect" id="Node000001" title=" " alt="" coords="20,903,215,1233"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,599,69,668"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="49,682,90,903,84,904,44,683"/>
+<area shape="rect" id="Node000003" href="$class_user.html" title=" " alt="" coords="95,167,203,364"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="138,364,132,428,121,667,118,886,113,886,115,667,126,428,133,363"/>
+<area shape="rect" id="Node000005" href="$class_deck.html" title=" " alt="" coords="193,428,290,839"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="166,363,174,403,190,466,185,467,169,405,161,364"/>
+<area shape="rect" id="Node000004" href="$class_serializable.html" title=" " alt="" coords="141,5,248,117"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="182,133,174,167,169,166,176,131"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="213,131,219,166,232,299,239,428,234,428,227,299,213,167,208,132"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="195,805,172,887,166,886,190,803"/>
+</map>

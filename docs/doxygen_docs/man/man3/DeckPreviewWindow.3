@@ -1,0 +1,117 @@
+.TH "DeckPreviewWindow" 3StudySphere" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+DeckPreviewWindow
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <deckpreviewwindow\&.h>\fP
+.PP
+Inherits QWidget\&.
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBsendPublicDeck\fP (QString deckNameID)"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDeckPreviewWindow\fP (QWidget *parent=nullptr)"
+.br
+.ti -1c
+.RI "\fBDeckPreviewWindow\fP (\fBDeck\fP *deck, \fBUser\fP &user, QWidget *parent=nullptr)"
+.br
+.ti -1c
+.RI "\fB~DeckPreviewWindow\fP () override"
+.br
+.in -1c
+.SS "Private Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBon_pushButton_flip_preview_clicked\fP ()"
+.br
+.ti -1c
+.RI "void \fBon_pushButton_cancel_clicked\fP ()"
+.br
+.ti -1c
+.RI "void \fBon_pushButton_add_clicked\fP ()"
+.br
+.ti -1c
+.RI "void \fBon_pushButton_next_clicked\fP ()"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBhasNextCard\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetDifficultyColor\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "Ui::DeckPreviewWindow * \fBui\fP"
+.br
+.ti -1c
+.RI "bool \fBm_answerShowed\fP = false"
+.br
+.ti -1c
+.RI "unsigned \fBm_currentCardIndex\fP = 0"
+.br
+.ti -1c
+.RI "\fBUser\fP \fBm_user\fP"
+.br
+.ti -1c
+.RI "\fBDeck\fP \fBm_deck\fP"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "DeckPreviewWindow::DeckPreviewWindow (QWidget * parent = \fCnullptr\fP)\fC [explicit]\fP"
+
+.SS "DeckPreviewWindow::DeckPreviewWindow (\fBDeck\fP * deck, \fBUser\fP & user, QWidget * parent = \fCnullptr\fP)"
+
+.SS "DeckPreviewWindow::~DeckPreviewWindow ()\fC [override]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool DeckPreviewWindow::hasNextCard ()\fC [private]\fP"
+
+.SS "void DeckPreviewWindow::on_pushButton_add_clicked ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void DeckPreviewWindow::on_pushButton_cancel_clicked ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void DeckPreviewWindow::on_pushButton_flip_preview_clicked ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void DeckPreviewWindow::on_pushButton_next_clicked ()\fC [private]\fP, \fC [slot]\fP"
+
+.SS "void DeckPreviewWindow::sendPublicDeck (QString deckNameID)\fC [signal]\fP"
+
+.SS "void DeckPreviewWindow::setDifficultyColor ()\fC [private]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "bool DeckPreviewWindow::m_answerShowed = false\fC [private]\fP"
+
+.SS "unsigned DeckPreviewWindow::m_currentCardIndex = 0\fC [private]\fP"
+
+.SS "\fBDeck\fP DeckPreviewWindow::m_deck\fC [private]\fP"
+
+.SS "\fBUser\fP DeckPreviewWindow::m_user\fC [private]\fP"
+
+.SS "Ui::DeckPreviewWindow* DeckPreviewWindow::ui\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for StudySphere from the source code\&.
