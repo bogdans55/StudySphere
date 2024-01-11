@@ -58,6 +58,12 @@ TEST_CASE("Deck Getters", "[Deck]") {
         REQUIRE(cards.contains(card2));
     }
 
+	SECTION("Empty Cards Getter") {
+		Deck deck;
+		QVector<Card*> cards = deck.cards();
+		REQUIRE(cards.size() == 0);
+	}
+
     SECTION("Privacy Getter") {
         Deck deck("Science Deck", user, Privacy::PUBLIC);
         REQUIRE(deck.privacy() == Privacy::PUBLIC);
