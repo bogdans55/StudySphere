@@ -6,7 +6,9 @@ Activity::Activity() : m_activityText(), m_start(), m_end() {}
 
 Activity::Activity(QString activityText, QTime start, QTime end)
 	: m_activityText(std::move(activityText)), m_start(start), m_end(end)
-{}
+{
+	
+}
 
 Activity::~Activity() = default;
 
