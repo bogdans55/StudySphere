@@ -24,7 +24,7 @@ ENV QT_PLUGIN_PATH /opt/qt/${QT}/gcc_64/plugins/
 ENV QML_IMPORT_PATH /opt/qt/${QT}/gcc_64/qml/
 ENV QML2_IMPORT_PATH /opt/qt/${QT}/gcc_64/qml/
 
-COPY ./server /server
+COPY . /server
 
 WORKDIR /server
 
