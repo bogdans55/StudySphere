@@ -1,4 +1,4 @@
-.TH "ImageCard" 3StudySphere" \" -*- nroff -*-
+.TH "ImageCard" 3 "StudySphere" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,7 +7,7 @@ ImageCard
 .br
 .PP
 .PP
-\fC#include <imagecard\&.h>\fP
+\fR#include <imagecard\&.h>\fP
 .PP
 Inherits \fBCard\fP\&.
 .SS "Public Member Functions"
@@ -75,12 +75,6 @@ Public Member Functions inherited from \fBSerializable\fP
 .ti -1c
 .RI "virtual \fB~Serializable\fP ()=default"
 .br
-.ti -1c
-.RI "virtual QVariant \fBtoVariant\fP () const =0"
-.br
-.ti -1c
-.RI "virtual void \fBfromVariant\fP (const QVariant &variant)=0"
-.br
 .in -1c
 .SS "Private Attributes"
 
@@ -115,13 +109,13 @@ Protected Attributes inherited from \fBCard\fP
 
 .SS "ImageCard::ImageCard (QString questionText, QString answerText, \fBDifficulty\fP questionDifficulty, QImage questionImage, QImage answerImage)"
 
-.SS "ImageCard::~ImageCard ()\fC [override]\fP, \fC [default]\fP"
+.SS "ImageCard::~ImageCard ()\fR [override]\fP, \fR [default]\fP"
 
 .SH "Member Function Documentation"
 .PP 
-.SS "QImage ImageCard::answerImage () const\fC [inline]\fP"
+.SS "QImage ImageCard::answerImage () const\fR [inline]\fP"
 
-.SS "QImage ImageCard::questionImage () const\fC [inline]\fP"
+.SS "QImage ImageCard::questionImage () const\fR [inline]\fP"
 
 .SS "void ImageCard::setAnswerImage (const QImage & answerImage)"
 
@@ -129,9 +123,9 @@ Protected Attributes inherited from \fBCard\fP
 
 .SH "Member Data Documentation"
 .PP 
-.SS "QImage ImageCard::m_answerImage\fC [private]\fP"
+.SS "QImage ImageCard::m_answerImage\fR [private]\fP"
 
-.SS "QImage ImageCard::m_questionImage\fC [private]\fP"
+.SS "QImage ImageCard::m_questionImage\fR [private]\fP"
 
 
 .SH "Author"

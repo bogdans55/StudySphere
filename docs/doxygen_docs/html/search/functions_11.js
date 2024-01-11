@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['save_0',['save',['../class_serializer.html#a06261709ceb3c490189d9deeecb84905',1,'Serializer::save()'],['../class_j_s_o_n_serializer.html#acff40fdafdc059bc6adf4ded96bb89ee',1,'JSONSerializer::save()']]],
+  ['save_0',['save',['../class_j_s_o_n_serializer.html#acff40fdafdc059bc6adf4ded96bb89ee',1,'JSONSerializer::save()'],['../class_serializer.html#a06261709ceb3c490189d9deeecb84905',1,'Serializer::save()']]],
   ['savecalendar_1',['saveCalendar',['../class_main_window.html#a30d8b1e1cddc178901245bb2ded17f6c',1,'MainWindow']]],
   ['saveonserver_2',['saveOnServer',['../class_main_window.html#ab12d73c2577033924cbd795581e13af4',1,'MainWindow']]],
   ['saveplanner_3',['savePlanner',['../class_main_window.html#aa23137c472354e946392cc72e0bade40',1,'MainWindow']]],
@@ -24,7 +24,7 @@ var searchData=
   ['setuptableview_21',['setupTableView',['../class_main_window.html#a51865cad1d922959c457e059f6d06045',1,'MainWindow']]],
   ['setusername_22',['setUsername',['../class_user.html#ad34f17da7fb5636bbdf9e9d3fe4f7b0a',1,'User']]],
   ['setvolume_23',['setVolume',['../class_settings.html#a8484a40d478ec1bab4789ff2c927cdc3',1,'Settings']]],
-  ['setwidth_24',['setWidth',['../class_schedule_item.html#a911c7940248892bb5062c253753437e8',1,'ScheduleItem::setWidth()'],['../class_activity_item.html#abe0e4f947443ef07fc985c674f01bca3',1,'ActivityItem::setWidth()']]],
+  ['setwidth_24',['setWidth',['../class_activity_item.html#abe0e4f947443ef07fc985c674f01bca3',1,'ActivityItem::setWidth()'],['../class_schedule_item.html#a911c7940248892bb5062c253753437e8',1,'ScheduleItem::setWidth()']]],
   ['showactivities_25',['showActivities',['../class_main_window.html#aafc76bd14c557ea283d120abd347d7fb',1,'MainWindow']]],
   ['start_26',['start',['../class_activity.html#a464419848df89f3e18ca64da895e39fa',1,'Activity']]],
   ['startsession_27',['startSession',['../class_study_session.html#a0916d52540e968e1a3c42c4e36a2c873',1,'StudySession']]],

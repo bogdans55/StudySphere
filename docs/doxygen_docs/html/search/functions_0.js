@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['activities_0',['activities',['../class_planner_scene.html#a0ef1a11a37074095e41812da84434e15',1,'PlannerScene::activities()'],['../class_planner.html#a56dd164efbc457c651462a12addea4bd',1,'Planner::activities()']]],
+  ['activities_0',['activities',['../class_planner.html#a56dd164efbc457c651462a12addea4bd',1,'Planner::activities()'],['../class_planner_scene.html#a0ef1a11a37074095e41812da84434e15',1,'PlannerScene::activities()']]],
   ['activity_1',['Activity',['../class_activity.html#abb0e3ce8f97431b704d2685547cc4fac',1,'Activity::Activity()'],['../class_activity.html#aebb810081c9f08d79719994e8f95b97c',1,'Activity::Activity(QString mActivityText, QTime mStart, QTime mEnd)']]],
   ['activity_2',['activity',['../class_activity_item.html#a5eeed23cf624894a2f96047fedb9f032',1,'ActivityItem']]],
   ['activityitem_3',['ActivityItem',['../class_activity_item.html#ac4550a5d4f1ba92fca7d81c462bff972',1,'ActivityItem']]],

@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['calendar_0',['CALENDAR',['../mainwindow_8cpp.html#a6c30dc926b00e05c4ab97a164de2c0bca2484ba084b3ebc76ed075ba6d4038798',1,'mainwindow.cpp']]],
-  ['calendar_1',['Calendar',['../class_calendar.html',1,'Calendar'],['../class_calendar.html#a423ef27351bfa2309c6e2173bff61756',1,'Calendar::Calendar()']]],
+  ['calendar_0',['Calendar',['../class_calendar.html',1,'Calendar'],['../class_calendar.html#a423ef27351bfa2309c6e2173bff61756',1,'Calendar::Calendar()']]],
+  ['calendar_1',['CALENDAR',['../mainwindow_8cpp.html#a6c30dc926b00e05c4ab97a164de2c0bca2484ba084b3ebc76ed075ba6d4038798',1,'mainwindow.cpp']]],
   ['calendar_2ecpp_2',['calendar.cpp',['../calendar_8cpp.html',1,'']]],
   ['calendar_2eh_3',['calendar.h',['../calendar_8h.html',1,'']]],
-  ['card_4',['Card',['../class_card.html#a916c96c5dd30c5466c8cff2f1130f558',1,'Card::Card(const Card &amp;card)'],['../class_card.html#aa07a8eebbd7d578948c5910f43697be9',1,'Card::Card(QString mQuestionText, QString mAnswerText, Difficulty mQuestionDifficulty)'],['../class_card.html#a783f5854cbe8c183ee3d4414c01472c0',1,'Card::Card()'],['../class_card.html',1,'Card']]],
+  ['card_4',['Card',['../class_card.html',1,'Card'],['../class_card.html#a783f5854cbe8c183ee3d4414c01472c0',1,'Card::Card()'],['../class_card.html#aa07a8eebbd7d578948c5910f43697be9',1,'Card::Card(QString mQuestionText, QString mAnswerText, Difficulty mQuestionDifficulty)'],['../class_card.html#a916c96c5dd30c5466c8cff2f1130f558',1,'Card::Card(const Card &amp;card)']]],
   ['card_2ecpp_5',['card.cpp',['../card_8cpp.html',1,'']]],
   ['card_2eh_6',['card.h',['../card_8h.html',1,'']]],
   ['cards_7',['cards',['../class_deck.html#a2ebaed02380ce5414e2dfc73b47dbba9',1,'Deck']]],
@@ -15,7 +15,7 @@ var searchData=
   ['clearwhiteboard_12',['clearWhiteboard',['../class_study_session_window.html#a8d7d5f8b2f9416d3b2022f44c95e0a56',1,'StudySessionWindow']]],
   ['closewhiteboard_13',['closeWhiteboard',['../class_study_session_window.html#a507c5b9169af3dfc457efe24bdce32b7',1,'StudySessionWindow']]],
   ['createdeck_5fclicked_14',['createDeck_clicked',['../class_main_window.html#a238db1d9bd157673de39532414db935f',1,'MainWindow']]],
-  ['createdeckdialog_15',['CreateDeckDialog',['../class_create_deck_dialog.html#a32e3d60b3706c97da479b7063461206c',1,'CreateDeckDialog::CreateDeckDialog()'],['../class_create_deck_dialog.html',1,'CreateDeckDialog']]],
+  ['createdeckdialog_15',['CreateDeckDialog',['../class_create_deck_dialog.html',1,'CreateDeckDialog'],['../class_create_deck_dialog.html#a32e3d60b3706c97da479b7063461206c',1,'CreateDeckDialog::CreateDeckDialog()']]],
   ['createdeckdialog_2ecpp_16',['createdeckdialog.cpp',['../createdeckdialog_8cpp.html',1,'']]],
   ['createdeckdialog_2eh_17',['createdeckdialog.h',['../createdeckdialog_8h.html',1,'']]],
   ['createdeckwindow_18',['CreateDeckWindow',['../class_create_deck_window.html',1,'CreateDeckWindow'],['../class_create_deck_window.html#a0435bef077cb73be020eba228f1323a5',1,'CreateDeckWindow::CreateDeckWindow(User &amp;user, QWidget *parent=nullptr)'],['../class_create_deck_window.html#aa1788bc27a41db7a20fd0571dcc4b492',1,'CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, User &amp;user, QWidget *parent=nullptr)']]],

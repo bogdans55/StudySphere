@@ -1,4 +1,4 @@
-.TH "User" 3StudySphere" \" -*- nroff -*-
+.TH "User" 3 "StudySphere" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,7 +7,7 @@ User
 .br
 .PP
 .PP
-\fC#include <user\&.h>\fP
+\fR#include <user\&.h>\fP
 .PP
 Inherits \fBSerializable\fP\&.
 .SS "Public Member Functions"
@@ -41,12 +41,6 @@ Public Member Functions inherited from \fBSerializable\fP
 .ti -1c
 .RI "virtual \fB~Serializable\fP ()=default"
 .br
-.ti -1c
-.RI "virtual QVariant \fBtoVariant\fP () const =0"
-.br
-.ti -1c
-.RI "virtual void \fBfromVariant\fP (const QVariant &variant)=0"
-.br
 .in -1c
 .SS "Private Attributes"
 
@@ -59,27 +53,27 @@ Public Member Functions inherited from \fBSerializable\fP
 .PP 
 .SS "User::User (QString mUsername)"
 
-.SS "User::User ()\fC [default]\fP"
+.SS "User::User ()\fR [default]\fP"
 
-.SS "User::~User ()\fC [override]\fP, \fC [default]\fP"
+.SS "User::~User ()\fR [override]\fP, \fR [default]\fP"
 
 .SH "Member Function Documentation"
 .PP 
-.SS "void User::fromVariant (const QVariant & variant)\fC [override]\fP, \fC [virtual]\fP"
+.SS "void User::fromVariant (const QVariant & variant)\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializable\fP\&.
 .SS "void User::setUsername (const QString & newUsername)"
 
-.SS "QVariant User::toVariant () const\fC [override]\fP, \fC [virtual]\fP"
+.SS "QVariant User::toVariant () const\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializable\fP\&.
-.SS "QString User::username () const\fC [inline]\fP"
+.SS "QString User::username () const\fR [inline]\fP"
 
 .SH "Member Data Documentation"
 .PP 
-.SS "QString User::m_username\fC [private]\fP"
+.SS "QString User::m_username\fR [private]\fP"
 
 
 .SH "Author"

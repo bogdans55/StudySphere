@@ -1,4 +1,4 @@
-.TH "Planner" 3StudySphere" \" -*- nroff -*-
+.TH "Planner" 3 "StudySphere" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,7 +7,7 @@ Planner
 .br
 .PP
 .PP
-\fC#include <planner\&.h>\fP
+\fR#include <planner\&.h>\fP
 .PP
 Inherits \fBSerializable\fP\&.
 .SS "Public Member Functions"
@@ -41,12 +41,6 @@ Public Member Functions inherited from \fBSerializable\fP
 .ti -1c
 .RI "virtual \fB~Serializable\fP ()=default"
 .br
-.ti -1c
-.RI "virtual QVariant \fBtoVariant\fP () const =0"
-.br
-.ti -1c
-.RI "virtual void \fBfromVariant\fP (const QVariant &variant)=0"
-.br
 .in -1c
 .SS "Static Public Member Functions"
 
@@ -69,31 +63,31 @@ Public Member Functions inherited from \fBSerializable\fP
 .PP 
 .SS "Planner::Planner ()"
 
-.SS "Planner::~Planner ()\fC [override]\fP, \fC [default]\fP"
+.SS "Planner::~Planner ()\fR [override]\fP, \fR [default]\fP"
 
 .SH "Member Function Documentation"
 .PP 
-.SS "QMap< \fBDay\fP, QVector< \fBActivity\fP > > Planner::activities () const\fC [inline]\fP"
+.SS "QMap< \fBDay\fP, QVector< \fBActivity\fP > > Planner::activities () const\fR [inline]\fP"
 
 .SS "void Planner::addActivity (\fBDay\fP day, \fBActivity\fP activity)"
 
-.SS "\fBDay\fP Planner::dayFromString (QString dayString)\fC [static]\fP"
+.SS "\fBDay\fP Planner::dayFromString (QString dayString)\fR [static]\fP"
 
-.SS "QString Planner::dayToString (\fBDay\fP day)\fC [static]\fP"
+.SS "QString Planner::dayToString (\fBDay\fP day)\fR [static]\fP"
 
 .SS "void Planner::deleteAll ()"
 
-.SS "void Planner::fromVariant (const QVariant & variant)\fC [override]\fP, \fC [virtual]\fP"
+.SS "void Planner::fromVariant (const QVariant & variant)\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializable\fP\&.
-.SS "QVariant Planner::toVariant () const\fC [override]\fP, \fC [virtual]\fP"
+.SS "QVariant Planner::toVariant () const\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializable\fP\&.
 .SH "Member Data Documentation"
 .PP 
-.SS "QMap<\fBDay\fP, QVector<\fBActivity\fP> > Planner::m_activities\fC [private]\fP"
+.SS "QMap<\fBDay\fP, QVector<\fBActivity\fP> > Planner::m_activities\fR [private]\fP"
 
 
 .SH "Author"

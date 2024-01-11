@@ -1,4 +1,4 @@
-.TH "Card" 3StudySphere" \" -*- nroff -*-
+.TH "Card" 3 "StudySphere" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,7 +7,7 @@ Card
 .br
 .PP
 .PP
-\fC#include <card\&.h>\fP
+\fR#include <card\&.h>\fP
 .PP
 Inherits \fBSerializable\fP\&.
 .PP
@@ -49,12 +49,6 @@ Public Member Functions inherited from \fBSerializable\fP
 .ti -1c
 .RI "virtual \fB~Serializable\fP ()=default"
 .br
-.ti -1c
-.RI "virtual QVariant \fBtoVariant\fP () const =0"
-.br
-.ti -1c
-.RI "virtual void \fBfromVariant\fP (const QVariant &variant)=0"
-.br
 .in -1c
 .SS "Protected Attributes"
 
@@ -77,31 +71,31 @@ Public Member Functions inherited from \fBSerializable\fP
 
 .SS "Card::Card (const \fBCard\fP & card)"
 
-.SS "Card::~Card ()\fC [override]\fP, \fC [default]\fP"
+.SS "Card::~Card ()\fR [override]\fP, \fR [default]\fP"
 
 .SH "Member Function Documentation"
 .PP 
-.SS "void Card::fromVariant (const QVariant & variant)\fC [override]\fP, \fC [virtual]\fP"
+.SS "void Card::fromVariant (const QVariant & variant)\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializable\fP\&.
-.SS "QString Card::questionAnswer () const\fC [inline]\fP"
+.SS "QString Card::questionAnswer () const\fR [inline]\fP"
 
-.SS "\fBDifficulty\fP Card::questionDifficulty () const\fC [inline]\fP"
+.SS "\fBDifficulty\fP Card::questionDifficulty () const\fR [inline]\fP"
 
-.SS "QString Card::questionText () const\fC [inline]\fP"
+.SS "QString Card::questionText () const\fR [inline]\fP"
 
-.SS "QVariant Card::toVariant () const\fC [override]\fP, \fC [virtual]\fP"
+.SS "QVariant Card::toVariant () const\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializable\fP\&.
 .SH "Member Data Documentation"
 .PP 
-.SS "QString Card::m_answerText\fC [protected]\fP"
+.SS "QString Card::m_answerText\fR [protected]\fP"
 
-.SS "\fBDifficulty\fP Card::m_questionDifficulty\fC [protected]\fP"
+.SS "\fBDifficulty\fP Card::m_questionDifficulty\fR [protected]\fP"
 
-.SS "QString Card::m_questionText\fC [protected]\fP"
+.SS "QString Card::m_questionText\fR [protected]\fP"
 
 
 .SH "Author"

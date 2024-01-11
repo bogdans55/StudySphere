@@ -1,4 +1,4 @@
-.TH "Deck" 3StudySphere" \" -*- nroff -*-
+.TH "Deck" 3 "StudySphere" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,7 +7,7 @@ Deck
 .br
 .PP
 .PP
-\fC#include <deck\&.h>\fP
+\fR#include <deck\&.h>\fP
 .PP
 Inherits \fBSerializable\fP\&.
 .SS "Public Member Functions"
@@ -62,12 +62,6 @@ Public Member Functions inherited from \fBSerializable\fP
 .ti -1c
 .RI "virtual \fB~Serializable\fP ()=default"
 .br
-.ti -1c
-.RI "virtual QVariant \fBtoVariant\fP () const =0"
-.br
-.ti -1c
-.RI "virtual void \fBfromVariant\fP (const QVariant &variant)=0"
-.br
 .in -1c
 .SS "Private Attributes"
 
@@ -96,45 +90,45 @@ Public Member Functions inherited from \fBSerializable\fP
 
 .SS "Deck::Deck (const \fBDeck\fP & deck)"
 
-.SS "Deck::~Deck ()\fC [override]\fP"
+.SS "Deck::~Deck ()\fR [override]\fP"
 
 .SH "Member Function Documentation"
 .PP 
 .SS "void Deck::addCard (\fBCard\fP * card)"
 
-.SS "QVector< \fBCard\fP * > Deck::cards ()\fC [inline]\fP"
+.SS "QVector< \fBCard\fP * > Deck::cards ()\fR [inline]\fP"
 
-.SS "unsigned int Deck::deckId () const\fC [inline]\fP"
+.SS "unsigned int Deck::deckId () const\fR [inline]\fP"
 
-.SS "void Deck::fromVariant (const QVariant & variant)\fC [override]\fP, \fC [virtual]\fP"
+.SS "void Deck::fromVariant (const QVariant & variant)\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializable\fP\&.
-.SS "QString Deck::name () const\fC [inline]\fP"
+.SS "QString Deck::name () const\fR [inline]\fP"
 
 .SS "bool Deck::operator== (const \fBDeck\fP & deck)"
 
-.SS "\fBPrivacy\fP Deck::privacy () const\fC [inline]\fP"
+.SS "\fBPrivacy\fP Deck::privacy () const\fR [inline]\fP"
 
 .SS "void Deck::setId (uint64_t id)"
 
-.SS "QVariant Deck::toVariant () const\fC [override]\fP, \fC [virtual]\fP"
+.SS "QVariant Deck::toVariant () const\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializable\fP\&.
-.SS "\fBUser\fP Deck::user () const\fC [inline]\fP"
+.SS "\fBUser\fP Deck::user () const\fR [inline]\fP"
 
 .SH "Member Data Documentation"
 .PP 
-.SS "QVector<\fBCard\fP *> Deck::m_cards\fC [private]\fP"
+.SS "QVector<\fBCard\fP *> Deck::m_cards\fR [private]\fP"
 
-.SS "unsigned Deck::m_deckId\fC [private]\fP"
+.SS "unsigned Deck::m_deckId\fR [private]\fP"
 
-.SS "QString Deck::m_name\fC [private]\fP"
+.SS "QString Deck::m_name\fR [private]\fP"
 
-.SS "\fBPrivacy\fP Deck::m_privacy\fC [private]\fP"
+.SS "\fBPrivacy\fP Deck::m_privacy\fR [private]\fP"
 
-.SS "\fBUser\fP Deck::m_user\fC [private]\fP"
+.SS "\fBUser\fP Deck::m_user\fR [private]\fP"
 
 
 .SH "Author"

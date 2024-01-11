@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['m_5factivities_0',['m_activities',['../class_planner_scene.html#a3e98fa50413a68459c299231e073d5b5',1,'PlannerScene::m_activities'],['../class_planner.html#a1dd70be678cf15286284cbfd54447125',1,'Planner::m_activities']]],
+  ['m_5factivities_0',['m_activities',['../class_planner.html#a1dd70be678cf15286284cbfd54447125',1,'Planner::m_activities'],['../class_planner_scene.html#a3e98fa50413a68459c299231e073d5b5',1,'PlannerScene::m_activities']]],
   ['m_5factivity_1',['m_activity',['../class_activity_item.html#ac127fe68bf7408abf2029e71834f729c',1,'ActivityItem']]],
   ['m_5factivitycolors_2',['m_activityColors',['../class_planner_scene.html#af9fa7bc69845b885a6cee187ea9efd68',1,'PlannerScene']]],
   ['m_5factivitytext_3',['m_activityText',['../class_activity.html#a01bf9a4b9e8cb2595901f6b5e12b8705',1,'Activity']]],
@@ -16,7 +16,7 @@ var searchData=
   ['m_5fcolorpicker_13',['m_colorPicker',['../class_planner_scene.html#a7af3726f2703607ee4526bec6e323e6b',1,'PlannerScene']]],
   ['m_5fcreationdate_14',['m_creationDate',['../class_deck_stats.html#a85e180364a780870218b75c88efcc2f3',1,'DeckStats']]],
   ['m_5fcurrentcardindex_15',['m_currentCardIndex',['../class_deck_preview_window.html#a6f7c953903f0cb90be364203a4bf14b6',1,'DeckPreviewWindow::m_currentCardIndex'],['../class_study_session.html#a84b19309f231f9bf8643a5f8a66adbe8',1,'StudySession::m_currentCardIndex']]],
-  ['m_5fdeck_16',['m_deck',['../class_study_session.html#a8586347e52243537e900a53e08fba85c',1,'StudySession::m_deck'],['../class_create_deck_window.html#acb73614f4830e9efd9aeb0e3fc0d8399',1,'CreateDeckWindow::m_deck'],['../class_deck_preview_window.html#ac66a04c401d5b4efaa2d968f13462683',1,'DeckPreviewWindow::m_deck']]],
+  ['m_5fdeck_16',['m_deck',['../class_create_deck_window.html#acb73614f4830e9efd9aeb0e3fc0d8399',1,'CreateDeckWindow::m_deck'],['../class_deck_preview_window.html#ac66a04c401d5b4efaa2d968f13462683',1,'DeckPreviewWindow::m_deck'],['../class_study_session.html#a8586347e52243537e900a53e08fba85c',1,'StudySession::m_deck']]],
   ['m_5fdeckcounter_17',['m_deckCounter',['../class_main_window.html#a2f89192339d6c6d021ef3fedfe879275',1,'MainWindow']]],
   ['m_5fdeckid_18',['m_deckId',['../class_deck.html#a9c0fcd099b0ab88adbd76c7b60fc902f',1,'Deck']]],
   ['m_5fdecknames_19',['m_deckNames',['../class_main_window.html#ad74eefabd2b5e2fbd4a4819857234a85',1,'MainWindow']]],

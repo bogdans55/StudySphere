@@ -1,4 +1,4 @@
-.TH "Activity" 3StudySphere" \" -*- nroff -*-
+.TH "Activity" 3 "StudySphere" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,7 +7,7 @@ Activity
 .br
 .PP
 .PP
-\fC#include <activity\&.h>\fP
+\fR#include <activity\&.h>\fP
 .PP
 Inherits \fBSerializable\fP\&.
 .SS "Public Member Functions"
@@ -59,12 +59,6 @@ Private Member Functions inherited from \fBSerializable\fP
 .ti -1c
 .RI "virtual \fB~Serializable\fP ()=default"
 .br
-.ti -1c
-.RI "virtual QVariant \fBtoVariant\fP () const =0"
-.br
-.ti -1c
-.RI "virtual void \fBfromVariant\fP (const QVariant &variant)=0"
-.br
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
@@ -72,31 +66,31 @@ Private Member Functions inherited from \fBSerializable\fP
 
 .SS "Activity::Activity (QString mActivityText, QTime mStart, QTime mEnd)"
 
-.SS "Activity::~Activity ()\fC [override]\fP, \fC [default]\fP"
+.SS "Activity::~Activity ()\fR [override]\fP, \fR [default]\fP"
 
 .SH "Member Function Documentation"
 .PP 
-.SS "QString Activity::activityText () const\fC [inline]\fP"
+.SS "QString Activity::activityText () const\fR [inline]\fP"
 
-.SS "QTime Activity::end () const\fC [inline]\fP"
+.SS "QTime Activity::end () const\fR [inline]\fP"
 
-.SS "void Activity::fromVariant (const QVariant & variant)\fC [override]\fP, \fC [virtual]\fP"
+.SS "void Activity::fromVariant (const QVariant & variant)\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializable\fP\&.
-.SS "QTime Activity::start () const\fC [inline]\fP"
+.SS "QTime Activity::start () const\fR [inline]\fP"
 
-.SS "QVariant Activity::toVariant () const\fC [override]\fP, \fC [virtual]\fP"
+.SS "QVariant Activity::toVariant () const\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializable\fP\&.
 .SH "Member Data Documentation"
 .PP 
-.SS "QString Activity::m_activityText\fC [private]\fP"
+.SS "QString Activity::m_activityText\fR [private]\fP"
 
-.SS "QTime Activity::m_end\fC [private]\fP"
+.SS "QTime Activity::m_end\fR [private]\fP"
 
-.SS "QTime Activity::m_start\fC [private]\fP"
+.SS "QTime Activity::m_start\fR [private]\fP"
 
 
 .SH "Author"

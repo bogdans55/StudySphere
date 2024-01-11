@@ -1,4 +1,4 @@
-.TH "DeckStats" 3StudySphere" \" -*- nroff -*-
+.TH "DeckStats" 3 "StudySphere" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,7 +7,7 @@ DeckStats
 .br
 .PP
 .PP
-\fC#include <deckstats\&.h>\fP
+\fR#include <deckstats\&.h>\fP
 .PP
 Inherits \fBSerializable\fP\&.
 .SS "Public Member Functions"
@@ -53,12 +53,6 @@ Public Member Functions inherited from \fBSerializable\fP
 .ti -1c
 .RI "virtual \fB~Serializable\fP ()=default"
 .br
-.ti -1c
-.RI "virtual QVariant \fBtoVariant\fP () const =0"
-.br
-.ti -1c
-.RI "virtual void \fBfromVariant\fP (const QVariant &variant)=0"
-.br
 .in -1c
 .SS "Private Attributes"
 
@@ -81,23 +75,23 @@ Public Member Functions inherited from \fBSerializable\fP
 
 .SS "DeckStats::DeckStats (const \fBDeckStats\fP & deckStats)"
 
-.SS "DeckStats::~DeckStats ()\fC [override]\fP, \fC [default]\fP"
+.SS "DeckStats::~DeckStats ()\fR [override]\fP, \fR [default]\fP"
 
 .SH "Member Function Documentation"
 .PP 
 .SS "void DeckStats::addGrade (unsigned cardIndex, unsigned grade)"
 
-.SS "QString DeckStats::creationDate () const\fC [inline]\fP"
+.SS "QString DeckStats::creationDate () const\fR [inline]\fP"
 
-.SS "void DeckStats::fromVariant (const QVariant & variant)\fC [override]\fP, \fC [virtual]\fP"
+.SS "void DeckStats::fromVariant (const QVariant & variant)\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializable\fP\&.
-.SS "QVector< unsigned > DeckStats::grades ()\fC [inline]\fP"
+.SS "QVector< unsigned > DeckStats::grades ()\fR [inline]\fP"
 
-.SS "unsigned int DeckStats::timesUsed () const\fC [inline]\fP"
+.SS "unsigned int DeckStats::timesUsed () const\fR [inline]\fP"
 
-.SS "QVariant DeckStats::toVariant () const\fC [override]\fP, \fC [virtual]\fP"
+.SS "QVariant DeckStats::toVariant () const\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializable\fP\&.
@@ -105,11 +99,11 @@ Implements \fBSerializable\fP\&.
 
 .SH "Member Data Documentation"
 .PP 
-.SS "QString DeckStats::m_creationDate\fC [private]\fP"
+.SS "QString DeckStats::m_creationDate\fR [private]\fP"
 
-.SS "QVector<unsigned> DeckStats::m_grades\fC [private]\fP"
+.SS "QVector<unsigned> DeckStats::m_grades\fR [private]\fP"
 
-.SS "unsigned DeckStats::m_timesUsed\fC [private]\fP"
+.SS "unsigned DeckStats::m_timesUsed\fR [private]\fP"
 
 
 .SH "Author"

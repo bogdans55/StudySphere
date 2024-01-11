@@ -1,4 +1,4 @@
-.TH "PlainCard" 3StudySphere" \" -*- nroff -*-
+.TH "PlainCard" 3 "StudySphere" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,7 +7,7 @@ PlainCard
 .br
 .PP
 .PP
-\fC#include <plaincard\&.h>\fP
+\fR#include <plaincard\&.h>\fP
 .PP
 Inherits \fBCard\fP\&.
 .SS "Public Member Functions"
@@ -60,12 +60,6 @@ Public Member Functions inherited from \fBSerializable\fP
 .ti -1c
 .RI "virtual \fB~Serializable\fP ()=default"
 .br
-.ti -1c
-.RI "virtual QVariant \fBtoVariant\fP () const =0"
-.br
-.ti -1c
-.RI "virtual void \fBfromVariant\fP (const QVariant &variant)=0"
-.br
 .in -1c
 .SS "Additional Inherited Members"
 
@@ -88,7 +82,7 @@ Protected Attributes inherited from \fBCard\fP
 
 .SS "PlainCard::PlainCard (QString questionText, QString answerText, \fBDifficulty\fP questionDifficulty)"
 
-.SS "PlainCard::~PlainCard ()\fC [override]\fP, \fC [default]\fP"
+.SS "PlainCard::~PlainCard ()\fR [override]\fP, \fR [default]\fP"
 
 
 .SH "Author"

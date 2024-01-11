@@ -1,4 +1,4 @@
-.TH "ToDoList" 3StudySphere" \" -*- nroff -*-
+.TH "ToDoList" 3 "StudySphere" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,7 +7,7 @@ ToDoList
 .br
 .PP
 .PP
-\fC#include <todolist\&.h>\fP
+\fR#include <todolist\&.h>\fP
 .PP
 Inherits \fBSerializable\fP\&.
 .SS "Public Member Functions"
@@ -47,12 +47,6 @@ Public Member Functions inherited from \fBSerializable\fP
 .ti -1c
 .RI "virtual \fB~Serializable\fP ()=default"
 .br
-.ti -1c
-.RI "virtual QVariant \fBtoVariant\fP () const =0"
-.br
-.ti -1c
-.RI "virtual void \fBfromVariant\fP (const QVariant &variant)=0"
-.br
 .in -1c
 .SS "Private Attributes"
 
@@ -65,7 +59,7 @@ Public Member Functions inherited from \fBSerializable\fP
 .PP 
 .SS "ToDoList::ToDoList ()"
 
-.SS "ToDoList::~ToDoList ()\fC [override]\fP, \fC [default]\fP"
+.SS "ToDoList::~ToDoList ()\fR [override]\fP, \fR [default]\fP"
 
 .SH "Member Function Documentation"
 .PP 
@@ -77,19 +71,19 @@ Public Member Functions inherited from \fBSerializable\fP
 
 .SS "void ToDoList::deleteToDo (const QString & text)"
 
-.SS "void ToDoList::fromVariant (const QVariant & variant)\fC [override]\fP, \fC [virtual]\fP"
+.SS "void ToDoList::fromVariant (const QVariant & variant)\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializable\fP\&.
-.SS "QVector< QPair< QString, bool > > ToDoList::toDos () const\fC [inline]\fP"
+.SS "QVector< QPair< QString, bool > > ToDoList::toDos () const\fR [inline]\fP"
 
-.SS "QVariant ToDoList::toVariant () const\fC [override]\fP, \fC [virtual]\fP"
+.SS "QVariant ToDoList::toVariant () const\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializable\fP\&.
 .SH "Member Data Documentation"
 .PP 
-.SS "QVector<QPair<QString, bool> > ToDoList::m_listToDos\fC [private]\fP"
+.SS "QVector<QPair<QString, bool> > ToDoList::m_listToDos\fR [private]\fP"
 
 
 .SH "Author"

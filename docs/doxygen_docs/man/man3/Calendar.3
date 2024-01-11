@@ -1,4 +1,4 @@
-.TH "Calendar" 3StudySphere" \" -*- nroff -*-
+.TH "Calendar" 3 "StudySphere" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,7 +7,7 @@ Calendar
 .br
 .PP
 .PP
-\fC#include <calendar\&.h>\fP
+\fR#include <calendar\&.h>\fP
 .PP
 Inherits \fBSerializable\fP\&.
 .SS "Public Member Functions"
@@ -41,12 +41,6 @@ Public Member Functions inherited from \fBSerializable\fP
 .ti -1c
 .RI "virtual \fB~Serializable\fP ()=default"
 .br
-.ti -1c
-.RI "virtual QVariant \fBtoVariant\fP () const =0"
-.br
-.ti -1c
-.RI "virtual void \fBfromVariant\fP (const QVariant &variant)=0"
-.br
 .in -1c
 .SS "Private Attributes"
 
@@ -59,7 +53,7 @@ Public Member Functions inherited from \fBSerializable\fP
 .PP 
 .SS "Calendar::Calendar ()"
 
-.SS "Calendar::~Calendar ()\fC [override]\fP, \fC [default]\fP"
+.SS "Calendar::~Calendar ()\fR [override]\fP, \fR [default]\fP"
 
 .SH "Member Function Documentation"
 .PP 
@@ -67,19 +61,19 @@ Public Member Functions inherited from \fBSerializable\fP
 
 .SS "void Calendar::deleteAll ()"
 
-.SS "QMap< QDate, QVector< QPair< QTime, QString > > > Calendar::events () const\fC [inline]\fP"
+.SS "QMap< QDate, QVector< QPair< QTime, QString > > > Calendar::events () const\fR [inline]\fP"
 
-.SS "void Calendar::fromVariant (const QVariant & variant)\fC [override]\fP, \fC [virtual]\fP"
+.SS "void Calendar::fromVariant (const QVariant & variant)\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializable\fP\&.
-.SS "QVariant Calendar::toVariant () const\fC [override]\fP, \fC [virtual]\fP"
+.SS "QVariant Calendar::toVariant () const\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializable\fP\&.
 .SH "Member Data Documentation"
 .PP 
-.SS "QMap<QDate, QVector<QPair<QTime, QString> > > Calendar::m_events\fC [private]\fP"
+.SS "QMap<QDate, QVector<QPair<QTime, QString> > > Calendar::m_events\fR [private]\fP"
 
 
 .SH "Author"

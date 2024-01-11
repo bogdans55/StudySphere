@@ -1,4 +1,4 @@
-.TH "JSONSerializer" 3StudySphere" \" -*- nroff -*-
+.TH "JSONSerializer" 3 "StudySphere" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,7 +7,7 @@ JSONSerializer
 .br
 .PP
 .PP
-\fC#include <jsonserializer\&.h>\fP
+\fR#include <jsonserializer\&.h>\fP
 .PP
 Inherits \fBSerializer\fP\&.
 .SS "Public Member Functions"
@@ -35,28 +35,22 @@ Public Member Functions inherited from \fBSerializer\fP
 .ti -1c
 .RI "virtual \fB~Serializer\fP ()=default"
 .br
-.ti -1c
-.RI "virtual void \fBsave\fP (const \fBSerializable\fP &serializable, const QString &filepath, const QString &rootname='')=0"
-.br
-.ti -1c
-.RI "virtual void \fBload\fP (\fBSerializable\fP &serializable, const QString &filepath)=0"
-.br
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
-.SS "JSONSerializer::JSONSerializer ()\fC [default]\fP"
+.SS "JSONSerializer::JSONSerializer ()\fR [default]\fP"
 
 .SH "Member Function Documentation"
 .PP 
 .SS "QJsonDocument JSONSerializer::createJson (const \fBSerializable\fP & serializable)"
 
-.SS "void JSONSerializer::load (\fBSerializable\fP & serializable, const QString & filepath)\fC [override]\fP, \fC [virtual]\fP"
+.SS "void JSONSerializer::load (\fBSerializable\fP & serializable, const QString & filepath)\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializer\fP\&.
 .SS "void JSONSerializer::loadJson (\fBSerializable\fP & serializable, QJsonDocument & jsonDeck)"
 
-.SS "void JSONSerializer::save (const \fBSerializable\fP & serializable, const QString & filepath, const QString & rootname = \fC''\fP)\fC [override]\fP, \fC [virtual]\fP"
+.SS "void JSONSerializer::save (const \fBSerializable\fP & serializable, const QString & filepath, const QString & rootname = \fR''\fP)\fR [override]\fP, \fR [virtual]\fP"
 
 .PP
 Implements \fBSerializer\fP\&.
