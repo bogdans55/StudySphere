@@ -1,10 +1,14 @@
+#include <utility>
+
 #include "../lib/user.h"
 
-User::User(const QString &newUsername) : m_username(newUsername) {}
+User::User(QString newUsername)
+    : m_username(std::move(newUsername))
+{}
 
-User::User() {}
+User::User() = default;
 
-User::~User() {}
+User::~User() = default;
 
 void User::setUsername(const QString &newUsername)
 {

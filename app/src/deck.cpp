@@ -2,11 +2,16 @@
 #include <QJsonArray>
 #include <QRandomGenerator>
 #include <QString>
+#include <utility>
 
 Deck::Deck() : m_deckId(), m_privacy() {}
 
-Deck::Deck(const QString &name, const User &user, Privacy privacy)
-    : m_deckId(0), m_name(name), m_privacy(privacy), m_user(user), m_cards()
+Deck::Deck(QString name, const User &user, Privacy privacy)
+    : m_deckId(0)
+    , m_name(std::move(name))
+    , m_privacy(privacy)
+    , m_user(user)
+    , m_cards()
 {}
 
 Deck::Deck(const Deck &deck)
@@ -38,11 +43,11 @@ QVariant Deck::toVariant() const
     map.insert("Privacy", (privacy() == Privacy::PRIVATE) ? "Private" : "Public");
 
 	QVariantList cardsList;
-	for (int i = 0; i < m_cards.length(); i++) {
-		Card card = *(m_cards[i]);
-		cardsList.append(card.toVariant());
-	}
-	map.insert("Flashcards", cardsList);
+    for (auto m_card : m_cards) {
+        Card card = *m_card;
+        cardsList.append(card.toVariant());
+    }
+    map.insert("Flashcards", cardsList);
 	map.insert("User", m_user.toVariant());
 
 	return map;

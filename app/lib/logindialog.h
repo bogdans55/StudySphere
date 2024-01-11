@@ -14,9 +14,9 @@ class LoginDialog : public QDialog
 
   public:
 	explicit LoginDialog(QWidget *parent = nullptr);
-	~LoginDialog();
+    ~LoginDialog() override;
 
-	inline QString getUsername() const { return m_username; }
+    inline QString getUsername() const { return m_username; }
 
 	inline QString getPassword() const { return m_password; }
 

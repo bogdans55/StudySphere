@@ -1,17 +1,26 @@
+#include <utility>
+
+#include <utility>
+
 #include "../lib/imagecard.h"
 
 ImageCard::ImageCard() : Card() {}
 
 ImageCard::ImageCard(QString questionText, QString answerText, Difficulty questionDifficulty)
-	: Card(questionText, answerText, questionDifficulty)
+    : Card(std::move(questionText), std::move(answerText), questionDifficulty)
 {}
 
-ImageCard::ImageCard(QString questionText, QString answerText, Difficulty questionDifficulty, QImage questionImage,
-					 QImage answerImage)
-	: Card(questionText, answerText, questionDifficulty), m_questionImage(questionImage), m_answerImage(answerImage)
+ImageCard::ImageCard(QString questionText,
+                     QString answerText,
+                     Difficulty questionDifficulty,
+                     QImage questionImage,
+                     QImage answerImage)
+    : Card(std::move(questionText), std::move(answerText), questionDifficulty)
+    , m_questionImage(std::move(std::move(questionImage)))
+    , m_answerImage(std::move(answerImage))
 {}
 
-ImageCard::~ImageCard() {}
+ImageCard::~ImageCard() = default;
 
 void ImageCard::setQuestionImage(const QImage &questionImage)
 {

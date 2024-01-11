@@ -21,9 +21,9 @@ class WhiteboardWindow : public QWidget
 
   public:
 	explicit WhiteboardWindow(QWidget *parent = nullptr);
-	~WhiteboardWindow();
+    ~WhiteboardWindow() override;
 
-  protected:
+protected:
 	void paintEvent(QPaintEvent *event) override;
 
 	void mousePressEvent(QMouseEvent *event) override;

@@ -16,9 +16,9 @@ class CreateDeckDialog : public QDialog
 
   public:
 	explicit CreateDeckDialog(QWidget *parent = nullptr);
-	~CreateDeckDialog();
+    ~CreateDeckDialog() override;
 
-	QString getDeckName() const;
+    QString getDeckName() const;
 	Privacy getDeckPrivacy() const;
 
   private slots:

@@ -1,0 +1,18 @@
+Checks: '-*,readability-identifier-naming,modernize-*,-modernize-use-trailing-return-type,-modernize-replace-auto-ptr,-modernize-use-nodiscard,performance-*,-readability-function-size'
+
+CheckOptions:
+  # Readability Checks
+  - { key: readability-identifier-naming.ClassCase,     value: CamelCase  }
+  - { key: readability-identifier-naming.VariableCase,  value: camelBack }
+  - { key: readability-identifier-naming.ParameterCase, value: '^m_[a-z]+[A-Z][a-zA-Z]*$' }
+
+  # Modernize Checks
+  - { key: modernize-use-auto, value: 'true' }
+  - { key: modernize-use-nullptr, value: 'true' }
+  - { key: modernize-replace-auto-ptr, value: 'true' }
+
+  # Performance Checks
+  - { key: performance-*, value: 'true' }
+
+  # Exclude Readability Function Size Check
+  - { key: readability-function-size, value: 'false' }

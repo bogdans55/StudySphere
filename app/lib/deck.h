@@ -24,11 +24,11 @@ class Deck : public Serializable
 
   public:
 	Deck();
-	Deck(const QString &name, const User &user, Privacy privacy);
-	Deck(const Deck &deck);
-	~Deck();
+    Deck(QString name, const User &user, Privacy privacy);
+    Deck(const Deck &deck);
+    ~Deck() override;
 
-	inline unsigned int deckId() const { return m_deckId; }
+    inline unsigned int deckId() const { return m_deckId; }
 
 	inline QString name() const { return m_name; }
 

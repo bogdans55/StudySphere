@@ -14,13 +14,13 @@ class Calendar : public Serializable
 
   public:
 	Calendar();
-	~Calendar();
+    ~Calendar() override;
 
-	QVariant toVariant() const override;
+    QVariant toVariant() const override;
 	void fromVariant(const QVariant &variant) override;
 
-	void addEvent(QDate date, QTime time, QString text);
-	void deleteAll();
+    void addEvent(QDate date, QTime time, const QString &text);
+    void deleteAll();
 
 	inline QMap<QDate, QVector<QPair<QTime, QString>>> events() const { return m_events; }
 };

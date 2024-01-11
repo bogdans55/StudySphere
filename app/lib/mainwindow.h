@@ -38,9 +38,9 @@ class MainWindow : public QWidget
 
   public:
 	MainWindow(QWidget *parent = nullptr);
-	~MainWindow();
+    ~MainWindow() override;
 
-  private slots:
+private slots:
 
 	void deckButton_clicked();
 
@@ -86,9 +86,9 @@ class MainWindow : public QWidget
 
 	void on_pushButton_exportDecks_clicked();
 
-	void addNewDeck(QString deckNameID);
+    void addNewDeck(const QString &deckNameID);
 
-	void on_comboBox_deck_currentIndexChanged(int index);
+    void on_comboBox_deck_currentIndexChanged(int index);
 
     void on_comboBox_deck_activated(int index);
 
@@ -125,8 +125,8 @@ protected:
 	void saveOnServer();
 
 	void setupTableView(QTableWidget *table);
-	void addDeckToTable(QString deckNameID, QTableWidget *table, int &counter);
-	int m_deckCounter = 0;
+    void addDeckToTable(const QString &deckNameID, QTableWidget *table, int &counter);
+    int m_deckCounter = 0;
 	void addCreateDeckButton();
 	void loadStats(DeckStats *deckStats);
 	void setEnabled(bool value);

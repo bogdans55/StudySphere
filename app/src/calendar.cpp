@@ -2,9 +2,9 @@
 
 Calendar::Calendar() : m_events() {}
 
-Calendar::~Calendar() {}
+Calendar::~Calendar() = default;
 
-void Calendar::addEvent(QDate date, QTime time, QString text)
+void Calendar::addEvent(QDate date, QTime time, const QString &text)
 {
 	QPair<QTime, QString> pair(time, text);
 	m_events[date].push_back(pair);

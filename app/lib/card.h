@@ -18,9 +18,9 @@ class Card : public Serializable
 	Card(QString m_questionText, QString m_answerText, Difficulty m_questionDifficulty);
 	Card(const Card &card);
 
-	~Card();
+    ~Card() override;
 
-	inline QString questionText() const { return m_questionText; }
+    inline QString questionText() const { return m_questionText; }
 
 	inline QString questionAnswer() const { return m_answerText; }
 

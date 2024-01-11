@@ -2,7 +2,7 @@
 #include <QFile>
 #include <QJsonDocument>
 
-JSONSerializer::JSONSerializer() {}
+JSONSerializer::JSONSerializer() = default;
 
 void JSONSerializer::save(const Serializable &serializable, const QString &filepath, const QString &rootname)
 {

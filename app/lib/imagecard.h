@@ -10,9 +10,9 @@ class ImageCard : public Card
 	ImageCard();
 	ImageCard(QString questionText, QString answerText, Difficulty questionDifficulty);
     ImageCard(QString questionText, QString answerText, Difficulty questionDifficulty, QImage questionImage, QImage answerImage);
-	~ImageCard();
+    ~ImageCard() override;
 
-	inline QImage questionImage() const { return m_questionImage; }
+    inline QImage questionImage() const { return m_questionImage; }
 
 	inline QImage answerImage() const { return m_answerImage; }
 

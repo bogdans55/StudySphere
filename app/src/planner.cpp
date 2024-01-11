@@ -2,9 +2,9 @@
 
 Planner::Planner() : m_activities() {}
 
-Planner::~Planner() {}
+Planner::~Planner() = default;
 
-void Planner::addActivity(Day day, Activity activity)
+void Planner::addActivity(Day day, const Activity &activity)
 {
 	m_activities[day].push_back(activity);
 }
@@ -51,7 +51,7 @@ QVariant Planner::toVariant() const
 	return result;
 }
 
-Day Planner::dayFromString(QString dayString)
+Day Planner::dayFromString(const QString &dayString)
 {
 	if (dayString == "Ponedeljak" or dayString == "Monday")
 		return Day::MONDAY;

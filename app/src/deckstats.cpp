@@ -10,7 +10,7 @@ DeckStats::DeckStats(const DeckStats &deckStats)
 	: m_grades(deckStats.m_grades), m_timesUsed(deckStats.m_timesUsed), m_creationDate(deckStats.m_creationDate)
 {}
 
-DeckStats::~DeckStats() {}
+DeckStats::~DeckStats() = default;
 
 void DeckStats::addGrade(unsigned int cardIndex, unsigned int grade)
 {

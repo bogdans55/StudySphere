@@ -28,9 +28,9 @@ StudySession::~StudySession()
 
 void StudySession::startSession()
 {
-	m_timeStarted = time(NULL);
+    m_timeStarted = time(nullptr);
 
-	QJsonObject requestObject;
+    QJsonObject requestObject;
 
 	requestObject["action"] = "getStats";
 	requestObject["username"] = m_user.username();
@@ -57,8 +57,8 @@ void StudySession::startSession()
 
 void StudySession::endSession()
 {
-	m_timeEnded = time(NULL);
-	m_deckStats->usedDeck();
+    m_timeEnded = time(nullptr);
+    m_deckStats->usedDeck();
 }
 
 void StudySession::chooseCardSequence(unsigned numCards)

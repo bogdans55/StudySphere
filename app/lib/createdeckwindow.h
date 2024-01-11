@@ -20,11 +20,11 @@ class CreateDeckWindow : public QWidget
   public:
 	explicit CreateDeckWindow(User &user, QWidget *parent = nullptr);
 
-	CreateDeckWindow(QString name, Privacy privacy, User &user, QWidget *parent = nullptr);
+    CreateDeckWindow(const QString &name, Privacy privacy, User &user, QWidget *parent = nullptr);
 
-	~CreateDeckWindow();
+    ~CreateDeckWindow() override;
 
-	QString getQuestionText() const;
+    QString getQuestionText() const;
 	QString getAnswerText() const;
 	Difficulty getDifficulty() const;
 

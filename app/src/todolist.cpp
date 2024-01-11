@@ -8,7 +8,7 @@
 
 ToDoList::ToDoList() : m_listToDos() {}
 
-ToDoList::~ToDoList() {}
+ToDoList::~ToDoList() = default;
 
 void ToDoList::addToDo(const QString &text, bool done)
 {

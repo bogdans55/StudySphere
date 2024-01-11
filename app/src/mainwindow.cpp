@@ -54,12 +54,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView_sunday->setScene(m_plannerScenes[Day::SUNDAY]);
 
     for (int i = 0; i < 7; ++i) {
-        ScheduleItem *scheduleItem = new ScheduleItem();
+        auto *scheduleItem = new ScheduleItem();
         scheduleItem->setWidth(ui->graphicsView_monday->width());
         m_plannerScenes[i]->addItem(scheduleItem);
     }
 
-    QApplication *app = qobject_cast<QApplication *>(QApplication::instance());
+    auto *app = qobject_cast<QApplication *>(QApplication::instance());
     Settings &settings = Settings::instance(app);
 
 
@@ -138,8 +138,8 @@ void MainWindow::createDeck_clicked()
 		QString name = popUp.getDeckName();
 		Privacy privacy = popUp.getDeckPrivacy();
 
-		CreateDeckWindow *createDeck = new CreateDeckWindow(name, privacy, m_user);
-		connect(createDeck, &CreateDeckWindow::writeGeneratedID, this, &MainWindow::addNewDeck);
+        auto *createDeck = new CreateDeckWindow(name, privacy, m_user);
+        connect(createDeck, &CreateDeckWindow::writeGeneratedID, this, &MainWindow::addNewDeck);
 		createDeck->setAttribute(Qt::WA_DeleteOnClose);
         createDeck->show();
 	}
@@ -147,8 +147,8 @@ void MainWindow::createDeck_clicked()
 
 void MainWindow::deckPreview_clicked()
 {
-	QPushButton *chosenDeck = qobject_cast<QPushButton *>(sender());
-	QString deckName = chosenDeck->text();
+    auto *chosenDeck = qobject_cast<QPushButton *>(sender());
+    QString deckName = chosenDeck->text();
 
 	QJsonObject requestObject;
 	requestObject["action"] = "sendDeck";
@@ -172,17 +172,17 @@ void MainWindow::deckPreview_clicked()
 	QJsonDocument deckDocument = QJsonDocument::fromVariant(deckObject.toVariantMap());
 	jsonSerializer.loadJson(*deck, deckDocument);
 
-	DeckPreviewWindow *preview = new DeckPreviewWindow(deck, m_user);
-	connect(preview, &DeckPreviewWindow::sendPublicDeck, this, &MainWindow::addNewDeck);
+    auto *preview = new DeckPreviewWindow(deck, m_user);
+    connect(preview, &DeckPreviewWindow::sendPublicDeck, this, &MainWindow::addNewDeck);
 	preview->setAttribute(Qt::WA_DeleteOnClose);
 	preview->show();
 }
 
 void MainWindow::deckButton_clicked()
 {
-	QPushButton *chosenDeck = qobject_cast<QPushButton *>(sender());
+    auto *chosenDeck = qobject_cast<QPushButton *>(sender());
 
-	QString deckName = chosenDeck->text();
+    QString deckName = chosenDeck->text();
 	QStringList deckNameEdited = deckName.split('.')[0].split('_');
 
 	QJsonObject requestObject;
@@ -209,9 +209,9 @@ void MainWindow::deckButton_clicked()
 
 	jsonSerializer.loadJson(*deck, deckDocument);
 
-	StudySession *session = new StudySession(m_user, deck);
-	StudySessionWindow *useDeck = new StudySessionWindow(session);
-	useDeck->show();
+    auto *session = new StudySession(m_user, deck);
+    auto *useDeck = new StudySessionWindow(session);
+    useDeck->show();
 }
 
 void MainWindow::on_pushButton_library_clicked()
@@ -250,8 +250,8 @@ void MainWindow::on_pushButton_todo_clicked()
 		m_todoLoaded = true;
 
 		for (auto &todo : m_toDoList.toDos()) {
-			QListWidgetItem *item = new QListWidgetItem();
-			item->setCheckState(todo.second ? Qt::Checked : Qt::Unchecked);
+            auto *item = new QListWidgetItem();
+            item->setCheckState(todo.second ? Qt::Checked : Qt::Unchecked);
 			item->setText(todo.first);
             onTodoItemChanged(item);
 			ui->listWidget_todos->addItem(item);
@@ -416,17 +416,17 @@ void MainWindow::on_pushButton_addActivity_clicked()
 
 	m_planner.addActivity(day, activity);
 
-	ActivityItem *activityItem = new ActivityItem(activity);
-	m_plannerScenes[day]->addActivity(activityItem);
+    auto *activityItem = new ActivityItem(activity);
+    m_plannerScenes[day]->addActivity(activityItem);
 	m_plannerScenes[day]->addItem(activityItem);
 
-	QGraphicsTextItem *activityTime = new QGraphicsTextItem();
-	activityTime->setPlainText(startTime.toString("hh:mm"));
+    auto *activityTime = new QGraphicsTextItem();
+    activityTime->setPlainText(startTime.toString("hh:mm"));
 	activityTime->setPos(activityItem->pos());
 	m_plannerScenes[day]->addItem(activityTime);
 
-	QGraphicsTextItem *activityText = new QGraphicsTextItem();
-	activityText->setPlainText(name);
+    auto *activityText = new QGraphicsTextItem();
+    activityText->setPlainText(name);
     qreal textWidth = ui->graphicsView_monday->width() - 10;
 	activityText->setTextWidth(textWidth);
 	activityText->setPos(activityItem->pos().x(), activityItem->pos().y() + activityTime->boundingRect().height());
@@ -446,17 +446,17 @@ void MainWindow::showActivities()
 
 			QTime startTime = currentActivity.start();
 
-			ActivityItem *activityItem = new ActivityItem(currentActivity);
-			m_plannerScenes[day]->addActivity(activityItem);
+            auto *activityItem = new ActivityItem(currentActivity);
+            m_plannerScenes[day]->addActivity(activityItem);
 			m_plannerScenes[day]->addItem(activityItem);
 
-			QGraphicsTextItem *activityTime = new QGraphicsTextItem();
-			activityTime->setPlainText(startTime.toString("hh:mm"));
+            auto *activityTime = new QGraphicsTextItem();
+            activityTime->setPlainText(startTime.toString("hh:mm"));
 			activityTime->setPos(activityItem->pos());
 			m_plannerScenes[day]->addItem(activityTime);
 
-			QGraphicsTextItem *activityText = new QGraphicsTextItem();
-			activityText->setPlainText(name);
+            auto *activityText = new QGraphicsTextItem();
+            activityText->setPlainText(name);
             qreal textWidth = ui->graphicsView_monday->width() - 10;
 			activityText->setTextWidth(textWidth);
 			activityText->setPos(activityItem->pos().x(),
@@ -663,8 +663,8 @@ void MainWindow::on_pushButton_addTodo_clicked()
 		return;
 	}
 
-	QListWidgetItem *item = new QListWidgetItem();
-	item->setCheckState(Qt::Unchecked);
+    auto *item = new QListWidgetItem();
+    item->setCheckState(Qt::Unchecked);
 	item->setText(ui->lineEdit_todo->text());
 
 	m_toDoList.addToDo(item->text(), item->checkState());
@@ -776,8 +776,8 @@ void MainWindow::on_pushButton_importDecks_clicked()
 	for (auto i = 0; i < rows; i += 2) {
 		for (auto j = 0; j < cols; j++) {
 			auto cell = ui->tableWidget_library->cellWidget(i, j);
-			if (QPushButton *button = dynamic_cast<QPushButton *>(cell)) {
-				for (auto it = filePaths.begin(); it != filePaths.end(); it++) {
+            if (auto *button = dynamic_cast<QPushButton *>(cell)) {
+                for (auto it = filePaths.begin(); it != filePaths.end(); it++) {
 					QStringList tempDeckName = (*it).split('/');
 					if (button->text() == *(--tempDeckName.end())) {
 						filePaths.removeAt(it - filePaths.begin());
@@ -788,17 +788,17 @@ void MainWindow::on_pushButton_importDecks_clicked()
 						}
 					}
 				}
-			}
-		}
+            }
+        }
 	}
 
-	for (auto it = filePaths.begin(); it != filePaths.end(); it++) {
-		QJsonObject request;
-		Deck deck;
-		JSONSerializer serializer;
-		serializer.load(deck, *it);
+    for (auto &filePath : filePaths) {
+        QJsonObject request;
+        Deck deck;
+        JSONSerializer serializer;
+        serializer.load(deck, filePath);
 
-		request["action"] = "saveDeck";
+        request["action"] = "saveDeck";
 		request["username"] = m_user.username();
 		QJsonDocument deckDocument = serializer.createJson(deck);
 		request["deck"] = deckDocument.toVariant().toJsonObject();
@@ -806,12 +806,12 @@ void MainWindow::on_pushButton_importDecks_clicked()
 		QJsonDocument requestDocument(request);
 		ServerCommunicator communicator;
 		QJsonObject response = communicator.sendRequest(requestDocument);
-		QStringList tempDeckName = (*it).split('/');
-		addDeckToTable(*(--tempDeckName.end()), ui->tableWidget_library, m_deckCounter);
+        QStringList tempDeckName = filePath.split('/');
+        addDeckToTable(*(--tempDeckName.end()), ui->tableWidget_library, m_deckCounter);
 		addCreateDeckButton();
         ui->comboBox_deck->addItem(deck.name());
-	}
-	if (!filePaths.isEmpty()) {
+    }
+    if (!filePaths.isEmpty()) {
 		QMessageBox::information(this, tr("Uvoz špilova"), tr("Uspešan uvoz!"));
 	}
 }
@@ -827,11 +827,11 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 	for (auto i = 0; i < rows; i += 2) {
 		for (auto j = 0; j < cols; j++) {
 			auto cell = ui->tableWidget_library->cellWidget(i, j);
-			if (QPushButton *button = dynamic_cast<QPushButton *>(cell)) {
-				if (!button->children().isEmpty()) {
-					QCheckBox *checkbox =
-						dynamic_cast<QCheckBox *>(ui->tableWidget_library->cellWidget(i, j)->children().front());
-					if (checkbox->isChecked()) {
+            if (auto *button = dynamic_cast<QPushButton *>(cell)) {
+                if (!button->children().isEmpty()) {
+                    auto *checkbox = dynamic_cast<QCheckBox *>(
+                        ui->tableWidget_library->cellWidget(i, j)->children().front());
+                    if (checkbox->isChecked()) {
 
 						QString deckName = button->text();
 						QStringList deckNameEdited = deckName.split('.')[0].split('_');
@@ -863,13 +863,13 @@ void MainWindow::on_pushButton_exportDecks_clicked()
 						checkbox->setCheckState(Qt::Unchecked);
 					}
 				}
-			}
-		}
+            }
+        }
 	}
 	QMessageBox::information(this, tr("Izvoz špilova"), tr("Uspešan izvoz!"));
 }
 
-void MainWindow::addNewDeck(QString deckNameID)
+void MainWindow::addNewDeck(const QString &deckNameID)
 {
 	addDeckToTable(deckNameID, ui->tableWidget_library, m_deckCounter);
 	addCreateDeckButton();
@@ -877,21 +877,21 @@ void MainWindow::addNewDeck(QString deckNameID)
 	m_deckNames.push_back(deckNameID);
 }
 
-void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table, int &counter)
+void MainWindow::addDeckToTable(const QString &deckNameID, QTableWidget *table, int &counter)
 {
-	QPushButton *button = new QPushButton(deckNameID);
-	button->setStyleSheet("color: transparent; margin-left: 25%;");
+    auto *button = new QPushButton(deckNameID);
+    button->setStyleSheet("color: transparent; margin-left: 25%;");
 
 	if (table == ui->tableWidget_library) {
 		connect(button, &QPushButton::clicked, this, &MainWindow::deckButton_clicked);
-		QCheckBox *checkbox = new QCheckBox(button);
-		checkbox->setStyleSheet("padding: 5%");
+        auto *checkbox = new QCheckBox(button);
+        checkbox->setStyleSheet("padding: 5%");
 	}
 	else
 		connect(button, &QPushButton::clicked, this, &MainWindow::deckPreview_clicked);
 
-	QLabel *label = new QLabel(deckNameID.split("_")[0], table);
-	label->setAlignment(Qt::AlignCenter);
+    auto *label = new QLabel(deckNameID.split("_")[0], table);
+    label->setAlignment(Qt::AlignCenter);
 	label->setStyleSheet("text-align: center; margin-left: 25%");
 
 	if (counter % 2 == 0) {
@@ -906,8 +906,8 @@ void MainWindow::addDeckToTable(QString deckNameID, QTableWidget *table, int &co
 
 void MainWindow::addCreateDeckButton()
 {
-    QPushButton *button = new QPushButton("+", ui->tableWidget_library);
-	connect(button, &QPushButton::clicked, this, &MainWindow::createDeck_clicked);
+    auto *button = new QPushButton("+", ui->tableWidget_library);
+    connect(button, &QPushButton::clicked, this, &MainWindow::createDeck_clicked);
     button->setStyleSheet("margin-left: 25%; font-size: 150pt; border-radius: 50px;");
 	if (m_deckCounter % 2 == 0) {
 		ui->tableWidget_library->setColumnCount(ui->tableWidget_library->columnCount() + 1);
@@ -939,8 +939,8 @@ void MainWindow::loadStats(DeckStats *deckStats)
 
 void MainWindow::on_comboBox_language_currentIndexChanged(int index)
 {
-	QApplication *app = qobject_cast<QApplication *>(QApplication::instance());
-	Settings &settings = Settings::instance(app);
+    auto *app = qobject_cast<QApplication *>(QApplication::instance());
+    Settings &settings = Settings::instance(app);
 
 	settings.setLanguage(index);
 	QString name = ui->label_username->text();
@@ -951,8 +951,8 @@ void MainWindow::on_comboBox_language_currentIndexChanged(int index)
 
 void MainWindow::on_comboBox_theme_currentIndexChanged(int index)
 {
-	QApplication *app = qobject_cast<QApplication *>(QApplication::instance());
-	Settings &settings = Settings::instance(app);
+    auto *app = qobject_cast<QApplication *>(QApplication::instance());
+    Settings &settings = Settings::instance(app);
 
 	settings.setTheme(index);
 	QString name = ui->label_username->text();

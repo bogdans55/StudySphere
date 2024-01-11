@@ -16,8 +16,11 @@ CreateDeckWindow::CreateDeckWindow(User &user, QWidget *parent)
 	ui->setupUi(this);
 }
 
-CreateDeckWindow::CreateDeckWindow(QString name, Privacy privacy, User &user, QWidget *parent)
-	: QWidget(parent), ui(new Ui::CreateDeckWindow), m_deck(name, user, privacy), m_user(user)
+CreateDeckWindow::CreateDeckWindow(const QString &name, Privacy privacy, User &user, QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::CreateDeckWindow)
+    , m_deck(name, user, privacy)
+    , m_user(user)
 {
 	ui->setupUi(this);
 
@@ -98,18 +101,19 @@ void CreateDeckWindow::generateId()
 
 void CreateDeckWindow::on_pushButton_add_clicked()
 {
-	QString m_question = getQuestionText();
-	QString m_answer = getAnswerText();
-	Difficulty m_difficulty = getDifficulty();
+    QString mQuestion = getQuestionText();
+    QString mAnswer = getAnswerText();
+    Difficulty mDifficulty = getDifficulty();
 
-	if (m_question.trimmed().isEmpty() or m_answer.trimmed().isEmpty() or m_questionDifficulty->checkedId() == -1) {
-		QMessageBox::warning(this, tr("Pogrešan unos"), tr("Niste popunili sva neophodna polja!"));
+    if (mQuestion.trimmed().isEmpty() or mAnswer.trimmed().isEmpty()
+        or m_questionDifficulty->checkedId() == -1) {
+        QMessageBox::warning(this, tr("Pogrešan unos"), tr("Niste popunili sva neophodna polja!"));
 		return;
-	}
+    }
 
-	Card *card = new Card(m_question, m_answer, m_difficulty);
+    Card *card = new Card(mQuestion, mAnswer, mDifficulty);
 
-	m_deck.addCard(card);
+    m_deck.addCard(card);
 
 	ui->textEdit_question->clear();
 	ui->textEdit_answer->clear();

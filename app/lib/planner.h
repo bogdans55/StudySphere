@@ -24,15 +24,15 @@ class Planner : public Serializable
 
   public:
 	Planner();
-	~Planner();
+    ~Planner() override;
 
-	QVariant toVariant() const override;
+    QVariant toVariant() const override;
 	void fromVariant(const QVariant &variant) override;
 
-	void addActivity(Day day, Activity activity);
+    void addActivity(Day day, const Activity &activity);
 
-	static Day dayFromString(QString dayString);
-	static QString dayToString(Day day);
+    static Day dayFromString(const QString &dayString);
+    static QString dayToString(Day day);
 	void deleteAll();
 
 	inline QMap<Day, QVector<Activity>> activities() const { return m_activities; }
