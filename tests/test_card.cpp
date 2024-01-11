@@ -1,4 +1,4 @@
-#include <catch.hpp>
+#include "catch.hpp"
 #include "../app/lib/card.h"
 
 TEST_CASE("Card Constructors", "[Card]") {

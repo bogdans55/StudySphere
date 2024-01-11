@@ -1,4 +1,4 @@
-#include <catch.hpp>
+#include "catch.hpp"
 #include "../app/lib/user.h"
 
 TEST_CASE("User Constructors and Destructor", "[User]") {

@@ -1,4 +1,4 @@
-#include <catch.hpp>
+#include "catch.hpp"
 #include "../app/lib/activity.h"
 
 TEST_CASE("Activity Constructors", "[Activity]") {
