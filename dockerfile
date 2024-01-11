@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:20.04
 
 RUN apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get -y install \
     git cmake python3 python3-pip build-essential \
