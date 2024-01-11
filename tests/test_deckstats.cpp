@@ -1,4 +1,4 @@
-#include <catch.hpp>
+#include "catch.hpp"
 #include "../app/lib/deckstats.h"
 
 TEST_CASE("DeckStats Constructors and Methods", "[DeckStats]") {
