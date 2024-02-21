@@ -1,9 +1,0 @@
-<map id="app/lib/serializer.h" name="app/lib/serializer.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="43,5,169,32"/>
-<area shape="rect" id="Node000002" href="$serializable_8h.html" title=" " alt="" coords="5,80,103,107"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,34,74,69,70,66,95,31"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="127,80,192,107"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="117,31,143,66,139,69,113,34"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="18,155,90,181"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="57,107,57,139,51,139,51,107"/>
-</map>

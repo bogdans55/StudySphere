@@ -1,4 +1,11 @@
-decks
+# Scripts
+.clang-format
+.clang-tidy
+.gitlab-ci.yml
+dockerfile
+Dockerfile
+format-code
+Doxyfile
 
 # C++ objects and libs
 *.slo
